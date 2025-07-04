@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    
+    <!-- Homepage -->
+    <url>
+        <loc>https://www.skyfirelaserservice.com/</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Professional%20Repair%20Lab.jpg</image:loc>
+            <image:title>Professional Laser Repair Laboratory</image:title>
+            <image:caption>State-of-the-art laser repair and testing facility</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Testing%20&%20Calibration.jpg</image:loc>
+            <image:title>Laser Testing and Calibration Services</image:title>
+            <image:caption>Precision testing and calibration equipment</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Services Pages -->
+    <url>
+        <loc>https://www.skyfirelaserservice.com/#services</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Product Pages -->
+    <url>
+        <loc>https://www.skyfirelaserservice.com/#laser-products</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Application Fields -->
+    <url>
+        <loc>https://www.skyfirelaserservice.com/#applications</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Partners -->
+    <url>
+        <loc>https://www.skyfirelaserservice.com/#partners</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- FAQ -->
+    <url>
+        <loc>https://www.skyfirelaserservice.com/#faq</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Contact -->
+    <url>
+        <loc>https://www.skyfirelaserservice.com/#contact</loc>
+        <lastmod>2025-01-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+</urlset> 

@@ -1,0 +1,46 @@
+# robots.txt for Sky Fire Laser Service Website
+
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl the site
+Allow: /sslaserservice.html
+Allow: /sitemap.xml
+
+# Disallow any potential admin or private directories (if they exist in the future)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: *.pdf$
+
+# Crawl delay to be respectful to server resources
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://www.skyfirelaserservice.com/sitemap.xml
+
+# Special rules for different search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+# Block bad bots and scrapers
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: / 

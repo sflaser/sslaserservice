@@ -1,0 +1,26 @@
+# Netlify Redirects for Sky Fire Laser Website
+
+# Redirect www to non-www
+https://www.skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
+
+# Force HTTPS
+http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
+
+# Common redirects
+/home / 301
+/index.html / 301
+/index.php / 301
+
+# Set main HTML file as default
+/ /sslaserservice.html 200
+
+# Handle old URLs (if any)
+/services /sslaserservice.html#services 301
+/products /sslaserservice.html#laser-products 301
+/applications /sslaserservice.html#applications 301
+/partners /sslaserservice.html#partners 301
+/contact /sslaserservice.html#contact 301
+/faq /sslaserservice.html#faq 301
+
+# Fallback for any unmatched routes
+/* /sslaserservice.html 200 
