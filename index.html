@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sky Fire Laser - Professional Solid-State Laser Repair & Manufacturing Solutions</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#ff8c00">
+    <!-- 性能优化 -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <!-- 图片优化提示 -->
+    <meta name="image-optimization" content="lazy-loading, webp-support, preload-critical">    <title>Sky Fire Laser - Professional Solid-State Laser Repair & Manufacturing Solutions</title>
     
     <!-- SEO Meta Tags -->
     <meta name="description" content="Professional solid-state laser repair services for Quantel, Lumibird, Coherent, JDSU, and Amplitude lasers. Expert laser maintenance, custom manufacturing, and 24/7 emergency support for industrial applications.">
@@ -184,12 +191,12 @@
         }
         
         /* Lazy loading images with smooth transition */
-        img[loading="lazy"] {
+        img[loading="lazy" decoding="async"] {
             opacity: 0;
             transition: opacity 0.3s ease;
         }
         
-        img[loading="lazy"].loaded {
+        img[loading="lazy" decoding="async"].loaded {
             opacity: 1;
         }
         
@@ -689,7 +696,367 @@
             color: var(--text-gray);
         }
         
-        /* Fix for comparison section */
+
+        /* DIY Contest Section Styles */
+        .diy-contest {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .diy-contest::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M0 0h100v100H0z' fill='%23ff8c00' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        
+        .contest-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .contest-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff8c00, #ff6b35);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .contest-header h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .contest-subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contest-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contest-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+            align-items: start;
+        }
+        
+        .contest-info h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .contest-features {
+            margin-bottom: 40px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            min-width: 30px;
+        }
+        
+        .contest-prizes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .prize-item {
+            text-align: center;
+            padding: 25px 15px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .prize-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+        }
+        
+        .prize-item.gold::before {
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+        }
+        
+        .prize-item.silver::before {
+            background: linear-gradient(90deg, #c0c0c0, #e6e6e6);
+        }
+        
+        .prize-item.bronze::before {
+            background: linear-gradient(90deg, #cd7f32, #daa520);
+        }
+        
+        .prize-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .prize-medal {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .prize-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .prize-amount {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ff8c00;
+        }
+        
+        .contest-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .contest-btn {
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .contest-btn.btn-primary {
+            background: linear-gradient(135deg, #ff8c00, #ff6b35);
+            color: white;
+            border: none;
+        }
+        
+        .contest-btn.btn-primary:hover {
+            background: linear-gradient(135deg, #e67e00, #e55a2b);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.4);
+        }
+        
+        .contest-btn.btn-secondary {
+            background: white;
+            color: #ff8c00;
+            border: 2px solid #ff8c00;
+        }
+        
+        .contest-btn.btn-secondary:hover {
+            background: #ff8c00;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .contest-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .contest-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 25px 15px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff8c00;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        .contest-timeline {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .contest-timeline h4 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: #ff8c00;
+            font-size: 0.9rem;
+        }
+        
+        .timeline-event {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .contest-criteria {
+            margin-top: 50px;
+        }
+        
+        .contest-criteria h4 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+        
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .criteria-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .criteria-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .criteria-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .criteria-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .criteria-desc {
+            color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .contest-header h2 {
+                font-size: 2rem;
+            }
+            
+            .contest-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .contest-prizes {
+                grid-template-columns: 1fr;
+            }
+            
+            .contest-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .contest-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .criteria-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+            }
+        }        /* Fix for comparison section */
         .comparison {
             padding: var(--section-padding);
             background-color: var(--background-light-orange);
@@ -3258,7 +3625,7 @@
     <header>
         <div class="container header-container">
             <a href="#" class="logo">
-                <img src="images/logos/LOGO长方形.png" alt="Sky Fire Laser" class="logo-image">
+                <img loading="lazy" decoding="async" src="images/logos/LOGO长方形.png" alt="Sky Fire Laser" class="logo-image">
             </a>
             <div class="header-right">
                 <a href="mailto:info@sflaser.net" class="cta-btn">Get a Quote</a>
@@ -3290,7 +3657,7 @@
                         <div class="laser-card">
                             <div class="laser-image">
                                 <div class="glow-effect"></div>
-                                <img src="images/services/Professional Repair Lab.jpg" alt="Professional Repair Laboratory">
+                                <img loading="lazy" decoding="async" src="images/services/Professional Repair Lab.jpg" alt="Professional Repair Laboratory">
                             </div>
                             <div class="laser-content">
                                 <h3>Professional Repair Lab</h3>
@@ -3301,7 +3668,7 @@
                         <div class="laser-card">
                             <div class="laser-image">
                                 <div class="glow-effect"></div>
-                                <img src="images/services/Testing & Calibration.jpg" alt="Testing & Calibration Equipment">
+                                <img loading="lazy" decoding="async" src="images/services/Testing & Calibration.jpg" alt="Testing & Calibration Equipment">
                             </div>
                             <div class="laser-content">
                                 <h3>Testing & Calibration</h3>
@@ -3420,7 +3787,7 @@
                     <div class="service-card">
                         <div class="service-img">
                             <!-- 将外部链接替换为本地图片 -->
-                            <img src="images/services/SSLaser Repair Services.jpg" alt="Laser Repair Service">
+                            <img loading="lazy" decoding="async" src="images/services/SSLaser Repair Services.jpg" alt="Laser Repair Service">
                         </div>
                         <div class="service-content">
                             <h3>SSLaser Repair Services</h3>
@@ -3433,7 +3800,7 @@
                 <div class="col">
                     <div class="service-card">
                         <div class="service-img">
-                            <img src="images/services/Custom Laser Manufacturing.jpg" alt="Custom Laser Manufacturing">
+                            <img loading="lazy" decoding="async" src="images/services/Custom Laser Manufacturing.jpg" alt="Custom Laser Manufacturing">
                         </div>
                         <div class="service-content">
                             <h3>Custom Laser Manufacturing</h3>
@@ -3523,6 +3890,132 @@
         </div>
     </section>
 
+    <!-- DIY Fiber Laser Contest Section -->
+    <section class="diy-contest">
+        <div class="container">
+            <div class="contest-header">
+                <div class="contest-badge">🔥 新活动</div>
+                <h2>SKYFIRE DIY光纤激光切割机大赛</h2>
+                <p class="contest-subtitle">加入全球创客社区，展示您的DIY光纤激光切割技能</p>
+            </div>
+            
+            <div class="contest-content">
+                <div class="contest-main">
+                    <div class="contest-info">
+                        <h3>🏆 第二届大赛现已开放报名！</h3>
+                        <div class="contest-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">🌍</span>
+                                <span>国际竞赛，总奖金池$5,800</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🎁</span>
+                                <span>丰厚奖品：一等奖$3,000代金券</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">📅</span>
+                                <span>报名截止：2025年9月30日</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🔧</span>
+                                <span>专为SKYFIRE激光套件拥有者设计</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contest-prizes">
+                            <div class="prize-item gold">
+                                <div class="prize-medal">🥇</div>
+                                <div class="prize-title">一等奖</div>
+                                <div class="prize-amount">$3,000代金券</div>
+                            </div>
+                            <div class="prize-item silver">
+                                <div class="prize-medal">🥈</div>
+                                <div class="prize-title">二等奖</div>
+                                <div class="prize-amount">$1,800代金券</div>
+                            </div>
+                            <div class="prize-item bronze">
+                                <div class="prize-medal">🥉</div>
+                                <div class="prize-title">三等奖</div>
+                                <div class="prize-amount">$1,000代金券</div>
+                            </div>
+                        </div>
+                        
+                        <div class="contest-buttons">
+                            <a href="https://www.diyfiberlasercontest.com/" target="_blank" class="btn btn-primary contest-btn">
+                                🚀 立即报名参赛
+                            </a>
+                            <a href="https://www.diyfiberlasercontest.com/" target="_blank" class="btn btn-secondary contest-btn">
+                                📋 查看详细规则
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contest-visual">
+                        <div class="contest-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">$5,800</div>
+                                <div class="stat-label">总奖金池</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">2024-2025</div>
+                                <div class="stat-label">第二届大赛</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">全球</div>
+                                <div class="stat-label">国际竞赛</div>
+                            </div>
+                        </div>
+                        
+                        <div class="contest-timeline">
+                            <h4>📅 重要时间节点</h4>
+                            <div class="timeline-item">
+                                <span class="timeline-date">2025年7月15日</span>
+                                <span class="timeline-event">报名开始</span>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-date">2025年9月30日</span>
+                                <span class="timeline-event">报名截止</span>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-date">2025年11月30日</span>
+                                <span class="timeline-event">评审开始</span>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-date">2025年12月15日</span>
+                                <span class="timeline-event">公布获奖者</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contest-criteria">
+                    <h4>🎯 评审标准</h4>
+                    <div class="criteria-grid">
+                        <div class="criteria-item">
+                            <div class="criteria-icon">🎨</div>
+                            <div class="criteria-title">外观设计</div>
+                            <div class="criteria-desc">美观度和工艺质量</div>
+                        </div>
+                        <div class="criteria-item">
+                            <div class="criteria-icon">💡</div>
+                            <div class="criteria-title">创新性</div>
+                            <div class="criteria-desc">独特设计概念和技术创新</div>
+                        </div>
+                        <div class="criteria-item">
+                            <div class="criteria-icon">⚡</div>
+                            <div class="criteria-title">切割性能</div>
+                            <div class="criteria-desc">精度、速度和切割质量</div>
+                        </div>
+                        <div class="criteria-item">
+                            <div class="criteria-icon">🔧</div>
+                            <div class="criteria-title">可扩展性</div>
+                            <div class="criteria-desc">功能扩展和升级潜力</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Comparison area -->
     <section class="comparison">
         <div class="container">
@@ -3627,7 +4120,7 @@
                     <div class="laser-product-card">
                         <div class="laser-product-image">
                             <div class="image-overlay"></div>
-                            <img src="images/services/ULTRA.jpg" alt="ULTRA Laser">
+                            <img loading="lazy" decoding="async" src="images/services/ULTRA.jpg" alt="ULTRA Laser">
                         </div>
                         <div class="laser-product-content">
                             <h3>ULTRA</h3>
@@ -3639,7 +4132,7 @@
                     <div class="laser-product-card">
                         <div class="laser-product-image">
                             <div class="image-overlay"></div>
-                            <img src="images/products/CFR200:400.jpg" alt="CFR Laser">
+                            <img loading="lazy" decoding="async" src="images/products/CFR200:400.jpg" alt="CFR Laser">
                         </div>
                         <div class="laser-product-content">
                             <h3>CFR200/400</h3>
@@ -3655,7 +4148,7 @@
                     <div class="laser-product-card">
                         <div class="laser-product-image">
                             <div class="image-overlay"></div>
-                            <img src="images/services/Q-SMART.jpg" alt="Q-SMART Laser">
+                            <img loading="lazy" decoding="async" src="images/services/Q-SMART.jpg" alt="Q-SMART Laser">
                         </div>
                         <div class="laser-product-content">
                             <h3>Q-SMART</h3>
@@ -3668,7 +4161,7 @@
                     <div class="laser-product-card">
                         <div class="laser-product-image">
                             <div class="image-overlay"></div>
-                            <img src="images/products/Centurion+.jpg" alt="Centurion+ Laser">
+                            <img loading="lazy" decoding="async" src="images/products/Centurion+.jpg" alt="Centurion+ Laser">
                         </div>
                         <div class="laser-product-content">
                             <h3>Centurion+</h3>
@@ -3684,7 +4177,7 @@
                     <div class="laser-product-card">
                         <div class="laser-product-image">
                             <div class="image-overlay"></div>
-                            <img src="images/products/Flare NX.jpg" alt="Flare NX Laser">
+                            <img loading="lazy" decoding="async" src="images/products/Flare NX.jpg" alt="Flare NX Laser">
                         </div>
                         <div class="laser-product-content">
                             <h3>Flare NX</h3>
@@ -3717,7 +4210,7 @@
                         <p>Our laser solutions play a key role in the manufacturing process of display panels, covering full-process applications from exposure to repair and cutting, helping customers improve product yield and production efficiency.</p>
                     </div>
                     <div class="application-intro-image">
-                        <img src="images/services/Display Panel.JPEG" alt="Display Panel Production Line">
+                        <img loading="lazy" decoding="async" src="images/services/Display Panel.JPEG" alt="Display Panel Production Line">
                     </div>
                 </div>
                 
@@ -3816,7 +4309,7 @@
                         <p>We provide high-precision laser solutions for the semiconductor packaging industry, ensuring accuracy and efficiency in processes such as wafer cutting, contributing to quality improvement in semiconductor production.</p>
                     </div>
                     <div class="application-intro-image">
-                        <img src="images/services/Semiconductor Packaging & Testing.jpeg" alt="Semiconductor Packaging Equipment">
+                        <img loading="lazy" decoding="async" src="images/services/Semiconductor Packaging & Testing.jpeg" alt="Semiconductor Packaging Equipment">
                     </div>
                 </div>
                 
@@ -3840,7 +4333,7 @@
                         <p>Our laser solutions excel in the field of PCB precision processing, especially in high-precision processes like laser drilling, ensuring micro-sized features and high-quality requirements.</p>
                     </div>
                     <div class="application-intro-image">
-                        <img src="images/services/PCB Processing.png" alt="PCB Laser Processing">
+                        <img loading="lazy" decoding="async" src="images/services/PCB Processing.png" alt="PCB Laser Processing">
                     </div>
                 </div>
                 
@@ -3930,73 +4423,73 @@
             <div class="partner-logos">
                 <div class="partner-logo">
                     <a href="https://quantel-laser.com" target="_blank">
-                        <img src="images/logos/quantel laser logo.jpg" alt="Quantel">
+                        <img loading="lazy" decoding="async" src="images/logos/quantel laser logo.jpg" alt="Quantel">
                     </a>
                 </div>
                 
                 <div class="partner-logo">
                     <a href="https://www.lumibird.com" target="_blank">
-                        <img src="images/logos/Lumibird laser logo1.jpg" alt="Lumibird">
+                        <img loading="lazy" decoding="async" src="images/logos/Lumibird laser logo1.jpg" alt="Lumibird">
                     </a>
                 </div>
                 
                 <div class="partner-logo">
                     <a href="https://www.coherent.com" target="_blank">
-                        <img src="images/logos/coherent laser logo2.jpg" alt="Coherent">
+                        <img loading="lazy" decoding="async" src="images/logos/coherent laser logo2.jpg" alt="Coherent">
                     </a>
                 </div>
                 
                 <div class="partner-logo">
                     <a href="https://www.viavisolutions.com" target="_blank">
-                        <img src="images/logos/jdsu_laser_logo1.jpg" alt="JDSU">
+                        <img loading="lazy" decoding="async" src="images/logos/jdsu_laser_logo1.jpg" alt="JDSU">
                     </a>
                 </div>
                 
                 <div class="partner-logo">
                     <a href="https://amplitude-laser.com" target="_blank">
-                        <img src="images/logos/Amplitude-laser-logo-1.jpg" alt="Amplitude">
+                        <img loading="lazy" decoding="async" src="images/logos/Amplitude-laser-logo-1.jpg" alt="Amplitude">
                     </a>
                 </div>
                 
                 <div class="partner-logo">
                     <a href="https://www.esi.com" target="_blank">
-                        <img src="images/logos/ESI laser logo1.jpg" alt="ESI">
+                        <img loading="lazy" decoding="async" src="images/logos/ESI laser logo1.jpg" alt="ESI">
                     </a>
                 </div>
                 
                 <div class="partner-logo">
                     <a href="https://www.pi-usa.us" target="_blank">
-                        <img src="images/logos/PI-laser-logo-1.jpg" alt="PI">
+                        <img loading="lazy" decoding="async" src="images/logos/PI-laser-logo-1.jpg" alt="PI">
                     </a>
                 </div>
                 
                 <div class="partner-logo">
                     <a href="https://www.spectra-physics.com" target="_blank">
-                        <img src="images/logos/SPECTRA-PHYSICS-laser-logo-1.jpg" alt="Spectra-Physics">
+                        <img loading="lazy" decoding="async" src="images/logos/SPECTRA-PHYSICS-laser-logo-1.jpg" alt="Spectra-Physics">
                     </a>
                 </div>
                 
                 <div class="partner-logo">
                     <a href="https://www.keysight.com" target="_blank">
-                        <img src="images/logos/agilent laser logo1.jpg" alt="Keysight">
+                        <img loading="lazy" decoding="async" src="images/logos/agilent laser logo1.jpg" alt="Keysight">
                     </a>
                 </div>
                 
                 <div class="partner-logo">
                     <a href="https://brightsolutions.lt" target="_blank">
-                        <img src="images/logos/bright solution laser logo1.jpg" alt="Bright Solutions">
+                        <img loading="lazy" decoding="async" src="images/logos/bright solution laser logo1.jpg" alt="Bright Solutions">
                     </a>
                 </div>
                 
                 <div class="partner-logo">
                     <a href="https://lightcon.com" target="_blank">
-                        <img src="images/logos/light conversion-laser-logo-1.jpg" alt="Light Conversion">
+                        <img loading="lazy" decoding="async" src="images/logos/light conversion-laser-logo-1.jpg" alt="Light Conversion">
                     </a>
                 </div>
                 
                 <div class="partner-logo">
                     <a href="https://www.zygo.com" target="_blank">
-                        <img src="images/logos/zygo laser logo1.jpg" alt="Zygo">
+                        <img loading="lazy" decoding="async" src="images/logos/zygo laser logo1.jpg" alt="Zygo">
                     </a>
                 </div>
             </div>
@@ -4781,7 +5274,7 @@
             });
         });
 
-        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        document.querySelectorAll('img[loading="lazy" decoding="async"]').forEach(img => {
             imageObserver.observe(img);
         });
     }
