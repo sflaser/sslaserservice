@@ -88,7 +88,7 @@
 # Fallback for SPA (if needed in future)
 [[redirects]]
   from = "/*"
-  to = "/sslaserservice.html"
+  to = "/index.html"
   status = 200
 
 # Forms (for future contact form)
