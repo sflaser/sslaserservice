@@ -1,9 +1,9 @@
 [build]
-  publish = "."
-  command = "echo 'No build command needed for static site'"
+  command = "npm run build"
+  publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
 
 # Headers for security and performance
 [[headers]]
