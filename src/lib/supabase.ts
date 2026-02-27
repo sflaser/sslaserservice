@@ -1,13 +1,30 @@
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_SUPABASE_ANON_KEY
+const supabaseAnonKey =
+  import.meta.env.VITE_SUPABASE_ANON_KEY ||
+  import.meta.env.VITE_SUPABASE_SUPABASE_ANON_KEY
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables')
+  console.warn(
+    '[Supabase] Missing environment variables. Falling back to a disabled client.'
+  )
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+const fallbackUrl = 'https://placeholder.supabase.co'
+const fallbackAnonKey = 'placeholder-anon-key'
+
+export const supabase = createClient(
+  supabaseUrl || fallbackUrl,
+  supabaseAnonKey || fallbackAnonKey,
+  {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+      detectSessionInUrl: false,
+    },
+  }
+)
 
 export type CaseStudy = {
   id: string
