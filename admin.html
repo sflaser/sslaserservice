@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sky Fire Laser CMS Admin</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="/assets/css/admin.css">
+</head>
+<body>
+  <main class="admin-shell">
+    <header class="admin-header">
+      <h1>Content Admin</h1>
+      <p>Publish blog posts and products for the frontend website.</p>
+      <div id="admin-status" class="status"></div>
+    </header>
+
+    <section id="login-card" class="admin-card">
+      <h2>Admin Login</h2>
+      <form id="login-form">
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="username" required>
+        </div>
+        <div class="form-row">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Sign In</button>
+      </form>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <div class="admin-card toolbar">
+        <strong>Dashboard</strong>
+        <button id="logout-btn" class="btn btn-outline" type="button">Sign Out</button>
+      </div>
+
+      <div class="grid-2">
+        <section class="admin-card">
+          <h2>Publish Blog Post</h2>
+          <form id="blog-form">
+            <div class="form-row">
+              <label for="blog-title">Title</label>
+              <input id="blog-title" name="title" required>
+            </div>
+            <div class="form-row">
+              <label for="blog-slug">Slug (optional)</label>
+              <input id="blog-slug" name="slug" placeholder="auto-generate-if-empty">
+            </div>
+            <div class="form-row">
+              <label for="blog-excerpt">Excerpt</label>
+              <textarea id="blog-excerpt" name="excerpt"></textarea>
+            </div>
+            <div class="form-row">
+              <label for="blog-content">Content</label>
+              <textarea id="blog-content" name="content" required></textarea>
+            </div>
+            <div class="form-row">
+              <label for="blog-cover-image">Cover Image</label>
+              <input id="blog-cover-image" name="cover_image" type="file" accept="image/*">
+            </div>
+            <div class="form-row">
+              <label for="blog-status">Status</label>
+              <select id="blog-status" name="status">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Save Blog Post</button>
+          </form>
+        </section>
+
+        <section class="admin-card">
+          <h2>Publish Product</h2>
+          <form id="product-form">
+            <div class="form-row">
+              <label for="product-name">Product Name</label>
+              <input id="product-name" name="name" required>
+            </div>
+            <div class="form-row">
+              <label for="product-slug">Slug (optional)</label>
+              <input id="product-slug" name="slug" placeholder="auto-generate-if-empty">
+            </div>
+            <div class="form-row">
+              <label for="product-short-description">Short Description</label>
+              <textarea id="product-short-description" name="short_description"></textarea>
+            </div>
+            <div class="form-row">
+              <label for="product-description">Full Description</label>
+              <textarea id="product-description" name="description"></textarea>
+            </div>
+            <div class="form-row">
+              <label for="product-price">Price</label>
+              <input id="product-price" name="price" type="number" step="0.01" min="0" required>
+            </div>
+            <div class="form-row">
+              <label for="product-currency">Currency</label>
+              <input id="product-currency" name="currency" value="USD" maxlength="3" required>
+            </div>
+            <div class="form-row">
+              <label for="product-purchase-url">Purchase Link</label>
+              <input id="product-purchase-url" name="purchase_url" type="url" placeholder="https://checkout.example.com/..." required>
+            </div>
+            <div class="form-row">
+              <label for="product-image">Product Image</label>
+              <input id="product-image" name="image" type="file" accept="image/*">
+            </div>
+            <div class="form-row">
+              <label for="product-status">Status</label>
+              <select id="product-status" name="status">
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Save Product</button>
+          </form>
+        </section>
+      </div>
+
+      <section class="admin-card">
+        <h2>Blog Posts</h2>
+        <table class="list-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Published</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="blogs-table-body"></tbody>
+        </table>
+      </section>
+
+      <section class="admin-card">
+        <h2>Products</h2>
+        <table class="list-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="products-table-body"></tbody>
+        </table>
+      </section>
+    </section>
+  </main>
+
+  <script src="/assets/js/cms-config.js"></script>
+  <script src="/assets/js/cms-admin.js"></script>
+</body>
+</html>

@@ -37,6 +37,7 @@
     
     <!-- Web App Manifest -->
     <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/assets/css/cms.css">
     
     <!-- Theme color for mobile browsers -->
     <meta name="theme-color" content="#ff8c00">
@@ -4078,6 +4079,30 @@
         </div>
     </section>
 
+    <!-- Product Store Section (CMS) -->
+    <section id="store" class="cms-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Products</h2>
+                <p>Published from the admin backend with direct purchase links.</p>
+            </div>
+            <div id="cms-products-grid" class="cms-grid"></div>
+            <p id="cms-products-empty" class="cms-empty cms-hidden">Loading products...</p>
+        </div>
+    </section>
+
+    <!-- Blog Section (CMS) -->
+    <section id="blog" class="cms-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest Blog Posts</h2>
+                <p>Technical updates, repair notes, and product knowledge.</p>
+            </div>
+            <div id="cms-blog-grid" class="cms-grid"></div>
+            <p id="cms-blog-empty" class="cms-empty cms-hidden">Loading blog posts...</p>
+        </div>
+    </section>
+
     <!-- CTA Area -->
     <section id="contact" class="cta">
         <div class="container">
@@ -4165,6 +4190,7 @@
                         <li><a href="https://alleriastore.com/pages/excimer-laser-repair-service" target="_blank" rel="noopener">Excimer Laser Repair</a></li>
                         <li><a href="https://alleriastore.com/pages/fiber-laser-source-repair-service" target="_blank" rel="noopener">Fiber Laser Source Repair</a></li>
                         <li><a href="https://alleriastore.com/products/fiber-laser-repair-training" target="_blank" rel="noopener">Laser Repair Training</a></li>
+                        <li><a href="/admin.html">Content Admin</a></li>
                     </ul>
                 </div>
                 
@@ -4774,6 +4800,9 @@
         /* Critical above-the-fold styles are already inlined */
     `;
     </script>
+
+    <script src="/assets/js/cms-config.js"></script>
+    <script src="/assets/js/cms-frontend.js"></script>
 
     <!-- Performance optimization meta tags -->
     <script type="application/ld+json">

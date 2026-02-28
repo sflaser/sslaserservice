@@ -22,5 +22,9 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 /contact /sslaserservice.html#contact 301
 /faq /sslaserservice.html#faq 301
 
+# Admin CMS
+/admin /admin.html 200
+/admin/* /admin.html 200
+
 # Fallback for any unmatched routes
-/* /sslaserservice.html 200 
+/* /sslaserservice.html 200
