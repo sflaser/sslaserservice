@@ -55,27 +55,31 @@ alter table public.blog_posts enable row level security;
 alter table public.products enable row level security;
 
 -- Public can only read published content
-create policy if not exists blog_posts_public_read
+drop policy if exists blog_posts_public_read on public.blog_posts;
+create policy blog_posts_public_read
 on public.blog_posts
 for select
 to anon, authenticated
 using (status = 'published');
 
-create policy if not exists products_public_read
+drop policy if exists products_public_read on public.products;
+create policy products_public_read
 on public.products
 for select
 to anon, authenticated
 using (status = 'published');
 
 -- Authenticated users can manage content (admin users should be controlled in Supabase Auth)
-create policy if not exists blog_posts_admin_all
+drop policy if exists blog_posts_admin_all on public.blog_posts;
+create policy blog_posts_admin_all
 on public.blog_posts
 for all
 to authenticated
 using (true)
 with check (true);
 
-create policy if not exists products_admin_all
+drop policy if exists products_admin_all on public.products;
+create policy products_admin_all
 on public.products
 for all
 to authenticated
@@ -87,26 +91,30 @@ insert into storage.buckets (id, name, public)
 values ('site-assets', 'site-assets', true)
 on conflict (id) do nothing;
 
-create policy if not exists site_assets_public_read
+drop policy if exists site_assets_public_read on storage.objects;
+create policy site_assets_public_read
 on storage.objects
 for select
 to anon, authenticated
 using (bucket_id = 'site-assets');
 
-create policy if not exists site_assets_auth_insert
+drop policy if exists site_assets_auth_insert on storage.objects;
+create policy site_assets_auth_insert
 on storage.objects
 for insert
 to authenticated
 with check (bucket_id = 'site-assets');
 
-create policy if not exists site_assets_auth_update
+drop policy if exists site_assets_auth_update on storage.objects;
+create policy site_assets_auth_update
 on storage.objects
 for update
 to authenticated
 using (bucket_id = 'site-assets')
 with check (bucket_id = 'site-assets');
 
-create policy if not exists site_assets_auth_delete
+drop policy if exists site_assets_auth_delete on storage.objects;
+create policy site_assets_auth_delete
 on storage.objects
 for delete
 to authenticated
