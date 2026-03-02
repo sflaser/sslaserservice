@@ -119,7 +119,7 @@
     if (!blogsGrid) return;
 
     const rows = await fetchTable(
-      'blog_posts?select=id,title,excerpt,content,cover_image_url,published_at,status&status=eq.published&order=published_at.desc.nullslast&limit=6'
+      'blog_posts?select=id,title,slug,excerpt,content,cover_image_url,published_at,status&status=eq.published&order=published_at.desc.nullslast&limit=6'
     );
 
     if (!rows.length) {
@@ -137,6 +137,12 @@
           : '';
 
         const excerpt = post.excerpt || (post.content || '').slice(0, 180);
+        const detailsHref = post.slug
+          ? `/blog.html?slug=${encodeURIComponent(post.slug)}`
+          : '#blog';
+        const readMore = post.slug
+          ? `<a class="cms-btn cms-btn-outline" href="${detailsHref}">Read More</a>`
+          : '';
 
         return `
           <article class="cms-card">
@@ -145,6 +151,7 @@
               <div class="cms-meta">${formatDate(post.published_at)}</div>
               <h3 class="cms-card-title">${escapeHtml(post.title)}</h3>
               <p class="cms-card-text">${escapeHtml(excerpt)}</p>
+              <div class="cms-card-actions">${readMore}</div>
             </div>
           </article>
         `;

@@ -1,7 +1,7 @@
 // Service Worker for Sky Fire Laser Website
-// Version 1.1.0
+// Version 1.2.0
 
-const SW_VERSION = '1.1.0';
+const SW_VERSION = '1.2.0';
 const STATIC_CACHE_NAME = `skyfire-static-v${SW_VERSION}`;
 const DYNAMIC_CACHE_NAME = `skyfire-dynamic-v${SW_VERSION}`;
 
@@ -11,6 +11,7 @@ const STATIC_PATHS = [
     '/index.html',
     '/sslaserservice.html',
     '/admin.html',
+    '/blog.html',
     '/sitemap.xml',
     '/manifest.json',
     '/robots.txt'

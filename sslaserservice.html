@@ -262,6 +262,7 @@
         .header-right {
             display: flex;
             align-items: center;
+            gap: 18px;
         }
         
         .cta-btn {
@@ -463,14 +464,83 @@
         .navigation li a:hover {
             opacity: 0.8;
         }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+        }
         
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            color: white;
+            color: var(--text-dark);
             font-size: 24px;
             cursor: pointer;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .header-container {
+                position: relative;
+            }
+
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: calc(100% + 10px);
+                left: 0;
+                right: 0;
+                background: #fff;
+                border: 1px solid #ececec;
+                border-radius: 12px;
+                box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+                padding: 10px;
+            }
+
+            .main-nav.is-open {
+                display: block;
+            }
+
+            .navigation {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .navigation li {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .navigation li a {
+                display: block;
+                width: 100%;
+                padding: 10px 12px;
+                border-radius: 8px;
+            }
+
+            .navigation li a:hover {
+                opacity: 1;
+                background: #fff4e6;
+            }
+
+            .mobile-menu-btn {
+                display: inline-flex;
+            }
+
+            .header-right {
+                gap: 10px;
+            }
+
+            .header-right .cta-btn {
+                padding: 8px 14px;
+                font-size: 14px;
+            }
         }
         
         /* Hero area styles */
@@ -3125,13 +3195,23 @@
                 <img src="https://github.com/sflaser/sslaserservice/blob/09b8ed50934d4acc755406a26ded85374ace184e/LOGO%E9%95%BF%E6%96%B9%E5%BD%A2.png?raw=true" alt="Sky Fire Laser" class="logo-image">
             </a>
             <div class="header-right">
+                <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-navigation">☰</button>
+                <nav class="main-nav" id="main-navigation" aria-label="Primary">
+                    <ul class="navigation">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#store">Products</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
                 <a href="mailto:info@sflaser.net" class="cta-btn">Get a Quote</a>
             </div>
         </div>
     </header>
 
     <!-- Product showcase area -->
-    <section class="product-showcase">
+    <section id="home" class="product-showcase">
         <div class="container">
             <div class="product-container">
                 <div class="product-info">
@@ -4799,6 +4879,27 @@
     const criticalCSS = `
         /* Critical above-the-fold styles are already inlined */
     `;
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const nav = document.getElementById('main-navigation');
+
+        if (!menuBtn || !nav) return;
+
+        menuBtn.addEventListener('click', function () {
+            const isOpen = nav.classList.toggle('is-open');
+            menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        nav.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                nav.classList.remove('is-open');
+                menuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+    });
     </script>
 
     <script src="/assets/js/cms-config.js"></script>
