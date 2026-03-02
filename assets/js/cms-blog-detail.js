@@ -38,11 +38,20 @@
     });
   }
 
-  async function fetchPost(slug) {
+  async function fetchPost(params) {
+    const filters = ["status=eq.published", "limit=1"];
+
+    if (params.slug) {
+      filters.push(`slug=eq.${encodeURIComponent(params.slug)}`);
+    } else if (params.id) {
+      filters.push(`id=eq.${encodeURIComponent(params.id)}`);
+    } else {
+      return null;
+    }
+
     const query =
-      "blog_posts?select=title,slug,excerpt,content,cover_image_url,published_at,status" +
-      `&slug=eq.${encodeURIComponent(slug)}` +
-      "&status=eq.published&limit=1";
+      "blog_posts?select=id,title,slug,excerpt,content,cover_image_url,published_at,status&" +
+      filters.join("&");
 
     const res = await fetch(`${supabaseUrl}/rest/v1/${query}`, {
       headers: {
@@ -69,14 +78,15 @@
 
     const params = new URLSearchParams(window.location.search);
     const slug = (params.get("slug") || "").trim();
+    const id = (params.get("id") || "").trim();
 
-    if (!slug) {
-      setState("No blog slug found in URL. Please open this page from the Blog list.", true);
+    if (!slug && !id) {
+      setState("No blog identifier found in URL. Please open this page from the Blog list.", true);
       return;
     }
 
     try {
-      const post = await fetchPost(slug);
+      const post = await fetchPost({ slug, id });
 
       if (!post) {
         setState("Blog post not found or not published.", true);
