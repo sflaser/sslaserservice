@@ -12,7 +12,13 @@
   "dir": "ltr",
   "icons": [
     {
-      "src": "/images/logos/skyfire-logo.png",
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/logos/skyfire-falcon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
