@@ -162,13 +162,8 @@
             appearance: none;
         }
         
-        /* Performance Optimizations */
-        * {
-            /* Enable hardware acceleration for smoother animations */
-            transform: translateZ(0);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
+        /* Performance note:
+           Avoid global transforms here because they can break fixed-position header behavior. */
         
         /* Optimize image loading */
         img {
