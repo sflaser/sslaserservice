@@ -207,7 +207,7 @@
         }
         
         body {
-            background: #f6f7f9;
+            background: var(--background-white);
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
@@ -1419,8 +1419,8 @@
         .contact-modern {
             padding: 92px 0;
             background: radial-gradient(circle at 15% 20%, rgba(255, 140, 0, 0.08), transparent 40%),
-                        radial-gradient(circle at 90% 85%, rgba(40, 120, 255, 0.08), transparent 35%),
-                        #f6f7f9;
+                        radial-gradient(circle at 90% 85%, rgba(255, 140, 0, 0.12), transparent 35%),
+                        #fff8f1;
         }
 
         .contact-modern .container {
@@ -1488,7 +1488,7 @@
             line-height: 1.2;
             letter-spacing: -0.02em;
             text-decoration: none;
-            color: #111827;
+            color: var(--primary-color);
             font-weight: 700;
         }
 
@@ -1519,24 +1519,24 @@
         }
 
         .contact-actions .btn-primary {
-            background: #111827;
+            background: var(--primary-color);
             color: #fff;
         }
 
         .contact-actions .btn-primary:hover {
-            background: #000;
+            background: var(--primary-dark);
         }
 
         .contact-actions .btn-outline {
-            border-color: #d1d5db;
-            color: #111827;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
             background: #fff;
         }
 
         .contact-actions .btn-outline:hover {
-            border-color: #9ca3af;
-            background: #f9fafb;
-            color: #111827;
+            border-color: var(--primary-dark);
+            background: #fff4e6;
+            color: var(--primary-dark);
         }
 
         @media (max-width: 900px) {
