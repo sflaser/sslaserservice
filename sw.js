@@ -1,25 +1,19 @@
 // Service Worker for Sky Fire Laser Website
-// Version 1.0.0
+// Version 1.1.0
 
-const CACHE_NAME = 'skyfire-laser-v1.0.0';
-const STATIC_CACHE_NAME = 'skyfire-static-v1.0.0';
-const DYNAMIC_CACHE_NAME = 'skyfire-dynamic-v1.0.0';
+const SW_VERSION = '1.1.0';
+const STATIC_CACHE_NAME = `skyfire-static-v${SW_VERSION}`;
+const DYNAMIC_CACHE_NAME = `skyfire-dynamic-v${SW_VERSION}`;
 
-// Define what to cache
-const STATIC_ASSETS = [
+// Only cache specific same-origin paths as static assets.
+const STATIC_PATHS = [
     '/',
+    '/index.html',
     '/sslaserservice.html',
+    '/admin.html',
     '/sitemap.xml',
-    // Add critical images that should be cached
-    'https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Professional%20Repair%20Lab.jpg',
-    'https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Testing%20&%20Calibration.jpg'
-];
-
-// Images that can be cached dynamically
-const DYNAMIC_ASSETS = [
-    'https://raw.githubusercontent.com/sflaser/sslaserservice/',
-    'https://fonts.googleapis.com/',
-    'https://fonts.gstatic.com/'
+    '/manifest.json',
+    '/robots.txt'
 ];
 
 // Install event - cache static assets
@@ -29,7 +23,7 @@ self.addEventListener('install', event => {
         caches.open(STATIC_CACHE_NAME)
             .then(cache => {
                 console.log('Caching static assets');
-                return cache.addAll(STATIC_ASSETS);
+                return cache.addAll(STATIC_PATHS);
             })
             .then(() => {
                 return self.skipWaiting();
@@ -47,7 +41,12 @@ self.addEventListener('activate', event => {
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames.map(cache => {
-                    if (cache !== STATIC_CACHE_NAME && cache !== DYNAMIC_CACHE_NAME) {
+                    // Remove all old Sky Fire caches from previous versions.
+                    if (
+                        cache.startsWith('skyfire-') &&
+                        cache !== STATIC_CACHE_NAME &&
+                        cache !== DYNAMIC_CACHE_NAME
+                    ) {
                         console.log('Deleting old cache:', cache);
                         return caches.delete(cache);
                     }
@@ -153,7 +152,11 @@ async function networkFirstStrategy(request) {
 
 // Helper functions
 function isStaticAsset(url) {
-    return STATIC_ASSETS.some(asset => url.includes(asset));
+    const parsed = new URL(url);
+    if (parsed.origin !== self.location.origin) {
+        return false;
+    }
+    return STATIC_PATHS.includes(parsed.pathname);
 }
 
 function isImageRequest(request) {
