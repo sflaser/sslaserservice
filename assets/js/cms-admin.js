@@ -14,9 +14,19 @@
   const productForm = document.getElementById('product-form');
   const blogsTableBody = document.getElementById('blogs-table-body');
   const productsTableBody = document.getElementById('products-table-body');
+  const blogCancelEditBtn = document.getElementById('blog-cancel-edit');
+  const productCancelEditBtn = document.getElementById('product-cancel-edit');
+  const blogSubmitBtn = blogForm ? blogForm.querySelector('button[type="submit"]') : null;
+  const productSubmitBtn = productForm ? productForm.querySelector('button[type="submit"]') : null;
 
   const tokenKey = 'cms_admin_access_token';
   let accessToken = localStorage.getItem(tokenKey) || '';
+  let editingBlogId = null;
+  let editingProductId = null;
+  let editingBlogCoverImageUrl = '';
+  let editingProductImageUrl = '';
+  let blogRowsById = new Map();
+  let productRowsById = new Map();
 
   function setStatus(message, kind) {
     statusEl.textContent = message || '';
@@ -41,6 +51,86 @@
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-');
+  }
+
+  function setBlogEditMode(row) {
+    if (!row) return;
+
+    editingBlogId = row.id;
+    editingBlogCoverImageUrl = row.cover_image_url || '';
+    blogForm.elements.title.value = row.title || '';
+    blogForm.elements.slug.value = row.slug || '';
+    blogForm.elements.excerpt.value = row.excerpt || '';
+    blogForm.elements.content.value = row.content || '';
+    blogForm.elements.status.value = row.status || 'draft';
+
+    if (blogSubmitBtn) {
+      blogSubmitBtn.textContent = 'Update Blog Post';
+    }
+    if (blogCancelEditBtn) {
+      blogCancelEditBtn.classList.remove('hidden');
+    }
+
+    blogForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setStatus(`Editing blog post #${row.id}.`, 'success');
+  }
+
+  function clearBlogEditMode(resetForm) {
+    editingBlogId = null;
+    editingBlogCoverImageUrl = '';
+    if (resetForm) {
+      blogForm.reset();
+    }
+    blogForm.elements.status.value = 'draft';
+
+    if (blogSubmitBtn) {
+      blogSubmitBtn.textContent = 'Save Blog Post';
+    }
+    if (blogCancelEditBtn) {
+      blogCancelEditBtn.classList.add('hidden');
+    }
+  }
+
+  function setProductEditMode(row) {
+    if (!row) return;
+
+    editingProductId = row.id;
+    editingProductImageUrl = row.image_url || '';
+    productForm.elements.name.value = row.name || '';
+    productForm.elements.slug.value = row.slug || '';
+    productForm.elements.short_description.value = row.short_description || '';
+    productForm.elements.description.value = row.description || '';
+    productForm.elements.price.value = (Number(row.price_cents || 0) / 100).toFixed(2);
+    productForm.elements.currency.value = (row.currency || 'USD').toUpperCase();
+    productForm.elements.purchase_url.value = row.purchase_url || '';
+    productForm.elements.status.value = row.status || 'draft';
+
+    if (productSubmitBtn) {
+      productSubmitBtn.textContent = 'Update Product';
+    }
+    if (productCancelEditBtn) {
+      productCancelEditBtn.classList.remove('hidden');
+    }
+
+    productForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setStatus(`Editing product #${row.id}.`, 'success');
+  }
+
+  function clearProductEditMode(resetForm) {
+    editingProductId = null;
+    editingProductImageUrl = '';
+    if (resetForm) {
+      productForm.reset();
+    }
+    productForm.elements.currency.value = cfg.defaultCurrency || 'USD';
+    productForm.elements.status.value = 'draft';
+
+    if (productSubmitBtn) {
+      productSubmitBtn.textContent = 'Save Product';
+    }
+    if (productCancelEditBtn) {
+      productCancelEditBtn.classList.add('hidden');
+    }
   }
 
   async function request(path, options) {
@@ -125,10 +215,11 @@
 
   async function fetchBlogs() {
     const rows = await request(
-      '/rest/v1/blog_posts?select=id,title,status,published_at,created_at&order=created_at.desc',
+      '/rest/v1/blog_posts?select=id,title,slug,excerpt,content,cover_image_url,status,published_at,created_at&order=created_at.desc',
       { auth: true }
     );
 
+    blogRowsById = new Map(rows.map((row) => [String(row.id), row]));
     blogsTableBody.innerHTML = rows
       .map(
         (row) => `
@@ -137,7 +228,10 @@
             <td>${row.title}</td>
             <td><span class="badge ${row.status}">${row.status}</span></td>
             <td>${row.published_at ? new Date(row.published_at).toLocaleString() : '-'}</td>
-            <td><button class="btn btn-danger" data-delete-blog="${row.id}">Delete</button></td>
+            <td class="actions">
+              <button class="btn btn-outline btn-sm" data-edit-blog="${row.id}">Edit</button>
+              <button class="btn btn-danger btn-sm" data-delete-blog="${row.id}">Delete</button>
+            </td>
           </tr>
         `
       )
@@ -146,10 +240,11 @@
 
   async function fetchProducts() {
     const rows = await request(
-      '/rest/v1/products?select=id,name,status,price_cents,currency,created_at&order=created_at.desc',
+      '/rest/v1/products?select=id,name,slug,short_description,description,price_cents,currency,purchase_url,image_url,status,published_at,created_at&order=created_at.desc',
       { auth: true }
     );
 
+    productRowsById = new Map(rows.map((row) => [String(row.id), row]));
     productsTableBody.innerHTML = rows
       .map(
         (row) => `
@@ -158,7 +253,10 @@
             <td>${row.name}</td>
             <td>${(Number(row.price_cents || 0) / 100).toFixed(2)} ${(row.currency || 'USD').toUpperCase()}</td>
             <td><span class="badge ${row.status}">${row.status}</span></td>
-            <td><button class="btn btn-danger" data-delete-product="${row.id}">Delete</button></td>
+            <td class="actions">
+              <button class="btn btn-outline btn-sm" data-edit-product="${row.id}">Edit</button>
+              <button class="btn btn-danger btn-sm" data-delete-product="${row.id}">Delete</button>
+            </td>
           </tr>
         `
       )
@@ -201,6 +299,8 @@
   logoutBtn.addEventListener('click', function () {
     accessToken = '';
     localStorage.removeItem(tokenKey);
+    clearBlogEditMode(true);
+    clearProductEditMode(true);
     leaveDashboard();
     setStatus('Signed out.');
   });
@@ -217,30 +317,48 @@
       const content = String(formData.get('content') || '').trim();
       const status = String(formData.get('status') || 'draft');
 
-      let coverImageUrl = '';
+      let coverImageUrl = editingBlogCoverImageUrl || null;
       const imageFile = formData.get('cover_image');
       if (imageFile instanceof File && imageFile.size > 0) {
         setStatus('Uploading blog cover image...');
         coverImageUrl = await uploadImage(imageFile, 'blog');
       }
 
-      await request('/rest/v1/blog_posts', {
-        method: 'POST',
-        auth: true,
-        body: {
-          title,
-          slug,
-          excerpt,
-          content,
-          cover_image_url: coverImageUrl || null,
-          status,
-          published_at: status === 'published' ? new Date().toISOString() : null,
-        },
-      });
+      let publishedAt = null;
+      if (status === 'published') {
+        const existingRow = editingBlogId ? blogRowsById.get(String(editingBlogId)) : null;
+        publishedAt = existingRow && existingRow.published_at ? existingRow.published_at : new Date().toISOString();
+      }
 
-      blogForm.reset();
-      await fetchBlogs();
-      setStatus('Blog post saved.', 'success');
+      const payload = {
+        title,
+        slug,
+        excerpt,
+        content,
+        cover_image_url: coverImageUrl,
+        status,
+        published_at: publishedAt,
+      };
+
+      if (editingBlogId) {
+        await request(`/rest/v1/blog_posts?id=eq.${encodeURIComponent(editingBlogId)}`, {
+          method: 'PATCH',
+          auth: true,
+          body: payload,
+        });
+        clearBlogEditMode(true);
+        await fetchBlogs();
+        setStatus('Blog post updated.', 'success');
+      } else {
+        await request('/rest/v1/blog_posts', {
+          method: 'POST',
+          auth: true,
+          body: payload,
+        });
+        clearBlogEditMode(true);
+        await fetchBlogs();
+        setStatus('Blog post saved.', 'success');
+      }
     } catch (err) {
       setStatus(err instanceof Error ? err.message : 'Failed to save blog post.', 'error');
     }
@@ -261,41 +379,91 @@
       const purchaseUrl = String(formData.get('purchase_url') || '').trim();
       const status = String(formData.get('status') || 'draft');
 
-      let imageUrl = '';
+      let imageUrl = editingProductImageUrl || null;
       const imageFile = formData.get('image');
       if (imageFile instanceof File && imageFile.size > 0) {
         setStatus('Uploading product image...');
         imageUrl = await uploadImage(imageFile, 'products');
       }
 
-      await request('/rest/v1/products', {
-        method: 'POST',
-        auth: true,
-        body: {
-          name,
-          slug,
-          short_description: shortDescription,
-          description,
-          price_cents: Math.round(price * 100),
-          currency,
-          purchase_url: purchaseUrl,
-          image_url: imageUrl || null,
-          status,
-          published_at: status === 'published' ? new Date().toISOString() : null,
-        },
-      });
+      let publishedAt = null;
+      if (status === 'published') {
+        const existingRow = editingProductId ? productRowsById.get(String(editingProductId)) : null;
+        publishedAt = existingRow && existingRow.published_at ? existingRow.published_at : new Date().toISOString();
+      }
 
-      productForm.reset();
-      await fetchProducts();
-      setStatus('Product saved.', 'success');
+      const payload = {
+        name,
+        slug,
+        short_description: shortDescription,
+        description,
+        price_cents: Math.round(price * 100),
+        currency,
+        purchase_url: purchaseUrl,
+        image_url: imageUrl,
+        status,
+        published_at: publishedAt,
+      };
+
+      if (editingProductId) {
+        await request(`/rest/v1/products?id=eq.${encodeURIComponent(editingProductId)}`, {
+          method: 'PATCH',
+          auth: true,
+          body: payload,
+        });
+        clearProductEditMode(true);
+        await fetchProducts();
+        setStatus('Product updated.', 'success');
+      } else {
+        await request('/rest/v1/products', {
+          method: 'POST',
+          auth: true,
+          body: payload,
+        });
+        clearProductEditMode(true);
+        await fetchProducts();
+        setStatus('Product saved.', 'success');
+      }
     } catch (err) {
       setStatus(err instanceof Error ? err.message : 'Failed to save product.', 'error');
     }
   });
 
+  if (blogCancelEditBtn) {
+    blogCancelEditBtn.addEventListener('click', function () {
+      clearBlogEditMode(true);
+      setStatus('Blog edit cancelled.');
+    });
+  }
+
+  if (productCancelEditBtn) {
+    productCancelEditBtn.addEventListener('click', function () {
+      clearProductEditMode(true);
+      setStatus('Product edit cancelled.');
+    });
+  }
+
   document.addEventListener('click', async function (event) {
     const target = event.target;
     if (!(target instanceof HTMLElement)) return;
+
+    const editBlogId = target.getAttribute('data-edit-blog');
+    if (editBlogId) {
+      const row = blogRowsById.get(editBlogId);
+      if (row) {
+        setBlogEditMode(row);
+      }
+      return;
+    }
+
+    const editProductId = target.getAttribute('data-edit-product');
+    if (editProductId) {
+      const row = productRowsById.get(editProductId);
+      if (row) {
+        setProductEditMode(row);
+      }
+      return;
+    }
 
     const blogId = target.getAttribute('data-delete-blog');
     if (blogId) {
@@ -305,6 +473,9 @@
           method: 'DELETE',
           auth: true,
         });
+        if (editingBlogId && String(editingBlogId) === String(blogId)) {
+          clearBlogEditMode(true);
+        }
         await fetchBlogs();
         setStatus('Blog post deleted.', 'success');
       } catch (err) {
@@ -321,6 +492,9 @@
           method: 'DELETE',
           auth: true,
         });
+        if (editingProductId && String(editingProductId) === String(productId)) {
+          clearProductEditMode(true);
+        }
         await fetchProducts();
         setStatus('Product deleted.', 'success');
       } catch (err) {
