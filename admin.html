@@ -55,6 +55,14 @@
               <textarea id="blog-excerpt" name="excerpt"></textarea>
             </div>
             <div class="form-row">
+              <label for="blog-markdown-file">Import Markdown (.md)</label>
+              <div class="import-row">
+                <input id="blog-markdown-file" type="file" accept=".md,.markdown,text/markdown,.txt">
+                <button id="blog-import-md" class="btn btn-outline btn-sm" type="button">Import .md</button>
+              </div>
+              <p class="field-hint">支持 AI 生成的 Markdown 文件。可识别 YAML 头信息：<code>title</code>、<code>slug</code>、<code>excerpt</code>、<code>status</code>。Supports AI-generated Markdown files and optional YAML front matter.</p>
+            </div>
+            <div class="form-row">
               <label for="blog-content">Content</label>
               <div class="format-toolbar" aria-label="Blog content formatting tools">
                 <button class="btn btn-tool" type="button" data-format-target="blog-content" data-format-action="h2">H2</button>

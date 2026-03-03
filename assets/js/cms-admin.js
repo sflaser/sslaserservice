@@ -18,6 +18,8 @@
   const productCancelEditBtn = document.getElementById('product-cancel-edit');
   const blogSubmitBtn = blogForm ? blogForm.querySelector('button[type="submit"]') : null;
   const productSubmitBtn = productForm ? productForm.querySelector('button[type="submit"]') : null;
+  const blogMarkdownFileInput = document.getElementById('blog-markdown-file');
+  const blogImportMdBtn = document.getElementById('blog-import-md');
 
   const tokenKey = 'cms_admin_access_token';
   let accessToken = localStorage.getItem(tokenKey) || '';
@@ -51,6 +53,113 @@
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-');
+  }
+
+  function parseFrontMatter(markdown) {
+    const text = String(markdown || '');
+    const match = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n?/);
+    if (!match) {
+      return { meta: {}, body: text };
+    }
+
+    const meta = {};
+    const lines = match[1].split('\n');
+    for (const line of lines) {
+      const kv = line.match(/^\s*([a-zA-Z0-9_-]+)\s*:\s*(.+?)\s*$/);
+      if (!kv) continue;
+      const key = kv[1].toLowerCase();
+      const value = kv[2].replace(/^["']|["']$/g, '');
+      meta[key] = value;
+    }
+
+    return {
+      meta,
+      body: text.slice(match[0].length),
+    };
+  }
+
+  function stripMarkdownToText(markdown) {
+    return String(markdown || '')
+      .replace(/```[\s\S]*?```/g, ' ')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      .replace(/^#{1,6}\s+/gm, '')
+      .replace(/^>\s?/gm, '')
+      .replace(/^[-*+]\s+/gm, '')
+      .replace(/^\d+[.)]\s+/gm, '')
+      .replace(/[*_~]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function parseMarkdownDocument(markdown) {
+    const normalized = String(markdown || '').replace(/\r\n/g, '\n');
+    const parsed = parseFrontMatter(normalized);
+    let content = parsed.body.trim();
+    const meta = parsed.meta || {};
+
+    let title = String(meta.title || '').trim();
+    const firstH1 = content.match(/^#\s+(.+?)\s*$/m);
+    if (!title && firstH1) {
+      title = firstH1[1].trim();
+      content = content.replace(/^#\s+.+?\n+/, '').trim();
+    }
+
+    let excerpt = String(meta.excerpt || meta.description || '').trim();
+    if (!excerpt) {
+      const parts = content.split(/\n{2,}/).map((s) => stripMarkdownToText(s)).filter(Boolean);
+      excerpt = parts[0] || '';
+      if (excerpt.length > 220) {
+        excerpt = `${excerpt.slice(0, 217)}...`;
+      }
+    }
+
+    const slug = String(meta.slug || '').trim();
+    const status = String(meta.status || '').trim().toLowerCase();
+
+    return {
+      title,
+      slug,
+      excerpt,
+      content,
+      status: status === 'published' ? 'published' : status === 'draft' ? 'draft' : '',
+    };
+  }
+
+  async function importMarkdownFile(file) {
+    if (!(file instanceof File)) {
+      throw new Error('Please select a Markdown file first.');
+    }
+    const ext = (file.name.split('.').pop() || '').toLowerCase();
+    if (!['md', 'markdown', 'txt'].includes(ext)) {
+      throw new Error('Only .md / .markdown / .txt files are supported.');
+    }
+
+    const text = await file.text();
+    const parsed = parseMarkdownDocument(text);
+
+    if (!parsed.content) {
+      throw new Error('Markdown file is empty.');
+    }
+
+    if (parsed.title) {
+      blogForm.elements.title.value = parsed.title;
+    }
+    if (parsed.slug) {
+      blogForm.elements.slug.value = parsed.slug;
+    } else if (!String(blogForm.elements.slug.value || '').trim() && parsed.title) {
+      blogForm.elements.slug.value = slugify(parsed.title);
+    }
+    if (parsed.excerpt) {
+      blogForm.elements.excerpt.value = parsed.excerpt;
+    }
+    blogForm.elements.content.value = parsed.content;
+    if (parsed.status) {
+      blogForm.elements.status.value = parsed.status;
+    }
+
+    setStatus('Markdown imported. Review and click Save Blog Post.', 'success');
   }
 
   function setTextareaSelection(textarea, start, end, insertedText, selectedStart, selectedEnd) {
@@ -196,6 +305,9 @@
     editingBlogCoverImageUrl = '';
     if (resetForm) {
       blogForm.reset();
+      if (blogMarkdownFileInput) {
+        blogMarkdownFileInput.value = '';
+      }
     }
     blogForm.elements.status.value = 'draft';
 
@@ -556,6 +668,30 @@
     productCancelEditBtn.addEventListener('click', function () {
       clearProductEditMode(true);
       setStatus('Product edit cancelled.');
+    });
+  }
+
+  if (blogImportMdBtn) {
+    blogImportMdBtn.addEventListener('click', async function () {
+      try {
+        const file = blogMarkdownFileInput && blogMarkdownFileInput.files ? blogMarkdownFileInput.files[0] : null;
+        await importMarkdownFile(file);
+      } catch (err) {
+        setStatus(err instanceof Error ? err.message : 'Failed to import markdown.', 'error');
+      }
+    });
+  }
+
+  if (blogMarkdownFileInput) {
+    blogMarkdownFileInput.addEventListener('change', async function () {
+      const file = blogMarkdownFileInput.files ? blogMarkdownFileInput.files[0] : null;
+      if (!file) return;
+
+      try {
+        await importMarkdownFile(file);
+      } catch (err) {
+        setStatus(err instanceof Error ? err.message : 'Failed to import markdown.', 'error');
+      }
     });
   }
 

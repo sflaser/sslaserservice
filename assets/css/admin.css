@@ -82,8 +82,22 @@ textarea {
   resize: vertical;
 }
 
+#blog-content {
+  min-height: 320px;
+}
+
 .form-row {
   margin-bottom: 12px;
+}
+
+.import-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.import-row input[type="file"] {
+  flex: 1;
 }
 
 .field-hint {
@@ -227,5 +241,10 @@ textarea {
 @media (max-width: 900px) {
   .grid-2 {
     grid-template-columns: 1fr;
+  }
+
+  .import-row {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
