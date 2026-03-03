@@ -56,6 +56,16 @@
             </div>
             <div class="form-row">
               <label for="blog-content">Content</label>
+              <div class="format-toolbar" aria-label="Blog content formatting tools">
+                <button class="btn btn-tool" type="button" data-format-target="blog-content" data-format-action="h2">H2</button>
+                <button class="btn btn-tool" type="button" data-format-target="blog-content" data-format-action="h3">H3</button>
+                <button class="btn btn-tool" type="button" data-format-target="blog-content" data-format-action="bold">Bold</button>
+                <button class="btn btn-tool" type="button" data-format-target="blog-content" data-format-action="bullet">• List</button>
+                <button class="btn btn-tool" type="button" data-format-target="blog-content" data-format-action="number">1. List</button>
+                <button class="btn btn-tool" type="button" data-format-target="blog-content" data-format-action="quote">Quote</button>
+                <button class="btn btn-tool" type="button" data-format-target="blog-content" data-format-action="paragraph">New Paragraph</button>
+                <button class="btn btn-tool" type="button" data-format-target="blog-content" data-format-action="template">Insert Template</button>
+              </div>
               <textarea id="blog-content" name="content" required></textarea>
               <p class="field-hint">支持简单格式：<code># 标题</code>、<code>- 列表</code>、<code>1. 序号</code>，段落之间空一行。Supports simple formatting: <code># Heading</code>, <code>- bullet</code>, <code>1. list</code>, and one blank line between paragraphs.</p>
             </div>
@@ -95,6 +105,15 @@
             </div>
             <div class="form-row">
               <label for="product-description">Full Description</label>
+              <div class="format-toolbar" aria-label="Product description formatting tools">
+                <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="h2">H2</button>
+                <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="h3">H3</button>
+                <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="bold">Bold</button>
+                <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="bullet">• List</button>
+                <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="number">1. List</button>
+                <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="quote">Quote</button>
+                <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="paragraph">New Paragraph</button>
+              </div>
               <textarea id="product-description" name="description"></textarea>
             </div>
             <div class="form-row">

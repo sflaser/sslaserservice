@@ -53,6 +53,122 @@
       .replace(/-+/g, '-');
   }
 
+  function setTextareaSelection(textarea, start, end, insertedText, selectedStart, selectedEnd) {
+    const before = textarea.value.slice(0, start);
+    const after = textarea.value.slice(end);
+    textarea.value = `${before}${insertedText}${after}`;
+
+    const nextStart = start + selectedStart;
+    const nextEnd = start + selectedEnd;
+    textarea.focus();
+    textarea.setSelectionRange(nextStart, nextEnd);
+    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
+  function normalizeLinePrefix(text, regex, prefixBuilder) {
+    const lines = text.split('\n');
+    return lines
+      .map((line, idx) => {
+        const trimmed = line.trim();
+        if (!trimmed) return line;
+        return `${prefixBuilder(idx)}${trimmed.replace(regex, '')}`;
+      })
+      .join('\n');
+  }
+
+  function applyFormatting(textarea, action) {
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selected = textarea.value.slice(start, end);
+
+    if (action === 'paragraph') {
+      setTextareaSelection(textarea, start, end, '\n\n', 2, 2);
+      return;
+    }
+
+    if (action === 'bold') {
+      if (selected) {
+        const text = `**${selected}**`;
+        setTextareaSelection(textarea, start, end, text, text.length, text.length);
+      } else {
+        const placeholder = 'bold text';
+        const text = `**${placeholder}**`;
+        setTextareaSelection(textarea, start, end, text, 2, 2 + placeholder.length);
+      }
+      return;
+    }
+
+    if (action === 'h2' || action === 'h3') {
+      const marker = action === 'h2' ? '##' : '###';
+      if (selected) {
+        const converted = normalizeLinePrefix(selected, /^#{1,6}\s+/, () => `${marker} `);
+        setTextareaSelection(textarea, start, end, converted, converted.length, converted.length);
+      } else {
+        const placeholder = action === 'h2' ? 'Section Heading' : 'Subheading';
+        const text = `${marker} ${placeholder}\n\n`;
+        const offset = marker.length + 1;
+        setTextareaSelection(textarea, start, end, text, offset, offset + placeholder.length);
+      }
+      return;
+    }
+
+    if (action === 'bullet') {
+      if (selected) {
+        const converted = normalizeLinePrefix(selected, /^([-*•]|\d+[.)])\s+/, () => '- ');
+        setTextareaSelection(textarea, start, end, converted, converted.length, converted.length);
+      } else {
+        const text = '- List item\n- List item\n';
+        setTextareaSelection(textarea, start, end, text, 2, 11);
+      }
+      return;
+    }
+
+    if (action === 'number') {
+      if (selected) {
+        const converted = normalizeLinePrefix(selected, /^([-*•]|\d+[.)])\s+/, (idx) => `${idx + 1}. `);
+        setTextareaSelection(textarea, start, end, converted, converted.length, converted.length);
+      } else {
+        const text = '1. First item\n2. Second item\n';
+        setTextareaSelection(textarea, start, end, text, 3, 13);
+      }
+      return;
+    }
+
+    if (action === 'quote') {
+      if (selected) {
+        const converted = normalizeLinePrefix(selected, /^>\s+/, () => '> ');
+        setTextareaSelection(textarea, start, end, converted, converted.length, converted.length);
+      } else {
+        const text = '> Quote\n\n';
+        setTextareaSelection(textarea, start, end, text, 2, 7);
+      }
+      return;
+    }
+
+    if (action === 'template') {
+      const block = [
+        '## Overview',
+        'One-sentence summary of this topic.',
+        '',
+        '## Key Points',
+        '- Point 1',
+        '- Point 2',
+        '- Point 3',
+        '',
+        '## Practical Notes',
+        'Write your practical recommendations here.',
+        '',
+        '## Conclusion',
+        'Close with a clear result or next action.',
+      ].join('\n');
+      const prefix = start > 0 && !/\n$/.test(textarea.value.slice(0, start)) ? '\n\n' : '';
+      const text = `${prefix}${block}\n`;
+      const selectionStart = prefix.length;
+      const selectionEnd = prefix.length + 10;
+      setTextareaSelection(textarea, start, end, text, selectionStart, selectionEnd);
+    }
+  }
+
   function setBlogEditMode(row) {
     if (!row) return;
 
@@ -446,6 +562,19 @@
   document.addEventListener('click', async function (event) {
     const target = event.target;
     if (!(target instanceof HTMLElement)) return;
+
+    const formatBtn = target.closest('[data-format-action][data-format-target]');
+    if (formatBtn instanceof HTMLElement) {
+      const action = formatBtn.getAttribute('data-format-action');
+      const targetId = formatBtn.getAttribute('data-format-target');
+      if (action && targetId) {
+        const textarea = document.getElementById(targetId);
+        if (textarea instanceof HTMLTextAreaElement) {
+          applyFormatting(textarea, action);
+        }
+      }
+      return;
+    }
 
     const editBlogId = target.getAttribute('data-edit-blog');
     if (editBlogId) {
