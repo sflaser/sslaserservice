@@ -12,7 +12,7 @@
 
 body {
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "SF Pro Text", "PingFang SC", "Noto Sans SC", "Segoe UI", Arial, sans-serif;
   color: var(--text);
   background: var(--bg);
 }
@@ -59,10 +59,20 @@ body {
   overflow: hidden;
 }
 
+.blog-cover-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(140deg, #f7f9fc, #eef2f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
 .blog-cover {
   width: 100%;
-  max-height: 420px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
   display: block;
 }
 
@@ -92,10 +102,57 @@ body {
 .blog-body {
   margin-top: 8px;
   color: #111827;
-  line-height: 1.9;
-  font-size: 17px;
-  white-space: pre-wrap;
+  line-height: 1.85;
+  font-size: 18px;
   word-break: break-word;
+}
+
+.blog-body p {
+  margin: 0 0 1.1em;
+}
+
+.blog-body h2,
+.blog-body h3,
+.blog-body h4 {
+  margin: 1.5em 0 0.6em;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.blog-body h2 {
+  font-size: 1.45em;
+}
+
+.blog-body h3 {
+  font-size: 1.2em;
+}
+
+.blog-body h4 {
+  font-size: 1.05em;
+}
+
+.blog-body ul,
+.blog-body ol {
+  margin: 0.4em 0 1.1em;
+  padding-left: 1.4em;
+}
+
+.blog-body li {
+  margin-bottom: 0.45em;
+  padding-left: 0.2em;
+}
+
+.blog-body blockquote {
+  margin: 1.2em 0;
+  padding: 0.7em 1em;
+  border-left: 3px solid var(--brand);
+  background: #fff8ef;
+  color: #374151;
+}
+
+.blog-body strong {
+  font-weight: 700;
 }
 
 .blog-state {

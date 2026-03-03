@@ -86,6 +86,20 @@ textarea {
   margin-bottom: 12px;
 }
 
+.field-hint {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.field-hint code {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 1px 5px;
+}
+
 .form-actions {
   display: flex;
   gap: 10px;
