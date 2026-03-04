@@ -82,7 +82,8 @@ textarea {
   resize: vertical;
 }
 
-#blog-content {
+#blog-content,
+#product-description {
   min-height: 320px;
 }
 

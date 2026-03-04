@@ -112,6 +112,14 @@
               <textarea id="product-short-description" name="short_description"></textarea>
             </div>
             <div class="form-row">
+              <label for="product-markdown-file">Import Markdown (.md)</label>
+              <div class="import-row">
+                <input id="product-markdown-file" type="file" accept=".md,.markdown,text/markdown,.txt">
+                <button id="product-import-md" class="btn btn-outline btn-sm" type="button">Import .md</button>
+              </div>
+              <p class="field-hint">支持 AI 生成的 Markdown 文件。可识别 YAML 头信息：<code>name</code>/<code>title</code>、<code>slug</code>、<code>short_description</code>/<code>excerpt</code>、<code>price</code>、<code>currency</code>、<code>purchase_url</code>、<code>status</code>。Supports AI-generated Markdown files and optional YAML front matter.</p>
+            </div>
+            <div class="form-row">
               <label for="product-description">Full Description</label>
               <div class="format-toolbar" aria-label="Product description formatting tools">
                 <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="h2">H2</button>
@@ -121,8 +129,10 @@
                 <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="number">1. List</button>
                 <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="quote">Quote</button>
                 <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="paragraph">New Paragraph</button>
+                <button class="btn btn-tool" type="button" data-format-target="product-description" data-format-action="template">Insert Template</button>
               </div>
               <textarea id="product-description" name="description"></textarea>
+              <p class="field-hint">支持简单格式：<code># 标题</code>、<code>- 列表</code>、<code>1. 序号</code>，段落之间空一行。Supports simple formatting: <code># Heading</code>, <code>- bullet</code>, <code>1. list</code>, and one blank line between paragraphs.</p>
             </div>
             <div class="form-row">
               <label for="product-price">Price</label>

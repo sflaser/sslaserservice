@@ -20,6 +20,8 @@
   const productSubmitBtn = productForm ? productForm.querySelector('button[type="submit"]') : null;
   const blogMarkdownFileInput = document.getElementById('blog-markdown-file');
   const blogImportMdBtn = document.getElementById('blog-import-md');
+  const productMarkdownFileInput = document.getElementById('product-markdown-file');
+  const productImportMdBtn = document.getElementById('product-import-md');
 
   const tokenKey = 'cms_admin_access_token';
   let accessToken = localStorage.getItem(tokenKey) || '';
@@ -93,6 +95,11 @@
       .trim();
   }
 
+  function normalizeStatus(value) {
+    const status = String(value || '').trim().toLowerCase();
+    return status === 'published' ? 'published' : status === 'draft' ? 'draft' : '';
+  }
+
   function parseMarkdownDocument(markdown) {
     const normalized = String(markdown || '').replace(/\r\n/g, '\n');
     const parsed = parseFrontMatter(normalized);
@@ -116,14 +123,60 @@
     }
 
     const slug = String(meta.slug || '').trim();
-    const status = String(meta.status || '').trim().toLowerCase();
-
     return {
       title,
       slug,
       excerpt,
       content,
-      status: status === 'published' ? 'published' : status === 'draft' ? 'draft' : '',
+      status: normalizeStatus(meta.status),
+    };
+  }
+
+  function parseProductMarkdownDocument(markdown) {
+    const normalized = String(markdown || '').replace(/\r\n/g, '\n');
+    const parsed = parseFrontMatter(normalized);
+    let description = parsed.body.trim();
+    const meta = parsed.meta || {};
+
+    let name = String(meta.name || meta.title || '').trim();
+    const firstH1 = description.match(/^#\s+(.+?)\s*$/m);
+    if (!name && firstH1) {
+      name = firstH1[1].trim();
+      description = description.replace(/^#\s+.+?\n+/, '').trim();
+    }
+
+    let shortDescription = String(meta.short_description || meta.excerpt || meta.description || '').trim();
+    if (!shortDescription) {
+      const parts = description.split(/\n{2,}/).map((s) => stripMarkdownToText(s)).filter(Boolean);
+      shortDescription = parts[0] || '';
+      if (shortDescription.length > 220) {
+        shortDescription = `${shortDescription.slice(0, 217)}...`;
+      }
+    }
+
+    const slug = String(meta.slug || '').trim();
+    const purchaseUrl = String(meta.purchase_url || meta.buy_url || meta.link || '').trim();
+    const currency = String(meta.currency || cfg.defaultCurrency || 'USD').trim().toUpperCase().slice(0, 3) || 'USD';
+    const priceRaw = String(meta.price || meta.price_usd || '').trim();
+    const status = normalizeStatus(meta.status);
+
+    let price = '';
+    if (priceRaw) {
+      const parsedPrice = Number(priceRaw.replace(/[^0-9.-]/g, ''));
+      if (Number.isFinite(parsedPrice) && parsedPrice >= 0) {
+        price = parsedPrice.toFixed(2);
+      }
+    }
+
+    return {
+      name,
+      slug,
+      shortDescription,
+      description,
+      price,
+      currency,
+      purchaseUrl,
+      status,
     };
   }
 
@@ -160,6 +213,52 @@
     }
 
     setStatus('Markdown imported. Review and click Save Blog Post.', 'success');
+  }
+
+  async function importProductMarkdownFile(file) {
+    if (!(file instanceof File)) {
+      throw new Error('Please select a Markdown file first.');
+    }
+    const ext = (file.name.split('.').pop() || '').toLowerCase();
+    if (!['md', 'markdown', 'txt'].includes(ext)) {
+      throw new Error('Only .md / .markdown / .txt files are supported.');
+    }
+
+    const text = await file.text();
+    const parsed = parseProductMarkdownDocument(text);
+
+    if (!parsed.description && !parsed.shortDescription) {
+      throw new Error('Markdown file is empty.');
+    }
+
+    if (parsed.name) {
+      productForm.elements.name.value = parsed.name;
+    }
+    if (parsed.slug) {
+      productForm.elements.slug.value = parsed.slug;
+    } else if (!String(productForm.elements.slug.value || '').trim() && parsed.name) {
+      productForm.elements.slug.value = slugify(parsed.name);
+    }
+    if (parsed.shortDescription) {
+      productForm.elements.short_description.value = parsed.shortDescription;
+    }
+    if (parsed.description) {
+      productForm.elements.description.value = parsed.description;
+    }
+    if (parsed.price) {
+      productForm.elements.price.value = parsed.price;
+    }
+    if (parsed.currency) {
+      productForm.elements.currency.value = parsed.currency;
+    }
+    if (parsed.purchaseUrl) {
+      productForm.elements.purchase_url.value = parsed.purchaseUrl;
+    }
+    if (parsed.status) {
+      productForm.elements.status.value = parsed.status;
+    }
+
+    setStatus('Markdown imported. Review and click Save Product.', 'success');
   }
 
   function setTextareaSelection(textarea, start, end, insertedText, selectedStart, selectedEnd) {
@@ -255,21 +354,41 @@
     }
 
     if (action === 'template') {
-      const block = [
-        '## Overview',
-        'One-sentence summary of this topic.',
-        '',
-        '## Key Points',
-        '- Point 1',
-        '- Point 2',
-        '- Point 3',
-        '',
-        '## Practical Notes',
-        'Write your practical recommendations here.',
-        '',
-        '## Conclusion',
-        'Close with a clear result or next action.',
-      ].join('\n');
+      const block = textarea.id === 'product-description'
+        ? [
+          '## Product Overview',
+          'One-sentence value statement for this product.',
+          '',
+          '## Key Features',
+          '- Feature 1',
+          '- Feature 2',
+          '- Feature 3',
+          '',
+          '## Technical Specifications',
+          'List major specs, compatibility, and operating requirements.',
+          '',
+          '## Typical Applications',
+          '- Application 1',
+          '- Application 2',
+          '',
+          '## Delivery and Support',
+          'Summarize lead time, warranty, and support scope.',
+        ].join('\n')
+        : [
+          '## Overview',
+          'One-sentence summary of this topic.',
+          '',
+          '## Key Points',
+          '- Point 1',
+          '- Point 2',
+          '- Point 3',
+          '',
+          '## Practical Notes',
+          'Write your practical recommendations here.',
+          '',
+          '## Conclusion',
+          'Close with a clear result or next action.',
+        ].join('\n');
       const prefix = start > 0 && !/\n$/.test(textarea.value.slice(0, start)) ? '\n\n' : '';
       const text = `${prefix}${block}\n`;
       const selectionStart = prefix.length;
@@ -349,6 +468,9 @@
     editingProductImageUrl = '';
     if (resetForm) {
       productForm.reset();
+      if (productMarkdownFileInput) {
+        productMarkdownFileInput.value = '';
+      }
     }
     productForm.elements.currency.value = cfg.defaultCurrency || 'USD';
     productForm.elements.status.value = 'draft';
@@ -689,6 +811,30 @@
 
       try {
         await importMarkdownFile(file);
+      } catch (err) {
+        setStatus(err instanceof Error ? err.message : 'Failed to import markdown.', 'error');
+      }
+    });
+  }
+
+  if (productImportMdBtn) {
+    productImportMdBtn.addEventListener('click', async function () {
+      try {
+        const file = productMarkdownFileInput && productMarkdownFileInput.files ? productMarkdownFileInput.files[0] : null;
+        await importProductMarkdownFile(file);
+      } catch (err) {
+        setStatus(err instanceof Error ? err.message : 'Failed to import markdown.', 'error');
+      }
+    });
+  }
+
+  if (productMarkdownFileInput) {
+    productMarkdownFileInput.addEventListener('change', async function () {
+      const file = productMarkdownFileInput.files ? productMarkdownFileInput.files[0] : null;
+      if (!file) return;
+
+      try {
+        await importProductMarkdownFile(file);
       } catch (err) {
         setStatus(err instanceof Error ? err.message : 'Failed to import markdown.', 'error');
       }
