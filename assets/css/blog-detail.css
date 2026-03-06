@@ -155,6 +155,20 @@ body {
   font-weight: 700;
 }
 
+.blog-body hr {
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+  margin: 1.6em 0;
+}
+
+.blog-body code {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 0.1em 0.35em;
+  font-size: 0.92em;
+}
+
 .blog-state {
   background: #fff;
   border: 1px solid #e5e7eb;

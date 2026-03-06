@@ -40,61 +40,134 @@
   }
 
   function renderTextInline(value) {
-    return escapeHtml(value)
-      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\*(.+?)\*/g, "<em>$1</em>");
+    let html = escapeHtml(value);
+
+    // Inline code first so markdown markers inside code are preserved.
+    html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+    html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    html = html.replace(/__(.+?)__/g, "<strong>$1</strong>");
+    html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
+    html = html.replace(/_(.+?)_/g, "<em>$1</em>");
+
+    return html;
   }
 
   function renderMultiline(value) {
     return renderTextInline(String(value || "")).replace(/\n/g, "<br>");
   }
 
+  function isHorizontalRule(line) {
+    return /^\s*([-*_])(?:\s*\1){2,}\s*$/.test(line);
+  }
+
+  function isHeading(line) {
+    return /^\s*#{1,6}\s+/.test(line);
+  }
+
+  function isUnorderedList(line) {
+    return /^\s*[-*+•]\s+/.test(line);
+  }
+
+  function isOrderedList(line) {
+    return /^\s*\d+[.)]\s+/.test(line);
+  }
+
+  function isBlockquote(line) {
+    return /^\s*>\s?/.test(line);
+  }
+
   function renderStructuredContent(content) {
     const normalized = String(content || "").replace(/\r\n/g, "\n").trim();
     if (!normalized) return "";
 
-    const blocks = normalized.split(/\n{2,}/).map((part) => part.trim()).filter(Boolean);
+    const lines = normalized.split("\n");
     const html = [];
 
-    for (const block of blocks) {
-      const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
-      if (!lines.length) continue;
+    let i = 0;
+    while (i < lines.length) {
+      const raw = lines[i];
+      const line = raw.trim();
 
-      if (/^#{1,4}\s+/.test(lines[0])) {
-        const level = Math.min(4, Math.max(1, (lines[0].match(/^#+/) || ["#"])[0].length));
-        const text = lines[0].replace(/^#{1,4}\s+/, "");
-        html.push(`<h${level}>${renderTextInline(text)}</h${level}>`);
-        if (lines.length > 1) {
-          html.push(`<p>${renderMultiline(lines.slice(1).join("\n"))}</p>`);
+      if (!line) {
+        i += 1;
+        continue;
+      }
+
+      if (isHorizontalRule(line)) {
+        html.push("<hr>");
+        i += 1;
+        continue;
+      }
+
+      if (isHeading(line)) {
+        const match = line.match(/^(#{1,6})\s+(.+)$/);
+        if (match) {
+          const level = Math.min(4, match[1].length);
+          html.push(`<h${level}>${renderTextInline(match[2].trim())}</h${level}>`);
+          i += 1;
+          continue;
         }
+      }
+
+      if (isUnorderedList(line)) {
+        const items = [];
+        while (i < lines.length) {
+          const next = lines[i].trim();
+          if (!next) break;
+          if (!isUnorderedList(next)) break;
+          items.push(next.replace(/^[-*+•]\s+/, ""));
+          i += 1;
+        }
+        html.push(`<ul>${items.map((item) => `<li>${renderTextInline(item)}</li>`).join("")}</ul>`);
         continue;
       }
 
-      if (lines.every((line) => /^([-*•])\s+/.test(line))) {
-        const listItems = lines
-          .map((line) => line.replace(/^([-*•])\s+/, ""))
-          .map((line) => `<li>${renderTextInline(line)}</li>`)
-          .join("");
-        html.push(`<ul>${listItems}</ul>`);
+      if (isOrderedList(line)) {
+        const items = [];
+        while (i < lines.length) {
+          const next = lines[i].trim();
+          if (!next) break;
+          if (!isOrderedList(next)) break;
+          items.push(next.replace(/^\d+[.)]\s+/, ""));
+          i += 1;
+        }
+        html.push(`<ol>${items.map((item) => `<li>${renderTextInline(item)}</li>`).join("")}</ol>`);
         continue;
       }
 
-      if (lines.every((line) => /^\d+[.)]\s+/.test(line))) {
-        const listItems = lines
-          .map((line) => line.replace(/^\d+[.)]\s+/, ""))
-          .map((line) => `<li>${renderTextInline(line)}</li>`)
-          .join("");
-        html.push(`<ol>${listItems}</ol>`);
+      if (isBlockquote(line)) {
+        const quoteLines = [];
+        while (i < lines.length) {
+          const next = lines[i].trim();
+          if (!next) break;
+          if (!isBlockquote(next)) break;
+          quoteLines.push(next.replace(/^>\s?/, ""));
+          i += 1;
+        }
+        html.push(`<blockquote>${renderMultiline(quoteLines.join("\n"))}</blockquote>`);
         continue;
       }
 
-      if (/^>\s+/.test(lines[0])) {
-        const quoteText = lines.map((line) => line.replace(/^>\s+/, "")).join("\n");
-        html.push(`<blockquote>${renderMultiline(quoteText)}</blockquote>`);
-        continue;
+      const paragraphLines = [];
+      while (i < lines.length) {
+        const nextRaw = lines[i];
+        const next = nextRaw.trim();
+        if (!next) break;
+        if (isHeading(next) || isHorizontalRule(next) || isUnorderedList(next) || isOrderedList(next) || isBlockquote(next)) {
+          break;
+        }
+        paragraphLines.push(next);
+        i += 1;
       }
 
-      html.push(`<p>${renderMultiline(lines.join("\n"))}</p>`);
+      if (paragraphLines.length) {
+        html.push(`<p>${renderMultiline(paragraphLines.join("\n"))}</p>`);
+      }
+
+      if (i < lines.length && !lines[i].trim()) {
+        i += 1;
+      }
     }
 
     return html.join("");
