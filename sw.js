@@ -1,7 +1,7 @@
 // Service Worker for Sky Fire Laser Website
-// Version 1.2.0
+// Version 1.2.1
 
-const SW_VERSION = '1.2.0';
+const SW_VERSION = '1.2.1';
 const STATIC_CACHE_NAME = `skyfire-static-v${SW_VERSION}`;
 const DYNAMIC_CACHE_NAME = `skyfire-dynamic-v${SW_VERSION}`;
 
@@ -12,6 +12,12 @@ const STATIC_PATHS = [
     '/sslaserservice.html',
     '/admin.html',
     '/blog.html',
+    '/favicon.ico',
+    '/favicon-16x16.png',
+    '/favicon-32x32.png',
+    '/apple-touch-icon.png',
+    '/app-icon-192.png',
+    '/app-icon-512.png',
     '/sitemap.xml',
     '/manifest.json',
     '/robots.txt'
@@ -162,6 +168,7 @@ function isStaticAsset(url) {
 
 function isImageRequest(request) {
     return request.destination === 'image' || 
+           request.url.includes('.ico') || 
            request.url.includes('.jpg') || 
            request.url.includes('.jpeg') || 
            request.url.includes('.png') || 
@@ -192,7 +199,7 @@ self.addEventListener('push', event => {
         const data = event.data.json();
         self.registration.showNotification(data.title, {
             body: data.body,
-            icon: '/icon-192.png',
+            icon: '/app-icon-192.png',
             badge: '/badge-72.png'
         });
     }
