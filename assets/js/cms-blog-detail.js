@@ -58,7 +58,7 @@
   }
 
   function isHorizontalRule(line) {
-    return /^\s*([-*_])(?:\s*\1){2,}\s*$/.test(line);
+    return /^\s*([-*_–—])(?:\s*\1){2,}\s*$/.test(line);
   }
 
   function isHeading(line) {
@@ -66,7 +66,7 @@
   }
 
   function isUnorderedList(line) {
-    return /^\s*[-*+•]\s+/.test(line);
+    return /^\s*[-*+•–—]\s+/.test(line);
   }
 
   function isOrderedList(line) {
@@ -116,7 +116,7 @@
           const next = lines[i].trim();
           if (!next) break;
           if (!isUnorderedList(next)) break;
-          items.push(next.replace(/^[-*+•]\s+/, ""));
+          items.push(next.replace(/^[-*+•–—]\s+/, ""));
           i += 1;
         }
         html.push(`<ul>${items.map((item) => `<li>${renderTextInline(item)}</li>`).join("")}</ul>`);

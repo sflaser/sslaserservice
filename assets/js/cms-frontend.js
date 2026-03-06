@@ -139,18 +139,24 @@
         const excerpt = post.excerpt || (post.content || '').slice(0, 180);
         const detailsHref = post.slug
           ? `/blog.html?slug=${encodeURIComponent(post.slug)}`
-          : `/blog.html?id=${encodeURIComponent(post.id)}`;
+          : '';
+        const coverLink = detailsHref
+          ? `<a class="cms-card-cover-link" href="${detailsHref}" aria-label="Read blog post: ${escapeHtml(post.title)}"></a>`
+          : '';
+        const actionButton = detailsHref
+          ? `<a class="cms-btn cms-btn-outline" href="${detailsHref}">Read More</a>`
+          : '<button class="cms-btn cms-btn-outline" type="button" disabled>Read More</button>';
 
         return `
           <article class="cms-card cms-card-link">
-            <a class="cms-card-cover-link" href="${detailsHref}" aria-label="Read blog post: ${escapeHtml(post.title)}"></a>
+            ${coverLink}
             ${image}
             <div class="cms-card-body">
               <div class="cms-meta">${formatDate(post.published_at)}</div>
               <h3 class="cms-card-title">${escapeHtml(post.title)}</h3>
               <p class="cms-card-text">${escapeHtml(excerpt)}</p>
               <div class="cms-card-actions">
-                <a class="cms-btn cms-btn-outline" href="${detailsHref}">Read More</a>
+                ${actionButton}
               </div>
             </div>
           </article>
