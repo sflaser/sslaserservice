@@ -3032,7 +3032,945 @@
         .faq-item {
             border-bottom: 1px solid #f0f0f0;
         }
-    </style>
+
+        /* 2026 design refresh: premium industrial direction */
+        :root {
+            --primary-color: #f28b23;
+            --primary-dark: #d66f0b;
+            --primary-light: #ffb869;
+            --secondary-color: #193a65;
+            --secondary-dark: #102948;
+            --text-dark: #171513;
+            --text-light: #fffaf5;
+            --text-gray: #686158;
+            --background-white: #f8f4ed;
+            --background-light-orange: #eee5d8;
+            --surface-panel: rgba(255, 251, 245, 0.9);
+            --line-subtle: rgba(23, 21, 19, 0.08);
+            --card-shadow: 0 26px 70px rgba(29, 23, 16, 0.08);
+            --transition: all 0.28s ease;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top right, rgba(242, 139, 35, 0.12), transparent 28%),
+                linear-gradient(180deg, #fbf8f2 0%, #f4efe7 100%);
+            color: var(--text-dark);
+            padding-top: 118px;
+            font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+        }
+
+        .container {
+            width: min(92%, 1280px);
+        }
+
+        header {
+            padding: 18px 0;
+        }
+
+        .header-container {
+            background: rgba(255, 251, 245, 0.86);
+            border: 1px solid var(--line-subtle);
+            border-radius: 24px;
+            padding: 14px 18px;
+            box-shadow: 0 24px 58px rgba(24, 20, 16, 0.08);
+        }
+
+        header.is-scrolled .header-container {
+            background: rgba(255, 252, 248, 0.96);
+            border-color: rgba(23, 21, 19, 0.11);
+            box-shadow: 0 24px 64px rgba(24, 20, 16, 0.12);
+        }
+
+        .logo-image {
+            height: 44px;
+            max-width: 360px;
+        }
+
+        .navigation li a {
+            padding: 9px 13px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #302a25;
+        }
+
+        .navigation li a:hover {
+            background: rgba(242, 139, 35, 0.12);
+            color: var(--text-dark);
+        }
+
+        .cta-btn,
+        .btn {
+            border-radius: 999px;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, #f49a36 0%, #df7411 100%);
+            color: #fffdf9;
+            padding: 11px 20px;
+            box-shadow: 0 14px 30px rgba(242, 139, 35, 0.22);
+        }
+
+        .cta-btn:hover,
+        .btn-primary:hover,
+        .btn-outline:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f49a36 0%, #de7210 100%);
+            color: #fffdf9;
+            box-shadow: 0 18px 36px rgba(242, 139, 35, 0.2);
+        }
+
+        .btn-outline {
+            border: 1.5px solid rgba(23, 21, 19, 0.14);
+            color: var(--text-dark);
+            background: rgba(255, 255, 255, 0.45);
+        }
+
+        .btn-outline:hover {
+            border-color: rgba(242, 139, 35, 0.36);
+            background: rgba(242, 139, 35, 0.1);
+            color: var(--text-dark);
+        }
+
+        .product-showcase {
+            padding: 32px 0 58px;
+            background: transparent;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+            gap: 44px;
+            align-items: start;
+        }
+
+        .hero-copy {
+            padding: 28px 0 6px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(242, 139, 35, 0.18);
+            background: rgba(242, 139, 35, 0.1);
+            color: #a35308;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            margin: 22px 0 22px;
+            max-width: 11ch;
+            font-size: clamp(3.2rem, 7vw, 6rem);
+            line-height: 0.96;
+            letter-spacing: -0.05em;
+            color: var(--text-dark);
+        }
+
+        .hero-title .hero-emphasis {
+            color: var(--primary-color);
+        }
+
+        .hero-summary {
+            max-width: 640px;
+            font-size: 18px;
+            line-height: 1.85;
+            color: var(--text-gray);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 32px;
+        }
+
+        .hero-signals {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .hero-signals span {
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--line-subtle);
+            background: rgba(255, 255, 255, 0.62);
+            color: #3c342d;
+            font-size: 14px;
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 36px;
+        }
+
+        .hero-metrics article {
+            min-height: 122px;
+            padding: 20px;
+            border-radius: 22px;
+            border: 1px solid var(--line-subtle);
+            background: rgba(255, 255, 255, 0.64);
+            box-shadow: 0 12px 30px rgba(18, 15, 12, 0.04);
+        }
+
+        .hero-metrics strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 24px;
+            line-height: 1.1;
+            color: var(--text-dark);
+        }
+
+        .hero-metrics span {
+            display: block;
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: grid;
+            gap: 18px;
+        }
+
+        .hero-visual-frame {
+            min-height: 580px;
+            overflow: hidden;
+            border-radius: 30px;
+            border: 1px solid rgba(23, 21, 19, 0.08);
+            background: #d6cec2;
+            box-shadow: var(--card-shadow);
+        }
+
+        .hero-visual-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1 !important;
+        }
+
+        .hero-side-panel {
+            width: min(88%, 390px);
+            margin-top: -88px;
+            margin-left: auto;
+            padding: 24px;
+            border-radius: 24px;
+            background: rgba(24, 19, 14, 0.92);
+            color: rgba(255, 249, 241, 0.92);
+            box-shadow: 0 28px 60px rgba(17, 13, 10, 0.24);
+        }
+
+        .hero-side-panel h3 {
+            margin-top: 10px;
+            font-size: 24px;
+            line-height: 1.25;
+            color: #fff8ef;
+        }
+
+        .hero-panel-kicker {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255, 230, 204, 0.62);
+        }
+
+        .hero-side-panel ul {
+            list-style: none;
+            display: grid;
+            gap: 12px;
+            margin: 18px 0 0;
+        }
+
+        .hero-side-panel li {
+            position: relative;
+            padding-left: 18px;
+            color: rgba(255, 244, 232, 0.78);
+            line-height: 1.7;
+        }
+
+        .hero-side-panel li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(242, 139, 35, 0.18);
+        }
+
+        .hero-panel-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 244, 232, 0.14);
+            color: rgba(255, 244, 232, 0.7);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .hero-panel-meta strong {
+            display: block;
+            color: #fff9f1;
+            font-size: 16px;
+            margin-top: 4px;
+        }
+
+        .hero-trust-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 36px;
+        }
+
+        .hero-trust-grid article {
+            min-height: 160px;
+            padding: 22px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--line-subtle);
+            box-shadow: 0 14px 28px rgba(18, 15, 12, 0.04);
+        }
+
+        .trust-label,
+        .section-kicker {
+            margin-bottom: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #8a7f73;
+        }
+
+        .hero-trust-grid h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        .hero-trust-grid p {
+            color: var(--text-gray);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .video-container {
+            margin-top: 28px;
+            border-radius: 28px;
+            border: 1px solid rgba(23, 21, 19, 0.08);
+            box-shadow: var(--card-shadow);
+        }
+
+        .section-title {
+            text-align: left;
+            margin-bottom: 42px;
+            max-width: 860px;
+        }
+
+        .section-title h2 {
+            display: block;
+            margin-bottom: 12px;
+            padding-bottom: 0;
+            font-size: clamp(2.2rem, 4vw, 3.8rem);
+            line-height: 1.05;
+            letter-spacing: -0.05em;
+            color: var(--text-dark);
+        }
+
+        .section-title h2:after {
+            display: none;
+        }
+
+        .section-title p {
+            margin: 0;
+            max-width: 720px;
+            color: var(--text-gray);
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .testimonials-section,
+        .services,
+        .products,
+        .cms-section,
+        .contact-modern,
+        footer {
+            position: relative;
+        }
+
+        .testimonials-section,
+        .services,
+        .products,
+        .cms-section {
+            padding-top: 96px;
+            padding-bottom: 96px;
+        }
+
+        .testimonials-section,
+        .products,
+        .contact-modern {
+            background: rgba(239, 229, 216, 0.72);
+        }
+
+        .services,
+        .cms-section,
+        footer {
+            background: transparent;
+        }
+
+        .service-card,
+        .comparison-box,
+        .testimonial-card,
+        .brand-tab,
+        .application-tab,
+        .contact-panel,
+        .faq-item {
+            border-color: var(--line-subtle);
+            box-shadow: 0 16px 34px rgba(18, 15, 12, 0.05);
+        }
+
+        .testimonials-section .container,
+        .comparison .container,
+        .repair-in-action .container,
+        .why-us .container,
+        .partners-section .container,
+        .faq-section .container {
+            width: min(92%, 1280px);
+        }
+
+        .testimonial-carousel {
+            margin-top: 0;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 252, 247, 0.78);
+            border: 1px solid var(--line-subtle);
+            border-radius: 28px;
+            padding: 30px;
+        }
+
+        .testimonial-card .stars {
+            color: var(--primary-color);
+            letter-spacing: 0.08em;
+        }
+
+        .testimonial-card .quote {
+            color: #403933;
+            line-height: 1.9;
+        }
+
+        .testimonial-card .author h4 {
+            color: var(--text-dark);
+        }
+
+        .prev-btn,
+        .next-btn,
+        .nav-arrow {
+            background: rgba(255, 252, 247, 0.92);
+            border: 1px solid var(--line-subtle);
+            color: var(--text-dark);
+            box-shadow: 0 14px 28px rgba(18, 15, 12, 0.06);
+        }
+
+        .prev-btn:hover,
+        .next-btn:hover,
+        .nav-arrow:hover {
+            background: rgba(242, 139, 35, 0.12);
+        }
+
+        .repair-in-action,
+        .comparison,
+        .why-us,
+        .partners-section,
+        .faq-section {
+            padding: 96px 0;
+        }
+
+        .repair-in-action {
+            background: rgba(255, 255, 255, 0.28);
+        }
+
+        .video-card,
+        .laser-product-card,
+        .feature,
+        .partner-logo,
+        .faq-item {
+            background: rgba(255, 252, 247, 0.78);
+            border: 1px solid var(--line-subtle);
+            border-radius: 28px;
+            box-shadow: 0 16px 34px rgba(18, 15, 12, 0.05);
+        }
+
+        .video-info,
+        .laser-product-content,
+        .feature,
+        .faq-question,
+        .faq-answer {
+            color: var(--text-dark);
+        }
+
+        .comparison {
+            background: transparent;
+        }
+
+        .comparison-title {
+            max-width: 900px;
+            margin: 0 auto 34px;
+            text-align: left;
+        }
+
+        .comparison-title .sparkle-icon {
+            display: none;
+        }
+
+        .comparison-title .section-kicker {
+            margin-bottom: 14px;
+        }
+
+        .comparison-title h2 {
+            font-size: clamp(2.2rem, 4vw, 3.6rem);
+            line-height: 1.08;
+            letter-spacing: -0.05em;
+            color: var(--text-dark);
+        }
+
+        .comparison-title p {
+            margin-top: 14px;
+            max-width: 760px;
+            color: var(--text-gray);
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .comparison-boxes {
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .comparison-vs {
+            min-width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #1c1713;
+            color: #fff8ef;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            box-shadow: 0 18px 40px rgba(17, 13, 10, 0.18);
+        }
+
+        .comparison-box {
+            padding: 30px;
+            border: 1px solid var(--line-subtle);
+            border-radius: 30px;
+            background: rgba(255, 252, 247, 0.78);
+        }
+
+        .comparison-box.right-box {
+            background: linear-gradient(180deg, rgba(242, 139, 35, 0.12) 0%, rgba(255, 252, 247, 0.92) 100%);
+        }
+
+        .comparison-box h3 {
+            color: var(--text-dark);
+        }
+
+        .comparison-list li {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(23, 21, 19, 0.08);
+        }
+
+        .comparison-list li:last-child {
+            border-bottom: none;
+        }
+
+        .negative-list .list-icon {
+            color: #b45309;
+        }
+
+        .positive-list .list-icon {
+            color: #c76f12;
+        }
+
+        .service-card {
+            overflow: hidden;
+            background: rgba(255, 252, 247, 0.8);
+            border: 1px solid var(--line-subtle);
+            border-radius: 30px;
+        }
+
+        .services .row {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+            margin: 0;
+        }
+
+        .services .col {
+            padding: 0;
+        }
+
+        .service-content {
+            padding: 28px;
+        }
+
+        .service-content h3,
+        .video-info h3,
+        .application-intro-text h3,
+        .feature h3,
+        .faq-question h3 {
+            color: var(--text-dark);
+        }
+
+        .service-content p,
+        .video-info p,
+        .application-intro-text p,
+        .feature p,
+        .faq-answer p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .brand-tabs,
+        .application-tabs {
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .brand-tab,
+        .application-tab {
+            background: rgba(255, 252, 247, 0.82);
+            border: 1px solid var(--line-subtle);
+            border-radius: 999px;
+            color: #3a332d;
+            font-weight: 700;
+        }
+
+        .brand-tab.active,
+        .application-tab.active {
+            background: linear-gradient(135deg, #f49a36 0%, #de7210 100%);
+            color: #fffaf3;
+            border-color: transparent;
+            box-shadow: 0 16px 30px rgba(242, 139, 35, 0.18);
+        }
+
+        .laser-product-card {
+            overflow: hidden;
+        }
+
+        .laser-product-content p,
+        .laser-item,
+        .process-title {
+            color: var(--text-gray);
+        }
+
+        .application-intro {
+            gap: 28px;
+            padding: 30px;
+            border: 1px solid var(--line-subtle);
+            border-radius: 30px;
+            background: rgba(255, 252, 247, 0.78);
+            box-shadow: 0 16px 34px rgba(18, 15, 12, 0.05);
+        }
+
+        .process-group {
+            padding: 28px 30px;
+            border: 1px solid var(--line-subtle);
+            border-radius: 26px;
+            background: rgba(255, 252, 247, 0.7);
+        }
+
+        .laser-item {
+            border-bottom: 1px solid rgba(23, 21, 19, 0.08);
+        }
+
+        .laser-item:last-child {
+            border-bottom: none;
+        }
+
+        .why-us {
+            background: rgba(239, 229, 216, 0.4);
+        }
+
+        .features {
+            gap: 18px;
+        }
+
+        .feature {
+            padding: 28px;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            background: rgba(242, 139, 35, 0.12);
+            color: #b45a0a;
+            box-shadow: none;
+        }
+
+        .feature-icon i {
+            font-style: normal;
+            font-size: 20px;
+        }
+
+        .partners-section {
+            background: transparent;
+        }
+
+        .partner-logos {
+            gap: 18px;
+        }
+
+        .partner-logo {
+            padding: 24px;
+            transition: var(--transition);
+        }
+
+        .partner-logo:hover {
+            transform: translateY(-4px);
+        }
+
+        .faq-section {
+            background: rgba(255, 255, 255, 0.34);
+        }
+
+        .faq-container {
+            display: grid;
+            gap: 16px;
+        }
+
+        .faq-item {
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 24px 28px;
+        }
+
+        .faq-answer {
+            padding: 0 28px 24px;
+        }
+
+        .contact-modern {
+            padding: 110px 0;
+        }
+
+        .contact-head {
+            max-width: 760px;
+            margin-bottom: 32px;
+        }
+
+        .contact-kicker {
+            margin-bottom: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #8a7f73;
+        }
+
+        .contact-head h2 {
+            font-size: clamp(2.2rem, 4vw, 3.7rem);
+            line-height: 1.05;
+            letter-spacing: -0.05em;
+            color: var(--text-dark);
+            margin-bottom: 14px;
+        }
+
+        .contact-head p {
+            color: var(--text-gray);
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .contact-panels {
+            gap: 20px;
+        }
+
+        .contact-panel {
+            background: rgba(255, 252, 247, 0.78);
+            border: 1px solid var(--line-subtle);
+            border-radius: 24px;
+            padding: 28px;
+        }
+
+        .contact-panel-label {
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #8a7f73;
+        }
+
+        .contact-panel-link {
+            color: var(--text-dark);
+            font-size: 28px;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+        }
+
+        .contact-panel-note {
+            margin-top: 12px;
+            color: var(--text-gray);
+            line-height: 1.75;
+        }
+
+        .contact-actions {
+            margin-top: 28px;
+            gap: 14px;
+        }
+
+        footer {
+            padding: 84px 0 36px;
+            background: #181410;
+            color: rgba(255, 244, 232, 0.74);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.9fr 1fr;
+            gap: 28px;
+        }
+
+        .footer-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 244, 232, 0.08);
+            border-radius: 24px;
+            padding: 26px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 14px;
+            color: #fff7ee;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-section p,
+        .footer-section a,
+        .footer-contact-info p {
+            color: rgba(255, 244, 232, 0.72);
+            line-height: 1.8;
+        }
+
+        .footer-links li + li {
+            margin-top: 10px;
+        }
+
+        .footer-contact-info p i {
+            display: none;
+        }
+
+        .footer-social a {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 244, 232, 0.08);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 244, 232, 0.08);
+            margin-top: 28px;
+            padding-top: 22px;
+        }
+
+        @media (max-width: 1100px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                max-width: 12ch;
+            }
+
+            .hero-side-panel {
+                width: 100%;
+                margin-top: 0;
+            }
+
+            .hero-trust-grid,
+            .hero-metrics,
+            .footer-content {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .services .row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 900px) {
+            body {
+                padding-top: 108px;
+            }
+
+            .header-container {
+                border-radius: 20px;
+            }
+
+            .product-showcase {
+                padding-top: 12px;
+            }
+
+            .hero-title {
+                font-size: clamp(2.7rem, 13vw, 4.8rem);
+            }
+
+            .hero-summary,
+            .section-title p,
+            .contact-head p {
+                font-size: 16px;
+            }
+
+            .hero-visual-frame {
+                min-height: 420px;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .services .row,
+            .hero-metrics,
+            .hero-trust-grid,
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-signals {
+                gap: 10px;
+            }
+
+            .hero-signals span {
+                width: 100%;
+            }
+
+            .contact-panel-link {
+                font-size: 24px;
+            }
+        }
+        </style>
 </head>
 <body>
     <!-- Top navigation bar -->
@@ -3047,8 +3985,9 @@
                     <ul class="navigation">
                         <li><a href="#home">Home</a></li>
                         <li><a href="#services">Services</a></li>
+                        <li><a href="#applications">Applications</a></li>
                         <li><a href="#store">Products</a></li>
-                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#blog">Resources</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </nav>
@@ -3060,50 +3999,89 @@
     <!-- Product showcase area -->
     <section id="home" class="product-showcase">
         <div class="container">
-            <div class="product-container">
-                <div class="product-info">
-                    <h1 class="product-title">SKY FIRE Solid-State Laser Repair:</h1>
-                    <h2 class="product-subtitle">Professional, Precise, Trustworthy</h2>
-                    <p class="product-description">We provide expert solid-state laser repair services covering multiple brands including Quantel, Lumibird, and Coherent, helping you minimize downtime and reduce operational costs</p>
-                    
-                    <ul class="feature-list">
-                        <li>Professional Diagnostics: Comprehensive testing and precise fault identification</li>
-                        <li>Multi-Brand Support: Expertise with Quantel, Lumibird, Coherent, and more</li>
-                        <li>Efficient Repairs: Minimize downtime, restore factory-standard performance</li>
-                        <li>Quality Assurance: Comprehensive testing and at least 6-month warranty</li>
-                    </ul>
-                    
-                    <a href="mailto:info@sflaser.net" class="cta-btn">Get a Quote</a>
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <p class="hero-eyebrow">Precision Repair · Custom Photonics · Components Supply</p>
+                    <h1 class="hero-title">Keep critical laser systems online with <span class="hero-emphasis">repair-first</span> support and custom photonics capability.</h1>
+                    <p class="hero-summary">SkyFire serves industrial users, research teams, and equipment builders with solid-state laser repair, semiconductor laser customization, optical component sourcing, and commercial coordination across trusted manufacturing partners.</p>
+
+                    <div class="hero-actions">
+                        <a href="mailto:info@sflaser.net?subject=Laser%20Service%20Quote%20Request" class="btn btn-primary">Request a Quote</a>
+                        <a href="#services" class="btn btn-outline">Explore Capabilities</a>
+                    </div>
+
+                    <div class="hero-signals">
+                        <span>Solid-state laser repair</span>
+                        <span>Semiconductor laser customization</span>
+                        <span>Components and spare parts</span>
+                        <span>Technical sales coordination</span>
+                    </div>
+
+                    <div class="hero-metrics">
+                        <article>
+                            <strong>10+ Years</strong>
+                            <span>Repair exposure across field systems, diagnostics, and supplier-side technical workflows.</span>
+                        </article>
+                        <article>
+                            <strong>24/7</strong>
+                            <span>Emergency response for production-critical issues and practical fault escalation.</span>
+                        </article>
+                        <article>
+                            <strong>OEM + Lab</strong>
+                            <span>Support for industrial equipment builders, research groups, and specialized users.</span>
+                        </article>
+                    </div>
                 </div>
-                
-                <div class="product-images">
-                    <div class="laser-types-container">
-                        <div class="laser-card">
-                            <div class="laser-image">
-                                <div class="glow-effect"></div>
-                                <img src="https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Professional%20Repair%20Lab.jpg" alt="Professional Repair Laboratory">
+
+                <div class="hero-visual">
+                    <div class="hero-visual-frame">
+                        <img src="https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Professional%20Repair%20Lab.jpg" alt="Sky Fire Laser repair laboratory">
+                    </div>
+                    <div class="hero-side-panel">
+                        <p class="hero-panel-kicker">Operational Focus</p>
+                        <h3>Built for teams that need technical depth without forcing suppliers to become public-facing brands.</h3>
+                        <ul>
+                            <li>Failure diagnosis and repair planning for production-critical solid-state systems</li>
+                            <li>Custom semiconductor laser and optical component coordination for specialized projects</li>
+                            <li>Commercial front-end for technical products, spares, and supplier-backed support</li>
+                        </ul>
+                        <div class="hero-panel-meta">
+                            <div>
+                                Response
+                                <strong>Quote path within 24 hours</strong>
                             </div>
-                            <div class="laser-content">
-                                <h3>Professional Repair Lab</h3>
-                                <p>Our state-of-the-art repair laboratory is equipped with specialized testing instruments and tools. Expert engineers provide comprehensive diagnosis and precision repairs for solid-state lasers.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="laser-card">
-                            <div class="laser-image">
-                                <div class="glow-effect"></div>
-                                <img src="https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Testing%20%26%20Calibration.jpg" alt="Testing & Calibration Equipment">
-                            </div>
-                            <div class="laser-content">
-                                <h3>Testing & Calibration</h3>
-                                <p>Advanced calibration platform ensures all repaired lasers meet original manufacturer specifications. Each system undergoes rigorous performance and stability testing.</p>
+                            <div>
+                                Coverage
+                                <strong>Repair, build, source</strong>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Video showcase area -->
+
+            <div class="hero-trust-grid">
+                <article>
+                    <p class="trust-label">Repair Platform</p>
+                    <h3>Field-proven diagnostics</h3>
+                    <p>We focus on fault isolation, repair feasibility, and restoring operational stability with less downtime risk.</p>
+                </article>
+                <article>
+                    <p class="trust-label">Customization</p>
+                    <h3>Semiconductor and solid-state builds</h3>
+                    <p>For non-standard requirements, we coordinate supplier-side technical input into a market-ready solution path.</p>
+                </article>
+                <article>
+                    <p class="trust-label">Components</p>
+                    <h3>Spare parts and optical subassemblies</h3>
+                    <p>We support sourcing and packaged component offers for teams that need faster commercial access.</p>
+                </article>
+                <article>
+                    <p class="trust-label">Positioning</p>
+                    <h3>Technical sales front-end</h3>
+                    <p>SkyFire is designed to translate deep engineering capability into a cleaner, more credible global-facing website.</p>
+                </article>
+            </div>
+
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/E9ZJhTfS6pc" title="Fiber Laser Repair Courseware | SkyFireLaser" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
@@ -3112,7 +4090,12 @@
 
     <!-- Customer reviews area - now below video, above comparison -->
     <section class="testimonials-section">
-        <h2>What Our Clients Say</h2>
+        <div class="container">
+            <div class="section-title">
+                <p class="section-kicker">Client Signals</p>
+                <h2>What customers value when uptime matters.</h2>
+                <p>Selected feedback from teams using repair, maintenance, and custom support across critical laser workflows.</p>
+            </div>
         
         <div class="testimonial-carousel">
             <div class="testimonial-container">
@@ -3196,14 +4179,16 @@
             
             <div class="dots-container"></div>
         </div>
+        </div>
     </section>
 
     <!-- Services overview area -->
     <section id="services" class="services">
         <div class="container">
             <div class="section-title">
-                <h2>Our Core Services</h2>
-                <p>Comprehensive solutions for all your laser equipment needs</p>
+                <p class="section-kicker">Capabilities</p>
+                <h2>Repair, build, source, and support around critical laser systems.</h2>
+                <p>We combine field repair execution with practical manufacturing and component coordination, so customers can solve failures and source next-step hardware through one commercial front end.</p>
             </div>
             
             <div class="row">
@@ -3214,8 +4199,8 @@
                             <img src="https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/SSLaser%20Repair%20Services.jpg" alt="Laser Repair Service">
                         </div>
                         <div class="service-content">
-                            <h3>SSLaser Repair Services</h3>
-                            <p>We provide comprehensive laser repair services covering various brands and models. With our extensive experience and professional expertise, we ensure your laser equipment quickly returns to optimal performance, minimizing downtime.</p>
+                            <h3>Solid-State Laser Repair</h3>
+                            <p>Repair-first support for critical laser failures, degraded output, cavity instability, optical damage, electronics issues, and production-side downtime pressure.</p>
                             <a href="mailto:info@sflaser.net" class="btn btn-outline">Inquire About Repairs</a>
                         </div>
                     </div>
@@ -3228,8 +4213,21 @@
                         </div>
                         <div class="service-content">
                             <h3>Custom Laser Manufacturing</h3>
-                            <p>We design and manufacture high-performance lasers based on your specific application requirements. Working with leading brands like Quantel (Lumibird) and Coherent, we offer various types of advanced products including lamp-pumped and diode-pumped solid-state lasers to meet specialized needs across high-tech fields.</p>
+                            <p>Custom semiconductor and solid-state development for non-standard requirements, application-specific builds, and supplier-backed technical coordination.</p>
                             <a href="mailto:info@sflaser.net" class="btn btn-outline">Explore Manufacturing Capabilities</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Professional%20Repair%20Lab.jpg" alt="Components and spare parts supply">
+                        </div>
+                        <div class="service-content">
+                            <h3>Components and Spare Parts</h3>
+                            <p>Commercial access to optical subassemblies, replacement parts, and supplier-connected component offers for teams that need faster sourcing paths.</p>
+                            <a href="mailto:info@sflaser.net" class="btn btn-outline">Ask About Components</a>
                         </div>
                     </div>
                 </div>
@@ -3241,8 +4239,9 @@
     <section class="repair-in-action">
         <div class="container">
             <div class="section-title">
-                <h2>Repair in Action</h2>
-                <p>Watch our expert engineers at work on real laser repair projects</p>
+                <p class="section-kicker">Repair Workflow</p>
+                <h2>Repair in action across optics, electronics, and cavity restoration.</h2>
+                <p>Show the work, not generic claims. These examples help buyers understand that support is practical, hands-on, and technically grounded.</p>
             </div>
             
             <div class="video-slider-container">
@@ -3318,8 +4317,9 @@
     <section class="comparison">
         <div class="container">
             <div class="comparison-title">
-                <div class="sparkle-icon">✦</div>
-                <h2>Standard Laser Services <span class="vs-text">vs</span> <span class="skyfire-title">SkyFire Solid-State Laser Experts</span></h2>
+                <p class="section-kicker">Commercial Difference</p>
+                <h2>Why teams move from generic repair vendors to a more technical service partner.</h2>
+                <p>SkyFire is positioned around technical coordination, supplier-backed depth, and practical repair outcomes instead of one-size-fits-all service language.</p>
             </div>
             
             <div class="comparison-boxes">
@@ -3358,7 +4358,7 @@
                     </ul>
                 </div>
                 
-                <div class="comparison-vs">Vs</div>
+                <div class="comparison-vs">Shift</div>
                 
                 <div class="comparison-box right-box">
                     <h3>Solid-State Laser Experts</h3>
@@ -3402,8 +4402,9 @@
     <section id="products" class="products">
         <div class="container">
             <div class="section-title">
-                <h2>Solid-State Laser Models We Service</h2>
-                <p>Comprehensive repair and maintenance for various solid-state laser models from leading manufacturers</p>
+                <p class="section-kicker">Supported Systems</p>
+                <h2>Solid-state platforms we regularly service.</h2>
+                <p>Examples of models and product families where our team has practical repair, maintenance, and support exposure.</p>
             </div>
             
             <div class="brand-tabs">
@@ -3491,8 +4492,9 @@
     <section id="applications" class="applications">
         <div class="container">
             <div class="section-title">
-                <h2>Application Fields</h2>
-                <p>Broad applications of lasers across multiple industries</p>
+                <p class="section-kicker">Applications</p>
+                <h2>Laser support across advanced manufacturing and research workflows.</h2>
+                <p>From semiconductor inspection and packaging to specialized laboratory use, we position the site around real technical buying contexts instead of generic marketing claims.</p>
             </div>
             
             <div class="application-tabs">
@@ -3654,8 +4656,9 @@
     <section id="why-us" class="why-us">
         <div class="container">
             <div class="section-title">
-                <h2>Why Choose SkyFire?</h2>
-                <p>We are committed to providing the most professional laser services and solutions</p>
+                <p class="section-kicker">Operating Principles</p>
+                <h2>Why the platform is structured this way.</h2>
+                <p>The site is designed to convert technical capability into a cleaner commercial front end, without forcing sensitive supplier-side know-how into public view.</p>
             </div>
             
             <div class="features">
@@ -3714,8 +4717,9 @@
     <section class="partners-section">
         <div class="container">
             <div class="section-title">
-                <h2>Partners</h2>
-                <p>Long-term collaboration with industry-leading brands</p>
+                <p class="section-kicker">Ecosystem</p>
+                <h2>Brands, platforms, and product families relevant to our work.</h2>
+                <p>These references help buyers quickly understand the types of systems, suppliers, and technical environments we are comfortable supporting.</p>
             </div>
             
             <div class="partner-logos">
@@ -3798,8 +4802,9 @@
     <section class="faq-section">
         <div class="container">
             <div class="section-title">
-                <h2>Frequently Asked Questions</h2>
-                <p>Common questions about our laser repair and manufacturing services</p>
+                <p class="section-kicker">Questions</p>
+                <h2>Commercial and technical questions customers ask before moving forward.</h2>
+                <p>Use this section to reduce friction during inquiry and keep repetitive technical-sales questions off email as much as possible.</p>
             </div>
             
             <div class="faq-container">
@@ -4010,8 +5015,9 @@
     <section id="store" class="cms-section">
         <div class="container">
             <div class="section-title">
-                <h2>Featured Products</h2>
-                <p>Published from the admin backend with direct purchase links.</p>
+                <p class="section-kicker">Products</p>
+                <h2>Selected components, modules, and commercial offers.</h2>
+                <p>Published from the admin backend with direct purchase or inquiry paths for component buyers and technical sourcing teams.</p>
             </div>
             <div id="cms-products-grid" class="cms-grid"></div>
             <p id="cms-products-empty" class="cms-empty cms-hidden">Loading products...</p>
@@ -4022,8 +5028,9 @@
     <section id="blog" class="cms-section">
         <div class="container">
             <div class="section-title">
-                <h2>Latest Blog Posts</h2>
-                <p>Technical updates, repair notes, and product knowledge.</p>
+                <p class="section-kicker">Resources</p>
+                <h2>Technical resources for maintenance, applications, and product understanding.</h2>
+                <p>Use this section as a knowledge center: maintenance guides, application notes, troubleshooting logic, and non-sensitive technical explainers.</p>
             </div>
             <div id="cms-blog-grid" class="cms-grid"></div>
             <p id="cms-blog-empty" class="cms-empty cms-hidden">Loading blog posts...</p>
@@ -4034,9 +5041,9 @@
     <section id="contact" class="contact-modern">
         <div class="container">
             <div class="contact-head">
-                <p class="contact-kicker">Contact</p>
-                <h2>Speak With a Laser Service Specialist</h2>
-                <p>Share your laser model, fault symptoms, and urgency. We will provide a clear diagnosis path and a practical repair plan.</p>
+                <p class="contact-kicker">Request for Quotation</p>
+                <h2>Start a technical conversation, not just a generic inquiry.</h2>
+                <p>Send the model, fault symptoms, application context, and delivery timeline. We use that to route you toward the right repair-side, sourcing-side, or supplier-backed response.</p>
             </div>
 
             <div class="contact-panels">
@@ -4064,27 +5071,28 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>About Us</h3>
-                    <p>Sky Fire Laser specializes in providing high-quality solid-state laser repair and manufacturing services, offering reliable laser solutions for clients across various industries.</p>
+                    <h3>SkyFire Platform</h3>
+                    <p>SkyFire is the commercial front end for laser repair, custom photonics projects, and component supply. The site is designed to present technical capability in a cleaner, more global-facing format.</p>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="https://alleriastore.com/collections/fiber-laser-repairing-equipment" target="_blank" rel="noopener">Fiber Repair Equipment</a></li>
-                        <li><a href="https://alleriastore.com/pages/excimer-laser-repair-service" target="_blank" rel="noopener">Excimer Laser Repair</a></li>
-                        <li><a href="https://alleriastore.com/pages/fiber-laser-source-repair-service" target="_blank" rel="noopener">Fiber Laser Source Repair</a></li>
-                        <li><a href="https://alleriastore.com/products/fiber-laser-repair-training" target="_blank" rel="noopener">Laser Repair Training</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#applications">Applications</a></li>
+                        <li><a href="#store">Products</a></li>
+                        <li><a href="#blog">Resources</a></li>
+                        <li><a href="https://alleriastore.com/collections/fiber-laser-repairing-equipment" target="_blank" rel="noopener">Alleria Store</a></li>
                         <li><a href="/admin.html">Content Admin</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Contact Information</h3>
+                    <h3>Contact</h3>
                     <div class="footer-contact-info">
-                        <p><i>📍</i> Building 3, Floor 4, Unit 24-2, Central Living Area, B3 Plot, 333 Sixin North Road, Hanyang District, Wuhan, Hubei Province</p>
-                        <p><i>📞</i> +86-13995672493</p>
-                        <p><i>✉️</i> info@sflaser.net</p>
+                        <p>Building 3, Floor 4, Unit 24-2, Central Living Area, B3 Plot, 333 Sixin North Road, Hanyang District, Wuhan, Hubei Province</p>
+                        <p>+86-13995672493</p>
+                        <p>info@sflaser.net</p>
                     </div>
                     
                     <div class="footer-social">
