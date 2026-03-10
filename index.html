@@ -4003,15 +4003,73 @@
             line-height: 1.8;
         }
 
-        .contact-panels {
-            gap: 20px;
+        .contact-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            gap: 24px;
+            align-items: start;
         }
 
-        .contact-panel {
-            background: rgba(255, 252, 247, 0.78);
+        .contact-side {
+            display: grid;
+            gap: 18px;
+        }
+
+        .contact-side-panel,
+        .contact-panel,
+        .rfq-card {
+            background: rgba(255, 252, 247, 0.82);
             border: 1px solid var(--line-subtle);
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 28px;
+            box-shadow: 0 16px 34px rgba(18, 15, 12, 0.05);
+        }
+
+        .contact-side-panel h3,
+        .rfq-card h3 {
+            margin: 0 0 12px;
+            color: var(--text-dark);
+            font-size: 24px;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+        }
+
+        .contact-side-panel p,
+        .rfq-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .contact-checklist {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .contact-checklist li {
+            list-style: none;
+            position: relative;
+            padding-left: 18px;
+            color: #423a33;
+            line-height: 1.75;
+        }
+
+        .contact-checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(242, 139, 35, 0.16);
+        }
+
+        .contact-panels {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
         }
 
         .contact-panel-label {
@@ -4034,6 +4092,102 @@
             margin-top: 12px;
             color: var(--text-gray);
             line-height: 1.75;
+        }
+
+        .rfq-card {
+            padding: 30px;
+        }
+
+        .rfq-form {
+            display: grid;
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .rfq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .rfq-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .rfq-field-full {
+            grid-column: 1 / -1;
+        }
+
+        .rfq-field label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #8a7f73;
+        }
+
+        .rfq-field input,
+        .rfq-field select,
+        .rfq-field textarea {
+            width: 100%;
+            border: 1px solid rgba(23, 21, 19, 0.1);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--text-dark);
+            font: inherit;
+            padding: 14px 16px;
+            outline: none;
+            transition: border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+        }
+
+        .rfq-field textarea {
+            min-height: 160px;
+            resize: vertical;
+        }
+
+        .rfq-field input:focus,
+        .rfq-field select:focus,
+        .rfq-field textarea:focus {
+            border-color: rgba(242, 139, 35, 0.4);
+            box-shadow: 0 0 0 4px rgba(242, 139, 35, 0.12);
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        .rfq-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: -2px;
+        }
+
+        .rfq-meta span {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(23, 21, 19, 0.08);
+            background: rgba(255, 255, 255, 0.58);
+            font-size: 12px;
+            font-weight: 700;
+            color: #403933;
+            letter-spacing: 0.04em;
+        }
+
+        .rfq-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .rfq-note {
+            max-width: 420px;
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.7;
         }
 
         .contact-actions {
@@ -4156,7 +4310,9 @@
             .footer-content,
             .application-summary-grid,
             .products-overview,
-            .cms-section-intro {
+            .cms-section-intro,
+            .contact-layout,
+            .rfq-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -5379,22 +5535,121 @@
                 <p>Send the model, fault symptoms, application context, and delivery timeline. We use that to route you toward the right repair-side, sourcing-side, or supplier-backed response.</p>
             </div>
 
-            <div class="contact-panels">
-                <article class="contact-panel">
-                    <p class="contact-panel-label">Direct Line</p>
-                    <a href="tel:+8613995672493" class="contact-panel-link">+86-13995672493</a>
-                    <p class="contact-panel-note">24/7 emergency response for production-critical issues.</p>
-                </article>
-                <article class="contact-panel">
-                    <p class="contact-panel-label">Email</p>
-                    <a href="mailto:info@sflaser.net" class="contact-panel-link">info@sflaser.net</a>
-                    <p class="contact-panel-note">Attach photos, logs, and current output status to accelerate quotation.</p>
-                </article>
-            </div>
+            <div class="contact-layout">
+                <div class="contact-side">
+                    <article class="contact-side-panel">
+                        <h3>What helps us quote faster</h3>
+                        <p>Good inquiries reduce back-and-forth. The more specific the request, the easier it is to route your case into repair, sourcing, or custom development.</p>
+                        <ul class="contact-checklist">
+                            <li>Brand, model, and current operating condition</li>
+                            <li>Failure symptoms, output drift, or damaged components</li>
+                            <li>Application context and urgency</li>
+                            <li>Whether you need repair, replacement, or a custom build path</li>
+                        </ul>
+                    </article>
 
-            <div class="contact-actions">
-                <a href="mailto:info@sflaser.net?subject=Laser%20Service%20Quote%20Request" class="btn btn-primary">Request a Quote</a>
-                <a href="tel:+8613995672493" class="btn btn-outline">Call Technical Support</a>
+                    <div class="contact-panels">
+                        <article class="contact-panel">
+                            <p class="contact-panel-label">Direct Line</p>
+                            <a href="tel:+8613995672493" class="contact-panel-link">+86-13995672493</a>
+                            <p class="contact-panel-note">Use this path for urgent production issues and time-sensitive recovery needs.</p>
+                        </article>
+                        <article class="contact-panel">
+                            <p class="contact-panel-label">Email</p>
+                            <a href="mailto:info@sflaser.net" class="contact-panel-link">info@sflaser.net</a>
+                            <p class="contact-panel-note">For images, logs, or reference files, email them after submitting the form below.</p>
+                        </article>
+                    </div>
+                </div>
+
+                <article class="rfq-card">
+                    <p class="contact-panel-label">Structured Inquiry</p>
+                    <h3>Submit an RFQ</h3>
+                    <p>This form is designed for repair requests, component sourcing, and custom photonics inquiries. It gives us the minimum technical context needed to respond seriously.</p>
+
+                    <div class="rfq-meta">
+                        <span>Repair</span>
+                        <span>Custom build</span>
+                        <span>Components</span>
+                        <span>Technical sales</span>
+                    </div>
+
+                    <form class="rfq-form" name="rfq" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks">
+                        <input type="hidden" name="form-name" value="rfq">
+                        <p hidden>
+                            <label>Do not fill this field if you are human: <input name="bot-field"></label>
+                        </p>
+
+                        <div class="rfq-grid">
+                            <div class="rfq-field">
+                                <label for="rfq-inquiry-type">Inquiry Type</label>
+                                <select id="rfq-inquiry-type" name="inquiry_type" required>
+                                    <option value="">Select one</option>
+                                    <option value="repair">Laser Repair</option>
+                                    <option value="custom_build">Custom Laser Development</option>
+                                    <option value="components">Components / Spare Parts</option>
+                                    <option value="technical_sales">Technical Sales Coordination</option>
+                                </select>
+                            </div>
+
+                            <div class="rfq-field">
+                                <label for="rfq-timeline">Requested Timeline</label>
+                                <select id="rfq-timeline" name="timeline">
+                                    <option value="">Not specified</option>
+                                    <option value="urgent">Urgent / Production Down</option>
+                                    <option value="1_week">Within 1 week</option>
+                                    <option value="1_month">Within 1 month</option>
+                                    <option value="planning">Planning stage</option>
+                                </select>
+                            </div>
+
+                            <div class="rfq-field">
+                                <label for="rfq-name">Full Name</label>
+                                <input id="rfq-name" name="full_name" type="text" required>
+                            </div>
+
+                            <div class="rfq-field">
+                                <label for="rfq-company">Company / Lab</label>
+                                <input id="rfq-company" name="company" type="text">
+                            </div>
+
+                            <div class="rfq-field">
+                                <label for="rfq-email">Email</label>
+                                <input id="rfq-email" name="email" type="email" required>
+                            </div>
+
+                            <div class="rfq-field">
+                                <label for="rfq-phone">Phone / WhatsApp</label>
+                                <input id="rfq-phone" name="phone" type="text">
+                            </div>
+
+                            <div class="rfq-field">
+                                <label for="rfq-brand">Brand</label>
+                                <input id="rfq-brand" name="brand" type="text" placeholder="Coherent, Quantel, Lumibird, etc.">
+                            </div>
+
+                            <div class="rfq-field">
+                                <label for="rfq-model">Model / Product Family</label>
+                                <input id="rfq-model" name="model" type="text" placeholder="Q-smart850, Flare NX, custom module...">
+                            </div>
+
+                            <div class="rfq-field rfq-field-full">
+                                <label for="rfq-application">Application Context</label>
+                                <input id="rfq-application" name="application" type="text" placeholder="Semiconductor inspection, lidar, research lab, display manufacturing...">
+                            </div>
+
+                            <div class="rfq-field rfq-field-full">
+                                <label for="rfq-details">Technical Details</label>
+                                <textarea id="rfq-details" name="details" placeholder="Describe the failure symptoms, part requirement, target wavelength/power, or the technical problem you need solved." required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="rfq-actions">
+                            <button type="submit" class="btn btn-primary">Send RFQ</button>
+                            <p class="rfq-note">After submission, if you need to send images, logs, or spec sheets, email them to <a href="mailto:info@sflaser.net">info@sflaser.net</a> and reference the same project.</p>
+                        </div>
+                    </form>
+                </article>
             </div>
         </div>
     </section>
