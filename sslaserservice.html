@@ -40,7 +40,7 @@
     
     <!-- Web App Manifest -->
     <link rel="manifest" href="/manifest.json?v=20260306h">
-    <link rel="stylesheet" href="/assets/css/cms.css?v=20260310a">
+    <link rel="stylesheet" href="/assets/css/cms.css?v=20260310c">
     
     <!-- Theme color for mobile browsers -->
     <meta name="theme-color" content="#ff8c00">
@@ -4153,6 +4153,72 @@
             line-height: 1.2;
         }
 
+        .commerce-paths {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin: 0 0 28px;
+        }
+
+        .commerce-path {
+            padding: 24px;
+            border-radius: 24px;
+            border: 1px solid var(--line-subtle);
+            background: rgba(255, 252, 247, 0.72);
+            box-shadow: 0 12px 28px rgba(18, 15, 12, 0.04);
+        }
+
+        .commerce-path-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: rgba(242, 139, 35, 0.1);
+            border: 1px solid rgba(242, 139, 35, 0.16);
+            color: #a35308;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .commerce-path h3 {
+            margin: 14px 0 10px;
+            color: var(--text-dark);
+            font-size: 22px;
+            line-height: 1.18;
+        }
+
+        .commerce-path p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .commerce-path ul {
+            margin: 16px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .commerce-path li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+            color: var(--text-gray);
+            line-height: 1.72;
+        }
+
+        .commerce-path li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+
         .contact-modern {
             padding: 110px 0;
         }
@@ -4488,8 +4554,28 @@
                 font-size: 16px;
             }
 
+            .hero-copy {
+                padding: 12px 0 0;
+            }
+
+            .hero-actions {
+                margin-top: 24px;
+            }
+
+            .hero-actions .btn {
+                min-height: 50px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .hero-metrics article,
+            .hero-trust-grid article {
+                min-height: auto;
+            }
+
             .hero-visual-frame {
-                min-height: 420px;
+                min-height: 360px;
             }
 
             .mobile-menu-btn {
@@ -4613,6 +4699,14 @@
                 width: 100%;
             }
 
+            .hero-actions {
+                display: grid;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
             .contact-panel-link {
                 font-size: 24px;
             }
@@ -4620,9 +4714,14 @@
             .platform-lead-card,
             .platform-card,
             .engagement-step,
-            .platform-point {
+            .platform-point,
+            .commerce-path {
                 border-radius: 24px;
                 padding: 24px;
+            }
+
+            .commerce-paths {
+                grid-template-columns: 1fr;
             }
         }
         </style>
@@ -5833,6 +5932,38 @@
                 <h2>Selected component offers and sourcing-ready product entries.</h2>
                 <p>Use this area for modules, optical parts, and commercially packaged offers that can move quickly from technical interest to quotation or checkout.</p>
             </div>
+            <div class="commerce-paths">
+                <article class="commerce-path">
+                    <span class="commerce-path-tag">Available Now</span>
+                    <h3>Use direct purchase when the offer is already packaged.</h3>
+                    <p>This path is for standard listings where compatibility is already clear and the commercial goal is simply faster ordering.</p>
+                    <ul>
+                        <li>Stock-like entries with clear scope</li>
+                        <li>Lower-friction commercial checkout</li>
+                        <li>Best for repeatable part requirements</li>
+                    </ul>
+                </article>
+                <article class="commerce-path">
+                    <span class="commerce-path-tag">Quote First</span>
+                    <h3>Use quotation when the requirement needs technical confirmation.</h3>
+                    <p>This is the safer path for replacement parts, subsystem compatibility checks, or anything that should be reviewed before money changes hands.</p>
+                    <ul>
+                        <li>Compatibility and fit need review</li>
+                        <li>Commercial scope may vary by project</li>
+                        <li>Better for uncertain model matching</li>
+                    </ul>
+                </article>
+                <article class="commerce-path">
+                    <span class="commerce-path-tag">Custom Build</span>
+                    <h3>Use technical discussion when the product is not standard yet.</h3>
+                    <p>For semi-custom modules, custom lasers, or supplier-backed integration work, the product card acts as an entry point into a scoped commercial conversation.</p>
+                    <ul>
+                        <li>Specification-led opportunities</li>
+                        <li>Supplier-backed technical review</li>
+                        <li>Better than forcing a fake ecommerce flow</li>
+                    </ul>
+                </article>
+            </div>
             <div class="cms-section-intro">
                 <article class="cms-intro-card">
                     <strong>Buy if the offer is already packaged</strong>
@@ -6697,7 +6828,7 @@
     </script>
 
     <script src="/assets/js/cms-config.js?v=20260306g"></script>
-    <script src="/assets/js/cms-frontend.js?v=20260310b"></script>
+    <script src="/assets/js/cms-frontend.js?v=20260310c"></script>
 
     <!-- Performance optimization meta tags -->
     <script type="application/ld+json">

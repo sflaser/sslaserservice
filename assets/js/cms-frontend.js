@@ -42,6 +42,32 @@
     });
   }
 
+  function getProductState(item) {
+    const sourceText = `${item.name || ''} ${item.short_description || ''}`.toLowerCase();
+
+    if (item.purchase_url) {
+      return {
+        label: 'Available Now',
+        className: 'is-buy',
+        quoteLabel: 'Ask for Quote',
+      };
+    }
+
+    if (/custom|semi-custom|non-standard|integration|tailored|spec/i.test(sourceText)) {
+      return {
+        label: 'Custom Build',
+        className: 'is-custom',
+        quoteLabel: 'Discuss Custom Specs',
+      };
+    }
+
+    return {
+      label: 'Quote First',
+      className: 'is-quote',
+      quoteLabel: 'Ask for Quote',
+    };
+  }
+
   async function fetchTable(pathAndQuery) {
     const res = await fetch(`${supabaseUrl}/rest/v1/${pathAndQuery}`, {
       headers: {
@@ -96,11 +122,15 @@
           ? `<div class="cms-card-media"><img src="${escapeHtml(item.image_url)}" alt="${escapeHtml(item.name)}"></div>`
           : '';
 
+        const productState = getProductState(item);
+        const priceValue = Number(item.price_cents || 0) > 0
+          ? formatPrice(item.price_cents, item.currency)
+          : 'Contact for pricing';
         const quoteHref = `mailto:info@sflaser.net?subject=${encodeURIComponent(`Product inquiry: ${item.name || 'SkyFire product'}`)}`;
         const buyButton = item.purchase_url
           ? `<a class="cms-btn cms-btn-primary" href="${escapeHtml(item.purchase_url)}" target="_blank" rel="noopener">Buy Now</a>`
           : '';
-        const quoteButton = `<a class="cms-btn cms-btn-outline" href="${escapeHtml(quoteHref)}">Ask for Quote</a>`;
+        const quoteButton = `<a class="cms-btn cms-btn-outline" href="${escapeHtml(quoteHref)}">${productState.quoteLabel}</a>`;
 
         return `
           <article class="cms-card">
@@ -108,7 +138,10 @@
             <div class="cms-card-body">
               <div class="cms-kicker">Product</div>
               <h3 class="cms-card-title">${escapeHtml(item.name)}</h3>
-              <div class="cms-price">${formatPrice(item.price_cents, item.currency)}</div>
+              <div class="cms-price-row">
+                <div class="cms-price">${escapeHtml(priceValue)}</div>
+                <div class="cms-status-badge ${productState.className}">${productState.label}</div>
+              </div>
               <p class="cms-card-text">${escapeHtml(item.short_description || '')}</p>
               <div class="cms-card-actions">${buyButton}${quoteButton}</div>
             </div>
