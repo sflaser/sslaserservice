@@ -4108,24 +4108,125 @@
         }
 
         .faq-section {
-            background: rgba(255, 255, 255, 0.34);
+            background: linear-gradient(180deg, rgba(255, 251, 245, 0.92) 0%, rgba(255, 255, 255, 0.72) 100%);
+        }
+
+        .faq-shell {
+            display: grid;
+            grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .faq-aside,
+        .faq-note-card {
+            border-radius: 26px;
+            border: 1px solid var(--line-subtle);
+            background: rgba(255, 252, 247, 0.84);
+            box-shadow: 0 12px 28px rgba(18, 15, 12, 0.05);
+        }
+
+        .faq-aside {
+            padding: 28px;
+        }
+
+        .faq-aside h3 {
+            margin: 0 0 12px;
+            font-size: 28px;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--text-dark);
+        }
+
+        .faq-aside p {
+            margin: 0;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .faq-notes {
+            display: grid;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .faq-note-card {
+            padding: 18px 20px;
+        }
+
+        .faq-note-card strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+
+        .faq-note-card span {
+            display: block;
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.7;
         }
 
         .faq-container {
             display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 16px;
         }
 
         .faq-item {
             overflow: hidden;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(23, 21, 19, 0.08);
+            border-radius: 22px;
+            box-shadow: 0 10px 24px rgba(18, 15, 12, 0.05);
         }
 
         .faq-question {
-            padding: 24px 28px;
+            padding: 22px 24px;
+            gap: 18px;
+            background: transparent;
+            border-bottom: 0;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 248, 239, 0.72);
+        }
+
+        .faq-question h3 {
+            font-size: 19px;
+            line-height: 1.4;
+            letter-spacing: -0.02em;
+        }
+
+        .faq-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(242, 139, 35, 0.1);
+            border: 1px solid rgba(242, 139, 35, 0.16);
+            border-radius: 50%;
         }
 
         .faq-answer {
-            padding: 0 28px 24px;
+            max-height: 0;
+            padding: 0 24px;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 24px 24px;
+        }
+
+        .faq-answer p {
+            margin: 0;
+            color: var(--text-gray);
+            line-height: 1.85;
+            font-size: 15px;
+        }
+
+        .faq-answer p + p {
+            margin-top: 12px;
         }
 
         .cms-section-intro {
@@ -4451,22 +4552,106 @@
         }
 
         footer {
-            padding: 84px 0 36px;
-            background: #181410;
+            padding: 88px 0 34px;
+            background:
+                radial-gradient(circle at top left, rgba(242, 139, 35, 0.18), transparent 28%),
+                linear-gradient(180deg, #17120e 0%, #120e0a 100%);
             color: rgba(255, 244, 232, 0.74);
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: 1.2fr 0.9fr 1fr;
-            gap: 28px;
+            grid-template-columns: minmax(0, 1.02fr) minmax(0, 1.38fr);
+            gap: 24px;
+            align-items: start;
         }
 
+        .footer-brand,
         .footer-section {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 244, 232, 0.09);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .footer-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: rgba(242, 139, 35, 0.12);
+            border: 1px solid rgba(242, 139, 35, 0.2);
+            color: #ffd9b1;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .footer-brand h3 {
+            margin: 18px 0 12px;
+            color: #fff7ee;
+            font-size: clamp(28px, 3vw, 38px);
+            line-height: 1.08;
+            letter-spacing: -0.04em;
+        }
+
+        .footer-brand p {
+            margin: 0;
+            color: rgba(255, 244, 232, 0.74);
+            line-height: 1.85;
+        }
+
+        .footer-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 22px 0 0;
+        }
+
+        .footer-pills span {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
             border: 1px solid rgba(255, 244, 232, 0.08);
-            border-radius: 24px;
-            padding: 26px;
+            color: rgba(255, 244, 232, 0.88);
+            font-size: 13px;
+        }
+
+        .footer-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .footer-actions .btn {
+            min-height: 46px;
+            padding: 0 20px;
+            text-decoration: none;
+        }
+
+        .footer-actions .btn-outline {
+            color: #fff3e2;
+            border-color: rgba(255, 244, 232, 0.18);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .footer-actions .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fffaf3;
+            border-color: rgba(255, 244, 232, 0.28);
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
         }
 
         .footer-section h3 {
@@ -4483,12 +4668,45 @@
             line-height: 1.8;
         }
 
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
         .footer-links li + li {
             margin-top: 10px;
         }
 
+        .footer-links a {
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #fff6eb;
+        }
+
+        .footer-contact-info {
+            display: grid;
+            gap: 12px;
+        }
+
+        .footer-contact-info p {
+            margin: 0;
+        }
+
+        .footer-contact-info strong {
+            color: #fff7ee;
+        }
+
         .footer-contact-info p i {
             display: none;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 22px;
         }
 
         .footer-social a {
@@ -4497,9 +4715,28 @@
         }
 
         .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
             border-top: 1px solid rgba(255, 244, 232, 0.08);
             margin-top: 28px;
             padding-top: 22px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .footer-bottom-links a {
+            text-decoration: none;
+            color: rgba(255, 244, 232, 0.7);
+        }
+
+        .footer-bottom-links a:hover {
+            color: #fff6eb;
         }
 
         @media (max-width: 1100px) {
@@ -4518,7 +4755,6 @@
 
             .hero-trust-grid,
             .hero-metrics,
-            .footer-content,
             .application-summary-grid,
             .products-overview,
             .cms-section-intro,
@@ -4533,6 +4769,15 @@
 
             .platform-intro {
                 grid-template-columns: 1fr;
+            }
+
+            .footer-content,
+            .faq-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-columns {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
@@ -4687,7 +4932,6 @@
             .services .row,
             .hero-metrics,
             .hero-trust-grid,
-            .footer-content,
             .application-summary-grid,
             .products-overview,
             .cms-section-intro,
@@ -4696,6 +4940,19 @@
             .platform-grid,
             .engagement-strip {
                 grid-template-columns: 1fr;
+            }
+
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             .hero-signals {
@@ -5738,208 +5995,109 @@
         <div class="container">
             <div class="section-title">
                 <p class="section-kicker">Questions</p>
-                <h2>Commercial and technical questions customers ask before moving forward.</h2>
-                <p>Use this section to reduce friction during inquiry and keep repetitive technical-sales questions off email as much as possible.</p>
+                <h2>Questions that usually come up before a repair quote, sourcing request, or custom build discussion.</h2>
+                <p>This section should qualify inbound demand, reduce repetitive email loops, and help serious buyers prepare a cleaner first inquiry.</p>
             </div>
-            
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>What types of solid-state lasers do you repair?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>We specialize in repairing various solid-state laser systems including lamp-pumped and diode-pumped lasers from major manufacturers like Quantel (Lumibird), Coherent, JDSU, and Amplitude. Our expertise covers models used in atmospheric research, mass spectrometry, display panel manufacturing, and PCB processing.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>How long does a typical laser repair take?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Repair time varies depending on the complexity of the issue and parts availability. Simple repairs typically take 5-10 business days, while more complex repairs may take 2-8 weeks. We provide emergency repair services for critical applications with 24-hour response time.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>Do you provide warranty on repaired lasers?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes, we provide a comprehensive warranty of at least 6 months on all repaired laser systems. Our warranty covers both parts and labor, and we ensure that all repaired systems meet or exceed original manufacturer specifications.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>Can you design custom laser solutions?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Absolutely! We offer custom laser design and manufacturing services based on your specific application requirements. Our team works closely with clients to develop optimized solutions for unique applications in research, industrial processing, and specialized measurement systems.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>What diagnostic services do you offer?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>We provide comprehensive diagnostic services including power output measurement, beam quality analysis, optical alignment verification, and electronic system testing. Our advanced testing equipment ensures accurate fault identification and optimal repair strategies.</p>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>Do you offer on-site repair services?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>We only provide on-site services within China. For international customers, we are unable to provide on-site services.</p>
-                    </div>
-                </div>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>What are the most common solid-state laser failures you repair?</h3>
-                        <span class="faq-icon">+</span>
+            <div class="faq-shell">
+                <aside class="faq-aside">
+                    <h3>Most RFQs move faster when the system, the failure, and the urgency are already clear.</h3>
+                    <p>The point of this section is not to publish sensitive engineering detail. It is to help qualified buyers send a better first message, which speeds up commercial routing and technical review.</p>
+                    <div class="faq-notes">
+                        <article class="faq-note-card">
+                            <strong>System identity</strong>
+                            <span>Brand, model, product family, and whether the unit is still running, degraded, or fully down.</span>
+                        </article>
+                        <article class="faq-note-card">
+                            <strong>Commercial path</strong>
+                            <span>Tell us whether you need repair, spare parts, replacement sourcing, or a custom optical build.</span>
+                        </article>
+                        <article class="faq-note-card">
+                            <strong>Protected detail stays private</strong>
+                            <span>Public content stays application-facing. Sensitive internal know-how is only discussed after qualification.</span>
+                        </article>
                     </div>
-                    <div class="faq-answer">
-                        <p>Common failures include pump lamp degradation, optical misalignment, Q-switch malfunctions, power supply issues, cooling system problems, and crystal damage. We also frequently repair beam quality deterioration, unstable output power, and timing synchronization issues in pulsed systems.</p>
-                    </div>
-                </div>
+                </aside>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>Do you repair both lamp-pumped and diode-pumped solid-state lasers?</h3>
-                        <span class="faq-icon">+</span>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>What kinds of laser systems does SkyFire usually support?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We focus on solid-state laser repair, supplier-backed component sourcing, semiconductor-laser-related custom work, and commercially coordinated photonics projects. That includes both legacy systems and more recent industrial or research platforms where practical support is still possible.</p>
+                        </div>
                     </div>
-                    <div class="faq-answer">
-                        <p>Yes, we are proficient in both technologies. For lamp-pumped systems, we handle flashlamp replacement, cavity alignment, crystal replacement, mirror replacement, and thermal management maintenance. For diode-pumped lasers, we repair laser diode arrays, beam shaping optics, cavity alignment, crystal replacement, mirror replacement, and precision temperature control systems.</p>
-                    </div>
-                </div>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>Can you repair vintage or discontinued laser models?</h3>
-                        <span class="faq-icon">+</span>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>What should I include in the first inquiry if I want a serious response?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Include the brand, model, current system state, failure symptoms or requested specification, application context, and expected timeline. A vague “please quote” message slows everything down; a structured RFQ moves much faster.</p>
+                        </div>
                     </div>
-                    <div class="faq-answer">
-                        <p>Absolutely! We maintain a rich inventory of legacy components and have the capability to manufacture custom replacement parts for some discontinued models. Our engineers have over 20 years of laser system maintenance experience and are familiar with various equipment from multiple manufacturers.</p>
-                    </div>
-                </div>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>What preventive maintenance services do you offer?</h3>
-                        <span class="faq-icon">+</span>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Do you only handle repairs, or can you also supply components and replacements?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Both. Some cases are repair-first, some are parts-first, and some are better handled as a replacement or custom-build path. The website is designed to support all three commercial routes rather than forcing everything into one service model.</p>
+                        </div>
                     </div>
-                    <div class="faq-answer">
-                        <p>Our preventive maintenance includes regular optical cleaning, alignment verification, pump source inspection, cooling system maintenance, power calibration, and performance optimization. We offer scheduled maintenance contracts to prevent unexpected failures and extend equipment lifespan.</p>
-                    </div>
-                </div>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>How do you handle laser safety during repairs?</h3>
-                        <span class="faq-icon">+</span>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>How are repair or sourcing timelines quoted?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Timelines depend on failure depth, component availability, logistics, and whether the case requires supplier-side evaluation. We do not publish fake fixed lead times. Once the system and requirement are clear, we scope the likely path and respond with a realistic commercial timeline.</p>
+                        </div>
                     </div>
-                    <div class="faq-answer">
-                        <p>Safety is our top priority. Our technicians are certified in laser safety protocols, use appropriate protective equipment, and follow strict safety procedures. Our repair facility is equipped with proper ventilation, safety interlocks, and emergency shutdown systems.</p>
-                    </div>
-                </div>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>Do you provide performance upgrades during repairs?</h3>
-                        <span class="faq-icon">+</span>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Can you help with discontinued or hard-to-source platforms?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, that is one of the practical reasons buyers come to us. Older systems often require a mix of repair judgment, compatible part sourcing, and commercial flexibility. Support depends on the platform and the remaining supply path, but this is a core use case for SkyFire.</p>
+                        </div>
                     </div>
-                    <div class="faq-answer">
-                        <p>Yes, we often recommend and implement performance upgrades during repairs. This includes upgrading to more efficient pump sources, improved cooling systems, better beam quality optics, or enhanced control electronics to improve reliability and performance.</p>
-                    </div>
-                </div>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>What documentation do you provide after repairs?</h3>
-                        <span class="faq-icon">+</span>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Do you provide on-site service for overseas customers?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Not as a default public offer. Many international cases are handled through remote qualification, shipped hardware, supplied components, or scoped technical coordination. If on-site work is even possible, it has to be evaluated case by case.</p>
+                        </div>
                     </div>
-                    <div class="faq-answer">
-                        <p>We provide comprehensive documentation including detailed repair reports, performance test results, calibration certificates, parts replacement records, and maintenance recommendations. All documentation is traceable and meets industry quality standards.</p>
-                    </div>
-                </div>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>Can you repair laser systems with custom modifications?</h3>
-                        <span class="faq-icon">+</span>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>Can custom laser or component projects start from a rough requirement instead of a final specification?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes. Many projects start with application goals, target wavelength or power, packaging limits, and budget constraints rather than a final drawing. Early discussions are used to qualify whether the project should move toward sourcing, adaptation, or a true custom-build path.</p>
+                        </div>
                     </div>
-                    <div class="faq-answer">
-                        <p>Yes, we have extensive experience with custom-modified laser systems. Our engineers can reverse-engineer modifications, repair custom components, and maintain the integrity of specialized configurations while ensuring optimal performance.</p>
-                    </div>
-                </div>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>What is your process for emergency laser repairs?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>For emergency repairs, we offer 24/7 technical support, expedited shipping, and priority scheduling. Our emergency response team can provide remote diagnostics, temporary solutions, and rush repair services to minimize critical downtime.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>Do you repair laser control electronics and software?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes, we repair and upgrade laser control systems including power supplies, timing controllers, temperature controllers, and user interfaces. We also provide software updates, parameter optimization, and integration with modern control systems.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>What testing equipment do you use for laser repairs?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Our repair center is equipped with advanced testing equipment including power meters, beam profilers, spectrum analyzers, oscilloscopes, thermal imaging cameras, fiber fusion splicers, autocorrelators, high-speed photodetectors, and high-precision alignment tools. This equipment ensures accurate fault diagnosis and verification of repair quality.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>Can you provide loaner equipment during repairs?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes, we maintain a selection of loaner laser systems for critical applications. Subject to availability, we can provide temporary replacement equipment to keep your operations running while your laser is being repaired.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>How do you handle international shipping for repairs?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>We have extensive experience with international shipping of laser equipment. We handle all customs documentation, provide proper packaging for sensitive optical components, and work with specialized carriers experienced in handling precision instruments.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <h3>What training do your repair technicians have?</h3>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Our technicians are highly trained with backgrounds in optics, electronics, and laser physics. They receive ongoing training from manufacturer partners, hold relevant certifications, and have years of hands-on experience with various laser technologies and applications.</p>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>How do you handle confidential technical information?</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Public website content stays at the application, commercial, and qualification level. Sensitive process detail, repair know-how, and protected technical information are not published openly. Those discussions only happen after the case is qualified and the right commercial context exists.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -6196,53 +6354,79 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h3>SkyFire Platform</h3>
-                    <p>SkyFire is the commercial front end for laser repair, custom photonics projects, and component supply. The site is designed to present technical capability in a cleaner, more global-facing format.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#applications">Applications</a></li>
-                        <li><a href="#store">Products</a></li>
-                        <li><a href="#blog">Resources</a></li>
-                        <li><a href="https://alleriastore.com/collections/fiber-laser-repairing-equipment" target="_blank" rel="noopener">Alleria Store</a></li>
-                        <li><a href="/admin.html">Content Admin</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <div class="footer-contact-info">
-                        <p>Building 3, Floor 4, Unit 24-2, Central Living Area, B3 Plot, 333 Sixin North Road, Hanyang District, Wuhan, Hubei Province</p>
-                        <p>+86-13995672493</p>
-                        <p>info@sflaser.net</p>
+                <section class="footer-brand">
+                    <span class="footer-eyebrow">SkyFire Platform</span>
+                    <h3>Commercial front end for laser repair, custom photonics, and component sourcing.</h3>
+                    <p>SkyFire is designed to make technically complex projects easier to understand, qualify, and route. Public content stays commercially useful and application-facing while deeper engineering detail stays inside the working process.</p>
+                    <div class="footer-pills">
+                        <span>Repair-first workflow</span>
+                        <span>Supplier-backed support</span>
+                        <span>Global-facing communication</span>
                     </div>
-                    
-                    <div class="footer-social">
-                        <a href="https://www.instagram.com/skyfirelaser/" target="_blank" rel="noopener">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/skyfirelaser" target="_blank" rel="noopener">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.youtube.com/@skyfirelaser" target="_blank" rel="noopener">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                            </svg>
-                        </a>
+                    <div class="footer-actions">
+                        <a href="#contact" class="btn btn-primary">Start an RFQ</a>
+                        <a href="mailto:info@sflaser.net" class="btn btn-outline">Email Technical Sales</a>
+                    </div>
+                </section>
+
+                <div class="footer-columns">
+                    <div class="footer-section">
+                        <h3>Capabilities</h3>
+                        <ul class="footer-links">
+                            <li><a href="#services">Solid-state laser repair</a></li>
+                            <li><a href="#services">Custom photonics projects</a></li>
+                            <li><a href="#store">Components and spare parts</a></li>
+                            <li><a href="#applications">Application-side support</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Navigation</h3>
+                        <ul class="footer-links">
+                            <li><a href="#applications">Applications</a></li>
+                            <li><a href="#store">Products</a></li>
+                            <li><a href="#blog">Resources</a></li>
+                            <li><a href="#why-us">About</a></li>
+                            <li><a href="https://alleriastore.com/collections/fiber-laser-repairing-equipment" target="_blank" rel="noopener">Alleria Store</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Contact</h3>
+                        <div class="footer-contact-info">
+                            <p><strong>Technical sales</strong><br><a href="mailto:info@sflaser.net">info@sflaser.net</a></p>
+                            <p><strong>Phone / WhatsApp</strong><br><a href="tel:+8613995672493">+86-13995672493</a></p>
+                            <p><strong>Base</strong><br>Building 3, Floor 4, Unit 24-2, Central Living Area, B3 Plot, 333 Sixin North Road, Hanyang District, Wuhan, Hubei Province</p>
+                        </div>
+
+                        <div class="footer-social">
+                            <a href="https://www.instagram.com/skyfirelaser/" target="_blank" rel="noopener" aria-label="Instagram">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.facebook.com/skyfirelaser" target="_blank" rel="noopener" aria-label="Facebook">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.youtube.com/@skyfirelaser" target="_blank" rel="noopener" aria-label="YouTube">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2023 Sky Fire Laser. All Rights Reserved. | <a href="https://alleriastore.com/pages/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a> | <a href="https://alleriastore.com/pages/terms-of-service" target="_blank" rel="noopener">Terms of Service</a></p>
+                <p>&copy; 2026 Sky Fire Laser. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="https://alleriastore.com/pages/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+                    <a href="https://alleriastore.com/pages/terms-of-service" target="_blank" rel="noopener">Terms of Service</a>
+                    <a href="/admin.html">CMS Admin</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -6394,18 +6578,33 @@
         // FAQ toggle function
         function toggleFAQ(element) {
             const faqItem = element.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
             const isActive = faqItem.classList.contains('active');
             
             // Close all FAQ items
             document.querySelectorAll('.faq-item').forEach(item => {
+                const itemAnswer = item.querySelector('.faq-answer');
                 item.classList.remove('active');
+                if (itemAnswer) {
+                    itemAnswer.style.maxHeight = null;
+                }
             });
             
             // If this item wasn't active, open it
             if (!isActive) {
                 faqItem.classList.add('active');
+                if (answer) {
+                    answer.style.maxHeight = `${answer.scrollHeight}px`;
+                }
             }
         }
+
+        window.addEventListener('resize', function () {
+            const activeAnswer = document.querySelector('.faq-item.active .faq-answer');
+            if (activeAnswer) {
+                activeAnswer.style.maxHeight = `${activeAnswer.scrollHeight}px`;
+            }
+        });
     </script>
 
     <script>
