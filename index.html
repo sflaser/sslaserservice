@@ -4430,6 +4430,13 @@
             flex-wrap: wrap;
         }
 
+        .rfq-actions .btn[disabled] {
+            opacity: 0.65;
+            cursor: wait;
+            transform: none;
+            box-shadow: none;
+        }
+
         .rfq-note {
             max-width: 420px;
             margin: 0;
@@ -6803,6 +6810,51 @@
         const siteHeader = document.querySelector('header');
         const menuBtn = document.getElementById('mobile-menu-btn');
         const nav = document.getElementById('main-navigation');
+        const rfqForm = document.querySelector('.rfq-form');
+
+        if (rfqForm) {
+            rfqForm.addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const submitButton = rfqForm.querySelector('button[type="submit"]');
+                const originalLabel = submitButton ? submitButton.textContent : '';
+
+                try {
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Sending...';
+                    }
+
+                    const formData = new FormData(rfqForm);
+                    const payload = new URLSearchParams();
+
+                    formData.forEach(function (value, key) {
+                        payload.append(key, value);
+                    });
+
+                    const response = await fetch('/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: payload.toString(),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`RFQ submission failed with status ${response.status}`);
+                    }
+
+                    window.location.href = '/thanks.html';
+                } catch (error) {
+                    console.error(error);
+                    alert('Submission failed. Please try again or email info@sflaser.net directly.');
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalLabel;
+                    }
+                }
+            });
+        }
 
         if (siteHeader) {
             const toggleHeaderState = function () {
