@@ -96,9 +96,11 @@
           ? `<div class="cms-card-media"><img src="${escapeHtml(item.image_url)}" alt="${escapeHtml(item.name)}"></div>`
           : '';
 
+        const quoteHref = `mailto:info@sflaser.net?subject=${encodeURIComponent(`Product inquiry: ${item.name || 'SkyFire product'}`)}`;
         const buyButton = item.purchase_url
           ? `<a class="cms-btn cms-btn-primary" href="${escapeHtml(item.purchase_url)}" target="_blank" rel="noopener">Buy Now</a>`
-          : '<button class="cms-btn cms-btn-outline" type="button" disabled>Purchase Link Pending</button>';
+          : '';
+        const quoteButton = `<a class="cms-btn cms-btn-outline" href="${escapeHtml(quoteHref)}">Ask for Quote</a>`;
 
         return `
           <article class="cms-card">
@@ -108,7 +110,7 @@
               <h3 class="cms-card-title">${escapeHtml(item.name)}</h3>
               <div class="cms-price">${formatPrice(item.price_cents, item.currency)}</div>
               <p class="cms-card-text">${escapeHtml(item.short_description || '')}</p>
-              <div class="cms-card-actions">${buyButton}</div>
+              <div class="cms-card-actions">${buyButton}${quoteButton}</div>
             </div>
           </article>
         `;

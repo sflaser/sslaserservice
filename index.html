@@ -3681,10 +3681,130 @@
             overflow: hidden;
         }
 
+        .products-overview {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .products-overview-copy,
+        .products-overview-panel {
+            padding: 28px 30px;
+            border-radius: 28px;
+            border: 1px solid var(--line-subtle);
+            background: rgba(255, 252, 247, 0.78);
+            box-shadow: 0 16px 34px rgba(18, 15, 12, 0.05);
+        }
+
+        .products-overview-copy p,
+        .products-overview-panel p {
+            color: var(--text-gray);
+            line-height: 1.85;
+        }
+
+        .products-overview-panel h3 {
+            margin: 0 0 12px;
+            font-size: 24px;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        .products-overview-points {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .products-overview-points div {
+            padding: 16px 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.58);
+            border: 1px solid rgba(23, 21, 19, 0.06);
+        }
+
+        .products-overview-points strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+            font-size: 16px;
+        }
+
         .laser-product-content p,
         .laser-item,
         .process-title {
             color: var(--text-gray);
+        }
+
+        .laser-product-grid {
+            margin: 30px auto 0;
+            padding: 0;
+            gap: 22px;
+            max-width: none;
+        }
+
+        .laser-product-card {
+            background: rgba(255, 252, 247, 0.82);
+            border: 1px solid var(--line-subtle);
+            border-radius: 28px;
+            box-shadow: 0 16px 34px rgba(18, 15, 12, 0.05);
+        }
+
+        .laser-product-card:hover {
+            box-shadow: 0 24px 46px rgba(18, 15, 12, 0.09);
+            border-color: rgba(242, 139, 35, 0.18);
+        }
+
+        .laser-product-image {
+            padding-top: 72%;
+            background: linear-gradient(140deg, #f7f4ee, #ece5da);
+        }
+
+        .laser-product-content {
+            padding: 24px;
+        }
+
+        .laser-product-content h3 {
+            margin: 0 0 10px;
+            color: var(--text-dark);
+            font-size: 24px;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+        }
+
+        .laser-product-subtitle {
+            margin: -4px 0 12px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #9b5410;
+        }
+
+        .product-meta-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .product-meta-chips span {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(23, 21, 19, 0.08);
+            background: rgba(255, 255, 255, 0.58);
+            font-size: 12px;
+            font-weight: 700;
+            color: #403933;
+            letter-spacing: 0.04em;
+        }
+
+        .product-platform-note {
+            margin: 0;
+            color: var(--text-gray);
+            line-height: 1.8;
         }
 
         .application-intro {
@@ -3826,6 +3946,31 @@
             padding: 0 28px 24px;
         }
 
+        .cms-section-intro {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .cms-intro-card {
+            padding: 22px;
+            border-radius: 24px;
+            border: 1px solid var(--line-subtle);
+            background: rgba(255, 252, 247, 0.72);
+            box-shadow: 0 12px 28px rgba(18, 15, 12, 0.04);
+            color: var(--text-gray);
+            line-height: 1.75;
+        }
+
+        .cms-intro-card strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-size: 18px;
+            line-height: 1.2;
+        }
+
         .contact-modern {
             padding: 110px 0;
         }
@@ -3965,7 +4110,9 @@
             .hero-trust-grid,
             .hero-metrics,
             .footer-content,
-            .application-summary-grid {
+            .application-summary-grid,
+            .products-overview,
+            .cms-section-intro {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
@@ -4007,7 +4154,9 @@
             .hero-metrics,
             .hero-trust-grid,
             .footer-content,
-            .application-summary-grid {
+            .application-summary-grid,
+            .products-overview,
+            .cms-section-intro {
                 grid-template-columns: 1fr;
             }
 
@@ -4459,6 +4608,29 @@
                 <h2>Solid-state platforms we regularly service.</h2>
                 <p>Examples of models and product families where our team has practical repair, maintenance, and support exposure.</p>
             </div>
+
+            <div class="products-overview">
+                <div class="products-overview-copy">
+                    <p>Supported systems are not listed here as a catalog. This section exists to show where SkyFire has real repair-side familiarity, platform recognition, and practical service context across solid-state laser families used in industrial and laboratory environments.</p>
+                </div>
+                <div class="products-overview-panel">
+                    <h3>How to read this section</h3>
+                    <div class="products-overview-points">
+                        <div>
+                            <strong>Platform exposure</strong>
+                            Buyers can quickly see the brands and product families we already understand.
+                        </div>
+                        <div>
+                            <strong>Application fit</strong>
+                            Each card ties the platform back to a real use context rather than leaving it as a bare model name.
+                        </div>
+                        <div>
+                            <strong>Next step</strong>
+                            If your exact system is not listed, the section still helps frame whether the inquiry belongs in repair, sourcing, or customization.
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <div class="brand-tabs">
                 <button class="brand-tab active" onclick="openBrandTab('quantel')">Quantel (Lumibird)</button>
@@ -4476,7 +4648,11 @@
                         </div>
                         <div class="laser-product-content">
                             <h3>ULTRA</h3>
-                            <p>Application: Aerosol Radar<br>Type: Lamp-Pumped Solid-State</p>
+                            <div class="product-meta-chips">
+                                <span>Aerosol radar</span>
+                                <span>Lamp-pumped</span>
+                            </div>
+                            <p class="product-platform-note">A field-relevant platform for atmospheric and lidar-oriented use cases where service continuity and output stability are operationally important.</p>
                         </div>
                     </div>
                     
@@ -4488,7 +4664,11 @@
                         </div>
                         <div class="laser-product-content">
                             <h3>CFR200/400</h3>
-                            <p>Application: Scientific Research<br>Type: Lamp-Pumped Solid-State</p>
+                            <div class="product-meta-chips">
+                                <span>Scientific research</span>
+                                <span>Lamp-pumped</span>
+                            </div>
+                            <p class="product-platform-note">Representative of research-facing solid-state systems where diagnostics, repair feasibility, and performance restoration need careful technical handling.</p>
                         </div>
                     </div>
                 </div>
@@ -4504,8 +4684,12 @@
                         </div>
                         <div class="laser-product-content">
                             <h3>Q-SMART</h3>
-                            <h3>Q-smart850</h3>
-                            <p>Application: Ozone/Temperature-Humidity Radar<br>Type: Lamp-Pumped Solid-State</p>
+                            <p class="laser-product-subtitle">Q-smart850</p>
+                            <div class="product-meta-chips">
+                                <span>Meteorology</span>
+                                <span>Lamp-pumped</span>
+                            </div>
+                            <p class="product-platform-note">A typical example of systems used in atmospheric observation workflows where downtime can directly impact measurement schedules and field operations.</p>
                         </div>
                     </div>
                     
@@ -4517,7 +4701,11 @@
                         </div>
                         <div class="laser-product-content">
                             <h3>Centurion+</h3>
-                            <p>Application: Mass Spectrometry<br>Type: Diode-Pumped Solid-State</p>
+                            <div class="product-meta-chips">
+                                <span>Mass spectrometry</span>
+                                <span>Diode-pumped</span>
+                            </div>
+                            <p class="product-platform-note">Relevant to instrument environments that require stable output, predictable support response, and familiarity with compact solid-state system design.</p>
                         </div>
                     </div>
                 </div>
@@ -4533,7 +4721,11 @@
                         </div>
                         <div class="laser-product-content">
                             <h3>Flare NX</h3>
-                            <p>Application: LCD Panel Repair<br>Type: Diode-Pumped Solid-State</p>
+                            <div class="product-meta-chips">
+                                <span>LCD panel repair</span>
+                                <span>Diode-pumped</span>
+                            </div>
+                            <p class="product-platform-note">A strong reference for display manufacturing and repair scenarios where beam quality, process stability, and turnaround speed matter to line recovery.</p>
                         </div>
                     </div>
                 </div>
@@ -5132,6 +5324,20 @@
                 <h2>Selected component offers and sourcing-ready product entries.</h2>
                 <p>Use this area for modules, optical parts, and commercially packaged offers that can move quickly from technical interest to quotation or checkout.</p>
             </div>
+            <div class="cms-section-intro">
+                <article class="cms-intro-card">
+                    <strong>Buy if the offer is already packaged</strong>
+                    When a product entry has a direct purchase path, the goal is speed and lower friction for straightforward orders.
+                </article>
+                <article class="cms-intro-card">
+                    <strong>Ask for quote if the requirement is technical</strong>
+                    For non-standard modules, replacement parts, or uncertain compatibility, quotation should happen before checkout.
+                </article>
+                <article class="cms-intro-card">
+                    <strong>Use products as a commercial bridge</strong>
+                    This section should support both ecommerce-style offers and supplier-backed sourcing opportunities.
+                </article>
+            </div>
             <div id="cms-products-grid" class="cms-grid"></div>
             <p id="cms-products-empty" class="cms-empty cms-hidden">Loading products...</p>
         </div>
@@ -5144,6 +5350,20 @@
                 <p class="section-kicker">Resources</p>
                 <h2>Technical resources that support trust, qualification, and inbound demand.</h2>
                 <p>Use this section as a knowledge center for maintenance guides, application notes, troubleshooting logic, and non-sensitive technical explainers.</p>
+            </div>
+            <div class="cms-section-intro">
+                <article class="cms-intro-card">
+                    <strong>Write for buyer confidence</strong>
+                    Good resource content reduces qualification friction before the first technical conversation even starts.
+                </article>
+                <article class="cms-intro-card">
+                    <strong>Avoid sensitive know-how</strong>
+                    Explain application logic, maintenance thinking, and selection guidance without exposing protected process details.
+                </article>
+                <article class="cms-intro-card">
+                    <strong>Turn content into inquiry quality</strong>
+                    The best articles help readers ask better questions, which improves your quoting efficiency and lead quality.
+                </article>
             </div>
             <div id="cms-blog-grid" class="cms-grid"></div>
             <p id="cms-blog-empty" class="cms-empty cms-hidden">Loading blog posts...</p>
@@ -5850,7 +6070,7 @@
     </script>
 
     <script src="/assets/js/cms-config.js?v=20260306g"></script>
-    <script src="/assets/js/cms-frontend.js?v=20260310a"></script>
+    <script src="/assets/js/cms-frontend.js?v=20260310b"></script>
 
     <!-- Performance optimization meta tags -->
     <script type="application/ld+json">
