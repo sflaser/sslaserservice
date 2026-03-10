@@ -3524,8 +3524,17 @@
         }
 
         .testimonial-card .stars {
+            display: inline-flex;
+            align-items: center;
+            padding: 7px 11px;
+            border-radius: 999px;
+            border: 1px solid rgba(242, 139, 35, 0.16);
+            background: rgba(242, 139, 35, 0.08);
             color: var(--primary-color);
-            letter-spacing: 0.08em;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
         }
 
         .testimonial-card .quote {
@@ -3535,6 +3544,11 @@
 
         .testimonial-card .author h4 {
             color: var(--text-dark);
+        }
+
+        .testimonial-card .author p {
+            color: var(--text-gray);
+            line-height: 1.75;
         }
 
         .prev-btn,
@@ -5138,93 +5152,73 @@
     <section class="testimonials-section">
         <div class="container">
             <div class="section-title">
-                <p class="section-kicker">Client Signals</p>
-                <h2>What customers value when uptime matters.</h2>
-                <p>Selected feedback from teams using repair, maintenance, and custom support across critical laser workflows.</p>
+                <p class="section-kicker">Engagement Patterns</p>
+                <h2>How buyers typically come to SkyFire when a project is commercially urgent or technically awkward.</h2>
+                <p>These are representative project patterns, not generic public testimonials. They reflect the kinds of situations where repair-first support, sourcing flexibility, or supplier-backed technical review matter most.</p>
             </div>
-        
-        <div class="testimonial-carousel">
-            <div class="testimonial-container">
-                <!-- Original testimonials -->
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"Their repair team diagnosed and fixed our Quantel CFR200 laser in just 5 days, when others quoted 2 weeks. Outstanding service!"</p>
-                    <div class="author">
-                        <h4>Michael Chen</h4>
-                        <p>Engineering Director, Climate Sciences Institute</p>
+
+            <div class="testimonial-carousel">
+                <div class="testimonial-container">
+                    <div class="testimonial-card">
+                        <div class="stars">Repair Recovery</div>
+                        <p class="quote">A production or lab system is still running, but output has drifted, power has become unstable, or beam behavior is no longer reliable enough to trust. The buyer needs a fast judgment on whether repair is realistic before downtime becomes expensive.</p>
+                        <div class="author">
+                            <h4>Best fit</h4>
+                            <p>Failure diagnosis, repair feasibility, and practical next-step routing.</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="stars">Legacy Platform</div>
+                        <p class="quote">The platform is older, discontinued, or no longer easy to support through the original channel. The problem is no longer just repair. It becomes a mix of compatibility judgment, parts access, and commercial flexibility.</p>
+                        <div class="author">
+                            <h4>Best fit</h4>
+                            <p>Hard-to-source systems, legacy support cases, and practical replacement pathways.</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="stars">Parts First</div>
+                        <p class="quote">Sometimes the customer does not need a full repair service engagement. They need the right component, a replacement module, or a commercially packaged offer that can be confirmed and moved quickly.</p>
+                        <div class="author">
+                            <h4>Best fit</h4>
+                            <p>Component sourcing, spare parts, and quote-first commercial requests.</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="stars">Custom Build</div>
+                        <p class="quote">The requirement starts with an application target, wavelength window, or packaging limit rather than a finished drawing. The commercial front end has to translate that request into a real technical review path.</p>
+                        <div class="author">
+                            <h4>Best fit</h4>
+                            <p>Custom photonics work, semi-custom modules, and supplier-backed evaluation.</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="stars">Application Match</div>
+                        <p class="quote">The buyer knows the use case but is not yet sure what technical path is commercially sensible. In these cases the first job is not quoting instantly. It is clarifying fit, risk, and the right route to action.</p>
+                        <div class="author">
+                            <h4>Best fit</h4>
+                            <p>Semiconductor, research, display, and precision processing application discussions.</p>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="stars">Commercial Coordination</div>
+                        <p class="quote">Some opportunities need a cleaner buyer-facing layer because the real technical capability sits behind suppliers or engineering partners who do not want to be the public sales voice. That is exactly where this platform model makes sense.</p>
+                        <div class="author">
+                            <h4>Best fit</h4>
+                            <p>Projects that need both market communication and protected technical depth.</p>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"We've been using SkyFire for all our Coherent Flare NX laser maintenance for over 3 years. Their knowledge and response time is unmatched."</p>
-                    <div class="author">
-                        <h4>Sarah Johnson</h4>
-                        <p>Technical Manager, Advanced Display Technologies</p>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"SkyFire helped us design a custom laser solution for our research facility. Their expertise across multiple laser types made this possible."</p>
-                    <div class="author">
-                        <h4>Dr. Robert Wang</h4>
-                        <p>Lead Researcher, National Physics Laboratory</p>
-                    </div>
-                </div>
-                
-                <!-- Additional testimonials -->
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"When our Lumibird Q-smart850 failed during a critical experiment, SkyFire's emergency response team had it operational within 24 hours. Truly impressive."</p>
-                    <div class="author">
-                        <h4>Dr. Emma Rodriguez</h4>
-                        <p>Director of Atmospheric Research, Global Climate Institute</p>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"SkyFire's custom diode-pumped laser solution improved our manufacturing precision by 35% while reducing operational costs. A game-changer for our production line."</p>
-                    <div class="author">
-                        <h4>James Wilson</h4>
-                        <p>VP of Manufacturing, Precision Electronics Ltd.</p>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"After struggling with multiple vendors, we found SkyFire's technical expertise unparalleled. They implemented a comprehensive service plan that has kept our 8 Coherent Avia lasers operating flawlessly."</p>
-                    <div class="author">
-                        <h4>Thomas Lee</h4>
-                        <p>Operations Manager, PCB Technologies Inc.</p>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"The team at SkyFire designed a custom DPSS laser for our medical equipment that exceeded all specifications. Their deep understanding of medical applications gave us confidence throughout the project."</p>
-                    <div class="author">
-                        <h4>Dr. Jennifer Martinez</h4>
-                        <p>Head of R&D, MedTech Innovations</p>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p class="quote">"SkyFire's preventative maintenance program has virtually eliminated downtime for our critical laser systems. Their technicians' expertise with both Quantel and Coherent systems is remarkable."</p>
-                    <div class="author">
-                        <h4>David Chang</h4>
-                        <p>Senior Engineer, Advanced Materials Processing</p>
-                    </div>
-                </div>
+
+                <button class="prev-btn" aria-label="Previous engagement">❮</button>
+                <button class="next-btn" aria-label="Next engagement">❯</button>
+
+                <div class="dots-container"></div>
             </div>
-            
-            <button class="prev-btn" aria-label="Previous testimonial">❮</button>
-            <button class="next-btn" aria-label="Next testimonial">❯</button>
-            
-            <div class="dots-container"></div>
-        </div>
         </div>
     </section>
 
