@@ -104,6 +104,7 @@
           <article class="cms-card">
             ${image}
             <div class="cms-card-body">
+              <div class="cms-kicker">Product</div>
               <h3 class="cms-card-title">${escapeHtml(item.name)}</h3>
               <div class="cms-price">${formatPrice(item.price_cents, item.currency)}</div>
               <p class="cms-card-text">${escapeHtml(item.short_description || '')}</p>
@@ -152,6 +153,7 @@
             ${coverLink}
             ${image}
             <div class="cms-card-body">
+              <div class="cms-kicker">Resource</div>
               <div class="cms-meta">${formatDate(post.published_at)}</div>
               <h3 class="cms-card-title">${escapeHtml(post.title)}</h3>
               <p class="cms-card-text">${escapeHtml(excerpt)}</p>
