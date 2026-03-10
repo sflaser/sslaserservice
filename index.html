@@ -3060,6 +3060,10 @@
             font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
         }
 
+        body.menu-open {
+            overflow: hidden;
+        }
+
         .container {
             width: min(92%, 1280px);
         }
@@ -3114,6 +3118,54 @@
             color: #fffdf9;
             padding: 11px 20px;
             box-shadow: 0 14px 30px rgba(242, 139, 35, 0.22);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            width: 46px;
+            height: 46px;
+            padding: 0;
+            border: 1px solid rgba(23, 21, 19, 0.1);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.72);
+            box-shadow: 0 14px 32px rgba(18, 15, 12, 0.08);
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(242, 139, 35, 0.12);
+            border-color: rgba(242, 139, 35, 0.22);
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            margin: 0 auto;
+            border-radius: 999px;
+            background: currentColor;
+            transition: transform 0.24s ease, opacity 0.24s ease;
+        }
+
+        .mobile-menu-btn span + span {
+            margin-top: 4px;
+        }
+
+        .mobile-menu-btn.is-active span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .mobile-menu-btn.is-active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.is-active span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .mobile-nav-foot {
+            display: none;
         }
 
         .cta-btn:hover,
@@ -3886,6 +3938,136 @@
             background: rgba(239, 229, 216, 0.4);
         }
 
+        .platform-intro {
+            display: grid;
+            grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .platform-lead-card,
+        .platform-point,
+        .platform-card,
+        .engagement-step {
+            background: rgba(255, 252, 247, 0.78);
+            border: 1px solid var(--line-subtle);
+            border-radius: 28px;
+            box-shadow: 0 16px 34px rgba(18, 15, 12, 0.05);
+        }
+
+        .platform-lead-card {
+            padding: 34px;
+        }
+
+        .platform-lead-card h3 {
+            margin: 16px 0 14px;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.04;
+            letter-spacing: -0.04em;
+            color: var(--text-dark);
+        }
+
+        .platform-lead-card p {
+            color: var(--text-gray);
+            line-height: 1.82;
+            font-size: 17px;
+        }
+
+        .platform-point-stack {
+            display: grid;
+            gap: 16px;
+        }
+
+        .platform-point {
+            padding: 24px 26px;
+        }
+
+        .platform-point-label,
+        .platform-card-label,
+        .engagement-step .step-label {
+            margin-bottom: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #8a7f73;
+        }
+
+        .platform-point h4,
+        .platform-card h3,
+        .engagement-step h4 {
+            margin: 0 0 10px;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .platform-point p,
+        .platform-card p,
+        .engagement-step p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 24px;
+        }
+
+        .platform-card {
+            padding: 28px;
+        }
+
+        .platform-card ul {
+            margin: 16px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .platform-card li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        .platform-card li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 11px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+
+        .engagement-strip {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 24px;
+        }
+
+        .engagement-step {
+            padding: 24px 26px;
+        }
+
+        .engagement-step .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            margin-bottom: 14px;
+            border-radius: 50%;
+            background: rgba(242, 139, 35, 0.12);
+            color: #b45a0a;
+            font-weight: 700;
+        }
+
         .features {
             gap: 18px;
         }
@@ -4266,12 +4448,18 @@
             .footer-content,
             .application-summary-grid,
             .products-overview,
-            .cms-section-intro {
+            .cms-section-intro,
+            .platform-grid,
+            .engagement-strip {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
             .services .row {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .platform-intro {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -4281,7 +4469,9 @@
             }
 
             .header-container {
-                border-radius: 20px;
+                border-radius: 22px;
+                padding: 12px 14px;
+                align-items: flex-start;
             }
 
             .product-showcase {
@@ -4301,6 +4491,103 @@
             .hero-visual-frame {
                 min-height: 420px;
             }
+
+            .mobile-menu-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .header-right {
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .header-right .cta-btn {
+                display: none;
+            }
+
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: calc(100% + 12px);
+                left: 0;
+                right: 0;
+                padding: 14px;
+                border-radius: 24px;
+                background: rgba(255, 251, 245, 0.96);
+                border: 1px solid rgba(23, 21, 19, 0.09);
+                box-shadow: 0 24px 48px rgba(18, 15, 12, 0.12);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+            }
+
+            .main-nav.is-open {
+                display: block;
+            }
+
+            .navigation {
+                display: grid;
+                gap: 8px;
+            }
+
+            .navigation li {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .navigation li a {
+                display: block;
+                width: 100%;
+                padding: 13px 14px;
+                border-radius: 16px;
+                background: rgba(255, 255, 255, 0.55);
+            }
+
+            .mobile-nav-foot {
+                display: grid;
+                gap: 14px;
+                margin-top: 14px;
+                padding-top: 14px;
+                border-top: 1px solid rgba(23, 21, 19, 0.08);
+            }
+
+            .mobile-nav-eyebrow {
+                margin: 0;
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                color: #8a7f73;
+            }
+
+            .mobile-nav-contact {
+                margin: 0;
+                color: var(--text-gray);
+                line-height: 1.75;
+                font-size: 14px;
+            }
+
+            .mobile-nav-actions {
+                display: grid;
+                gap: 10px;
+            }
+
+            .mobile-nav-cta {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                min-height: 46px;
+                border-radius: 999px;
+                text-decoration: none;
+                font-weight: 700;
+            }
+
+            .mobile-nav-cta.btn-outline {
+                background: rgba(255, 255, 255, 0.55);
+            }
         }
 
         @media (max-width: 720px) {
@@ -4312,7 +4599,9 @@
             .products-overview,
             .cms-section-intro,
             .contact-layout,
-            .rfq-grid {
+            .rfq-grid,
+            .platform-grid,
+            .engagement-strip {
                 grid-template-columns: 1fr;
             }
 
@@ -4327,6 +4616,14 @@
             .contact-panel-link {
                 font-size: 24px;
             }
+
+            .platform-lead-card,
+            .platform-card,
+            .engagement-step,
+            .platform-point {
+                border-radius: 24px;
+                padding: 24px;
+            }
         }
         </style>
 </head>
@@ -4338,7 +4635,11 @@
                 <img src="/images/logos/LOGO长方形.png?v=20260306h" alt="Sky Fire Laser" class="logo-image">
             </a>
             <div class="header-right">
-                <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-navigation">☰</button>
+                <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <nav class="main-nav" id="main-navigation" aria-label="Primary">
                     <ul class="navigation">
                         <li><a href="#home">Home</a></li>
@@ -4346,8 +4647,17 @@
                         <li><a href="#applications">Applications</a></li>
                         <li><a href="#store">Products</a></li>
                         <li><a href="#blog">Resources</a></li>
+                        <li><a href="#why-us">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
+                    <div class="mobile-nav-foot">
+                        <p class="mobile-nav-eyebrow">Commercial Front End</p>
+                        <p class="mobile-nav-contact">SkyFire handles repair inquiries, custom photonics requests, and component sourcing with a cleaner buyer-facing workflow.</p>
+                        <div class="mobile-nav-actions">
+                            <a href="#contact" class="mobile-nav-cta btn btn-primary">Start an RFQ</a>
+                            <a href="mailto:info@sflaser.net" class="mobile-nav-cta btn btn-outline">Email Technical Sales</a>
+                        </div>
+                    </div>
                 </nav>
                 <a href="mailto:info@sflaser.net" class="cta-btn">Get a Quote</a>
             </div>
@@ -5117,59 +5427,102 @@
     <section id="why-us" class="why-us">
         <div class="container">
             <div class="section-title">
-                <p class="section-kicker">Operating Principles</p>
-                <h2>Why the platform is structured this way.</h2>
-                <p>The site is designed to convert technical capability into a cleaner commercial front end, without forcing sensitive supplier-side know-how into public view.</p>
+                <p class="section-kicker">Platform Model</p>
+                <h2>A buyer-facing commercial front end backed by supplier-side technical depth.</h2>
+                <p>SkyFire is structured to make complex laser work easier to buy, scope, and communicate, while keeping sensitive manufacturing details and supplier-specific know-how off the public site.</p>
             </div>
-            
-            <div class="features">
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i>✓</i>
-                    </div>
-                    <h3>Professional Experience</h3>
-                    <p>Years of laser industry experience with profound understanding of various laser principles and applications.</p>
+
+            <div class="platform-intro">
+                <article class="platform-lead-card">
+                    <p class="section-kicker">How We Operate</p>
+                    <h3>The public site is not the lab. It is the commercial layer that makes technical work easier to engage.</h3>
+                    <p>On one side, customers need a professional contact point for repair, custom photonics, and component sourcing. On the other side, supplier and engineering partners need room to protect methods, manufacturing details, and commercially sensitive information. This structure serves both requirements.</p>
+                </article>
+
+                <div class="platform-point-stack">
+                    <article class="platform-point">
+                        <p class="platform-point-label">Buyer Experience</p>
+                        <h4>Clear entry point for RFQs and technical sales</h4>
+                        <p>Customers can describe failures, target specifications, or sourcing needs in one place instead of chasing fragmented technical contacts.</p>
+                    </article>
+                    <article class="platform-point">
+                        <p class="platform-point-label">Supplier Protection</p>
+                        <h4>Public content stays commercial, not overly revealing</h4>
+                        <p>We publish enough to establish trust and technical relevance, but we do not expose process-sensitive repair logic, supplier-only know-how, or internal manufacturing details.</p>
+                    </article>
+                    <article class="platform-point">
+                        <p class="platform-point-label">Operational Fit</p>
+                        <h4>Better routing between inquiry, diagnosis, sourcing, and delivery</h4>
+                        <p>This model is designed for real work: urgent repairs, semi-custom modules, component sales, and opportunities that require partner-side technical input before quotation.</p>
+                    </article>
                 </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i>✓</i>
-                    </div>
-                    <h3>Brand Coverage</h3>
-                    <p>Familiar with and capable of handling mainstream laser brands including Quantel, Lumibird, and Coherent.</p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i>✓</i>
-                    </div>
-                    <h3>Broad Applications</h3>
-                    <p>Serving high-demand fields including meteorology, scientific research, and industrial manufacturing.</p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i>✓</i>
-                    </div>
-                    <h3>Customization Capability</h3>
-                    <p>Custom laser development based on specific requirements, providing optimized solutions.</p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i>✓</i>
-                    </div>
-                    <h3>Quality Assurance</h3>
-                    <p>Strict quality control processes ensuring excellent performance of repaired and manufactured lasers.</p>
-                </div>
-                
-                <div class="feature">
-                    <div class="feature-icon">
-                        <i>✓</i>
-                    </div>
-                    <h3>Quick Response</h3>
-                    <p>Efficient service team promptly responding to your needs, reducing equipment downtime.</p>
-                </div>
+            </div>
+
+            <div class="platform-grid">
+                <article class="platform-card">
+                    <p class="platform-card-label">Commercial Window</p>
+                    <h3>SkyFire handles the market-facing layer.</h3>
+                    <p>The site, RFQ flow, resources, and first-round communication are built to reduce friction for overseas buyers, labs, OEM teams, and industrial customers.</p>
+                    <ul>
+                        <li>Front-end branding and inquiry capture</li>
+                        <li>Application framing and qualification</li>
+                        <li>Commercial follow-up and coordination</li>
+                    </ul>
+                </article>
+
+                <article class="platform-card">
+                    <p class="platform-card-label">Technical Backbone</p>
+                    <h3>Technical depth comes from partner-side engineering support.</h3>
+                    <p>When projects need deeper diagnostics, custom design evaluation, or component-level feasibility checks, supplier and engineering partners support the technical decision layer.</p>
+                    <ul>
+                        <li>Repair judgment and feasibility review</li>
+                        <li>Custom laser and module evaluation</li>
+                        <li>Component and supply coordination</li>
+                    </ul>
+                </article>
+
+                <article class="platform-card">
+                    <p class="platform-card-label">Content Boundary</p>
+                    <h3>Public resources build confidence without disclosing too much.</h3>
+                    <p>Resources are written to help customers understand applications, maintenance logic, and sourcing considerations, without turning the website into a documentation dump of sensitive technical know-how.</p>
+                    <ul>
+                        <li>Application notes and maintenance guides</li>
+                        <li>Commercially safe technical education</li>
+                        <li>No public release of supplier-only methods</li>
+                    </ul>
+                </article>
+
+                <article class="platform-card">
+                    <p class="platform-card-label">What This Means</p>
+                    <h3>Customers get a cleaner path from question to action.</h3>
+                    <p>Instead of guessing who to contact, buyers can move from problem statement to the right response path: repair, sourcing, semi-custom development, or deeper technical review.</p>
+                    <ul>
+                        <li>Less confusion during technical sales</li>
+                        <li>Faster scoping for urgent cases</li>
+                        <li>Better qualification before quotation</li>
+                    </ul>
+                </article>
+            </div>
+
+            <div class="engagement-strip">
+                <article class="engagement-step">
+                    <div class="step-number">1</div>
+                    <p class="step-label">Start Here</p>
+                    <h4>Describe the commercial need clearly</h4>
+                    <p>Tell us whether the requirement is repair, component replacement, subsystem sourcing, or a custom photonics request.</p>
+                </article>
+                <article class="engagement-step">
+                    <div class="step-number">2</div>
+                    <p class="step-label">Internal Routing</p>
+                    <h4>We route it to the correct technical path</h4>
+                    <p>Depending on complexity, the next step may be direct quotation, deeper technical clarification, or partner-side evaluation.</p>
+                </article>
+                <article class="engagement-step">
+                    <div class="step-number">3</div>
+                    <p class="step-label">Decision Stage</p>
+                    <h4>You get the right commercial response</h4>
+                    <p>The output is practical: a repair path, sourcing recommendation, custom-build direction, or a scoped next-step discussion.</p>
+                </article>
             </div>
         </div>
     </section>
@@ -5574,7 +5927,7 @@
                         <span>Technical sales</span>
                     </div>
 
-                    <form class="rfq-form" name="rfq" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks">
+                    <form class="rfq-form" name="rfq" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">
                         <input type="hidden" name="form-name" value="rfq">
                         <p hidden>
                             <label>Do not fill this field if you are human: <input name="bot-field"></label>
@@ -6303,23 +6656,42 @@
 
         if (!menuBtn || !nav) return;
 
+        const closeMenu = function () {
+            nav.classList.remove('is-open');
+            menuBtn.classList.remove('is-active');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('menu-open');
+        };
+
         menuBtn.addEventListener('click', function () {
             const isOpen = nav.classList.toggle('is-open');
+            menuBtn.classList.toggle('is-active', isOpen);
             menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            document.body.classList.toggle('menu-open', isOpen);
         });
 
         nav.querySelectorAll('a').forEach(function (link) {
             link.addEventListener('click', function () {
-                nav.classList.remove('is-open');
-                menuBtn.setAttribute('aria-expanded', 'false');
+                closeMenu();
             });
         });
 
         document.addEventListener('click', function (event) {
             if (!nav.classList.contains('is-open')) return;
             if (nav.contains(event.target) || menuBtn.contains(event.target)) return;
-            nav.classList.remove('is-open');
-            menuBtn.setAttribute('aria-expanded', 'false');
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeMenu();
+            }
+        });
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 900) {
+                closeMenu();
+            }
         });
     });
     </script>
