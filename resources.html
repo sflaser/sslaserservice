@@ -18,6 +18,8 @@
       --text: #171513;
       --muted: #686158;
       --line: rgba(23, 21, 19, 0.08);
+      --font-sans: "Avenir Next", "SF Pro Text", "PingFang SC", "Noto Sans SC", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+      --font-display: "Avenir Next", "SF Pro Display", "PingFang SC", "Noto Sans SC", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
     }
 
     * {
@@ -26,12 +28,20 @@
 
     body {
       margin: 0;
-      font-family: "Avenir Next", "SF Pro Text", "Segoe UI", sans-serif;
+      font-family: var(--font-sans);
       color: var(--text);
       background:
         radial-gradient(circle at top right, rgba(242, 139, 35, 0.12), transparent 26%),
         linear-gradient(180deg, #fbf8f2 0%, #f4efe7 100%);
       min-height: 100vh;
+    }
+
+    body,
+    button,
+    input,
+    select,
+    textarea {
+      font-family: var(--font-sans);
     }
 
     .shell {
@@ -122,6 +132,7 @@
       font-size: clamp(2.8rem, 6vw, 4.8rem);
       line-height: 0.98;
       letter-spacing: -0.05em;
+      font-family: var(--font-display);
     }
 
     h2 {
@@ -129,6 +140,7 @@
       font-size: clamp(2rem, 4vw, 3rem);
       line-height: 1.04;
       letter-spacing: -0.04em;
+      font-family: var(--font-display);
     }
 
     .lead,
