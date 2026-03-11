@@ -3796,6 +3796,239 @@
             font-size: 16px;
         }
 
+        .comparison-grid-premium {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+            margin-top: 34px;
+        }
+
+        .comparison-card-premium,
+        .comparison-bridge-bar,
+        .products-signal-card,
+        .products-service-lens-copy,
+        .products-service-lens-points,
+        .products-rfq-bridge,
+        .products-rfq-note,
+        .resources-compact-card {
+            border: 1px solid var(--line-subtle);
+            border-radius: 28px;
+            background: rgba(255, 252, 247, 0.8);
+            box-shadow: 0 16px 34px rgba(18, 15, 12, 0.05);
+        }
+
+        .comparison-card-premium {
+            padding: 30px;
+        }
+
+        .comparison-card-premium.is-highlight {
+            background: linear-gradient(180deg, rgba(242, 139, 35, 0.12) 0%, rgba(255, 252, 247, 0.92) 100%);
+        }
+
+        .comparison-card-label,
+        .products-signal-label {
+            display: inline-flex;
+            align-items: center;
+            align-self: flex-start;
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: rgba(242, 139, 35, 0.1);
+            border: 1px solid rgba(242, 139, 35, 0.16);
+            color: #a35308;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .comparison-card-premium h3,
+        .products-signal-card h3,
+        .products-service-lens-copy h3,
+        .products-service-lens-points h4,
+        .products-rfq-copy h3 {
+            margin: 16px 0 10px;
+            color: var(--text-dark);
+            font-size: 28px;
+            line-height: 1.15;
+            letter-spacing: -0.04em;
+        }
+
+        .comparison-card-premium > p,
+        .products-signal-card p,
+        .products-service-lens-copy p,
+        .products-service-lens-points li,
+        .products-rfq-copy p,
+        .products-rfq-note span,
+        .resources-compact-card span {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .comparison-lanes {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .comparison-lane {
+            padding: 16px 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.58);
+            border: 1px solid rgba(23, 21, 19, 0.06);
+        }
+
+        .comparison-lane.is-highlight {
+            background: rgba(242, 139, 35, 0.08);
+            border-color: rgba(242, 139, 35, 0.14);
+        }
+
+        .comparison-lane-label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #8b7d70;
+        }
+
+        .comparison-lane p {
+            margin: 0;
+            color: var(--text-gray);
+            line-height: 1.75;
+        }
+
+        .comparison-bridge-bar {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            align-items: start;
+            margin-top: 24px;
+            padding: 24px 28px;
+        }
+
+        .comparison-bridge-copy h3 {
+            margin: 8px 0 10px;
+            font-size: 24px;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--text-dark);
+        }
+
+        .comparison-bridge-copy p,
+        .comparison-bridge-point p {
+            margin: 0;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .comparison-bridge-point strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+            font-size: 16px;
+        }
+
+        .products-signal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+            margin-bottom: 24px;
+        }
+
+        .products-signal-card,
+        .products-service-lens-copy,
+        .products-service-lens-points {
+            padding: 26px 28px;
+        }
+
+        .products-service-lens {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+            gap: 22px;
+            margin-bottom: 30px;
+        }
+
+        .products-service-lens-points ul {
+            display: grid;
+            gap: 12px;
+            margin: 18px 0 0;
+            padding-left: 20px;
+        }
+
+        .products-rfq-bridge {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+            gap: 22px;
+            margin-top: 30px;
+            padding: 28px 30px;
+        }
+
+        .products-rfq-copy .section-kicker {
+            margin-bottom: 10px;
+        }
+
+        .products-rfq-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .products-rfq-note-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .products-rfq-note {
+            padding: 16px 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.58);
+            border: 1px solid rgba(23, 21, 19, 0.06);
+            box-shadow: none;
+        }
+
+        .products-rfq-note strong,
+        .resources-compact-card strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+            font-size: 16px;
+        }
+
+        .resources-compact-intro {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 22px;
+        }
+
+        .resources-compact-card {
+            padding: 20px 22px;
+        }
+
+        .cms-section-footer {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 980px) {
+            .comparison-grid-premium,
+            .products-signal-grid,
+            .products-service-lens,
+            .products-rfq-bridge,
+            .resources-compact-intro {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-bridge-bar {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .laser-product-content p,
         .laser-item,
         .process-title {
@@ -5052,7 +5285,7 @@
                         <li><a href="#services">Services</a></li>
                         <li><a href="#applications">Applications</a></li>
                         <li><a href="#store">Products</a></li>
-                        <li><a href="#blog">Resources</a></li>
+                        <li><a href="/resources.html">Resources</a></li>
                         <li><a href="#why-us">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -5371,82 +5604,94 @@
     <section class="comparison">
         <div class="container">
             <div class="comparison-title">
-                <p class="section-kicker">Commercial Difference</p>
-                <h2>Why teams move from generic repair vendors to a more technical service partner.</h2>
-                <p>SkyFire is positioned around technical coordination, supplier-backed depth, and practical repair outcomes instead of one-size-fits-all service language.</p>
+                <p class="section-kicker">Decision Factors</p>
+                <h2>What qualified buyers actually compare before choosing a laser service partner.</h2>
+                <p>The strongest commercial difference is usually not a slogan. It is whether the partner can diagnose correctly, route the request intelligently, and keep options open across repair, sourcing, and custom work.</p>
             </div>
-            
-            <div class="comparison-boxes">
-                <div class="comparison-box left-box">
-                    <h3>Standard Laser Services</h3>
-                    
-                    <ul class="comparison-list negative-list">
-                        <li>
-                            <span class="list-icon">✕</span>
-                            <span class="list-text">Lack of professional diagnostics, only basic repairs</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✕</span>
-                            <span class="list-text">Difficulty handling complex brands and models</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✕</span>
-                            <span class="list-text">Long repair cycles, high downtime costs</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✕</span>
-                            <span class="list-text">Unstable performance after repairs, prone to failures</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✕</span>
-                            <span class="list-text">Unable to provide customized solutions</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✕</span>
-                            <span class="list-text">Passive service attitude, slow response time</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✕</span>
-                            <span class="list-text">No comprehensive testing or warranty after repairs</span>
-                        </li>
-                    </ul>
+
+            <div class="comparison-grid-premium">
+                <article class="comparison-card-premium">
+                    <p class="comparison-card-label">Diagnostic Depth</p>
+                    <h3>Fault isolation matters more than simply replacing obvious parts.</h3>
+                    <p>Complex solid-state platforms usually fail in ways that are not obvious from a short symptom description. The commercial value comes from getting the first judgment right.</p>
+                    <div class="comparison-lanes">
+                        <div class="comparison-lane">
+                            <span class="comparison-lane-label">Common vendor pattern</span>
+                            <p>Limited triage, narrow model familiarity, and longer turnaround when the issue is not immediately visible.</p>
+                        </div>
+                        <div class="comparison-lane is-highlight">
+                            <span class="comparison-lane-label">SkyFire model</span>
+                            <p>Repair-side familiarity, supplier-backed escalation, and practical diagnosis before the request gets pushed into the wrong commercial path.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="comparison-card-premium is-highlight">
+                    <p class="comparison-card-label">Commercial Routing</p>
+                    <h3>Not every inquiry should be forced into the same service offer.</h3>
+                    <p>Some customers need repair, some need parts, and some need a different build direction entirely. Treating every request as the same service slows everyone down.</p>
+                    <div class="comparison-lanes">
+                        <div class="comparison-lane">
+                            <span class="comparison-lane-label">Common vendor pattern</span>
+                            <p>Everything gets framed as a generic repair job, even when sourcing or redesign would be a better business decision.</p>
+                        </div>
+                        <div class="comparison-lane is-highlight">
+                            <span class="comparison-lane-label">SkyFire model</span>
+                            <p>Requests are routed toward repair, sourcing, replacement, or custom development based on the actual technical and commercial context.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="comparison-card-premium">
+                    <p class="comparison-card-label">Platform Familiarity</p>
+                    <h3>Model family recognition reduces wasted quoting cycles.</h3>
+                    <p>Buyers usually care less about marketing breadth and more about whether the partner already understands the kind of platform sitting on the bench or in the line.</p>
+                    <div class="comparison-lanes">
+                        <div class="comparison-lane">
+                            <span class="comparison-lane-label">Common vendor pattern</span>
+                            <p>Brand names are mentioned broadly, but the team may not have real working familiarity with the product family in question.</p>
+                        </div>
+                        <div class="comparison-lane is-highlight">
+                            <span class="comparison-lane-label">SkyFire model</span>
+                            <p>The site is organized around actual platform familiarity, application context, and system families we can discuss with confidence.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="comparison-card-premium">
+                    <p class="comparison-card-label">Extension Path</p>
+                    <h3>The useful partner is the one who can go beyond a single repair ticket.</h3>
+                    <p>Once a case is understood, customers often need replacement parts, follow-on sourcing, or a custom optical path. That extension should not require starting over.</p>
+                    <div class="comparison-lanes">
+                        <div class="comparison-lane">
+                            <span class="comparison-lane-label">Common vendor pattern</span>
+                            <p>The job ends at the repair bench, leaving the buyer to solve sourcing and customization elsewhere.</p>
+                        </div>
+                        <div class="comparison-lane is-highlight">
+                            <span class="comparison-lane-label">SkyFire model</span>
+                            <p>The same conversation can continue into spares, subsystem sourcing, or supplier-backed custom photonics work when the case requires it.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="comparison-bridge-bar">
+                <div class="comparison-bridge-copy">
+                    <p class="section-kicker">Why The Switch Happens</p>
+                    <h3>Buyers move when the technical path becomes clearer and the commercial path gets shorter.</h3>
+                    <p>That is the role of the website: fewer vague promises, more structured routing toward the right next step.</p>
                 </div>
-                
-                <div class="comparison-vs">Shift</div>
-                
-                <div class="comparison-box right-box">
-                    <h3>Solid-State Laser Experts</h3>
-                    
-                    <ul class="comparison-list positive-list">
-                        <li>
-                            <span class="list-icon">✓</span>
-                            <span class="list-text">Professional team providing comprehensive diagnostics and precise repairs</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✓</span>
-                            <span class="list-text">Coverage of multiple brands including Quantel, Lumibird, and Coherent</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✓</span>
-                            <span class="list-text">Efficient repair process to minimize downtime</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✓</span>
-                            <span class="list-text">Repair quality meets factory standards, stable and reliable</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✓</span>
-                            <span class="list-text">Custom laser design and manufacturing services</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✓</span>
-                            <span class="list-text">24-hour professional response, proactive maintenance</span>
-                        </li>
-                        <li>
-                            <span class="list-icon">✓</span>
-                            <span class="list-text">Comprehensive testing and at least 6-month warranty</span>
-                        </li>
-                    </ul>
+                <div class="comparison-bridge-point">
+                    <strong>Repair-first logic</strong>
+                    <p>Salvage value and downtime reduction are considered before replacement is pushed.</p>
+                </div>
+                <div class="comparison-bridge-point">
+                    <strong>Quote-first discipline</strong>
+                    <p>Unclear compatibility cases are qualified properly instead of rushed into a checkout flow.</p>
+                </div>
+                <div class="comparison-bridge-point">
+                    <strong>Partner-backed reach</strong>
+                    <p>When the request needs deeper technical backing, the commercial front end does not break.</p>
                 </div>
             </div>
         </div>
@@ -5461,26 +5706,36 @@
                 <p>Examples of models and product families where our team has practical repair, maintenance, and support exposure.</p>
             </div>
 
-            <div class="products-overview">
-                <div class="products-overview-copy">
-                    <p>Supported systems are not listed here as a catalog. This section exists to show where SkyFire has real repair-side familiarity, platform recognition, and practical service context across solid-state laser families used in industrial and laboratory environments.</p>
+            <div class="products-signal-grid">
+                <article class="products-signal-card">
+                    <p class="products-signal-label">Practical Familiarity</p>
+                    <h3>We show product families we can already recognize in the field.</h3>
+                    <p>This is a qualification layer for buyers who want to know whether the team already understands the platform category before the first technical conversation.</p>
+                </article>
+                <article class="products-signal-card">
+                    <p class="products-signal-label">Application Context</p>
+                    <h3>Each platform is tied to the use case, not only the model name.</h3>
+                    <p>That makes the section more useful for industrial buyers, labs, and equipment teams who care about the operational role of the laser, not just its label.</p>
+                </article>
+                <article class="products-signal-card">
+                    <p class="products-signal-label">Commercial Fit</p>
+                    <h3>The section helps frame repair, sourcing, or custom follow-up.</h3>
+                    <p>If the exact unit is not listed, the closest family reference still helps decide whether the request belongs in repair, spare parts, or a deeper supplier-backed discussion.</p>
+                </article>
+            </div>
+
+            <div class="products-service-lens">
+                <div class="products-service-lens-copy">
+                    <h3>This is not a public spare-parts catalog. It is an exposure map.</h3>
+                    <p>The point is to show where there is practical repair-side familiarity across solid-state platforms used in manufacturing, measurement, research, and specialized optical workflows.</p>
                 </div>
-                <div class="products-overview-panel">
-                    <h3>How to read this section</h3>
-                    <div class="products-overview-points">
-                        <div>
-                            <strong>Platform exposure</strong>
-                            Buyers can quickly see the brands and product families we already understand.
-                        </div>
-                        <div>
-                            <strong>Application fit</strong>
-                            Each card ties the platform back to a real use context rather than leaving it as a bare model name.
-                        </div>
-                        <div>
-                            <strong>Next step</strong>
-                            If your exact system is not listed, the section still helps frame whether the inquiry belongs in repair, sourcing, or customization.
-                        </div>
-                    </div>
+                <div class="products-service-lens-points">
+                    <h4>What a buyer can answer here</h4>
+                    <ul>
+                        <li>Do we already understand the product family or operating environment?</li>
+                        <li>Does the system look closer to a repair case, a parts case, or a sourcing problem?</li>
+                        <li>Is the platform similar enough to justify a technical review even if the exact model is not shown?</li>
+                    </ul>
                 </div>
             </div>
             
@@ -5579,6 +5834,32 @@
                             </div>
                             <p class="product-platform-note">A strong reference for display manufacturing and repair scenarios where beam quality, process stability, and turnaround speed matter to line recovery.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-rfq-bridge">
+                <div class="products-rfq-copy">
+                    <p class="section-kicker">Model Not Listed?</p>
+                    <h3>Equivalent systems can still be worth a review.</h3>
+                    <p>Absence from the list does not automatically mean unsupported. Many inbound cases start from adjacent product families, discontinued platforms, or regional variants that still map to known service logic.</p>
+                    <div class="products-rfq-actions">
+                        <a href="#contact" class="btn btn-primary">Request a System Review</a>
+                        <a href="mailto:info@sflaser.net" class="btn btn-outline">Email Model Details</a>
+                    </div>
+                </div>
+                <div class="products-rfq-note-list">
+                    <div class="products-rfq-note">
+                        <strong>Best inputs</strong>
+                        <span>Brand, model, serial label, current operating state, and a short description of the failure or requirement.</span>
+                    </div>
+                    <div class="products-rfq-note">
+                        <strong>Common outcome</strong>
+                        <span>The next step is usually a repair feasibility review, a parts path, or a cleaner sourcing conversation rather than an immediate quote.</span>
+                    </div>
+                    <div class="products-rfq-note">
+                        <strong>Why this matters</strong>
+                        <span>It prevents buyers from discarding recoverable hardware or ordering the wrong replacement path too early.</span>
                     </div>
                 </div>
             </div>
@@ -6175,58 +6456,30 @@
     <section id="blog" class="cms-section">
         <div class="container">
             <div class="section-title">
-                <p class="section-kicker">Resources</p>
-                <h2>Technical resources that support trust, qualification, and inbound demand.</h2>
-                <p>Use this section as a knowledge center for maintenance guides, application notes, troubleshooting logic, and non-sensitive technical explainers.</p>
+                <p class="section-kicker">Featured Resources</p>
+                <h2>Selected technical notes that help buyers qualify the next conversation.</h2>
+                <p>The homepage stays selective. The full resource library lives on a dedicated page so the site can keep accumulating maintenance logic, application context, and buying guidance without turning the homepage into a long archive.</p>
             </div>
-            <div class="commerce-paths">
-                <article class="commerce-path">
-                    <span class="commerce-path-tag">Maintenance Guides</span>
-                    <h3>Write content that reduces preventable support friction.</h3>
-                    <p>Preventive maintenance notes, fault symptoms, and service-side logic help buyers understand problems before the first technical discussion.</p>
-                    <ul>
-                        <li>Common failure symptoms</li>
-                        <li>Preventive maintenance basics</li>
-                        <li>What to prepare before inquiry</li>
-                    </ul>
+            <div class="resources-compact-intro">
+                <article class="resources-compact-card">
+                    <strong>Maintenance guides</strong>
+                    <span>Preventive checks, common symptoms, and what serious customers should prepare before a repair or sourcing inquiry.</span>
                 </article>
-                <article class="commerce-path">
-                    <span class="commerce-path-tag">Application Notes</span>
-                    <h3>Explain where the products fit without revealing protected details.</h3>
-                    <p>Application-facing content should help buyers connect your capabilities to semiconductor, research, quantum, and industrial use cases.</p>
-                    <ul>
-                        <li>Industry context and use scenarios</li>
-                        <li>Selection thinking for non-experts</li>
-                        <li>Commercially safe technical depth</li>
-                    </ul>
+                <article class="resources-compact-card">
+                    <strong>Application notes</strong>
+                    <span>Commercially safe context for semiconductor tools, research workflows, display manufacturing, and specialized optical use.</span>
                 </article>
-                <article class="commerce-path">
-                    <span class="commerce-path-tag">Buyer Qualification</span>
-                    <h3>Turn content into better RFQs, not just pageviews.</h3>
-                    <p>The best resource articles help customers ask sharper questions, which improves quote quality and reduces back-and-forth on technical sales.</p>
-                    <ul>
-                        <li>Higher-quality inbound demand</li>
-                        <li>Fewer vague inquiries</li>
-                        <li>Clearer route to action</li>
-                    </ul>
+                <article class="resources-compact-card">
+                    <strong>Buyer qualification</strong>
+                    <span>Use content to raise RFQ quality, reduce vague requests, and make the first commercial conversation more efficient.</span>
                 </article>
             </div>
-            <div class="cms-section-intro">
-                <article class="cms-intro-card">
-                    <strong>Write for buyer confidence</strong>
-                    Good resource content reduces qualification friction before the first technical conversation even starts.
-                </article>
-                <article class="cms-intro-card">
-                    <strong>Avoid sensitive know-how</strong>
-                    Explain application logic, maintenance thinking, and selection guidance without exposing protected process details.
-                </article>
-                <article class="cms-intro-card">
-                    <strong>Turn content into inquiry quality</strong>
-                    The best articles help readers ask better questions, which improves your quoting efficiency and lead quality.
-                </article>
+            <div id="cms-blog-grid" class="cms-grid" data-limit="3"></div>
+            <p id="cms-blog-empty" class="cms-empty cms-hidden">Loading featured resources...</p>
+            <div class="cms-section-footer">
+                <a href="/resources.html" class="btn btn-outline">View All Resources</a>
+                <a href="#contact" class="btn btn-primary">Start an RFQ</a>
             </div>
-            <div id="cms-blog-grid" class="cms-grid"></div>
-            <p id="cms-blog-empty" class="cms-empty cms-hidden">Loading blog posts...</p>
         </div>
     </section>
 
@@ -6399,7 +6652,7 @@
                         <ul class="footer-links">
                             <li><a href="#applications">Applications</a></li>
                             <li><a href="#store">Products</a></li>
-                            <li><a href="#blog">Resources</a></li>
+                            <li><a href="/resources.html">Resources</a></li>
                             <li><a href="#why-us">About</a></li>
                             <li><a href="https://alleriastore.com/collections/fiber-laser-repairing-equipment" target="_blank" rel="noopener">Alleria Store</a></li>
                         </ul>
@@ -7141,7 +7394,7 @@
     </script>
 
     <script src="/assets/js/cms-config.js?v=20260306g"></script>
-    <script src="/assets/js/cms-frontend.js?v=20260310c"></script>
+    <script src="/assets/js/cms-frontend.js?v=20260311b"></script>
 
     <!-- Performance optimization meta tags -->
     <script type="application/ld+json">

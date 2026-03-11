@@ -42,6 +42,21 @@
     });
   }
 
+  function resolveLimit(element, fallback) {
+    const raw = (element?.dataset.limit || '').trim().toLowerCase();
+
+    if (!raw) {
+      return fallback;
+    }
+
+    if (raw === 'all') {
+      return null;
+    }
+
+    const parsed = Number.parseInt(raw, 10);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+  }
+
   function getProductState(item) {
     const sourceText = `${item.name || ''} ${item.short_description || ''}`.toLowerCase();
 
@@ -154,9 +169,17 @@
   async function loadBlogs() {
     if (!blogsGrid) return;
 
-    const rows = await fetchTable(
-      'blog_posts?select=id,title,slug,excerpt,content,cover_image_url,published_at,status&status=eq.published&order=published_at.desc.nullslast&limit=6'
-    );
+    const blogLimit = resolveLimit(blogsGrid, 6);
+    const query = [
+      'blog_posts?select=id,title,slug,excerpt,content,cover_image_url,published_at,status',
+      'status=eq.published',
+      'order=published_at.desc.nullslast',
+      blogLimit ? `limit=${blogLimit}` : '',
+    ]
+      .filter(Boolean)
+      .join('&');
+
+    const rows = await fetchTable(query);
 
     if (!rows.length) {
       if (blogsEmpty) {
