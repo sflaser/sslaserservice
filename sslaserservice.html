@@ -3051,12 +3051,16 @@
             --transition: all 0.28s ease;
         }
 
+        html {
+            scroll-padding-top: 110px;
+        }
+
         body {
             background:
                 radial-gradient(circle at top right, rgba(242, 139, 35, 0.12), transparent 28%),
                 linear-gradient(180deg, #fbf8f2 0%, #f4efe7 100%);
             color: var(--text-dark);
-            padding-top: 118px;
+            padding-top: 106px;
             font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
         }
 
@@ -3069,32 +3073,48 @@
         }
 
         header {
-            padding: 18px 0;
+            padding: 12px 0;
+            transition: transform 0.24s ease, padding 0.24s ease;
+        }
+
+        header.is-hidden {
+            transform: translateY(calc(-100% - 18px));
         }
 
         .header-container {
-            background: rgba(255, 251, 245, 0.86);
+            background: rgba(255, 251, 245, 0.76);
             border: 1px solid var(--line-subtle);
             border-radius: 24px;
-            padding: 14px 18px;
-            box-shadow: 0 24px 58px rgba(24, 20, 16, 0.08);
+            padding: 11px 16px;
+            box-shadow: 0 18px 44px rgba(24, 20, 16, 0.07);
+            transition: background 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease, padding 0.24s ease;
+        }
+
+        header.is-scrolled {
+            padding: 8px 0;
         }
 
         header.is-scrolled .header-container {
-            background: rgba(255, 252, 248, 0.96);
+            background: rgba(255, 252, 248, 0.88);
             border-color: rgba(23, 21, 19, 0.11);
-            box-shadow: 0 24px 64px rgba(24, 20, 16, 0.12);
+            box-shadow: 0 14px 34px rgba(24, 20, 16, 0.10);
+            padding: 9px 14px;
         }
 
         .logo-image {
-            height: 44px;
+            height: 40px;
             max-width: 360px;
+            transition: height 0.24s ease;
+        }
+
+        header.is-scrolled .logo-image {
+            height: 36px;
         }
 
         .navigation li a {
-            padding: 9px 13px;
+            padding: 8px 12px;
             border-radius: 999px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             letter-spacing: 0.04em;
             text-transform: uppercase;
@@ -3116,7 +3136,7 @@
         .cta-btn {
             background: linear-gradient(135deg, #f49a36 0%, #df7411 100%);
             color: #fffdf9;
-            padding: 11px 20px;
+            padding: 10px 18px;
             box-shadow: 0 14px 30px rgba(242, 139, 35, 0.22);
         }
 
@@ -5043,13 +5063,17 @@
 
         @media (max-width: 900px) {
             body {
-                padding-top: 108px;
+                padding-top: 94px;
             }
 
             .header-container {
                 border-radius: 22px;
-                padding: 12px 14px;
+                padding: 10px 12px;
                 align-items: flex-start;
+            }
+
+            header.is-scrolled .header-container {
+                padding: 9px 12px;
             }
 
             .product-showcase {
@@ -7339,12 +7363,24 @@
         }
 
         if (siteHeader) {
+            let lastScrollY = window.scrollY;
             const toggleHeaderState = function () {
-                if (window.scrollY > 24) {
+                const currentScrollY = window.scrollY;
+                const menuOpen = document.body.classList.contains('menu-open');
+
+                if (currentScrollY > 24) {
                     siteHeader.classList.add('is-scrolled');
                 } else {
                     siteHeader.classList.remove('is-scrolled');
                 }
+
+                if (menuOpen || currentScrollY < 80 || currentScrollY < lastScrollY - 6) {
+                    siteHeader.classList.remove('is-hidden');
+                } else if (currentScrollY > lastScrollY + 6) {
+                    siteHeader.classList.add('is-hidden');
+                }
+
+                lastScrollY = currentScrollY;
             };
 
             toggleHeaderState();
@@ -7358,6 +7394,9 @@
             menuBtn.classList.remove('is-active');
             menuBtn.setAttribute('aria-expanded', 'false');
             document.body.classList.remove('menu-open');
+            if (siteHeader) {
+                siteHeader.classList.remove('is-hidden');
+            }
         };
 
         menuBtn.addEventListener('click', function () {
@@ -7365,6 +7404,9 @@
             menuBtn.classList.toggle('is-active', isOpen);
             menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             document.body.classList.toggle('menu-open', isOpen);
+            if (siteHeader) {
+                siteHeader.classList.remove('is-hidden');
+            }
         });
 
         nav.querySelectorAll('a').forEach(function (link) {
