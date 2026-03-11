@@ -4476,13 +4476,18 @@
 
         .faq-answer {
             max-height: 0;
-            padding: 0 24px;
+            padding: 0;
             overflow: hidden;
-            transition: max-height 0.35s ease, padding 0.35s ease;
+            opacity: 0;
+            visibility: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease, opacity 0.24s ease, visibility 0.24s ease;
         }
 
         .faq-item.active .faq-answer {
+            max-height: 320px;
             padding: 0 24px 24px;
+            opacity: 1;
+            visibility: visible;
         }
 
         .faq-answer p {
