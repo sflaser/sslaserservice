@@ -60,7 +60,7 @@
     padding: 22px 22px 24px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     flex: 1;
     position: relative;
     z-index: 2;
@@ -77,13 +77,13 @@
     color: #a35308;
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 
 .cms-card-title {
-    font-size: 24px;
-    line-height: 1.2;
+    font-size: 23px;
+    line-height: 1.18;
     color: #171513;
     margin: 0;
     letter-spacing: -0.03em;
@@ -92,7 +92,7 @@
 .cms-meta {
     font-size: 12px;
     color: #7b7269;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
 }
 
@@ -139,7 +139,8 @@
 .cms-card-text {
     margin: 0;
     color: #554d45;
-    line-height: 1.8;
+    font-size: 15px;
+    line-height: 1.72;
 }
 
 .cms-card-actions {
@@ -176,7 +177,7 @@
 }
 
 .cms-price {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
     color: #171513;
     letter-spacing: -0.03em;

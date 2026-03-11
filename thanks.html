@@ -8,6 +8,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260306h">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260306h">
   <link rel="shortcut icon" href="/favicon.ico?v=20260306h">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <style>
     :root {
       --brand: #f28b23;
@@ -33,6 +34,10 @@
       min-height: 100vh;
     }
 
+    body.menu-open {
+      overflow: hidden;
+    }
+
     body,
     button,
     input,
@@ -51,6 +56,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
       gap: 16px;
       padding: 14px 18px;
       border-radius: 24px;
@@ -62,6 +68,45 @@
     .topbar img {
       height: 42px;
       display: block;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid rgba(23, 21, 19, 0.1);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 14px 32px rgba(18, 15, 12, 0.08);
+      color: var(--text);
+      transition: 0.24s ease;
+    }
+
+    .mobile-menu-btn span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin: 0 auto;
+      border-radius: 999px;
+      background: currentColor;
+      transition: transform 0.24s ease, opacity 0.24s ease;
+    }
+
+    .mobile-menu-btn span + span {
+      margin-top: 4px;
+    }
+
+    .mobile-menu-btn.is-active span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .mobile-menu-btn.is-active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-btn.is-active span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
     }
 
     .nav {
@@ -84,6 +129,10 @@
 
     .nav a:hover {
       background: rgba(242, 139, 35, 0.12);
+    }
+
+    .mobile-nav-foot {
+      display: none;
     }
 
     .hero {
@@ -116,7 +165,7 @@
       color: #a35308;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
@@ -167,7 +216,7 @@
       margin-bottom: 8px;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: #8a7f73;
     }
@@ -185,18 +234,89 @@
       line-height: 1.8;
     }
 
-    @media (max-width: 820px) {
-      .topbar,
+    @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
       }
 
-      .topbar {
-        align-items: flex-start;
+      .mobile-menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .nav {
+        display: none;
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 0;
+        right: 0;
+        padding: 14px;
+        border-radius: 24px;
+        background: rgba(255, 251, 245, 0.96);
+        border: 1px solid rgba(23, 21, 19, 0.09);
+        box-shadow: 0 24px 48px rgba(18, 15, 12, 0.12);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+
+      .nav.is-open {
+        display: block;
+      }
+
+      .nav a {
+        display: block;
         width: 100%;
+        margin-bottom: 8px;
+        padding: 13px 14px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.55);
+      }
+
+      .nav a:last-of-type {
+        margin-bottom: 0;
+      }
+
+      .mobile-nav-foot {
+        display: grid;
+        gap: 14px;
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(23, 21, 19, 0.08);
+      }
+
+      .mobile-nav-eyebrow {
+        margin: 0;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #8a7f73;
+      }
+
+      .mobile-nav-contact {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+        font-size: 14px;
+      }
+
+      .mobile-nav-actions {
+        display: grid;
+        gap: 10px;
+      }
+
+      .mobile-nav-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 46px;
+        border-radius: 999px;
+      }
+
+      .mobile-nav-cta.btn-outline {
+        background: rgba(255, 255, 255, 0.55);
       }
 
       .panel,
@@ -212,7 +332,12 @@
       <a href="/#home" aria-label="Sky Fire Laser home">
         <img src="/images/logos/LOGO长方形.png?v=20260306h" alt="Sky Fire Laser">
       </a>
-      <nav class="nav" aria-label="Primary">
+      <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="thanks-navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav" aria-label="Primary" id="thanks-navigation">
         <a href="/#home">Home</a>
         <a href="/#services">Services</a>
         <a href="/#applications">Applications</a>
@@ -220,6 +345,14 @@
         <a href="/resources.html">Resources</a>
         <a href="/#why-us">About</a>
         <a href="/#contact">Contact</a>
+        <div class="mobile-nav-foot">
+          <p class="mobile-nav-eyebrow">Commercial Front End</p>
+          <p class="mobile-nav-contact">SkyFire handles repair inquiries, custom photonics requests, and component sourcing with a cleaner buyer-facing workflow.</p>
+          <div class="mobile-nav-actions">
+            <a href="/#contact" class="mobile-nav-cta btn btn-primary">Start an RFQ</a>
+            <a href="mailto:info@sflaser.net" class="mobile-nav-cta btn btn-outline">Email Technical Sales</a>
+          </div>
+        </div>
       </nav>
     </header>
 
@@ -248,5 +381,50 @@
       </div>
     </section>
   </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const nav = document.getElementById('thanks-navigation');
+
+      if (!menuBtn || !nav) return;
+
+      const closeMenu = function () {
+        nav.classList.remove('is-open');
+        menuBtn.classList.remove('is-active');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      };
+
+      menuBtn.addEventListener('click', function () {
+        const isOpen = nav.classList.toggle('is-open');
+        menuBtn.classList.toggle('is-active', isOpen);
+        menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        document.body.classList.toggle('menu-open', isOpen);
+      });
+
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      document.addEventListener('click', function (event) {
+        if (!nav.classList.contains('is-open')) return;
+        if (nav.contains(event.target) || menuBtn.contains(event.target)) return;
+        closeMenu();
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          closeMenu();
+        }
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 900) {
+          closeMenu();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
