@@ -4517,6 +4517,19 @@
             background: rgba(255, 255, 255, 0.92);
         }
 
+        .rfq-field input[type="file"] {
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.88);
+            cursor: pointer;
+        }
+
+        .rfq-file-help {
+            margin: 0;
+            font-size: 13px;
+            color: #7a6f63;
+            line-height: 1.65;
+        }
+
         .rfq-meta {
             display: flex;
             flex-wrap: wrap;
@@ -5017,6 +5030,7 @@
         <input type="text" name="brand">
         <input type="text" name="model">
         <input type="text" name="application">
+        <input type="file" name="project_file">
         <textarea name="details"></textarea>
     </form>
 
@@ -6247,7 +6261,7 @@
                         <article class="contact-panel">
                             <p class="contact-panel-label">Email</p>
                             <a href="mailto:info@sflaser.net" class="contact-panel-link">info@sflaser.net</a>
-                            <p class="contact-panel-note">For images, logs, or reference files, email them after submitting the form below.</p>
+                            <p class="contact-panel-note">Small reference files can now be attached directly in the RFQ. Use email for larger logs, multiple files, or follow-up materials.</p>
                         </article>
                     </div>
                 </div>
@@ -6264,7 +6278,7 @@
                         <span>Technical sales</span>
                     </div>
 
-                    <form class="rfq-form" name="rfq" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">
+                    <form class="rfq-form" name="rfq" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">
                         <input type="hidden" name="form-name" value="rfq">
                         <p hidden>
                             <label>Do not fill this field if you are human: <input name="bot-field"></label>
@@ -6329,6 +6343,12 @@
                             </div>
 
                             <div class="rfq-field rfq-field-full">
+                                <label for="rfq-file">Reference File (optional)</label>
+                                <input id="rfq-file" name="project_file" type="file" accept=".jpg,.jpeg,.png,.pdf,.txt,.csv,.log,.zip,.7z">
+                                <p class="rfq-file-help">Attach one file up to 8 MB. Good options are failure photos, screenshots, log files, PDFs, or a spec sheet.</p>
+                            </div>
+
+                            <div class="rfq-field rfq-field-full">
                                 <label for="rfq-details">Technical Details</label>
                                 <textarea id="rfq-details" name="details" placeholder="Describe the failure symptoms, part requirement, target wavelength/power, or the technical problem you need solved." required></textarea>
                             </div>
@@ -6336,7 +6356,7 @@
 
                         <div class="rfq-actions">
                             <button type="submit" class="btn btn-primary">Send RFQ</button>
-                            <p class="rfq-note">After submission, if you need to send images, logs, or spec sheets, email them to <a href="mailto:info@sflaser.net">info@sflaser.net</a> and reference the same project.</p>
+                            <p class="rfq-note">If your logs or media are larger than 8 MB, email them to <a href="mailto:info@sflaser.net">info@sflaser.net</a> after submitting the form and reference the same project.</p>
                         </div>
                     </form>
                 </article>
@@ -7034,18 +7054,15 @@
                     }
 
                     const formData = new FormData(rfqForm);
-                    const payload = new URLSearchParams();
+                    const file = formData.get('project_file');
 
-                    formData.forEach(function (value, key) {
-                        payload.append(key, value);
-                    });
+                    if (file instanceof File && file.size > 8 * 1024 * 1024) {
+                        throw new Error('Attached file exceeds 8 MB');
+                    }
 
                     const response = await fetch('/', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: payload.toString(),
+                        body: formData,
                     });
 
                     if (!response.ok) {
@@ -7055,7 +7072,11 @@
                     window.location.href = '/thanks.html';
                 } catch (error) {
                     console.error(error);
-                    alert('Submission failed. Please try again or email info@sflaser.net directly.');
+                    if (error && error.message === 'Attached file exceeds 8 MB') {
+                        alert('The attached file is larger than 8 MB. Please upload a smaller file or email it to info@sflaser.net after submitting the RFQ.');
+                    } else {
+                        alert('Submission failed. Please try again or email info@sflaser.net directly.');
+                    }
                     if (submitButton) {
                         submitButton.disabled = false;
                         submitButton.textContent = originalLabel;
