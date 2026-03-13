@@ -7114,5 +7114,214 @@
       }
     }
     </script>
+
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('review') !== 'zh') return;
+
+            const reviewNotes = [
+                {
+                    target: '#home .container',
+                    label: '首屏定位',
+                    title: '这一屏的任务：10 秒内说清 SkyFire 做什么。',
+                    body: '这里主要表达三条主线：固体激光维修、定制光子项目、组件与备件供应。同时说明 SkyFire 是国际业务前台，而不是普通维修门店。'
+                },
+                {
+                    target: '.testimonials-section .container',
+                    label: '客户进入模式',
+                    title: '这一块不是公开好评，而是客户常见的进入场景。',
+                    body: '重点让郑老师确认：这些场景是否真实，例如故障恢复、老旧平台支持、先买配件、定制项目启动，以及需要前台承接的复杂技术项目。'
+                },
+                {
+                    target: '#services .container',
+                    label: '服务主线',
+                    title: '这里固定网站的三大服务方向。',
+                    body: '建议长期保持为：固体激光维修、定制激光/项目协作、组件与备件供应。审稿时重点看是否有服务边界写得太宽或不准确。'
+                },
+                {
+                    target: '.repair-in-action .container',
+                    label: '维修展示',
+                    title: '这一块的作用是证明你们具备实际执行能力。',
+                    body: '视频的目的不是做课程感，而是让客户看到：你们确实做维修、校准、板卡处理、器件更换和恢复调试。'
+                },
+                {
+                    target: '.comparison .container',
+                    label: '为什么选 SkyFire',
+                    title: '这里回答：客户为什么不直接找普通维修商或普通卖家。',
+                    body: '重点比较的是判断深度、商业分流能力、平台熟悉度和后续延展能力，而不是做模板式“我们更好”的空洞对比。'
+                },
+                {
+                    target: '#products .container',
+                    label: '平台熟悉度',
+                    title: '这一块不是商城目录，而是已接触平台/系统家族的熟悉度证明。',
+                    body: '作用是帮助客户判断：自己的型号是否属于你们熟悉的系统家族，从而决定是否值得发起技术评估。'
+                },
+                {
+                    target: '#applications .container',
+                    label: '应用场景',
+                    title: '这里让客户按应用场景找到自己，而不是只按产品名分类。',
+                    body: '当前重点是显示制造、半导体设备、PCB 精密加工。审稿时主要看这些分类是否足够贴近真实客户。'
+                },
+                {
+                    target: '#why-us .container',
+                    label: '关于 SkyFire',
+                    title: '这一块承载的是方案 A：业务范围 + 商业模式 + 合作方式。',
+                    body: '这里更适合吸收那篇“大而全”的长文内容，用来解释 SkyFire 为什么是商业前台、技术深度来自哪里，以及哪些内容适合公开。'
+                },
+                {
+                    target: '#store .container',
+                    label: '产品与备件',
+                    title: '这里是产品承接入口，不是普通电商列表。',
+                    body: '重点要让客户理解：有些产品可以直接买，有些要先询价，有些则属于定制讨论。'
+                },
+                {
+                    target: '#blog .container',
+                    label: '精选资源',
+                    title: '首页只放精选 3 条，完整内容不应该继续堆在首页。',
+                    body: '这一块的目标，是建立专业感、帮助 SEO、提升 RFQ 质量，而不是把首页拖成博客门户。'
+                },
+                {
+                    target: '#contact .container',
+                    label: 'RFQ 转化区',
+                    title: '这里是网站最重要的转化入口。',
+                    body: '郑老师主要看表单字段是否对技术判断真正有帮助，哪些字段必须保留，哪些字段可以简化。现在也支持客户直接上传图片、日志和 PDF。'
+                },
+                {
+                    target: 'footer .container',
+                    label: '页脚收尾',
+                    title: '页脚的作用是把网站收成一个平台入口，而不是普通公司站收尾。',
+                    body: '这里应该强调 SkyFire 作为国际业务承接前台的角色，同时保留清晰的联系路径。'
+                }
+            ];
+
+            const reviewStyle = document.createElement('style');
+            reviewStyle.textContent = `
+                body.review-zh-active .review-zh-banner {
+                    position: fixed;
+                    right: 20px;
+                    bottom: 20px;
+                    z-index: 10002;
+                    width: min(360px, calc(100vw - 32px));
+                    background: rgba(22, 22, 22, 0.94);
+                    color: #f8f5ef;
+                    border-radius: 20px;
+                    padding: 16px 18px;
+                    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.24);
+                    backdrop-filter: blur(18px);
+                }
+
+                body.review-zh-active .review-zh-banner h3 {
+                    margin: 0 0 8px;
+                    font-size: 18px;
+                    line-height: 1.2;
+                    color: #ffffff;
+                }
+
+                body.review-zh-active .review-zh-banner p {
+                    margin: 0;
+                    font-size: 13px;
+                    line-height: 1.7;
+                    color: rgba(248, 245, 239, 0.84);
+                }
+
+                body.review-zh-active .review-zh-banner a {
+                    color: #ff9a1f;
+                    text-decoration: none;
+                    font-weight: 600;
+                }
+
+                body.review-zh-active .review-zh-note {
+                    margin: 0 0 24px;
+                    padding: 18px 20px;
+                    border-radius: 18px;
+                    background: linear-gradient(135deg, rgba(255, 154, 31, 0.14), rgba(255, 154, 31, 0.06));
+                    border: 1px solid rgba(255, 154, 31, 0.24);
+                    box-shadow: 0 18px 40px rgba(28, 27, 24, 0.08);
+                }
+
+                body.review-zh-active .review-zh-note-label {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 6px 10px;
+                    border-radius: 999px;
+                    background: rgba(255, 154, 31, 0.16);
+                    color: #9f4e16;
+                    font-size: 12px;
+                    font-weight: 700;
+                    letter-spacing: 0.08em;
+                    text-transform: uppercase;
+                }
+
+                body.review-zh-active .review-zh-note h3 {
+                    margin: 12px 0 8px;
+                    color: #191816;
+                    font-size: 24px;
+                    line-height: 1.28;
+                }
+
+                body.review-zh-active .review-zh-note p {
+                    margin: 0;
+                    color: #554d44;
+                    font-size: 16px;
+                    line-height: 1.8;
+                    max-width: 980px;
+                }
+
+                @media (max-width: 900px) {
+                    body.review-zh-active .review-zh-banner {
+                        left: 16px;
+                        right: 16px;
+                        bottom: 16px;
+                        width: auto;
+                    }
+
+                    body.review-zh-active .review-zh-note {
+                        margin-bottom: 18px;
+                        padding: 16px;
+                        border-radius: 16px;
+                    }
+
+                    body.review-zh-active .review-zh-note h3 {
+                        font-size: 20px;
+                    }
+
+                    body.review-zh-active .review-zh-note p {
+                        font-size: 15px;
+                        line-height: 1.75;
+                    }
+                }
+            `;
+            document.head.appendChild(reviewStyle);
+            document.body.classList.add('review-zh-active');
+
+            const normalUrl = new URL(window.location.href);
+            normalUrl.searchParams.delete('review');
+
+            const banner = document.createElement('aside');
+            banner.className = 'review-zh-banner';
+            banner.innerHTML = `
+                <h3>中文审稿模式已开启</h3>
+                <p>这个模式只用于内部审稿。每个首页区块上方都会出现中文说明，方便直接看当前英文在表达什么。<br><a href="${normalUrl.toString()}">打开正常版本</a></p>
+            `;
+            document.body.appendChild(banner);
+
+            reviewNotes.forEach(function (note) {
+                const target = document.querySelector(note.target);
+                if (!target) return;
+
+                const card = document.createElement('div');
+                card.className = 'review-zh-note';
+                card.innerHTML = `
+                    <span class="review-zh-note-label">${note.label}</span>
+                    <h3>${note.title}</h3>
+                    <p>${note.body}</p>
+                `;
+
+                target.insertBefore(card, target.firstChild);
+            });
+        })();
+    </script>
 </body>
 </html>
