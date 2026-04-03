@@ -38,16 +38,11 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260306h">
     
-    <!-- Web App Manifest -->
-    <link rel="manifest" href="/manifest.json?v=20260306h">
     <link rel="stylesheet" href="/assets/css/cms.css?v=20260310c">
     
     <!-- Theme color for mobile browsers -->
     <meta name="theme-color" content="#ff8c00">
     <meta name="msapplication-TileColor" content="#ff8c00">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Sky Fire Laser">
     
     <!-- Preload Critical Resources -->
     <link rel="preload" href="https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Professional%20Repair%20Lab.jpg" as="image">
@@ -6869,15 +6864,21 @@
         });
     }
 
-    // 3. Service Worker Registration (for caching)
+    // 3. Explicitly disable old PWA registrations
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    console.log('SW registered: ', registration);
+            navigator.serviceWorker.getRegistrations()
+                .then(registrations => Promise.all(registrations.map(registration => registration.unregister())))
+                .then(() => {
+                    if ('caches' in window) {
+                        return caches.keys().then(cacheNames => Promise.all(cacheNames.map(cacheName => caches.delete(cacheName))));
+                    }
                 })
-                .catch(registrationError => {
-                    console.log('SW registration failed: ', registrationError);
+                .then(() => {
+                    console.log('PWA features disabled and old service workers removed.');
+                })
+                .catch(error => {
+                    console.log('Service worker cleanup skipped: ', error);
                 });
         });
     }
