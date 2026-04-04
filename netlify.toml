@@ -86,6 +86,66 @@
   status = 200
 
 [[redirects]]
+  from = "/laser-repair"
+  to = "/laser-repair/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/semiconductor-manufacturing"
+  to = "/laser-repair/semiconductor-manufacturing/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/semiconductor-manufacturing/kla"
+  to = "/laser-repair/semiconductor-manufacturing/kla/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/semiconductor-manufacturing/applied-materials"
+  to = "/laser-repair/semiconductor-manufacturing/applied-materials/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/semiconductor-manufacturing/kla/puma-9150"
+  to = "/laser-repair/semiconductor-manufacturing/kla/puma-9150/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/semiconductor-manufacturing/kla/puma-9980"
+  to = "/laser-repair/semiconductor-manufacturing/kla/puma-9980/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/semiconductor-manufacturing/kla/sp2"
+  to = "/laser-repair/semiconductor-manufacturing/kla/sp2/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/semiconductor-manufacturing/kla/sp5"
+  to = "/laser-repair/semiconductor-manufacturing/kla/sp5/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/semiconductor-manufacturing/applied-materials/uv"
+  to = "/laser-repair/semiconductor-manufacturing/applied-materials/uv/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/semiconductor-manufacturing/applied-materials/enight"
+  to = "/laser-repair/semiconductor-manufacturing/applied-materials/enight/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/semiconductor-manufacturing/rudolph"
+  to = "/laser-repair/semiconductor-manufacturing/rudolph/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/semiconductor-manufacturing/laserscale"
+  to = "/laser-repair/semiconductor-manufacturing/laserscale/"
+  status = 301
+
+[[redirects]]
   from = "/thanks"
   to = "/thanks.html"
   status = 200

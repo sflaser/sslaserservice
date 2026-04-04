@@ -28,6 +28,18 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 
 # Blog details
 /blog /blog.html 200
+/laser-repair /laser-repair/ 301
+/laser-repair/semiconductor-manufacturing /laser-repair/semiconductor-manufacturing/ 301
+/laser-repair/semiconductor-manufacturing/kla /laser-repair/semiconductor-manufacturing/kla/ 301
+/laser-repair/semiconductor-manufacturing/applied-materials /laser-repair/semiconductor-manufacturing/applied-materials/ 301
+/laser-repair/semiconductor-manufacturing/kla/puma-9150 /laser-repair/semiconductor-manufacturing/kla/puma-9150/ 301
+/laser-repair/semiconductor-manufacturing/kla/puma-9980 /laser-repair/semiconductor-manufacturing/kla/puma-9980/ 301
+/laser-repair/semiconductor-manufacturing/kla/sp2 /laser-repair/semiconductor-manufacturing/kla/sp2/ 301
+/laser-repair/semiconductor-manufacturing/kla/sp5 /laser-repair/semiconductor-manufacturing/kla/sp5/ 301
+/laser-repair/semiconductor-manufacturing/applied-materials/uv /laser-repair/semiconductor-manufacturing/applied-materials/uv/ 301
+/laser-repair/semiconductor-manufacturing/applied-materials/enight /laser-repair/semiconductor-manufacturing/applied-materials/enight/ 301
+/laser-repair/semiconductor-manufacturing/rudolph /laser-repair/semiconductor-manufacturing/rudolph/ 301
+/laser-repair/semiconductor-manufacturing/laserscale /laser-repair/semiconductor-manufacturing/laserscale/ 301
 
 # Fallback for any unmatched routes
 /* /index.html 200
