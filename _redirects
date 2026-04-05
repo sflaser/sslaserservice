@@ -40,6 +40,8 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 /laser-repair/semiconductor-manufacturing/applied-materials/enight /laser-repair/semiconductor-manufacturing/applied-materials/enight/ 301
 /laser-repair/semiconductor-manufacturing/rudolph /laser-repair/semiconductor-manufacturing/rudolph/ 301
 /laser-repair/semiconductor-manufacturing/laserscale /laser-repair/semiconductor-manufacturing/laserscale/ 301
+/laser-repair/display-panel-manufacturing /laser-repair/display-panel-manufacturing/ 301
+/laser-repair/display-panel-manufacturing/lc-cb5 /laser-repair/display-panel-manufacturing/lc-cb5/ 301
 
 # Fallback for any unmatched routes
 /* /index.html 200

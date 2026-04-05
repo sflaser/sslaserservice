@@ -152,4 +152,18 @@
         <priority>0.72</priority>
     </url>
 
+    <url>
+        <loc>https://www.sslaserservice.com/laser-repair/display-panel-manufacturing/</loc>
+        <lastmod>2026-04-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.78</priority>
+    </url>
+
+    <url>
+        <loc>https://www.sslaserservice.com/laser-repair/display-panel-manufacturing/lc-cb5/</loc>
+        <lastmod>2026-04-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.72</priority>
+    </url>
+
 </urlset>

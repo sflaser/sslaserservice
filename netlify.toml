@@ -146,6 +146,16 @@
   status = 301
 
 [[redirects]]
+  from = "/laser-repair/display-panel-manufacturing"
+  to = "/laser-repair/display-panel-manufacturing/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/display-panel-manufacturing/lc-cb5"
+  to = "/laser-repair/display-panel-manufacturing/lc-cb5/"
+  status = 301
+
+[[redirects]]
   from = "/thanks"
   to = "/thanks.html"
   status = 200
