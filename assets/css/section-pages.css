@@ -320,6 +320,30 @@ textarea {
   letter-spacing: -0.03em;
 }
 
+.page-hero .metric-grid {
+  grid-template-columns: 1fr;
+}
+
+.page-hero .metric-card {
+  padding: 20px 22px;
+}
+
+.page-hero .metric-card strong {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.page-hero .metric-card h3 {
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.page-hero .metric-card p {
+  font-size: 15px;
+  line-height: 1.62;
+}
+
 .section {
   margin-top: 34px;
 }
@@ -676,9 +700,13 @@ textarea {
   .note-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .page-hero .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 980px) {
   .mobile-menu-btn {
     display: inline-flex;
     align-items: center;
