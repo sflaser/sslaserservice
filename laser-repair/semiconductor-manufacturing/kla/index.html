@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260306h">
   <link rel="shortcut icon" href="/favicon.ico?v=20260306h">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/section-pages.css?v=20260407a">
+  <link rel="stylesheet" href="/assets/css/section-pages.css?v=20260407c">
 </head>
 <body>
   <main class="page-shell">
@@ -50,7 +50,7 @@
     <div class="metric-grid">
       <article class="metric-card"><strong>Families listed</strong><h3>3</h3><p>Puma, SP, and Voyager are the current KLA families shown here.</p></article>
       <article class="metric-card"><strong>Available model pages</strong><h3>4</h3><p>Puma 9150, Puma 9980, SP2, and SP5 already have dedicated pages.</p></article>
-      <article class="metric-card"><strong>Known laser references</strong><h3>Available</h3><p>Each model page includes a known laser reference when one is already confirmed.</p></article>
+      <article class="metric-card"><strong>Paired laser references</strong><h3>Available</h3><p>Each model page includes a known laser reference when one is already confirmed.</p></article>
     </div>
   </aside>
 </section>
@@ -61,9 +61,9 @@
     <p>Choose the KLA family or device page that matches the platform you are working with. If you only know the model name, go straight to the device page.</p>
   </div>
   <div class="directory-grid">
-    <article class="brand-card"><span class="series-meta">Puma family</span><h3>Puma</h3><p>Puma is one of the clearest KLA repair sections today, with two model-specific pages already linked to confirmed laser references.</p><div class="link-list"><a href="/laser-repair/semiconductor-manufacturing/kla/puma-9150/">Puma 9150<span>Known reference: Spectra-Physics VNGD-2500-HMD35</span></a><a href="/laser-repair/semiconductor-manufacturing/kla/puma-9980/">Puma 9980<span>Known reference: Coherent Paladin Compact 355-4000</span></a></div></article>
-    <article class="brand-card"><span class="series-meta">SP family</span><h3>SP</h3><p>SP2 and SP5 are available as equipment-model pages. If you know the tool model but not every laser detail, these pages are the right place to start.</p><div class="link-list"><a href="/laser-repair/semiconductor-manufacturing/kla/sp2/">SP2<span>Known reference: Spectra-Physics VNGD-350-HMD35</span></a><a href="/laser-repair/semiconductor-manufacturing/kla/sp5/">SP5<span>Known reference: Coherent Paladin Compact 4000</span></a></div></article>
-    <article class="brand-card"><span class="series-meta">Voyager reference</span><h3>Voyager</h3><p>Voyager remains listed for KLA-related cases where the family is known and the exact model still needs to be confirmed.</p><div class="paired-model"><span>Known laser reference</span>Crylas FQCW 266-500</div></article>
+    <article class="brand-card"><span class="series-meta">Puma family</span><h3>Puma</h3><p>Puma is one of the clearest KLA repair sections today, with two model-specific pages already linked to confirmed laser references.</p><div class="link-list"><a href="/laser-repair/semiconductor-manufacturing/kla/puma-9150/">Puma 9150<span>Paired laser: Spectra-Physics VNGD-2500-HMD35</span></a><a href="/laser-repair/semiconductor-manufacturing/kla/puma-9980/">Puma 9980<span>Paired laser: Coherent Paladin Compact 355-4000</span></a></div></article>
+    <article class="brand-card"><span class="series-meta">SP family</span><h3>SP</h3><p>SP2 and SP5 are available as equipment-model pages. If you know the tool model but not every laser detail, these pages are the right place to start.</p><div class="link-list"><a href="/laser-repair/semiconductor-manufacturing/kla/sp2/">SP2<span>Paired laser: Spectra-Physics VNGD-350-HMD35</span></a><a href="/laser-repair/semiconductor-manufacturing/kla/sp5/">SP5<span>Paired laser: Coherent Paladin Compact 4000</span></a></div></article>
+    <article class="brand-card"><span class="series-meta">Voyager reference</span><h3>Voyager</h3><p>Voyager remains listed for KLA-related cases where the family is known and the exact model still needs to be confirmed.</p><div class="paired-model"><span>Paired laser</span>Crylas FQCW 266-500</div></article>
   </div>
 </section>
 
@@ -123,7 +123,7 @@
       if (event.key === 'Escape') closeMenu();
     });
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 900) closeMenu();
+      if (window.innerWidth > 980) closeMenu();
     });
   })();
 </script>
