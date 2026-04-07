@@ -325,32 +325,35 @@ textarea {
 
 .page-hero .metric-grid {
   grid-template-columns: 1fr;
-  gap: 14px;
+  gap: 12px;
 }
 
 .page-hero .metric-card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 18px 20px;
+  gap: 6px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 10px 24px rgba(18, 15, 12, 0.04);
+  padding: 16px 18px;
 }
 
 .page-hero .metric-card strong {
   margin-bottom: 0;
-  font-size: 11px;
-  letter-spacing: 0.08em;
+  font-size: 10.5px;
+  letter-spacing: 0.09em;
 }
 
 .page-hero .metric-card h3 {
   margin: 0;
-  font-size: clamp(1.55rem, 2.4vw, 2.1rem);
-  line-height: 1.05;
+  font-size: clamp(1.28rem, 1.75vw, 1.62rem);
+  line-height: 1.08;
   letter-spacing: -0.04em;
 }
 
 .page-hero .metric-card p {
-  font-size: 14px;
-  line-height: 1.56;
+  font-size: 13.5px;
+  line-height: 1.52;
 }
 
 .section {
@@ -410,7 +413,15 @@ textarea {
 }
 
 .directory-grid {
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.directory-grid > :only-child {
+  grid-column: 1 / -1;
+}
+
+.directory-grid .brand-card {
+  height: 100%;
 }
 
 .brand-card h3 {
@@ -762,6 +773,7 @@ textarea {
   }
 
   .app-grid,
+  .directory-grid,
   .model-grid,
   .metric-grid,
   .scope-grid,
