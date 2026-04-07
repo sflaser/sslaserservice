@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-    
-    <!-- Homepage -->
-    <url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<url>
         <loc>https://www.sslaserservice.com/</loc>
         <lastmod>2025-01-01</lastmod>
         <changefreq>weekly</changefreq>
@@ -19,151 +17,165 @@
             <image:caption>Precision testing and calibration equipment</image:caption>
         </image:image>
     </url>
-    
-    <!-- Services Pages -->
-    <url>
+
+<url>
         <loc>https://www.sslaserservice.com/#services</loc>
         <lastmod>2025-01-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
-    
-    <!-- Product Pages -->
-    <url>
+
+<url>
         <loc>https://www.sslaserservice.com/#laser-products</loc>
         <lastmod>2025-01-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
-    
-    <!-- Application Fields -->
-    <url>
+
+<url>
         <loc>https://www.sslaserservice.com/#applications</loc>
         <lastmod>2025-01-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
-    
-    <!-- Partners -->
-    <url>
+
+<url>
         <loc>https://www.sslaserservice.com/#partners</loc>
         <lastmod>2025-01-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
-    
-    <!-- FAQ -->
-    <url>
+
+<url>
         <loc>https://www.sslaserservice.com/#faq</loc>
         <lastmod>2025-01-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
-    
-    <!-- Contact -->
-    <url>
+
+<url>
         <loc>https://www.sslaserservice.com/#contact</loc>
         <lastmod>2025-01-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/</loc>
         <lastmod>2026-04-03</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.85</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/semiconductor-manufacturing/</loc>
         <lastmod>2026-04-03</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/semiconductor-manufacturing/kla/</loc>
         <lastmod>2026-04-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.78</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/semiconductor-manufacturing/applied-materials/</loc>
         <lastmod>2026-04-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.78</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/semiconductor-manufacturing/kla/puma-9150/</loc>
         <lastmod>2026-04-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.72</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/semiconductor-manufacturing/kla/puma-9980/</loc>
         <lastmod>2026-04-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.72</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/semiconductor-manufacturing/kla/sp2/</loc>
         <lastmod>2026-04-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.72</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/semiconductor-manufacturing/kla/sp5/</loc>
         <lastmod>2026-04-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.72</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/semiconductor-manufacturing/applied-materials/uv/</loc>
         <lastmod>2026-04-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/semiconductor-manufacturing/applied-materials/enight/</loc>
         <lastmod>2026-04-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/semiconductor-manufacturing/rudolph/</loc>
         <lastmod>2026-04-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.72</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/semiconductor-manufacturing/laserscale/</loc>
         <lastmod>2026-04-04</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.72</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/display-panel-manufacturing/</loc>
         <lastmod>2026-04-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.78</priority>
     </url>
 
-    <url>
+<url>
         <loc>https://www.sslaserservice.com/laser-repair/display-panel-manufacturing/lc-cb5/</loc>
         <lastmod>2026-04-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.72</priority>
     </url>
 
+<url>
+        <loc>https://www.sslaserservice.com/manufacturing/</loc>
+        <lastmod>2026-04-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.82</priority>
+    </url>
+
+<url>
+        <loc>https://www.sslaserservice.com/components/</loc>
+        <lastmod>2026-04-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.82</priority>
+    </url>
+
+<url>
+        <loc>https://www.sslaserservice.com/applications/</loc>
+        <lastmod>2026-04-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.82</priority>
+    </url>
 </urlset>
