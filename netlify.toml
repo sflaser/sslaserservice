@@ -156,6 +156,66 @@
   status = 301
 
 [[redirects]]
+  from = "/laser-repair/lidar-systems"
+  to = "/laser-repair/lidar-systems/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/lidar-systems/centurion"
+  to = "/laser-repair/lidar-systems/centurion/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/lidar-systems/cfr"
+  to = "/laser-repair/lidar-systems/cfr/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/lidar-systems/q-smart"
+  to = "/laser-repair/lidar-systems/q-smart/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/lidar-systems/ultra4"
+  to = "/laser-repair/lidar-systems/ultra4/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/industrial-processing"
+  to = "/laser-repair/industrial-processing/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/industrial-processing/rapid"
+  to = "/laser-repair/industrial-processing/rapid/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/industrial-processing/dc-50"
+  to = "/laser-repair/industrial-processing/dc-50/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/scientific-research"
+  to = "/laser-repair/scientific-research/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/scientific-research/libra"
+  to = "/laser-repair/scientific-research/libra/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/scientific-research/verdi-v18"
+  to = "/laser-repair/scientific-research/verdi-v18/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-repair/scientific-research/chameleon-ultra"
+  to = "/laser-repair/scientific-research/chameleon-ultra/"
+  status = 301
+
+[[redirects]]
   from = "/thanks"
   to = "/thanks.html"
   status = 200

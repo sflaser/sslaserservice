@@ -42,6 +42,18 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 /laser-repair/semiconductor-manufacturing/laserscale /laser-repair/semiconductor-manufacturing/laserscale/ 301
 /laser-repair/display-panel-manufacturing /laser-repair/display-panel-manufacturing/ 301
 /laser-repair/display-panel-manufacturing/lc-cb5 /laser-repair/display-panel-manufacturing/lc-cb5/ 301
+/laser-repair/lidar-systems /laser-repair/lidar-systems/ 301
+/laser-repair/lidar-systems/centurion /laser-repair/lidar-systems/centurion/ 301
+/laser-repair/lidar-systems/cfr /laser-repair/lidar-systems/cfr/ 301
+/laser-repair/lidar-systems/q-smart /laser-repair/lidar-systems/q-smart/ 301
+/laser-repair/lidar-systems/ultra4 /laser-repair/lidar-systems/ultra4/ 301
+/laser-repair/industrial-processing /laser-repair/industrial-processing/ 301
+/laser-repair/industrial-processing/rapid /laser-repair/industrial-processing/rapid/ 301
+/laser-repair/industrial-processing/dc-50 /laser-repair/industrial-processing/dc-50/ 301
+/laser-repair/scientific-research /laser-repair/scientific-research/ 301
+/laser-repair/scientific-research/libra /laser-repair/scientific-research/libra/ 301
+/laser-repair/scientific-research/verdi-v18 /laser-repair/scientific-research/verdi-v18/ 301
+/laser-repair/scientific-research/chameleon-ultra /laser-repair/scientific-research/chameleon-ultra/ 301
 
 # Fallback for any unmatched routes
 /* /index.html 200
