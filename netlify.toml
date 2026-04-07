@@ -216,6 +216,56 @@
   status = 301
 
 [[redirects]]
+  from = "/manufacturing/semiconductor-lasers"
+  to = "/manufacturing/semiconductor-lasers/"
+  status = 301
+
+[[redirects]]
+  from = "/manufacturing/fiber-lasers"
+  to = "/manufacturing/fiber-lasers/"
+  status = 301
+
+[[redirects]]
+  from = "/manufacturing/custom-solid-state"
+  to = "/manufacturing/custom-solid-state/"
+  status = 301
+
+[[redirects]]
+  from = "/manufacturing/integration-test-support"
+  to = "/manufacturing/integration-test-support/"
+  status = 301
+
+[[redirects]]
+  from = "/components/pump-sources"
+  to = "/components/pump-sources/"
+  status = 301
+
+[[redirects]]
+  from = "/components/laser-crystals"
+  to = "/components/laser-crystals/"
+  status = 301
+
+[[redirects]]
+  from = "/components/q-switch-modulation"
+  to = "/components/q-switch-modulation/"
+  status = 301
+
+[[redirects]]
+  from = "/components/optical-components"
+  to = "/components/optical-components/"
+  status = 301
+
+[[redirects]]
+  from = "/components/drivers-electronics"
+  to = "/components/drivers-electronics/"
+  status = 301
+
+[[redirects]]
+  from = "/components/legacy-spare-parts"
+  to = "/components/legacy-spare-parts/"
+  status = 301
+
+[[redirects]]
   from = "/thanks"
   to = "/thanks.html"
   status = 200

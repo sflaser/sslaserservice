@@ -54,6 +54,16 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 /laser-repair/scientific-research/libra /laser-repair/scientific-research/libra/ 301
 /laser-repair/scientific-research/verdi-v18 /laser-repair/scientific-research/verdi-v18/ 301
 /laser-repair/scientific-research/chameleon-ultra /laser-repair/scientific-research/chameleon-ultra/ 301
+/manufacturing/semiconductor-lasers /manufacturing/semiconductor-lasers/ 301
+/manufacturing/fiber-lasers /manufacturing/fiber-lasers/ 301
+/manufacturing/custom-solid-state /manufacturing/custom-solid-state/ 301
+/manufacturing/integration-test-support /manufacturing/integration-test-support/ 301
+/components/pump-sources /components/pump-sources/ 301
+/components/laser-crystals /components/laser-crystals/ 301
+/components/q-switch-modulation /components/q-switch-modulation/ 301
+/components/optical-components /components/optical-components/ 301
+/components/drivers-electronics /components/drivers-electronics/ 301
+/components/legacy-spare-parts /components/legacy-spare-parts/ 301
 
 # Fallback for any unmatched routes
 /* /index.html 200
