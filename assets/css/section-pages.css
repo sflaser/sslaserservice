@@ -512,6 +512,10 @@ textarea {
   gap: 16px;
 }
 
+.info-grid.is-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .info-card {
   border: 1px solid var(--line);
   border-radius: 24px;
@@ -734,7 +738,8 @@ textarea {
 
   .metric-grid,
   .scope-grid,
-  .note-grid {
+  .note-grid,
+  .info-grid.is-three {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
