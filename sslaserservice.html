@@ -2026,6 +2026,27 @@
             transition: transform 0.5s ease;
         }
 
+        .laser-product-image--placeholder {
+            background: linear-gradient(145deg, rgba(255, 243, 229, 0.98), rgba(255, 250, 244, 0.92));
+            border-bottom: 1px solid rgba(255, 140, 0, 0.12);
+        }
+
+        .laser-product-brand-mark {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(76, 46, 17, 0.9);
+            z-index: 2;
+        }
+
         /* 悬停效果 */
         .laser-product-card:hover .laser-product-image img {
             transform: scale(1.08);
@@ -5408,8 +5429,8 @@
 
             <div class="products-service-lens">
                 <div class="products-service-lens-copy">
-                    <h3>This section shows the kinds of solid-state platforms we support most often.</h3>
-                    <p>It helps customers quickly understand where we already have practical familiarity across manufacturing, measurement, research, and specialized optical systems.</p>
+                    <h3>This section highlights the main brands and platform families we already work with.</h3>
+                    <p>It is a representative homepage view, not the full repair directory. Customers can use it to see where we already have practical familiarity across semiconductor tools, display systems, lidar platforms, industrial processing, and research environments.</p>
                 </div>
                 <div class="products-service-lens-points">
                     <h4>What this section helps answer</h4>
@@ -5422,99 +5443,283 @@
             </div>
             
             <div class="brand-tabs">
-                <button class="brand-tab active" onclick="openBrandTab('quantel')">Quantel (Lumibird)</button>
-                <button class="brand-tab" onclick="openBrandTab('lumibird')">Lumibird</button>
+                <button class="brand-tab active" onclick="openBrandTab('kla')">KLA</button>
+                <button class="brand-tab" onclick="openBrandTab('applied-materials')">Applied Materials</button>
+                <button class="brand-tab" onclick="openBrandTab('rudolph')">Rudolph</button>
+                <button class="brand-tab" onclick="openBrandTab('laserscale')">LaserScale</button>
+                <button class="brand-tab" onclick="openBrandTab('lumibird-quantel')">Lumibird / Quantel</button>
                 <button class="brand-tab" onclick="openBrandTab('coherent')">Coherent</button>
+                <button class="brand-tab" onclick="openBrandTab('light-conversion')">Light Conversion</button>
+                <button class="brand-tab" onclick="openBrandTab('lumera')">Lumera</button>
+                <button class="brand-tab" onclick="openBrandTab('photonics-industries')">Photonics Industries</button>
             </div>
-            
-            <div id="quantel" class="tab-content active">
+
+            <div id="kla" class="tab-content active">
                 <div class="laser-product-grid">
-                    <!-- ULTRA 卡片 -->
                     <div class="laser-product-card">
-                        <div class="laser-product-image">
+                        <div class="laser-product-image laser-product-image--placeholder">
                             <div class="image-overlay"></div>
-                            <img src="https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/ULTRA.jpg" alt="ULTRA Laser">
+                            <span class="laser-product-brand-mark">KLA</span>
                         </div>
                         <div class="laser-product-content">
-                            <h3>ULTRA</h3>
+                            <h3>Puma 9150</h3>
                             <div class="product-meta-chips">
-                                <span>Aerosol radar</span>
-                                <span>Lamp-pumped</span>
+                                <span>Semiconductor inspection</span>
+                                <span>Equipment model</span>
                             </div>
-                            <p class="product-platform-note">A field-relevant platform for atmospheric and lidar-oriented use cases where service continuity and output stability are operationally important.</p>
+                            <p class="product-platform-note">A commonly referenced KLA platform where repair work usually starts from tool identity, current symptoms, and paired source confirmation rather than guesswork.</p>
                         </div>
                     </div>
-                    
-                    <!-- CFR 卡片 -->
+                    <div class="laser-product-card">
+                        <div class="laser-product-image laser-product-image--placeholder">
+                            <div class="image-overlay"></div>
+                            <span class="laser-product-brand-mark">KLA</span>
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>SP2 / SP5</h3>
+                            <div class="product-meta-chips">
+                                <span>Semiconductor tool</span>
+                                <span>Platform review</span>
+                            </div>
+                            <p class="product-platform-note">These KLA equipment models are handled as tool-side platforms first. Public intake usually begins with labels, installed state, and the paired laser reference if available.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="applied-materials" class="tab-content">
+                <div class="laser-product-grid">
+                    <div class="laser-product-card">
+                        <div class="laser-product-image laser-product-image--placeholder">
+                            <div class="image-overlay"></div>
+                            <span class="laser-product-brand-mark">Applied
+Materials</span>
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>UV</h3>
+                            <div class="product-meta-chips">
+                                <span>Semiconductor process tool</span>
+                                <span>Source-side review</span>
+                            </div>
+                            <p class="product-platform-note">A source review case that usually starts from the installed tool, available labels, and the current failure pattern before deeper compatibility or replacement discussion.</p>
+                        </div>
+                    </div>
+                    <div class="laser-product-card">
+                        <div class="laser-product-image laser-product-image--placeholder">
+                            <div class="image-overlay"></div>
+                            <span class="laser-product-brand-mark">Applied
+Materials</span>
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>Enight</h3>
+                            <div class="product-meta-chips">
+                                <span>Semiconductor platform</span>
+                                <span>Equipment identity first</span>
+                            </div>
+                            <p class="product-platform-note">For Enight-related cases, the practical starting point is confirming the equipment identity, installed configuration, and current behavior before narrowing the paired laser path.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="rudolph" class="tab-content">
+                <div class="laser-product-grid">
                     <div class="laser-product-card">
                         <div class="laser-product-image">
                             <div class="image-overlay"></div>
-                            <img src="https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/CFR200%3A400.jpg" alt="CFR Laser">
+                            <img src="/images/repair/semiconductor/rudolph/exterior.jpg" alt="Rudolph platform">
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>Rudolph Platforms</h3>
+                            <div class="product-meta-chips">
+                                <span>Metrology environment</span>
+                                <span>Legacy support</span>
+                            </div>
+                            <p class="product-platform-note">Typical Rudolph cases involve older metrology tools where serviceability depends on platform confirmation, usable photos, and practical spare-part access.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="laserscale" class="tab-content">
+                <div class="laser-product-grid">
+                    <div class="laser-product-card">
+                        <div class="laser-product-image">
+                            <div class="image-overlay"></div>
+                            <img src="/images/repair/semiconductor/laserscale/exterior.jpg" alt="LaserScale platform">
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>LaserScale Systems</h3>
+                            <div class="product-meta-chips">
+                                <span>Semiconductor measurement</span>
+                                <span>Known public brand</span>
+                            </div>
+                            <p class="product-platform-note">LaserScale-branded systems usually benefit from an equipment-first review, especially when the exact paired source history is incomplete or the original channel is no longer straightforward.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="lumibird-quantel" class="tab-content">
+                <div class="laser-product-grid">
+                    <div class="laser-product-card">
+                        <div class="laser-product-image">
+                            <div class="image-overlay"></div>
+                            <img src="/images/repair/lidar/ultra4/exterior.png" alt="ULTRA4">
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>ULTRA4</h3>
+                            <div class="product-meta-chips">
+                                <span>Lidar systems</span>
+                                <span>Lamp-pumped</span>
+                            </div>
+                            <p class="product-platform-note">A strong reference for lidar and atmospheric-use systems where uptime, output stability, and practical field support matter more than brochure-level specification alone.</p>
+                        </div>
+                    </div>
+                    <div class="laser-product-card">
+                        <div class="laser-product-image">
+                            <div class="image-overlay"></div>
+                            <img src="/images/repair/lidar/cfr/exterior.png" alt="CFR200/400">
                         </div>
                         <div class="laser-product-content">
                             <h3>CFR200/400</h3>
                             <div class="product-meta-chips">
-                                <span>Scientific research</span>
+                                <span>Research & lidar</span>
                                 <span>Lamp-pumped</span>
                             </div>
-                            <p class="product-platform-note">Representative of research-facing solid-state systems where diagnostics, repair feasibility, and performance restoration need careful technical handling.</p>
+                            <p class="product-platform-note">Relevant for research-facing and lidar-facing solid-state systems where restoration decisions depend on beam behavior, maintenance history, and service feasibility.</p>
+                        </div>
+                    </div>
+                    <div class="laser-product-card">
+                        <div class="laser-product-image">
+                            <div class="image-overlay"></div>
+                            <img src="/images/repair/lidar/q-smart/exterior.png" alt="Q-Smart">
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>Q-Smart</h3>
+                            <div class="product-meta-chips">
+                                <span>Atmospheric observation</span>
+                                <span>Field service</span>
+                            </div>
+                            <p class="product-platform-note">A typical platform in observation workflows where downtime affects measurement schedules directly and buyers need a fast view of repair vs. replacement options.</p>
+                        </div>
+                    </div>
+                    <div class="laser-product-card">
+                        <div class="laser-product-image">
+                            <div class="image-overlay"></div>
+                            <img src="/images/repair/lidar/centurion/exterior.jpg" alt="Centurion">
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>Centurion</h3>
+                            <div class="product-meta-chips">
+                                <span>Instrument platform</span>
+                                <span>Compact solid-state</span>
+                            </div>
+                            <p class="product-platform-note">Centurion-family cases often combine service continuity, compact packaging limits, and the need for a realistic replacement path when support timing matters.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div id="lumibird" class="tab-content">
-                <div class="laser-product-grid">
-                    <!-- Q-SMART 卡片 -->
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Q-SMART.jpg" alt="Q-SMART Laser">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>Q-SMART</h3>
-                            <p class="laser-product-subtitle">Q-smart850</p>
-                            <div class="product-meta-chips">
-                                <span>Meteorology</span>
-                                <span>Lamp-pumped</span>
-                            </div>
-                            <p class="product-platform-note">A typical example of systems used in atmospheric observation workflows where downtime can directly impact measurement schedules and field operations.</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Centurion+ 卡片 -->
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Centurion%2B.jpg" alt="Centurion+ Laser">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>Centurion+</h3>
-                            <div class="product-meta-chips">
-                                <span>Mass spectrometry</span>
-                                <span>Diode-pumped</span>
-                            </div>
-                            <p class="product-platform-note">Relevant to instrument environments that require stable output, predictable support response, and familiarity with compact solid-state system design.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+
             <div id="coherent" class="tab-content">
                 <div class="laser-product-grid">
-                    <!-- Flare NX 卡片 -->
                     <div class="laser-product-card">
                         <div class="laser-product-image">
                             <div class="image-overlay"></div>
-                            <img src="https://raw.githubusercontent.com/sflaser/sslaserservice/cf6b4aa8f4e06e0751f2ee5639a83df12029113d/Flare%20NX.jpg" alt="Flare NX Laser">
+                            <img src="/images/products/Flare NX液晶面板修复.jpg" alt="Flare NX">
                         </div>
                         <div class="laser-product-content">
                             <h3>Flare NX</h3>
                             <div class="product-meta-chips">
-                                <span>LCD panel repair</span>
+                                <span>Display repair</span>
                                 <span>Diode-pumped</span>
                             </div>
-                            <p class="product-platform-note">A strong reference for display manufacturing and repair scenarios where beam quality, process stability, and turnaround speed matter to line recovery.</p>
+                            <p class="product-platform-note">A representative display-manufacturing source where turnaround speed, process stability, and replacement judgment can matter as much as the repair decision itself.</p>
+                        </div>
+                    </div>
+                    <div class="laser-product-card">
+                        <div class="laser-product-image">
+                            <div class="image-overlay"></div>
+                            <img src="/images/repair/research/verdi-v18/exterior.jpg" alt="Verdi V18">
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>Verdi V18</h3>
+                            <div class="product-meta-chips">
+                                <span>Scientific research</span>
+                                <span>Precision output</span>
+                            </div>
+                            <p class="product-platform-note">Research-oriented support usually begins with performance behavior, installed optics, and current application constraints instead of a generic maintenance request.</p>
+                        </div>
+                    </div>
+                    <div class="laser-product-card">
+                        <div class="laser-product-image">
+                            <div class="image-overlay"></div>
+                            <img src="/images/repair/research/chameleon-ultra/exterior.png" alt="Chameleon Ultra">
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>Chameleon Ultra</h3>
+                            <div class="product-meta-chips">
+                                <span>Research platform</span>
+                                <span>Tunable system</span>
+                            </div>
+                            <p class="product-platform-note">For tunable research systems, the first conversation often centers on performance drift, installed accessories, and whether the issue belongs in service, source replacement, or component support.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="light-conversion" class="tab-content">
+                <div class="laser-product-grid">
+                    <div class="laser-product-card">
+                        <div class="laser-product-image">
+                            <div class="image-overlay"></div>
+                            <img src="/images/repair/display/lc-cb5/exterior.jpg" alt="LC CB5">
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>LC CB5</h3>
+                            <div class="product-meta-chips">
+                                <span>Display manufacturing</span>
+                                <span>Equipment model</span>
+                            </div>
+                            <p class="product-platform-note">A display-focused equipment model where fault review usually starts from the installed tool, visible labels, and process behavior before a deeper source-side decision is made.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="lumera" class="tab-content">
+                <div class="laser-product-grid">
+                    <div class="laser-product-card">
+                        <div class="laser-product-image">
+                            <div class="image-overlay"></div>
+                            <img src="/images/repair/industrial/rapid/exterior.png" alt="RAPID">
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>RAPID</h3>
+                            <div class="product-meta-chips">
+                                <span>Industrial processing</span>
+                                <span>Operational uptime</span>
+                            </div>
+                            <p class="product-platform-note">Industrial systems like RAPID are usually evaluated around line continuity, source condition, and whether the most practical next step is repair, component replacement, or controlled substitution.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="photonics-industries" class="tab-content">
+                <div class="laser-product-grid">
+                    <div class="laser-product-card">
+                        <div class="laser-product-image">
+                            <div class="image-overlay"></div>
+                            <img src="/images/repair/industrial/dc-50/exterior.png" alt="DC 50">
+                        </div>
+                        <div class="laser-product-content">
+                            <h3>DC 50</h3>
+                            <div class="product-meta-chips">
+                                <span>Industrial processing</span>
+                                <span>System continuity</span>
+                            </div>
+                            <p class="product-platform-note">DC 50 inquiries typically begin with process-side symptoms, installed hardware identity, and whether a practical replacement path is needed alongside service review.</p>
                         </div>
                     </div>
                 </div>
@@ -5523,8 +5728,8 @@
             <div class="products-rfq-bridge">
                 <div class="products-rfq-copy">
                     <p class="section-kicker">Model Not Listed?</p>
-                    <h3>Equivalent systems can still be worth a review.</h3>
-                    <p>Absence from the list does not automatically mean unsupported. Many inbound cases start from adjacent product families, discontinued platforms, or regional variants that still map to known service logic.</p>
+                    <h3>Not every supported platform needs to appear on the homepage.</h3>
+                    <p>This section is a front-page sample of the brands and model families we see most often. If your platform is not shown here, the structured repair directories and RFQ review still provide a practical route into support.</p>
                     <div class="products-rfq-actions">
                         <a href="#contact" class="btn btn-primary">Request a System Review</a>
                         <a href="mailto:info@sflaser.net" class="btn btn-outline">Email Model Details</a>
