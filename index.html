@@ -4194,6 +4194,94 @@
             margin-top: 12px;
         }
 
+        .support-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+            margin-top: 28px;
+        }
+
+        .support-summary-card,
+        .about-compact {
+            border-radius: 28px;
+            border: 1px solid var(--line-subtle);
+            background: rgba(255, 252, 247, 0.84);
+            box-shadow: 0 14px 30px rgba(18, 15, 12, 0.05);
+        }
+
+        .support-summary-card {
+            padding: 28px;
+        }
+
+        .support-summary-visual {
+            position: relative;
+            overflow: hidden;
+            border-radius: 22px;
+            aspect-ratio: 16 / 10;
+            margin-bottom: 22px;
+            background: rgba(255, 255, 255, 0.72);
+        }
+
+        .support-summary-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .support-summary-card h3 {
+            margin: 12px 0 10px;
+            font-size: 28px;
+            line-height: 1.12;
+            letter-spacing: -0.03em;
+            color: var(--text-dark);
+        }
+
+        .support-summary-card p,
+        .about-compact p {
+            margin: 0;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .support-chip-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 18px 0 20px;
+        }
+
+        .support-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(23, 21, 19, 0.08);
+            background: rgba(255, 255, 255, 0.68);
+            color: var(--text-dark);
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .support-summary-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .about-compact {
+            padding: 34px;
+            text-align: center;
+        }
+
+        .about-compact p {
+            max-width: 840px;
+            margin: 0 auto;
+            font-size: 17px;
+        }
+
         .cms-section-intro {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -4771,6 +4859,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .support-summary-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
             .footer-columns {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
@@ -4947,6 +5039,15 @@
 
             .faq-container {
                 grid-template-columns: 1fr;
+            }
+
+            .support-summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .support-summary-card,
+            .about-compact {
+                padding: 24px;
             }
 
             .footer-bottom {
@@ -5189,315 +5290,69 @@
         <div class="container">
             <div class="section-title">
                 <p class="section-kicker">Supported Systems</p>
-                <h2>Solid-state platforms we regularly service.</h2>
-                <p>Examples of models and product families where our team has practical repair, maintenance, and support exposure.</p>
+                <h2>Representative platforms across the repair areas we publish.</h2>
+                <p>The homepage stays selective. Detailed brand, series, and model paths live inside the repair directories, where buyers can go deeper by application and platform.</p>
             </div>
 
-            <div class="brand-tabs">
-                <button class="brand-tab active" onclick="openBrandTab('kla')">KLA</button>
-                <button class="brand-tab" onclick="openBrandTab('applied-materials')">Applied Materials</button>
-                <button class="brand-tab" onclick="openBrandTab('rudolph')">Rudolph</button>
-                <button class="brand-tab" onclick="openBrandTab('laserscale')">LaserScale</button>
-                <button class="brand-tab" onclick="openBrandTab('lumibird-quantel')">Lumibird / Quantel</button>
-                <button class="brand-tab" onclick="openBrandTab('coherent')">Coherent</button>
-                <button class="brand-tab" onclick="openBrandTab('light-conversion')">Light Conversion</button>
-                <button class="brand-tab" onclick="openBrandTab('lumera')">Lumera</button>
-                <button class="brand-tab" onclick="openBrandTab('photonics-industries')">Photonics Industries</button>
+            <div class="support-summary-grid">
+                <article class="support-summary-card">
+                    <div class="support-summary-visual">
+                        <img src="/images/repair/semiconductor/kla/puma/exterior.png" alt="Semiconductor platform support">
+                    </div>
+                    <p class="comparison-card-label">Semiconductor</p>
+                    <h3>Platform-first repair paths for semiconductor tools.</h3>
+                    <p>We already organize the repair directory around the semiconductor platforms and brands customers identify first during tool-side fault review.</p>
+                    <div class="support-chip-cloud">
+                        <span class="support-chip">KLA</span>
+                        <span class="support-chip">Applied Materials</span>
+                        <span class="support-chip">Rudolph</span>
+                        <span class="support-chip">LaserScale</span>
+                        <span class="support-chip">Puma</span>
+                        <span class="support-chip">SP2 / SP5</span>
+                        <span class="support-chip">Voyager</span>
+                        <span class="support-chip">UV / Enight</span>
+                    </div>
+                    <a href="/laser-repair/semiconductor-manufacturing/" class="btn btn-outline">Open Semiconductor Directory</a>
+                </article>
+
+                <article class="support-summary-card">
+                    <div class="support-summary-visual">
+                        <img src="/images/repair/display/lc-cb5/exterior.jpg" alt="Display and field system support">
+                    </div>
+                    <p class="comparison-card-label">Display and Field Systems</p>
+                    <h3>Panel, lidar, and field-use systems where uptime matters.</h3>
+                    <p>These programs usually move faster when the conversation starts from installed equipment identity, service urgency, and practical replacement options.</p>
+                    <div class="support-chip-cloud">
+                        <span class="support-chip">LC CB5</span>
+                        <span class="support-chip">Centurion</span>
+                        <span class="support-chip">CFR</span>
+                        <span class="support-chip">Q-Smart</span>
+                        <span class="support-chip">ULTRA4</span>
+                    </div>
+                    <a href="/applications/" class="btn btn-outline">View Application Areas</a>
+                </article>
+
+                <article class="support-summary-card">
+                    <div class="support-summary-visual">
+                        <img src="/images/repair/research/libra/exterior.jpg" alt="Industrial and research laser support">
+                    </div>
+                    <p class="comparison-card-label">Industrial and Research</p>
+                    <h3>Industrial processing and laboratory platforms already in scope.</h3>
+                    <p>Industrial and research requests usually begin with current performance behavior, installed accessories, and whether the next step is repair, sourcing, or controlled substitution.</p>
+                    <div class="support-chip-cloud">
+                        <span class="support-chip">RAPID</span>
+                        <span class="support-chip">DC 50</span>
+                        <span class="support-chip">Libra</span>
+                        <span class="support-chip">Verdi V18</span>
+                        <span class="support-chip">Chameleon Ultra</span>
+                    </div>
+                    <a href="/laser-repair/" class="btn btn-outline">Browse Repair Coverage</a>
+                </article>
             </div>
 
-            <div id="kla" class="tab-content active">
-                <div class="laser-product-grid">
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/semiconductor/kla/puma/exterior.png" alt="KLA Puma platform">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>Puma 9150 / 9980</h3>
-                            <div class="product-meta-chips">
-                                <span>Semiconductor inspection</span>
-                                <span>Equipment model</span>
-                            </div>
-                            <p class="product-platform-note">Puma-related cases usually start from tool identity, current symptoms, and paired source confirmation rather than trying to infer the internal source too early.</p>
-                        </div>
-                    </div>
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/semiconductor/kla/sp/exterior.png" alt="KLA SP platform">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>SP2 / SP5</h3>
-                            <div class="product-meta-chips">
-                                <span>Semiconductor tool</span>
-                                <span>Platform review</span>
-                            </div>
-                            <p class="product-platform-note">These KLA equipment models are handled as tool-side platforms first. Public intake usually begins with labels, installed state, and the paired laser reference if available.</p>
-                        </div>
-                    </div>
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/semiconductor/kla/voyager/exterior.png" alt="KLA Voyager platform">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>Voyager</h3>
-                            <div class="product-meta-chips">
-                                <span>KLA family reference</span>
-                                <span>Paired laser known</span>
-                            </div>
-                            <p class="product-platform-note">Voyager remains part of the confirmed KLA structure. It is useful when the family is known first and the exact installed model still needs to be confirmed during intake.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="applied-materials" class="tab-content">
-                <div class="laser-product-grid">
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/semiconductor/applied-materials/uv/exterior.jpg" alt="Applied Materials UV platform">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>UV</h3>
-                            <div class="product-meta-chips">
-                                <span>Semiconductor process tool</span>
-                                <span>Source-side review</span>
-                            </div>
-                            <p class="product-platform-note">A source review case that usually starts from the installed tool, available labels, and the current failure pattern before deeper compatibility or replacement discussion.</p>
-                        </div>
-                    </div>
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/semiconductor/applied-materials/enight/exterior.png" alt="Applied Materials Enight platform">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>Enight</h3>
-                            <div class="product-meta-chips">
-                                <span>Semiconductor platform</span>
-                                <span>Equipment identity first</span>
-                            </div>
-                            <p class="product-platform-note">For Enight-related cases, the practical starting point is confirming the equipment identity, installed configuration, and current behavior before narrowing the paired laser path.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="rudolph" class="tab-content">
-                <div class="laser-product-grid">
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/semiconductor/rudolph/exterior.jpg" alt="Rudolph platform">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>Rudolph Platforms</h3>
-                            <div class="product-meta-chips">
-                                <span>Metrology environment</span>
-                                <span>Legacy support</span>
-                            </div>
-                            <p class="product-platform-note">Typical Rudolph cases involve older metrology tools where serviceability depends on platform confirmation, usable photos, and practical spare-part access.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="laserscale" class="tab-content">
-                <div class="laser-product-grid">
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/semiconductor/laserscale/exterior.jpg" alt="LaserScale platform">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>LaserScale Systems</h3>
-                            <div class="product-meta-chips">
-                                <span>Semiconductor measurement</span>
-                                <span>Known public brand</span>
-                            </div>
-                            <p class="product-platform-note">LaserScale-branded systems usually benefit from an equipment-first review, especially when the exact paired source history is incomplete or the original channel is no longer straightforward.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="lumibird-quantel" class="tab-content">
-                <div class="laser-product-grid">
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/lidar/ultra4/exterior.png" alt="ULTRA4">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>ULTRA4</h3>
-                            <div class="product-meta-chips">
-                                <span>Lidar systems</span>
-                                <span>Lamp-pumped</span>
-                            </div>
-                            <p class="product-platform-note">A strong reference for lidar and atmospheric-use systems where uptime, output stability, and practical field support matter more than brochure-level specification alone.</p>
-                        </div>
-                    </div>
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/lidar/cfr/exterior.jpg" alt="CFR">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>CFR</h3>
-                            <div class="product-meta-chips">
-                                <span>Research & lidar</span>
-                                <span>Lamp-pumped</span>
-                            </div>
-                            <p class="product-platform-note">Relevant for research-facing and lidar-facing solid-state systems where restoration decisions depend on beam behavior, maintenance history, and service feasibility.</p>
-                        </div>
-                    </div>
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/lidar/q-smart/exterior.png" alt="Q-Smart">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>Q-Smart</h3>
-                            <div class="product-meta-chips">
-                                <span>Atmospheric observation</span>
-                                <span>Field service</span>
-                            </div>
-                            <p class="product-platform-note">A typical platform in observation workflows where downtime affects measurement schedules directly and buyers need a fast view of repair vs. replacement options.</p>
-                        </div>
-                    </div>
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/lidar/centurion/exterior.jpg" alt="Centurion">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>Centurion</h3>
-                            <div class="product-meta-chips">
-                                <span>Instrument platform</span>
-                                <span>Compact solid-state</span>
-                            </div>
-                            <p class="product-platform-note">Centurion-family cases often combine service continuity, compact packaging limits, and the need for a realistic replacement path when support timing matters.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="coherent" class="tab-content">
-                <div class="laser-product-grid">
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/research/libra/exterior.jpg" alt="Libra">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>Libra</h3>
-                            <div class="product-meta-chips">
-                                <span>Scientific research</span>
-                                <span>Ultrafast platform</span>
-                            </div>
-                            <p class="product-platform-note">Libra-related requests usually begin with installed configuration, current output behavior, and the laboratory workflow that must stay stable during service or source review.</p>
-                        </div>
-                    </div>
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/research/verdi-v18/exterior.jpg" alt="Verdi V18">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>Verdi V18</h3>
-                            <div class="product-meta-chips">
-                                <span>Scientific research</span>
-                                <span>Precision output</span>
-                            </div>
-                            <p class="product-platform-note">Research-oriented support usually begins with performance behavior, installed optics, and current application constraints instead of a generic maintenance request.</p>
-                        </div>
-                    </div>
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/research/chameleon-ultra/exterior.png" alt="Chameleon Ultra">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>Chameleon Ultra</h3>
-                            <div class="product-meta-chips">
-                                <span>Research platform</span>
-                                <span>Tunable system</span>
-                            </div>
-                            <p class="product-platform-note">For tunable research systems, the first conversation often centers on performance drift, installed accessories, and whether the issue belongs in service, source replacement, or component support.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="light-conversion" class="tab-content">
-                <div class="laser-product-grid">
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/display/lc-cb5/exterior.jpg" alt="LC CB5">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>LC CB5</h3>
-                            <div class="product-meta-chips">
-                                <span>Display manufacturing</span>
-                                <span>Equipment model</span>
-                            </div>
-                            <p class="product-platform-note">A display-focused equipment model where fault review usually starts from the installed tool, visible labels, and process behavior before a deeper source-side decision is made.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="lumera" class="tab-content">
-                <div class="laser-product-grid">
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/industrial/rapid/exterior.png" alt="RAPID">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>RAPID</h3>
-                            <div class="product-meta-chips">
-                                <span>Industrial processing</span>
-                                <span>Operational uptime</span>
-                            </div>
-                            <p class="product-platform-note">Industrial systems like RAPID are usually evaluated around line continuity, source condition, and whether the most practical next step is repair, component replacement, or controlled substitution.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="photonics-industries" class="tab-content">
-                <div class="laser-product-grid">
-                    <div class="laser-product-card">
-                        <div class="laser-product-image">
-                            <div class="image-overlay"></div>
-                            <img src="/images/repair/industrial/dc-50/exterior.png" alt="DC 50">
-                        </div>
-                        <div class="laser-product-content">
-                            <h3>DC 50</h3>
-                            <div class="product-meta-chips">
-                                <span>Industrial processing</span>
-                                <span>System continuity</span>
-                            </div>
-                            <p class="product-platform-note">DC 50 inquiries typically begin with process-side symptoms, installed hardware identity, and whether a practical replacement path is needed alongside service review.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="products-rfq-bridge">
-                <div class="products-rfq-copy">
-                    <p class="section-kicker">Model Not Listed?</p>
-                    <h3>This homepage shows a representative sample, not the full repair directory.</h3>
-                    <p>If your platform is not shown here, use the repair directories or send the model details directly through RFQ. We can still review the system from labels, photos, and current symptoms.</p>
-                    <div class="products-rfq-actions">
-                        <a href="#contact" class="btn btn-primary">Request a System Review</a>
-                        <a href="/laser-repair/" class="btn btn-outline">Open Repair Directories</a>
-                    </div>
-                </div>
+            <div class="support-summary-actions">
+                <a href="#contact" class="btn btn-primary">Request a System Review</a>
+                <a href="/laser-repair/" class="btn btn-outline">Open Repair Directories</a>
             </div>
         </div>
     </section>
@@ -5605,37 +5460,15 @@
                 <p>SkyFire is built to make complex laser work easier to understand, scope, and start. The website focuses on service fit, application relevance, and practical next steps for repair, manufacturing, and sourcing requests.</p>
             </div>
 
-            <div class="platform-intro">
-                <article class="platform-lead-card">
-                    <p class="section-kicker">How We Operate</p>
-                    <h3>Sky Fire Laser gives customers one clear place to start repair, custom build, and component discussions.</h3>
-                    <p>Customers need a professional point of contact for repair, custom photonics, and component sourcing. Our role is to turn technical capability into a clear, responsive, and commercially usable service experience.</p>
-                </article>
-
-                <div class="platform-point-stack">
-                    <article class="platform-point">
-                        <p class="platform-point-label">Buyer Experience</p>
-                        <h4>Clear entry point for RFQs and technical sales</h4>
-                        <p>Customers can describe failures, target specifications, or sourcing needs in one place instead of chasing fragmented technical contacts.</p>
-                    </article>
-                    <article class="platform-point">
-                        <p class="platform-point-label">Service Clarity</p>
-                        <h4>Public content stays practical and customer-focused</h4>
-                        <p>We focus on practical service information, application relevance, and project fit so customers can start conversations faster and with better context.</p>
-                    </article>
-                    <article class="platform-point">
-                        <p class="platform-point-label">Operational Fit</p>
-                        <h4>Clearer coordination from inquiry to diagnosis, sourcing, and delivery</h4>
-                        <p>This structure supports urgent repairs, semi-custom modules, component sales, and projects that need technical review before quotation.</p>
-                    </article>
+            <div class="about-compact">
+                <p>Sky Fire Laser gives customers one clear place to start repair, custom photonics, and component sourcing conversations. We keep the public site concise so buyers can move from platform identity, application context, or part demand into a practical RFQ without reading through internal process detail.</p>
+                <div class="hero-actions">
+                    <a href="/laser-repair/" class="btn btn-primary">Explore Laser Repair</a>
+                    <a href="/manufacturing/" class="btn btn-outline">View Manufacturing</a>
+                    <a href="/components/" class="btn btn-outline">Browse Components</a>
                 </div>
             </div>
-
-            <div class="hero-actions">
-                <a href="/laser-repair/" class="btn btn-primary">Explore Laser Repair</a>
-                <a href="/manufacturing/" class="btn btn-outline">View Manufacturing</a>
-                <a href="/components/" class="btn btn-outline">Browse Components</a>
-            </div></div>
+        </div>
     </section>
 
     <!-- Product Store Section (CMS) -->
@@ -5664,6 +5497,75 @@
             <div class="cms-section-footer">
                 <a href="/resources.html" class="btn btn-outline">View All Resources</a>
                 <a href="#contact" class="btn btn-primary">Start an RFQ</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="section-title">
+                <p class="section-kicker">Questions</p>
+                <h2>Common questions before a repair or sourcing inquiry.</h2>
+                <p>These are the first issues buyers usually need clarified before sending a model number, symptom report, or part request.</p>
+            </div>
+
+            <div class="faq-shell">
+                <aside class="faq-aside">
+                    <h3>Use the first message to shorten the technical loop.</h3>
+                    <p>A good RFQ does not need every internal detail. It needs enough platform identity and current behavior for us to judge whether the next step is repair, sourcing, or a custom-build discussion.</p>
+                    <div class="faq-notes">
+                        <div class="faq-note-card">
+                            <strong>Start with identity</strong>
+                            <span>Brand, model, labels, installed photos, and the application context are usually the fastest entry point.</span>
+                        </div>
+                        <div class="faq-note-card">
+                            <strong>Add current behavior</strong>
+                            <span>Output drift, startup failures, damaged optics, missing parts, or timing pressure all help us route the request more accurately.</span>
+                        </div>
+                    </div>
+                </aside>
+
+                <div class="faq-container">
+                    <article class="faq-item active">
+                        <button class="faq-question" type="button">
+                            <h3>Can you review a platform even if we do not know the paired laser model yet?</h3>
+                            <span class="faq-icon"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. In many cases the fastest starting point is the installed equipment identity, labels, photos, and current fault behavior. We can often narrow the next step before the paired source path is fully confirmed.</p>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <button class="faq-question" type="button">
+                            <h3>Do we need to decide between repair and replacement before contacting you?</h3>
+                            <span class="faq-icon"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>No. That is part of the review. Some cases should go straight into repair, some are better handled through component replacement, and some need a more practical commercial path.</p>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <button class="faq-question" type="button">
+                            <h3>What information helps you quote faster?</h3>
+                            <span class="faq-icon"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Brand, model, current symptoms, application context, urgency, and a few clear photos are usually the most useful. If a file is larger than 8 MB, send it by email after submitting the RFQ.</p>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <button class="faq-question" type="button">
+                            <h3>Can you help with older or hard-to-source systems?</h3>
+                            <span class="faq-icon"></span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes. Legacy support is part of the work. Older platforms often require compatibility judgment, practical spare-part access, and a realistic view of whether repair or replacement makes more sense.</p>
+                        </div>
+                    </article>
+                </div>
             </div>
         </div>
     </section>
@@ -6134,6 +6036,26 @@
         const menuBtn = document.getElementById('mobile-menu-btn');
         const nav = document.getElementById('main-navigation');
         const rfqForm = document.querySelector('.rfq-form');
+        const faqItems = Array.from(document.querySelectorAll('.faq-item'));
+
+        if (faqItems.length) {
+            faqItems.forEach(function (item) {
+                const trigger = item.querySelector('.faq-question');
+                if (!trigger) return;
+
+                trigger.addEventListener('click', function () {
+                    const isActive = item.classList.contains('active');
+
+                    faqItems.forEach(function (entry) {
+                        entry.classList.remove('active');
+                    });
+
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        }
 
         if (rfqForm) {
             rfqForm.addEventListener('submit', async function (event) {
