@@ -17,7 +17,7 @@ Disallow: *.pdf$
 Crawl-delay: 1
 
 # Sitemap location
-Sitemap: https://www.skyfirelaserservice.com/sitemap.xml
+Sitemap: https://www.sslaserservice.com/sitemap.xml
 
 # Special rules for different search engines
 User-agent: Googlebot
