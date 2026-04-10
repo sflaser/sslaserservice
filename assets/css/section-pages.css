@@ -608,15 +608,18 @@ textarea {
 }
 
 .visual-grid--quad .visual-card img {
-  aspect-ratio: 16 / 11;
+  aspect-ratio: 16 / 10;
 }
 
 .visual-card img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
+  min-height: 220px;
   object-fit: cover;
+  object-position: center center;
   background: rgba(23, 21, 19, 0.04);
+  border-bottom: 1px solid rgba(28, 23, 18, 0.06);
 }
 
 .visual-copy {
