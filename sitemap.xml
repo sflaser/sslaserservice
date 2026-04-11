@@ -346,4 +346,18 @@
         <changefreq>monthly</changefreq>
         <priority>0.82</priority>
     </url>
+
+<url>
+        <loc>https://www.sslaserservice.com/resources.html</loc>
+        <lastmod>2026-04-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.78</priority>
+    </url>
+
+<url>
+        <loc>https://www.sslaserservice.com/resources/industry-updates/</loc>
+        <lastmod>2026-04-11</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.72</priority>
+    </url>
 </urlset>
