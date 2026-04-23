@@ -46,15 +46,14 @@
     
     <!-- Preload Critical Resources -->
     <link rel="preload" href="/images/services/professional-repair-lab-home-20260418.jpg" as="image">
-    
-    <!-- Google Analytics -->
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1125868950"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CDW4YR5MC5"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        
+
+        gtag('config', 'G-CDW4YR5MC5');
         gtag('config', 'AW-1125868950');
     </script>
     
@@ -5801,7 +5800,7 @@
             <div class="footer-bottom">
                 <p>&copy; 2026 Sky Fire Laser. All rights reserved.</p>
                 <div class="footer-bottom-links">
-                    <a href="https://alleriastore.com/pages/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+                    <a href="/privacy.html">Privacy Policy</a>
                     <a href="https://alleriastore.com/pages/terms-of-service" target="_blank" rel="noopener">Terms of Service</a>
                     <a href="/admin.html">CMS Admin</a>
                 </div>
@@ -5991,21 +5990,7 @@
 
     // 5. Optimize Third-party Scripts Loading
     function loadThirdPartyScripts() {
-        // Defer non-critical third-party scripts
-        const scripts = [
-            {
-                src: 'https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID',
-                async: true
-            }
-        ];
-
-        scripts.forEach(script => {
-            const scriptElement = document.createElement('script');
-            scriptElement.src = script.src;
-            scriptElement.async = script.async;
-            scriptElement.defer = true;
-            document.head.appendChild(scriptElement);
-        });
+        // Google tag is already loaded in the head.
     }
 
     // 6. Image Format Detection and Optimization
