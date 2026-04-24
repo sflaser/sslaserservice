@@ -22,6 +22,9 @@
   const blogImportMdBtn = document.getElementById('blog-import-md');
   const productMarkdownFileInput = document.getElementById('product-markdown-file');
   const productImportMdBtn = document.getElementById('product-import-md');
+  const productImageUrlInput = document.getElementById('product-image-url');
+  const productBrochureUrlInput = document.getElementById('product-brochure-url');
+  const productBrochureFileInput = document.getElementById('product-brochure');
 
   const tokenKey = 'cms_admin_access_token';
   let accessToken = localStorage.getItem(tokenKey) || '';
@@ -29,6 +32,7 @@
   let editingProductId = null;
   let editingBlogCoverImageUrl = '';
   let editingProductImageUrl = '';
+  let editingProductBrochureUrl = '';
   let blogRowsById = new Map();
   let productRowsById = new Map();
 
@@ -156,6 +160,8 @@
 
     const slug = String(meta.slug || '').trim();
     const purchaseUrl = String(meta.purchase_url || meta.buy_url || meta.link || '').trim();
+    const imageUrl = String(meta.image_url || meta.cover_image_url || meta.image || '').trim();
+    const brochureUrl = String(meta.brochure_url || meta.document_url || meta.pdf_url || meta.brochure_pdf || '').trim();
     const currency = String(meta.currency || cfg.defaultCurrency || 'USD').trim().toUpperCase().slice(0, 3) || 'USD';
     const priceRaw = String(meta.price || meta.price_usd || '').trim();
     const status = normalizeStatus(meta.status);
@@ -176,6 +182,8 @@
       price,
       currency,
       purchaseUrl,
+      imageUrl,
+      brochureUrl,
       status,
     };
   }
@@ -253,6 +261,12 @@
     }
     if (parsed.purchaseUrl) {
       productForm.elements.purchase_url.value = parsed.purchaseUrl;
+    }
+    if (parsed.imageUrl && productImageUrlInput) {
+      productImageUrlInput.value = parsed.imageUrl;
+    }
+    if (parsed.brochureUrl && productBrochureUrlInput) {
+      productBrochureUrlInput.value = parsed.brochureUrl;
     }
     if (parsed.status) {
       productForm.elements.status.value = parsed.status;
@@ -443,6 +457,7 @@
 
     editingProductId = row.id;
     editingProductImageUrl = row.image_url || '';
+    editingProductBrochureUrl = row.brochure_url || '';
     productForm.elements.name.value = row.name || '';
     productForm.elements.slug.value = row.slug || '';
     productForm.elements.short_description.value = row.short_description || '';
@@ -450,6 +465,12 @@
     productForm.elements.price.value = (Number(row.price_cents || 0) / 100).toFixed(2);
     productForm.elements.currency.value = (row.currency || 'USD').toUpperCase();
     productForm.elements.purchase_url.value = row.purchase_url || '';
+    if (productImageUrlInput) {
+      productImageUrlInput.value = row.image_url || '';
+    }
+    if (productBrochureUrlInput) {
+      productBrochureUrlInput.value = row.brochure_url || '';
+    }
     productForm.elements.status.value = row.status || 'draft';
 
     if (productSubmitBtn) {
@@ -466,6 +487,7 @@
   function clearProductEditMode(resetForm) {
     editingProductId = null;
     editingProductImageUrl = '';
+    editingProductBrochureUrl = '';
     if (resetForm) {
       productForm.reset();
       if (productMarkdownFileInput) {
@@ -474,6 +496,15 @@
     }
     productForm.elements.currency.value = cfg.defaultCurrency || 'USD';
     productForm.elements.status.value = 'draft';
+    if (productImageUrlInput) {
+      productImageUrlInput.value = '';
+    }
+    if (productBrochureUrlInput) {
+      productBrochureUrlInput.value = '';
+    }
+    if (productBrochureFileInput) {
+      productBrochureFileInput.value = '';
+    }
 
     if (productSubmitBtn) {
       productSubmitBtn.textContent = 'Save Product';
@@ -590,7 +621,7 @@
 
   async function fetchProducts() {
     const rows = await request(
-      '/rest/v1/products?select=id,name,slug,short_description,description,price_cents,currency,purchase_url,image_url,status,published_at,created_at&order=created_at.desc',
+      '/rest/v1/products?select=id,name,slug,short_description,description,price_cents,currency,purchase_url,image_url,brochure_url,status,published_at,created_at&order=created_at.desc',
       { auth: true }
     );
 
@@ -727,13 +758,22 @@
       const price = Number(formData.get('price') || 0);
       const currency = String(formData.get('currency') || 'USD').toUpperCase();
       const purchaseUrl = String(formData.get('purchase_url') || '').trim();
+      const imageUrlInput = String(formData.get('image_url') || '').trim();
+      const brochureUrlInput = String(formData.get('brochure_url') || '').trim();
       const status = String(formData.get('status') || 'draft');
 
-      let imageUrl = editingProductImageUrl || null;
+      let imageUrl = editingProductImageUrl || imageUrlInput || null;
       const imageFile = formData.get('image');
       if (imageFile instanceof File && imageFile.size > 0) {
         setStatus('Uploading product image...');
         imageUrl = await uploadImage(imageFile, 'products');
+      }
+
+      let brochureUrl = editingProductBrochureUrl || brochureUrlInput || null;
+      const brochureFile = formData.get('brochure_file');
+      if (brochureFile instanceof File && brochureFile.size > 0) {
+        setStatus('Uploading product brochure...');
+        brochureUrl = await uploadImage(brochureFile, 'brochures');
       }
 
       let publishedAt = null;
@@ -751,6 +791,7 @@
         currency,
         purchase_url: purchaseUrl,
         image_url: imageUrl,
+        brochure_url: brochureUrl,
         status,
         published_at: publishedAt,
       };

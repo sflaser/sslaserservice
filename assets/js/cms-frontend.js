@@ -83,6 +83,28 @@
     };
   }
 
+  function buildProductActions(item, quoteLabel) {
+    const actions = [];
+
+    if (item.purchase_url) {
+      actions.push(
+        `<a class="cms-btn cms-btn-primary" href="${escapeHtml(item.purchase_url)}" target="_blank" rel="noopener">Open Link</a>`
+      );
+    }
+
+    if (item.brochure_url) {
+      actions.push(
+        `<a class="cms-btn cms-btn-outline" href="${escapeHtml(item.brochure_url)}" target="_blank" rel="noopener">Download Brochure</a>`
+      );
+    }
+
+    actions.push(
+      `<a class="cms-btn cms-btn-outline" href="${escapeHtml(`mailto:sales3@sflaser.net?subject=${encodeURIComponent(`Product inquiry: ${item.name || 'SkyFire product'}`)}`)}">${quoteLabel}</a>`
+    );
+
+    return actions.join('');
+  }
+
   async function fetchTable(pathAndQuery) {
     const res = await fetch(`${supabaseUrl}/rest/v1/${pathAndQuery}`, {
       headers: {
@@ -120,7 +142,7 @@
     if (!productsGrid) return;
 
     const rows = await fetchTable(
-      'products?select=id,name,short_description,price_cents,currency,image_url,purchase_url,published_at,status&status=eq.published&order=published_at.desc.nullslast&limit=8'
+      'products?select=id,name,short_description,price_cents,currency,image_url,purchase_url,brochure_url,published_at,status&status=eq.published&order=published_at.desc.nullslast&limit=8'
     );
 
     if (!rows.length) {
@@ -141,11 +163,7 @@
         const priceValue = Number(item.price_cents || 0) > 0
           ? formatPrice(item.price_cents, item.currency)
           : 'Contact for pricing';
-        const quoteHref = `mailto:sales3@sflaser.net?subject=${encodeURIComponent(`Product inquiry: ${item.name || 'SkyFire product'}`)}`;
-        const buyButton = item.purchase_url
-          ? `<a class="cms-btn cms-btn-primary" href="${escapeHtml(item.purchase_url)}" target="_blank" rel="noopener">Buy Now</a>`
-          : '';
-        const quoteButton = `<a class="cms-btn cms-btn-outline" href="${escapeHtml(quoteHref)}">${productState.quoteLabel}</a>`;
+        const actions = buildProductActions(item, productState.quoteLabel);
 
         return `
           <article class="cms-card">
@@ -158,7 +176,7 @@
                 <div class="cms-status-badge ${productState.className}">${productState.label}</div>
               </div>
               <p class="cms-card-text">${escapeHtml(item.short_description || '')}</p>
-              <div class="cms-card-actions">${buyButton}${quoteButton}</div>
+              <div class="cms-card-actions">${actions}</div>
             </div>
           </article>
         `;

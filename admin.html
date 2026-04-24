@@ -130,7 +130,7 @@
                 <input id="product-markdown-file" type="file" accept=".md,.markdown,text/markdown,.txt">
                 <button id="product-import-md" class="btn btn-outline btn-sm" type="button">Import .md</button>
               </div>
-              <p class="field-hint">支持 AI 生成的 Markdown 文件。可识别 YAML 头信息：<code>name</code>/<code>title</code>、<code>slug</code>、<code>short_description</code>/<code>excerpt</code>、<code>price</code>、<code>currency</code>、<code>purchase_url</code>、<code>status</code>。Supports AI-generated Markdown files and optional YAML front matter.</p>
+              <p class="field-hint">支持 AI 生成的 Markdown 文件。可识别 YAML 头信息：<code>name</code>/<code>title</code>、<code>slug</code>、<code>short_description</code>/<code>excerpt</code>、<code>image_url</code>、<code>brochure_url</code>、<code>price</code>、<code>currency</code>、<code>purchase_url</code>、<code>status</code>。Supports AI-generated Markdown files and optional YAML front matter.</p>
             </div>
             <div class="form-row">
               <label for="product-description">Full Description</label>
@@ -156,13 +156,29 @@
               <input id="product-currency" name="currency" value="USD" maxlength="3" required>
             </div>
             <div class="form-row">
-              <label for="product-purchase-url">Purchase Link</label>
-              <input id="product-purchase-url" name="purchase_url" type="url" placeholder="https://checkout.example.com/..." required>
+              <label for="product-purchase-url">Primary Link</label>
+              <input id="product-purchase-url" name="purchase_url" type="url" placeholder="https://www.sslaserservice.com/#contact" required>
+              <p class="field-hint">This can be a product page, RFQ page, or checkout link. Use the brochure field below for the PDF itself.</p>
             </div>
             <div class="form-row">
-              <label for="product-image">Product Image</label>
+              <label for="product-image-url">Product Image URL (optional)</label>
+              <input id="product-image-url" name="image_url" type="url" placeholder="/images/products/... or https://...">
+              <p class="field-hint">Use this when you already have a public image URL. If you upload an image file below, that upload will override this field.</p>
+            </div>
+            <div class="form-row">
+              <label for="product-image">Product Image File</label>
               <input id="product-image" name="image" type="file" accept="image/*">
               <p class="field-hint">建议尺寸：1600x900（16:9），JPG/PNG/WebP，2MB以内。其他比例也支持，会自动完整显示不裁剪。Recommended: 1600x900 (16:9), JPG/PNG/WebP, under 2MB. Other ratios are auto-fitted without cropping.</p>
+            </div>
+            <div class="form-row">
+              <label for="product-brochure-url">Brochure / PDF URL (optional)</label>
+              <input id="product-brochure-url" name="brochure_url" type="url" placeholder="/assets/brochures/...pdf or https://...">
+              <p class="field-hint">Use this for a brochure that already lives on the site or another public location. You can also upload a PDF file below.</p>
+            </div>
+            <div class="form-row">
+              <label for="product-brochure">Product Brochure PDF (optional)</label>
+              <input id="product-brochure" name="brochure_file" type="file" accept="application/pdf">
+              <p class="field-hint">Uploads the brochure PDF to the public site assets bucket and stores the link with the product.</p>
             </div>
             <div class="form-row">
               <label for="product-status">Status</label>

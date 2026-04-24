@@ -20,6 +20,7 @@ create table if not exists public.products (
   short_description text,
   description text,
   image_url text,
+  brochure_url text,
   price_cents integer not null check (price_cents >= 0),
   currency text not null default 'USD',
   purchase_url text not null,
@@ -28,6 +29,9 @@ create table if not exists public.products (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table if exists public.products
+  add column if not exists brochure_url text;
 
 -- Trigger helper for updated_at
 create or replace function public.set_updated_at()
