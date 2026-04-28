@@ -3,7 +3,7 @@ name: "Pulse-Shape Editable Nanosecond Fiber Laser"
 slug: "pulse-shape-editable-nanosecond-fiber-laser"
 short_description: "FPGA-based nanosecond fiber laser with user-defined pulse shaping, 20-500 ns pulse width, and up to 50 MHz repetition."
 image_url: "/images/products/pulse-shape-editable-nanosecond-fiber-laser/cover.png"
-brochure_url: "/assets/brochures/pulse-shape-editable-nanosecond-fiber-laser.pdf"
+brochure_url: "/assets/brochures/pulse-waveform-editable-nanosecond-fiber-laser-en.pdf"
 purchase_url: "https://www.sslaserservice.com/#contact"
 currency: "USD"
 price: 0
@@ -60,5 +60,6 @@ This product is a pulse-shape editable nanosecond fiber laser built around an FP
 ## Included files
 
 - Product image: cover.png
-- Brochure PDF: pulse-shape-editable-nanosecond-fiber-laser.pdf
+- Brochure PDF (EN): pulse-waveform-editable-nanosecond-fiber-laser-en.pdf
+- Brochure PDF (ES): pulse-waveform-editable-nanosecond-fiber-laser-es.pdf
 - Waveform examples: Lorentzian, Gaussian, front-rise, rear-fall, double-M, and Voigt profiles

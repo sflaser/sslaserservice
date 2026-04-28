@@ -83,6 +83,23 @@
     };
   }
 
+  function deriveSiblingBrochureUrl(url, sourceLanguage, targetLanguage) {
+    const value = String(url || '').trim();
+    const source = String(sourceLanguage || '').trim().toLowerCase();
+    const target = String(targetLanguage || '').trim().toLowerCase();
+
+    if (!value || !source || !target || source === target) {
+      return '';
+    }
+
+    const pattern = new RegExp(`([_-])${source}(?=\\.pdf(?:[?#].*)?$)`, 'i');
+    if (!pattern.test(value)) {
+      return '';
+    }
+
+    return value.replace(pattern, `$1${target}`);
+  }
+
   function buildProductActions(item, quoteLabel) {
     const actions = [];
 
@@ -94,8 +111,15 @@
 
     if (item.brochure_url) {
       actions.push(
-        `<a class="cms-btn cms-btn-outline" href="${escapeHtml(item.brochure_url)}" target="_blank" rel="noopener">Download Brochure</a>`
+        `<a class="cms-btn cms-btn-outline" href="${escapeHtml(item.brochure_url)}" target="_blank" rel="noopener">Download Brochure (EN)</a>`
       );
+
+      const brochureEsUrl = deriveSiblingBrochureUrl(item.brochure_url, 'en', 'es');
+      if (brochureEsUrl) {
+        actions.push(
+          `<a class="cms-btn cms-btn-outline" href="${escapeHtml(brochureEsUrl)}" target="_blank" rel="noopener">Download Brochure (ES)</a>`
+        );
+      }
     }
 
     actions.push(

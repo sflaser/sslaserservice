@@ -31,10 +31,10 @@ Edit file `assets/js/cms-config.js`:
 1. Open `/admin.html`
 2. Sign in with Supabase admin account
 3. Publish blog posts and products
-4. For products, you can import Markdown with `image_url`, `brochure_url`, `purchase_url`, and a full description, then save the product after uploading an image or brochure PDF if needed.
+4. For products, you can import Markdown with `image_url`, `brochure_url`, `purchase_url`, and a full description, then save the product after uploading an image or brochure PDF if needed. If you are publishing bilingual brochures, keep the English PDF as the primary URL and place the Spanish PDF next to it with a `-es.pdf` suffix.
 4. Frontend updates automatically after publish
 
 ## Notes
 - Product `purchase_url` is now a general primary link. It can point to a checkout page, RFQ page, or product detail page.
-- Use `brochure_url` for a downloadable brochure or PDF manual. The admin form can also upload a brochure PDF to the public storage bucket.
+- Use `brochure_url` for the primary downloadable brochure or PDF manual. If you place a sibling PDF with the same base name and a `-es.pdf` suffix, the frontend will surface a Spanish download link automatically. The admin form can also upload a brochure PDF to the public storage bucket.
 - If you want native cart + checkout next, we can add Stripe Checkout via Netlify Functions.

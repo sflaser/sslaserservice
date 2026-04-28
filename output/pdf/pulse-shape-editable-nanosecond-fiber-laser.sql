@@ -57,7 +57,7 @@ Ideal for:
 - Custom optical and photonics integration
 $$,
   '/images/products/pulse-shape-editable-nanosecond-fiber-laser/cover.png',
-  '/assets/brochures/pulse-shape-editable-nanosecond-fiber-laser.pdf',
+  '/assets/brochures/pulse-waveform-editable-nanosecond-fiber-laser-en.pdf',
   0,
   'USD',
   'https://www.sslaserservice.com/#contact',

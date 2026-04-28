@@ -71,6 +71,8 @@ temp/
 *.docx
 *.pptx
 *.pdf
+!assets/brochures/pulse-waveform-editable-nanosecond-fiber-laser-en.pdf
+!assets/brochures/pulse-waveform-editable-nanosecond-fiber-laser-es.pdf
 
 # Keep images for the website but exclude large ones
 # *.jpg
