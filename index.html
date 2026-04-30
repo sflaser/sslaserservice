@@ -56,67 +56,7 @@
         gtag('config', 'G-CDW4YR5MC5');
         gtag('config', 'AW-1125868950');
     </script>
-    
-    <!-- Schema.org JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Sky Fire Laser",
-      "image": "https://www.sslaserservice.com/images/services/professional-repair-lab-home-20260418.jpg",
-      "description": "Professional solid-state laser repair, laser manufacturing, and optoelectronic component support across semiconductor manufacturing, display panel production, lidar systems, industrial processing, and scientific research.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "CN"
-      },
-      "telephone": "+86-XXX-XXXX-XXXX",
-      "email": "sales3@sflaser.net",
-      "url": "https://www.sslaserservice.com",
-      "sameAs": [
-        "https://www.linkedin.com/company/skyfire-laser"
-      ],
-      "serviceArea": {
-        "@type": "Country",
-        "name": "China"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Laser Repair Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Solid-State Laser Repair",
-              "description": "Professional repair services for industrial solid-state laser systems"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Laser System Calibration",
-              "description": "Precision calibration and testing services for laser systems"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Custom Laser Manufacturing",
-              "description": "Custom laser system design and manufacturing services"
-            }
-          }
-        ]
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "47"
-      }
-    }
-    </script>
-    <style>
+<style>
         :root {
             /* Main brand colors */
             --primary-color: #ff8c00;
@@ -5090,6 +5030,105 @@
             }
         }
         </style>
+
+  <!-- AI and search structured data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.sslaserservice.com/#organization",
+      "name": "Sky Fire Laser",
+      "alternateName": "SS Laser Service",
+      "url": "https://www.sslaserservice.com/",
+      "logo": "https://www.sslaserservice.com/images/logos/LOGO长方形.png?v=20260412c",
+      "email": "sales3@sflaser.net",
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Malaysia"
+        },
+        {
+          "@type": "Country",
+          "name": "South Korea"
+        },
+        {
+          "@type": "Country",
+          "name": "Japan"
+        },
+        {
+          "@type": "Country",
+          "name": "United States"
+        },
+        {
+          "@type": "Country",
+          "name": "Germany"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Taiwan"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.sslaserservice.com/#website",
+      "name": "SS Laser Service",
+      "url": "https://www.sslaserservice.com/",
+      "publisher": {
+        "@id": "https://www.sslaserservice.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "OfferCatalog",
+      "@id": "https://www.sslaserservice.com/#service-catalog",
+      "name": "Laser Repair, Manufacturing, and Component Support",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Solid-State Laser Repair",
+            "url": "https://www.sslaserservice.com/laser-repair/"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Laser Manufacturing Support",
+            "url": "https://www.sslaserservice.com/manufacturing/"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Optoelectronic Components and Spare Parts",
+            "url": "https://www.sslaserservice.com/components/"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.sslaserservice.com/#webpage",
+      "url": "https://www.sslaserservice.com/",
+      "name": "Sky Fire Laser - Professional Solid-State Laser Repair & Manufacturing Solutions",
+      "description": "Professional solid-state laser repair, laser manufacturing, and optoelectronic component support across semiconductor manufacturing, display panel production, lidar systems, industrial processing, and scientific research.",
+      "isPartOf": {
+        "@id": "https://www.sslaserservice.com/#website"
+      },
+      "publisher": {
+        "@id": "https://www.sslaserservice.com/#organization"
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+  </script>
 </head>
 <body>
     <form name="rfq" data-netlify="true" netlify-honeypot="bot-field" hidden>
@@ -6074,23 +6113,7 @@
 
     <script src="/assets/js/cms-config.js?v=20260306g"></script>
     <script src="/assets/js/cms-frontend.js?v=20260311b"></script>
-
-    <!-- Performance optimization meta tags -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Sky Fire Laser",
-      "url": "https://www.sslaserservice.com",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.sslaserservice.com/?s={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-
-    <script>
+<script>
         (function () {
             const params = new URLSearchParams(window.location.search);
             if (params.get('review') !== 'zh') return;

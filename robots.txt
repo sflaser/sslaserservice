@@ -1,46 +1,13 @@
-# robots.txt for Sky Fire Laser Service Website
+# robots.txt for SS Laser Service
+# Public service, product, brochure, and resource pages are open for search and AI discovery.
+# This wildcard rule applies to compliant crawlers including Googlebot, Bingbot,
+# OAI-SearchBot, GPTBot, and ChatGPT-User unless a crawler requires separate handling.
 
 User-agent: *
 Allow: /
-
-# Allow all search engines to crawl the site
-Allow: /sslaserservice.html
-Allow: /sitemap.xml
-
-# Disallow any potential admin or private directories (if they exist in the future)
-Disallow: /admin/
+Disallow: /admin.html
+Disallow: /thanks.html
 Disallow: /private/
 Disallow: /temp/
-Disallow: *.pdf$
 
-# Crawl delay to be respectful to server resources
-Crawl-delay: 1
-
-# Sitemap location
 Sitemap: https://www.sslaserservice.com/sitemap.xml
-
-# Special rules for different search engines
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Baiduspider
-Allow: /
-Crawl-delay: 2
-
-# Block bad bots and scrapers
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /
-
-User-agent: DotBot
-Disallow: / 

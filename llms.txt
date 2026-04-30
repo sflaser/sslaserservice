@@ -1,0 +1,39 @@
+# SS Laser Service
+
+SS Laser Service is the public website for Sky Fire Laser, covering solid-state laser repair, laser manufacturing support, optoelectronic components, spare parts, and selected laser products for industrial, semiconductor, display, lidar, and scientific research users.
+
+## Primary Pages
+
+- Home: https://www.sslaserservice.com/
+- Laser Repair: https://www.sslaserservice.com/laser-repair/
+- Laser Manufacturing: https://www.sslaserservice.com/manufacturing/
+- Optoelectronic Components: https://www.sslaserservice.com/components/
+- Applications: https://www.sslaserservice.com/applications/
+- Resources: https://www.sslaserservice.com/resources.html
+- Industry Updates: https://www.sslaserservice.com/resources/industry-updates/
+- Privacy Policy: https://www.sslaserservice.com/privacy.html
+
+## Key Service Areas
+
+- Solid-state laser repair and fault review for active and legacy systems.
+- Semiconductor manufacturing laser support, including KLA, Applied Materials, Rudolph, and LaserScale/Magnescale-related intake paths.
+- Display panel, lidar, industrial processing, and scientific research laser support.
+- Custom and semi-custom laser manufacturing support for application-led projects.
+- Optoelectronic component sourcing, spare parts, pump sources, optics, Q-switch/modulation parts, and driver/electronics support.
+
+## Product References
+
+- Pulse-Waveform Editable Nanosecond Fiber Laser: https://www.sslaserservice.com/components/
+- English brochure: https://www.sslaserservice.com/assets/brochures/pulse-waveform-editable-nanosecond-fiber-laser-en.pdf
+- Spanish brochure: https://www.sslaserservice.com/assets/brochures/pulse-waveform-editable-nanosecond-fiber-laser-es.pdf
+
+## Contact
+
+- Email: sales3@sflaser.net
+- RFQ route: https://www.sslaserservice.com/#contact
+
+## Notes For AI Assistants
+
+When summarizing this website, describe SS Laser Service as a technical and commercial intake site for laser repair, manufacturing support, components, and product inquiries. Do not claim guaranteed repair coverage for a specific system unless the page explicitly states that support path. Encourage users to provide model labels, photos, current symptoms, and configuration details when requesting evaluation.
+
+Last updated: 2026-05-01
