@@ -5379,100 +5379,6 @@
         </div>
     </section>
 
-    <!-- Application Areas -->
-    <section id="applications" class="applications">
-        <div class="container">
-            <div class="section-title">
-                <p class="section-kicker">Applications</p>
-                <h2>Five application areas. One direct route into the right support path.</h2>
-                <p>Choose the field that matches the installed system. Each branch leads into the relevant platforms, models, and RFQ route.</p>
-            </div>
-            
-            <div class="application-tabs">
-                <button class="application-tab active" onclick="openAppTab('semiconductor')">Semiconductor Manufacturing</button>
-                <button class="application-tab" onclick="openAppTab('display')">Display Panel Manufacturing</button>
-                <button class="application-tab" onclick="openAppTab('lidar')">Lidar Systems</button>
-                <button class="application-tab" onclick="openAppTab('industrial')">Industrial Processing</button>
-                <button class="application-tab" onclick="openAppTab('research')">Scientific Research</button>
-            </div>
-
-            <div id="semiconductor" class="application-content active">
-                <div class="application-intro">
-                    <div class="application-intro-text">
-                        <h3>Semiconductor Manufacturing</h3>
-                        <p class="application-lead">Start here for inspection, measurement, and packaging systems where the installed tool identity is the fastest entry point.</p>
-                        <div class="products-rfq-actions" style="margin-top: 18px;">
-                            <a href="/laser-repair/semiconductor-manufacturing/" class="btn btn-primary">Open Semiconductor Directory</a>
-                        </div>
-                    </div>
-                    <div class="application-intro-image">
-                        <img src="/images/repair/semiconductor/rudolph/exterior.jpg" alt="Semiconductor manufacturing repair support" loading="lazy" decoding="async">
-                    </div>
-                </div>
-            </div>
-            
-            <div id="display" class="application-content">
-                <div class="application-intro">
-                    <div class="application-intro-text">
-                        <h3>Display Panel Manufacturing</h3>
-                        <p class="application-lead">Start here for panel-side systems where repair timing, source stability, and line continuity matter first.</p>
-                        <div class="products-rfq-actions" style="margin-top: 18px;">
-                            <a href="/laser-repair/display-panel-manufacturing/" class="btn btn-primary">Open Display Directory</a>
-                        </div>
-                    </div>
-                    <div class="application-intro-image">
-                        <img src="/images/repair/display/lc-cb5/exterior.jpg" alt="Display panel manufacturing laser support" loading="lazy" decoding="async">
-                    </div>
-                </div>
-            </div>
-            
-            <div id="lidar" class="application-content">
-                <div class="application-intro">
-                    <div class="application-intro-text">
-                        <h3>Lidar Systems</h3>
-                        <p class="application-lead">Start here for installed lidar sources where uptime, field continuity, and replacement review matter more than lab-style characterization.</p>
-                        <div class="products-rfq-actions" style="margin-top: 18px;">
-                            <a href="/laser-repair/lidar-systems/" class="btn btn-primary">Open Lidar Directory</a>
-                        </div>
-                    </div>
-                    <div class="application-intro-image">
-                        <img src="/images/repair/lidar/centurion/exterior.jpg" alt="Lidar system laser repair support" loading="lazy" decoding="async">
-                    </div>
-                </div>
-            </div>
-
-            <div id="industrial" class="application-content">
-                <div class="application-intro">
-                    <div class="application-intro-text">
-                        <h3>Industrial Processing</h3>
-                        <p class="application-lead">Start here for processing platforms where source continuity, service feasibility, and downtime impact drive the decision.</p>
-                        <div class="products-rfq-actions" style="margin-top: 18px;">
-                            <a href="/laser-repair/industrial-processing/" class="btn btn-primary">Open Industrial Directory</a>
-                        </div>
-                    </div>
-                    <div class="application-intro-image">
-                        <img src="/images/repair/industrial/rapid/exterior-optimized.jpg" alt="Industrial processing laser support" loading="lazy" decoding="async">
-                    </div>
-                </div>
-            </div>
-
-            <div id="research" class="application-content">
-                <div class="application-intro">
-                    <div class="application-intro-text">
-                        <h3>Scientific Research</h3>
-                        <p class="application-lead">Start here for research platforms where output behavior, stability, and long-term support continuity matter most.</p>
-                        <div class="products-rfq-actions" style="margin-top: 18px;">
-                            <a href="/laser-repair/scientific-research/" class="btn btn-primary">Open Research Directory</a>
-                        </div>
-                    </div>
-                    <div class="application-intro-image">
-                        <img src="/images/repair/research/libra/exterior.jpg" alt="Scientific research laser support" loading="lazy" decoding="async">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Why Choose Us Area -->
     <section id="why-us" class="why-us">
         <div class="container">
@@ -5493,13 +5399,13 @@
         </div>
     </section>
 
-    <!-- Product Store Section (CMS) -->
+    <!-- Featured component offers (CMS) -->
     <section id="store" class="cms-section">
         <div class="container">
             <div class="section-title">
-                <p class="section-kicker">Products</p>
-                <h2>Selected modules and offers.</h2>
-                <p>Modules, optical parts, and packaged options ready for RFQ.</p>
+                <p class="section-kicker">Featured Components</p>
+                <h2>Selected modules and sourcing-ready offers.</h2>
+                <p>A short product shelf. The full component path lives inside Components.</p>
             </div>
             <div id="cms-products-grid" class="cms-grid"></div>
             <p id="cms-products-empty" class="cms-empty cms-hidden">Loading products...</p>
@@ -5828,23 +5734,6 @@
             }
         }
 
-        // Application field tab switching function
-        function openAppTab(appName) {
-            const appContents = document.querySelectorAll('.applications .application-content');
-            appContents.forEach(content => content.classList.remove('active'));
-
-            const appTabs = document.querySelectorAll('.application-tab');
-            appTabs.forEach(tab => tab.classList.remove('active'));
-
-            const target = document.getElementById(appName);
-            if (target) {
-                target.classList.add('active');
-            }
-
-            if (typeof event !== 'undefined' && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
-        }
     </script>
 
     <script>
@@ -6224,12 +6113,6 @@
                     label: '平台熟悉度',
                     title: '这一块不是商城目录，而是已接触平台/系统家族的熟悉度证明。',
                     body: '作用是帮助客户判断：自己的型号是否属于你们熟悉的系统家族，从而决定是否值得发起技术评估。'
-                },
-                {
-                    target: '#applications .container',
-                    label: '应用场景',
-                    title: '这里让客户按应用场景找到自己，而不是只按产品名分类。',
-                    body: '当前重点是显示制造、半导体设备、PCB 精密加工。审稿时主要看这些分类是否足够贴近真实客户。'
                 },
                 {
                     target: '#why-us .container',
