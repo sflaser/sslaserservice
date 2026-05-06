@@ -4212,6 +4212,61 @@
             margin-top: 28px;
         }
 
+        .video-proof-section {
+            background: linear-gradient(180deg, rgba(255, 252, 247, 0.86) 0%, rgba(240, 230, 217, 0.34) 100%);
+        }
+
+        .video-proof-card {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+            gap: 30px;
+            align-items: center;
+            padding: 30px;
+            border: 1px solid var(--line-subtle);
+            border-radius: 34px;
+            background: rgba(255, 252, 247, 0.86);
+            box-shadow: 0 20px 48px rgba(18, 15, 12, 0.08);
+        }
+
+        .video-proof-frame {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 26px;
+            background: #15120f;
+        }
+
+        .video-proof-frame iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-proof-copy h2 {
+            margin: 12px 0 16px;
+            font-size: clamp(2rem, 4vw, 3.7rem);
+            line-height: 1.02;
+            letter-spacing: -0.055em;
+            color: var(--text-dark);
+        }
+
+        .video-proof-copy p {
+            margin: 0;
+            color: var(--text-gray);
+            font-size: 17px;
+            line-height: 1.78;
+        }
+
+        .video-proof-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
         .about-compact {
             padding: 34px;
             text-align: center;
@@ -4795,6 +4850,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .video-proof-card {
+                grid-template-columns: 1fr;
+            }
+
             .footer-content,
             .faq-shell {
                 grid-template-columns: 1fr;
@@ -4987,8 +5046,13 @@
             }
 
             .support-summary-card,
-            .about-compact {
+            .about-compact,
+            .video-proof-card {
                 padding: 24px;
+            }
+
+            .video-proof-copy h2 {
+                font-size: clamp(2rem, 11vw, 3rem);
             }
 
             .footer-bottom {
@@ -5319,6 +5383,31 @@
                             <p>Commercial access to optical subassemblies, replacement parts, and supplier-connected component offers for teams that need faster sourcing paths.</p>
                             <a href="/components/" class="btn btn-outline">Ask About Components</a>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="service-video" class="video-proof-section">
+        <div class="container">
+            <div class="video-proof-card">
+                <div class="video-proof-frame" aria-label="SkyFire solid-state laser service video">
+                    <iframe
+                        src="https://www.youtube-nocookie.com/embed/E9ZJhTfS6pc"
+                        title="SkyFire solid-state laser service video"
+                        loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="video-proof-copy">
+                    <p class="section-kicker">Service Video</p>
+                    <h2>A quick view of the laser service workflow.</h2>
+                    <p>Watch a brief overview of how laser repair inquiries usually begin, from system identity and label photos to symptom review and the next service step.</p>
+                    <div class="video-proof-actions">
+                        <a href="/laser-repair/" class="btn btn-primary">Open Laser Repair</a>
+                        <a href="#contact" class="btn btn-outline">Send a Repair Inquiry</a>
                     </div>
                 </div>
             </div>
