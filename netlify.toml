@@ -86,6 +86,26 @@
   status = 200
 
 [[redirects]]
+  from = "/laser-support"
+  to = "/laser-support/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-support/"
+  to = "/laser-support/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/laser-support/es"
+  to = "/laser-support/es/"
+  status = 301
+
+[[redirects]]
+  from = "/laser-support/es/"
+  to = "/laser-support/es/index.html"
+  status = 200
+
+[[redirects]]
   from = "/laser-repair"
   to = "/laser-repair/"
   status = 301
