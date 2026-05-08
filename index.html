@@ -38,7 +38,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260508a">
 
     <link rel="stylesheet" href="/assets/css/cms.css?v=20260310c">
-    <link rel="stylesheet" href="/assets/css/home.css?v=20260508b">
+    <link rel="stylesheet" href="/assets/css/home.css?v=20260508c">
     
     <!-- Theme color for mobile browsers -->
     <meta name="theme-color" content="#ff8c00">
@@ -237,37 +237,66 @@
                     </div>
                 </div>
 
-                <div class="hero-visual hero-3d-visual" data-spline-src="">
-                    <div class="hero-visual-frame hero-3d-scene" aria-label="Interactive solid-state laser optical path concept">
-                        <canvas id="hero-laser-particles" aria-hidden="true"></canvas>
-                        <div class="hero-scene-stage" aria-hidden="true">
-                            <div class="hero-beam hero-beam-primary"></div>
-                            <div class="hero-beam hero-beam-secondary"></div>
-                            <div class="hero-optic hero-optic-left"></div>
-                            <div class="hero-optic hero-optic-center"></div>
-                            <div class="hero-optic hero-optic-right"></div>
-                            <div class="hero-laser-core">
-                                <span class="hero-core-slab hero-core-top"></span>
-                                <span class="hero-core-slab hero-core-mid"></span>
-                                <span class="hero-core-slab hero-core-bottom"></span>
-                                <span class="hero-core-glow"></span>
+                <div class="hero-visual hero-system-visual">
+                    <div class="hero-visual-frame hero-system-map" aria-label="SkyFire service routes and repair coverage navigator">
+                        <picture class="hero-map-photo">
+                            <source srcset="/images/services/professional-repair-lab-home-20260418.webp" type="image/webp">
+                            <img src="/images/services/professional-repair-lab-home-20260418.jpg" alt="SkyFire repair laboratory" width="960" height="960" fetchpriority="high" decoding="async">
+                        </picture>
+
+                        <div class="hero-map-overlay">
+                            <div class="hero-map-header">
+                                <p>Start from the actual system</p>
+                                <strong>Repair coverage navigator</strong>
                             </div>
-                            <div class="hero-diagnostic-chip hero-chip-a">
-                                <span>Failure mode</span>
-                                <strong>Diagnose</strong>
+
+                            <div class="hero-route-grid" aria-label="Main SkyFire service routes">
+                                <a href="/laser-repair/" class="hero-route-card hero-route-primary">
+                                    <span>Repair</span>
+                                    <strong>Diagnostics and recovery</strong>
+                                </a>
+                                <a href="/manufacturing/" class="hero-route-card">
+                                    <span>Build</span>
+                                    <strong>Custom photonics paths</strong>
+                                </a>
+                                <a href="/components/" class="hero-route-card">
+                                    <span>Source</span>
+                                    <strong>Components and legacy parts</strong>
+                                </a>
                             </div>
-                            <div class="hero-diagnostic-chip hero-chip-b">
-                                <span>Service route</span>
-                                <strong>Repair</strong>
+
+                            <div class="hero-coverage-stage">
+                                <a href="/laser-repair/semiconductor-manufacturing/" class="hero-coverage-card card-semiconductor">
+                                    <img src="/images/repair/semiconductor/laserscale/exterior.jpg" alt="Semiconductor laser system support" width="640" height="360" loading="lazy" decoding="async">
+                                    <span>Semiconductor</span>
+                                    <strong>KLA / Applied Materials / Laserscale</strong>
+                                </a>
+                                <a href="/laser-repair/display-panel-manufacturing/" class="hero-coverage-card card-display">
+                                    <img src="/images/repair/display/lc-cb5/exterior.jpg" alt="Display panel laser support" width="640" height="360" loading="lazy" decoding="async">
+                                    <span>Display Panel</span>
+                                    <strong>LC CB5 and line continuity</strong>
+                                </a>
+                                <a href="/laser-repair/lidar-systems/" class="hero-coverage-card card-lidar">
+                                    <img src="/images/repair/lidar/centurion/exterior.jpg" alt="Lidar laser system support" width="640" height="360" loading="lazy" decoding="async">
+                                    <span>Lidar Systems</span>
+                                    <strong>Centurion / CFR / Q-Smart</strong>
+                                </a>
+                                <a href="/laser-repair/industrial-processing/" class="hero-coverage-card card-industrial">
+                                    <img src="/images/repair/industrial/rapid/exterior-optimized.jpg" alt="Industrial processing laser support" width="640" height="360" loading="lazy" decoding="async">
+                                    <span>Industrial</span>
+                                    <strong>RAPID / DC 50 production uptime</strong>
+                                </a>
+                                <a href="/laser-repair/scientific-research/" class="hero-coverage-card card-research">
+                                    <img src="/images/repair/research/verdi-v18/exterior.jpg" alt="Scientific research laser support" width="640" height="360" loading="lazy" decoding="async">
+                                    <span>Research</span>
+                                    <strong>Verdi / Libra / Chameleon Ultra</strong>
+                                </a>
                             </div>
-                            <div class="hero-diagnostic-chip hero-chip-c">
-                                <span>Source path</span>
-                                <strong>Build / Source</strong>
+
+                            <div class="hero-map-footer">
+                                <span>Every card links to a real page in the repair directory.</span>
+                                <a href="/laser-repair/">Open full directory</a>
                             </div>
-                        </div>
-                        <div class="hero-scene-caption">
-                            <span>3D optical path concept</span>
-                            <strong>Repair · Build · Source</strong>
                         </div>
                     </div>
                     <div class="hero-side-panel">
@@ -835,6 +864,6 @@
     <script defer src="/assets/js/cms-config.js?v=20260306g"></script>
     <script defer src="/assets/js/cms-frontend.js?v=20260311b"></script>
     <script defer src="/assets/js/analytics.js?v=20260508a"></script>
-    <script defer src="/assets/js/home.js?v=20260508b"></script>
+    <script defer src="/assets/js/home.js?v=20260508c"></script>
 </body>
 </html>

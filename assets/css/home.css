@@ -2934,300 +2934,227 @@
             opacity: 1 !important;
         }
 
-        .hero-3d-scene {
+        .hero-system-map {
             position: relative;
             isolation: isolate;
-            min-height: 610px;
+            min-height: 640px;
             overflow: hidden;
+            color: #fff8ef;
             background:
-                radial-gradient(circle at 52% 46%, rgba(255, 140, 0, 0.24), transparent 32%),
-                radial-gradient(circle at 72% 22%, rgba(0, 85, 255, 0.18), transparent 30%),
-                linear-gradient(145deg, #090806 0%, #17120d 48%, #070706 100%);
-            box-shadow: 0 34px 86px rgba(24, 18, 12, 0.25);
+                radial-gradient(circle at 74% 14%, rgba(255, 140, 0, 0.22), transparent 26%),
+                linear-gradient(145deg, #15100c 0%, #080706 100%);
+            box-shadow: 0 34px 86px rgba(24, 18, 12, 0.24);
             perspective: 1200px;
         }
 
-        .hero-3d-scene::before,
-        .hero-3d-scene::after {
+        .hero-system-map::before,
+        .hero-system-map::after {
             content: '';
             position: absolute;
             inset: 0;
             pointer-events: none;
         }
 
-        .hero-3d-scene::before {
-            z-index: 0;
+        .hero-system-map::before {
+            z-index: 1;
             background:
-                linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-                linear-gradient(118deg, transparent 0 36%, rgba(255, 180, 96, 0.12) 47%, transparent 58%);
-            background-size: 58px 58px, 58px 58px, auto;
-            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.86), transparent 86%);
+                linear-gradient(180deg, rgba(8, 7, 6, 0.2), rgba(8, 7, 6, 0.74)),
+                linear-gradient(90deg, rgba(8, 7, 6, 0.82), rgba(8, 7, 6, 0.16) 50%, rgba(8, 7, 6, 0.72));
         }
 
-        .hero-3d-scene::after {
-            z-index: 5;
+        .hero-system-map::after {
+            z-index: 2;
             border-radius: inherit;
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 -130px 130px rgba(0, 0, 0, 0.32);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 -140px 140px rgba(0, 0, 0, 0.32);
         }
 
-        #hero-laser-particles {
+        .hero-map-photo {
             position: absolute;
             inset: 0;
-            z-index: 1;
+            z-index: 0;
+        }
+
+        .hero-map-photo img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            opacity: 0.58 !important;
+            filter: saturate(0.92) contrast(1.06);
         }
 
-        .hero-scene-stage {
+        .hero-map-overlay {
             position: absolute;
-            inset: 10% 5% 16%;
-            z-index: 2;
+            inset: 24px;
+            z-index: 3;
+            display: grid;
+            grid-template-rows: auto auto 1fr auto;
+            gap: 18px;
             transform-style: preserve-3d;
-            transform: rotateX(var(--hero-scene-x, 0deg)) rotateY(var(--hero-scene-y, 0deg));
-            transition: transform 0.18s ease-out;
         }
 
-        .hero-beam {
-            position: absolute;
-            left: 7%;
-            right: 7%;
-            top: 50%;
-            height: 4px;
-            border-radius: 999px;
-            background: linear-gradient(90deg, transparent, rgba(255, 199, 114, 0.9), #fff5d8, rgba(255, 140, 0, 0.95), transparent);
-            box-shadow: 0 0 18px rgba(255, 140, 0, 0.78), 0 0 72px rgba(255, 98, 22, 0.42);
-            transform: translateY(-50%) translateZ(72px) rotateZ(-8deg);
-            animation: heroBeamPulse 2.9s ease-in-out infinite;
+        .hero-map-header,
+        .hero-map-footer,
+        .hero-route-card,
+        .hero-coverage-card {
+            border: 1px solid rgba(255, 244, 232, 0.14);
+            background: rgba(10, 9, 8, 0.62);
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
         }
 
-        .hero-beam-secondary {
-            top: 58%;
-            height: 2px;
-            opacity: 0.58;
-            transform: translateY(-50%) translateZ(30px) rotateZ(11deg);
-            animation-duration: 3.8s;
-        }
-
-        .hero-optic {
-            position: absolute;
-            top: 50%;
-            width: 92px;
-            height: 150px;
-            border: 1px solid rgba(148, 217, 255, 0.54);
-            border-radius: 999px;
-            background:
-                linear-gradient(90deg, rgba(148, 217, 255, 0.24), rgba(255, 255, 255, 0.04) 44%, rgba(255, 199, 114, 0.18)),
-                rgba(255, 255, 255, 0.035);
-            box-shadow: inset 0 0 34px rgba(148, 217, 255, 0.18), 0 0 60px rgba(0, 85, 255, 0.12);
-            transform: translate(-50%, -50%) rotateY(58deg) translateZ(68px);
-        }
-
-        .hero-optic::before,
-        .hero-optic::after {
-            content: '';
-            position: absolute;
-            border-radius: inherit;
-        }
-
-        .hero-optic::before {
-            inset: 13px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-
-        .hero-optic::after {
-            inset: 40% 16px auto;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.54);
-            filter: blur(1px);
-        }
-
-        .hero-optic-left {
-            left: 20%;
-        }
-
-        .hero-optic-center {
-            left: 48%;
-            width: 116px;
-            height: 176px;
-            transform: translate(-50%, -50%) rotateY(66deg) translateZ(130px);
-        }
-
-        .hero-optic-right {
-            left: 78%;
-        }
-
-        .hero-laser-core {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 220px;
-            height: 142px;
-            transform-style: preserve-3d;
-            transform: translate(-50%, -50%) translateZ(118px) rotateX(62deg) rotateZ(-12deg);
-            animation: heroCoreFloat 5.4s ease-in-out infinite;
-        }
-
-        .hero-core-slab {
-            position: absolute;
-            left: 0;
-            right: 0;
-            height: 42px;
-            border: 1px solid rgba(255, 199, 114, 0.28);
-            border-radius: 18px;
-            background:
-                linear-gradient(135deg, rgba(255, 199, 114, 0.18), rgba(255, 255, 255, 0.05)),
-                linear-gradient(90deg, rgba(255, 98, 22, 0.24), transparent 54%, rgba(148, 217, 255, 0.18));
-            box-shadow: 0 22px 70px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.04);
-        }
-
-        .hero-core-top {
-            top: 0;
-            transform: translateZ(42px);
-        }
-
-        .hero-core-mid {
-            top: 50px;
-            transform: translateZ(10px);
-        }
-
-        .hero-core-bottom {
-            top: 100px;
-            transform: translateZ(-24px);
-        }
-
-        .hero-core-glow {
-            position: absolute;
-            inset: 28px 22px;
-            border-radius: 999px;
-            background: radial-gradient(circle, rgba(255, 199, 114, 0.58), rgba(255, 98, 22, 0.16) 42%, transparent 72%);
-            filter: blur(16px);
+        .hero-map-header {
+            width: min(100%, 420px);
+            padding: 18px 20px;
+            border-radius: 22px;
             transform: translateZ(72px);
         }
 
-        .hero-diagnostic-chip {
-            position: absolute;
-            z-index: 3;
-            display: grid;
-            gap: 4px;
-            min-width: 146px;
-            padding: 13px 15px;
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            border-radius: 18px;
-            background: rgba(8, 8, 7, 0.64);
-            box-shadow: 0 20px 58px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(20px);
-            transform: translateZ(160px);
-            animation: heroChipFloat 6s ease-in-out infinite;
-        }
-
-        .hero-diagnostic-chip span {
-            color: rgba(255, 249, 241, 0.58);
+        .hero-map-header p,
+        .hero-route-card span,
+        .hero-coverage-card span {
+            margin: 0 0 6px;
+            color: rgba(255, 216, 181, 0.72);
             font-size: 11px;
             font-weight: 800;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
         }
 
-        .hero-diagnostic-chip strong {
-            color: #fff9f1;
+        .hero-map-header strong {
+            display: block;
+            color: #fff8ef;
+            font-size: 24px;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-route-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            transform: translateZ(92px);
+        }
+
+        .hero-route-card {
+            display: grid;
+            min-height: 96px;
+            padding: 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .hero-route-card strong {
+            color: #fffaf4;
             font-size: 16px;
+            line-height: 1.25;
         }
 
-        .hero-chip-a {
-            left: 5%;
-            top: 18%;
+        .hero-route-primary {
+            border-color: rgba(255, 140, 0, 0.34);
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.28), rgba(10, 9, 8, 0.64));
         }
 
-        .hero-chip-b {
-            right: 6%;
-            top: 21%;
-            animation-delay: -1.4s;
+        .hero-route-card:hover,
+        .hero-coverage-card:hover {
+            border-color: rgba(255, 196, 118, 0.44);
+            transform: translateY(-4px) translateZ(110px);
         }
 
-        .hero-chip-c {
-            left: 52%;
-            bottom: 6%;
-            animation-delay: -2.8s;
+        .hero-coverage-stage {
+            position: relative;
+            min-height: 330px;
+            transform-style: preserve-3d;
+            transform: rotateX(var(--hero-map-x, 0deg)) rotateY(var(--hero-map-y, 0deg));
+            transition: transform 0.2s ease-out;
         }
 
-        .hero-scene-caption {
+        .hero-coverage-card {
             position: absolute;
-            left: 24px;
-            right: 24px;
-            bottom: 22px;
-            z-index: 6;
+            display: grid;
+            grid-template-columns: 88px minmax(0, 1fr);
+            grid-template-rows: auto auto;
+            column-gap: 14px;
+            align-items: center;
+            width: min(280px, 48%);
+            min-height: 106px;
+            padding: 12px;
+            border-radius: 22px;
+            color: #fff8ef;
+            text-decoration: none;
+            transform: translateZ(var(--card-z, 40px)) rotate(var(--card-r, 0deg));
+            transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .hero-coverage-card img {
+            grid-row: 1 / span 2;
+            width: 88px;
+            height: 82px;
+            object-fit: cover;
+            border-radius: 16px;
+            opacity: 1 !important;
+            filter: saturate(0.92) contrast(1.04);
+        }
+
+        .hero-coverage-card strong {
+            color: rgba(255, 249, 241, 0.86);
+            font-size: 14px;
+            line-height: 1.32;
+        }
+
+        .card-semiconductor {
+            --card-z: 126px;
+            --card-r: -2deg;
+            left: 4%;
+            top: 10%;
+        }
+
+        .card-display {
+            --card-z: 92px;
+            --card-r: 2deg;
+            right: 2%;
+            top: 4%;
+        }
+
+        .card-lidar {
+            --card-z: 118px;
+            --card-r: 1deg;
+            left: 26%;
+            top: 39%;
+        }
+
+        .card-industrial {
+            --card-z: 74px;
+            --card-r: -1deg;
+            left: 2%;
+            bottom: 0;
+        }
+
+        .card-research {
+            --card-z: 94px;
+            --card-r: 2deg;
+            right: 5%;
+            bottom: 2%;
+        }
+
+        .hero-map-footer {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            gap: 18px;
-            color: rgba(255, 249, 241, 0.62);
+            gap: 16px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            color: rgba(255, 249, 241, 0.72);
             font-size: 13px;
+            transform: translateZ(78px);
         }
 
-        .hero-scene-caption strong {
-            color: #ffc772;
-        }
-
-        .spline-frame {
-            position: absolute;
-            inset: 0;
-            z-index: 4;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .hero-3d-scene.has-spline-frame .hero-scene-stage,
-        .hero-3d-scene.has-spline-frame #hero-laser-particles {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        @keyframes heroBeamPulse {
-            0%,
-            100% {
-                opacity: 0.72;
-                filter: saturate(0.9);
-            }
-
-            50% {
-                opacity: 1;
-                filter: saturate(1.28);
-            }
-        }
-
-        @keyframes heroCoreFloat {
-            0%,
-            100% {
-                translate: 0 0;
-            }
-
-            50% {
-                translate: 0 -12px;
-            }
-        }
-
-        @keyframes heroChipFloat {
-            0%,
-            100% {
-                translate: 0 0;
-            }
-
-            50% {
-                translate: 0 -10px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .hero-beam,
-            .hero-laser-core,
-            .hero-diagnostic-chip {
-                animation: none;
-            }
-
-            .hero-scene-stage {
-                transition: none;
-            }
+        .hero-map-footer a {
+            color: #ffc06f;
+            font-weight: 800;
+            text-decoration: none;
+            white-space: nowrap;
         }
 
         .hero-side-panel {
@@ -5148,8 +5075,8 @@
                 margin-top: 0;
             }
 
-            .hero-3d-scene {
-                min-height: 560px;
+            .hero-system-map {
+                min-height: 600px;
             }
 
             .hero-trust-grid,
@@ -5241,8 +5168,8 @@
                 min-height: 360px;
             }
 
-            .hero-3d-scene {
-                min-height: 500px;
+            .hero-system-map {
+                min-height: 560px;
             }
 
             .mobile-menu-btn {
@@ -5400,60 +5327,43 @@
                 width: 100%;
             }
 
-            .hero-3d-scene {
-                min-height: 430px;
+            .hero-system-map {
+                min-height: auto;
                 border-radius: 26px;
             }
 
-            .hero-scene-stage {
-                inset: 9% 1% 18%;
+            .hero-map-overlay {
+                position: relative;
+                inset: auto;
+                padding: 18px;
+                gap: 14px;
             }
 
-            .hero-optic {
-                width: 68px;
-                height: 114px;
+            .hero-route-grid {
+                grid-template-columns: 1fr;
             }
 
-            .hero-optic-center {
-                width: 86px;
-                height: 134px;
+            .hero-route-card {
+                min-height: auto;
             }
 
-            .hero-laser-core {
-                width: 170px;
-            }
-
-            .hero-diagnostic-chip {
-                min-width: 116px;
-                padding: 10px 12px;
-            }
-
-            .hero-diagnostic-chip span {
-                font-size: 9px;
-            }
-
-            .hero-diagnostic-chip strong {
-                font-size: 14px;
-            }
-
-            .hero-chip-a {
-                left: 3%;
-            }
-
-            .hero-chip-b {
-                right: 3%;
-            }
-
-            .hero-chip-c {
-                left: 39%;
-            }
-
-            .hero-scene-caption {
-                left: 18px;
-                right: 18px;
-                bottom: 18px;
+            .hero-coverage-stage {
                 display: grid;
-                gap: 4px;
+                grid-template-columns: 1fr;
+                gap: 12px;
+                min-height: auto;
+                transform: none !important;
+            }
+
+            .hero-coverage-card {
+                position: relative;
+                inset: auto;
+                width: 100%;
+                transform: none;
+            }
+
+            .hero-map-footer {
+                display: grid;
             }
 
             .contact-panel-link {

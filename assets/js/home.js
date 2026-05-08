@@ -273,147 +273,26 @@
     });
   }
 
-  function initHero3DScene() {
-    const visual = document.querySelector('.hero-3d-visual');
-    const scene = visual ? visual.querySelector('.hero-3d-scene') : null;
-    const stage = scene ? scene.querySelector('.hero-scene-stage') : null;
-    const canvas = document.getElementById('hero-laser-particles');
+  function initHeroSystemMap() {
+    const map = document.querySelector('.hero-system-map');
+    const stage = map ? map.querySelector('.hero-coverage-stage') : null;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!scene) return;
+    if (!map || !stage || reduceMotion || !window.matchMedia('(pointer: fine)').matches) return;
 
-    if (visual && visual.dataset.splineSrc) {
-      const iframe = document.createElement('iframe');
-      iframe.className = 'spline-frame';
-      iframe.src = visual.dataset.splineSrc;
-      iframe.title = 'SkyFire Laser interactive optical path scene';
-      iframe.loading = 'lazy';
-      iframe.allow = 'autoplay; fullscreen; xr-spatial-tracking';
-      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-      scene.appendChild(iframe);
-      scene.classList.add('has-spline-frame');
-    }
+    map.addEventListener('pointermove', function (event) {
+      const rect = map.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
 
-    if (!reduceMotion && stage && window.matchMedia('(pointer: fine)').matches) {
-      scene.addEventListener('pointermove', function (event) {
-        const rect = scene.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
+      stage.style.setProperty('--hero-map-y', `${x * 5}deg`);
+      stage.style.setProperty('--hero-map-x', `${y * -4}deg`);
+    }, { passive: true });
 
-        stage.style.setProperty('--hero-scene-y', `${x * 9}deg`);
-        stage.style.setProperty('--hero-scene-x', `${y * -7}deg`);
-      }, { passive: true });
-
-      scene.addEventListener('pointerleave', function () {
-        stage.style.setProperty('--hero-scene-y', '0deg');
-        stage.style.setProperty('--hero-scene-x', '0deg');
-      });
-    }
-
-    if (!canvas || reduceMotion || scene.classList.contains('has-spline-frame')) return;
-
-    const context = canvas.getContext('2d', { alpha: true });
-    if (!context) return;
-
-    let width = 0;
-    let height = 0;
-    let particles = [];
-    let animationId = 0;
-    let running = true;
-
-    const makeParticle = function () {
-      const lane = height * (0.43 + Math.random() * 0.2);
-
-      return {
-        x: Math.random() * width,
-        y: lane + (Math.random() - 0.5) * height * 0.42,
-        vx: 0.08 + Math.random() * 0.28,
-        vy: (Math.random() - 0.5) * 0.16,
-        radius: 0.7 + Math.random() * 1.8,
-        alpha: 0.18 + Math.random() * 0.4,
-        warm: Math.random() > 0.28,
-      };
-    };
-
-    const resize = function () {
-      const rect = canvas.getBoundingClientRect();
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
-
-      width = Math.max(1, rect.width);
-      height = Math.max(1, rect.height);
-      canvas.width = Math.round(width * ratio);
-      canvas.height = Math.round(height * ratio);
-      context.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-      const count = Math.min(86, Math.max(30, Math.round((width * height) / 9000)));
-      particles = Array.from({ length: count }, makeParticle);
-    };
-
-    const drawBeam = function (time) {
-      const centerY = height * 0.52 + Math.sin(time / 1200) * 10;
-      const gradient = context.createLinearGradient(width * 0.08, centerY, width * 0.92, centerY);
-
-      gradient.addColorStop(0, 'rgba(255, 140, 0, 0)');
-      gradient.addColorStop(0.22, 'rgba(255, 140, 0, 0.22)');
-      gradient.addColorStop(0.5, 'rgba(255, 235, 190, 0.62)');
-      gradient.addColorStop(0.78, 'rgba(142, 216, 255, 0.2)');
-      gradient.addColorStop(1, 'rgba(142, 216, 255, 0)');
-
-      context.save();
-      context.translate(width / 2, centerY);
-      context.rotate(-0.12);
-      context.translate(-width / 2, -centerY);
-      context.strokeStyle = gradient;
-      context.lineWidth = 1.4 + Math.sin(time / 420) * 0.45;
-      context.shadowColor = 'rgba(255, 140, 0, 0.55)';
-      context.shadowBlur = 22;
-      context.beginPath();
-      context.moveTo(width * 0.06, centerY);
-      context.bezierCurveTo(width * 0.28, centerY - 38, width * 0.72, centerY + 42, width * 0.94, centerY - 4);
-      context.stroke();
-      context.restore();
-    };
-
-    const render = function (time) {
-      if (!running) return;
-
-      context.clearRect(0, 0, width, height);
-      drawBeam(time);
-
-      particles.forEach(function (particle) {
-        particle.x += particle.vx;
-        particle.y += particle.vy + Math.sin((time / 900) + particle.x * 0.01) * 0.035;
-
-        if (particle.x > width + 10 || particle.y < -10 || particle.y > height + 10) {
-          Object.assign(particle, makeParticle(), { x: -10 });
-        }
-
-        const color = particle.warm ? '255, 198, 118' : '142, 216, 255';
-
-        context.beginPath();
-        context.fillStyle = `rgba(${color}, ${particle.alpha})`;
-        context.shadowColor = `rgba(${color}, 0.42)`;
-        context.shadowBlur = 12;
-        context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        context.fill();
-      });
-
-      animationId = window.requestAnimationFrame(render);
-    };
-
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-    document.addEventListener('visibilitychange', function () {
-      running = !document.hidden;
-
-      if (running) {
-        animationId = window.requestAnimationFrame(render);
-      } else {
-        window.cancelAnimationFrame(animationId);
-      }
+    map.addEventListener('pointerleave', function () {
+      stage.style.setProperty('--hero-map-y', '0deg');
+      stage.style.setProperty('--hero-map-x', '0deg');
     });
-
-    animationId = window.requestAnimationFrame(render);
   }
 
   function initReviewMode() {
@@ -555,7 +434,7 @@
     initRfqForm();
     initHeader();
     initVideoEmbeds();
-    initHero3DScene();
+    initHeroSystemMap();
     initReviewMode();
   });
 })();
