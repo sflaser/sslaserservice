@@ -369,6 +369,7 @@ body {
   top: 18%;
   width: 56%;
   height: 62%;
+  z-index: 2;
   transform: rotateY(-18deg) rotateX(8deg) rotateZ(-2deg);
   animation: moduleFloat 7s ease-in-out infinite;
 }
@@ -378,8 +379,21 @@ body {
   top: 2%;
   width: 44%;
   height: 30%;
+  z-index: 3;
   transform: rotateY(-22deg) rotateX(10deg) rotateZ(4deg);
   animation: moduleFloat 8.5s ease-in-out infinite reverse;
+}
+
+.scene-module--tertiary {
+  left: 2%;
+  bottom: 1%;
+  width: 40%;
+  height: 26%;
+  z-index: 1;
+  border-color: rgba(255, 135, 48, 0.28);
+  background: rgba(255, 135, 48, 0.08);
+  transform: rotateY(15deg) rotateX(7deg) rotateZ(-6deg);
+  animation: moduleFloat 9.2s ease-in-out infinite;
 }
 
 .scene-beam {
