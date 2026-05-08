@@ -2934,6 +2934,302 @@
             opacity: 1 !important;
         }
 
+        .hero-3d-scene {
+            position: relative;
+            isolation: isolate;
+            min-height: 610px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 52% 46%, rgba(255, 140, 0, 0.24), transparent 32%),
+                radial-gradient(circle at 72% 22%, rgba(0, 85, 255, 0.18), transparent 30%),
+                linear-gradient(145deg, #090806 0%, #17120d 48%, #070706 100%);
+            box-shadow: 0 34px 86px rgba(24, 18, 12, 0.25);
+            perspective: 1200px;
+        }
+
+        .hero-3d-scene::before,
+        .hero-3d-scene::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .hero-3d-scene::before {
+            z-index: 0;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(118deg, transparent 0 36%, rgba(255, 180, 96, 0.12) 47%, transparent 58%);
+            background-size: 58px 58px, 58px 58px, auto;
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.86), transparent 86%);
+        }
+
+        .hero-3d-scene::after {
+            z-index: 5;
+            border-radius: inherit;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 -130px 130px rgba(0, 0, 0, 0.32);
+        }
+
+        #hero-laser-particles {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-scene-stage {
+            position: absolute;
+            inset: 10% 5% 16%;
+            z-index: 2;
+            transform-style: preserve-3d;
+            transform: rotateX(var(--hero-scene-x, 0deg)) rotateY(var(--hero-scene-y, 0deg));
+            transition: transform 0.18s ease-out;
+        }
+
+        .hero-beam {
+            position: absolute;
+            left: 7%;
+            right: 7%;
+            top: 50%;
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent, rgba(255, 199, 114, 0.9), #fff5d8, rgba(255, 140, 0, 0.95), transparent);
+            box-shadow: 0 0 18px rgba(255, 140, 0, 0.78), 0 0 72px rgba(255, 98, 22, 0.42);
+            transform: translateY(-50%) translateZ(72px) rotateZ(-8deg);
+            animation: heroBeamPulse 2.9s ease-in-out infinite;
+        }
+
+        .hero-beam-secondary {
+            top: 58%;
+            height: 2px;
+            opacity: 0.58;
+            transform: translateY(-50%) translateZ(30px) rotateZ(11deg);
+            animation-duration: 3.8s;
+        }
+
+        .hero-optic {
+            position: absolute;
+            top: 50%;
+            width: 92px;
+            height: 150px;
+            border: 1px solid rgba(148, 217, 255, 0.54);
+            border-radius: 999px;
+            background:
+                linear-gradient(90deg, rgba(148, 217, 255, 0.24), rgba(255, 255, 255, 0.04) 44%, rgba(255, 199, 114, 0.18)),
+                rgba(255, 255, 255, 0.035);
+            box-shadow: inset 0 0 34px rgba(148, 217, 255, 0.18), 0 0 60px rgba(0, 85, 255, 0.12);
+            transform: translate(-50%, -50%) rotateY(58deg) translateZ(68px);
+        }
+
+        .hero-optic::before,
+        .hero-optic::after {
+            content: '';
+            position: absolute;
+            border-radius: inherit;
+        }
+
+        .hero-optic::before {
+            inset: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .hero-optic::after {
+            inset: 40% 16px auto;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.54);
+            filter: blur(1px);
+        }
+
+        .hero-optic-left {
+            left: 20%;
+        }
+
+        .hero-optic-center {
+            left: 48%;
+            width: 116px;
+            height: 176px;
+            transform: translate(-50%, -50%) rotateY(66deg) translateZ(130px);
+        }
+
+        .hero-optic-right {
+            left: 78%;
+        }
+
+        .hero-laser-core {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 220px;
+            height: 142px;
+            transform-style: preserve-3d;
+            transform: translate(-50%, -50%) translateZ(118px) rotateX(62deg) rotateZ(-12deg);
+            animation: heroCoreFloat 5.4s ease-in-out infinite;
+        }
+
+        .hero-core-slab {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 42px;
+            border: 1px solid rgba(255, 199, 114, 0.28);
+            border-radius: 18px;
+            background:
+                linear-gradient(135deg, rgba(255, 199, 114, 0.18), rgba(255, 255, 255, 0.05)),
+                linear-gradient(90deg, rgba(255, 98, 22, 0.24), transparent 54%, rgba(148, 217, 255, 0.18));
+            box-shadow: 0 22px 70px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.04);
+        }
+
+        .hero-core-top {
+            top: 0;
+            transform: translateZ(42px);
+        }
+
+        .hero-core-mid {
+            top: 50px;
+            transform: translateZ(10px);
+        }
+
+        .hero-core-bottom {
+            top: 100px;
+            transform: translateZ(-24px);
+        }
+
+        .hero-core-glow {
+            position: absolute;
+            inset: 28px 22px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(255, 199, 114, 0.58), rgba(255, 98, 22, 0.16) 42%, transparent 72%);
+            filter: blur(16px);
+            transform: translateZ(72px);
+        }
+
+        .hero-diagnostic-chip {
+            position: absolute;
+            z-index: 3;
+            display: grid;
+            gap: 4px;
+            min-width: 146px;
+            padding: 13px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 18px;
+            background: rgba(8, 8, 7, 0.64);
+            box-shadow: 0 20px 58px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            transform: translateZ(160px);
+            animation: heroChipFloat 6s ease-in-out infinite;
+        }
+
+        .hero-diagnostic-chip span {
+            color: rgba(255, 249, 241, 0.58);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .hero-diagnostic-chip strong {
+            color: #fff9f1;
+            font-size: 16px;
+        }
+
+        .hero-chip-a {
+            left: 5%;
+            top: 18%;
+        }
+
+        .hero-chip-b {
+            right: 6%;
+            top: 21%;
+            animation-delay: -1.4s;
+        }
+
+        .hero-chip-c {
+            left: 52%;
+            bottom: 6%;
+            animation-delay: -2.8s;
+        }
+
+        .hero-scene-caption {
+            position: absolute;
+            left: 24px;
+            right: 24px;
+            bottom: 22px;
+            z-index: 6;
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            color: rgba(255, 249, 241, 0.62);
+            font-size: 13px;
+        }
+
+        .hero-scene-caption strong {
+            color: #ffc772;
+        }
+
+        .spline-frame {
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .hero-3d-scene.has-spline-frame .hero-scene-stage,
+        .hero-3d-scene.has-spline-frame #hero-laser-particles {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes heroBeamPulse {
+            0%,
+            100% {
+                opacity: 0.72;
+                filter: saturate(0.9);
+            }
+
+            50% {
+                opacity: 1;
+                filter: saturate(1.28);
+            }
+        }
+
+        @keyframes heroCoreFloat {
+            0%,
+            100% {
+                translate: 0 0;
+            }
+
+            50% {
+                translate: 0 -12px;
+            }
+        }
+
+        @keyframes heroChipFloat {
+            0%,
+            100% {
+                translate: 0 0;
+            }
+
+            50% {
+                translate: 0 -10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-beam,
+            .hero-laser-core,
+            .hero-diagnostic-chip {
+                animation: none;
+            }
+
+            .hero-scene-stage {
+                transition: none;
+            }
+        }
+
         .hero-side-panel {
             width: min(88%, 390px);
             margin-top: -88px;
@@ -4852,6 +5148,10 @@
                 margin-top: 0;
             }
 
+            .hero-3d-scene {
+                min-height: 560px;
+            }
+
             .hero-trust-grid,
             .hero-metrics,
             .application-summary-grid,
@@ -4939,6 +5239,10 @@
 
             .hero-visual-frame {
                 min-height: 360px;
+            }
+
+            .hero-3d-scene {
+                min-height: 500px;
             }
 
             .mobile-menu-btn {
@@ -5094,6 +5398,62 @@
 
             .hero-actions .btn {
                 width: 100%;
+            }
+
+            .hero-3d-scene {
+                min-height: 430px;
+                border-radius: 26px;
+            }
+
+            .hero-scene-stage {
+                inset: 9% 1% 18%;
+            }
+
+            .hero-optic {
+                width: 68px;
+                height: 114px;
+            }
+
+            .hero-optic-center {
+                width: 86px;
+                height: 134px;
+            }
+
+            .hero-laser-core {
+                width: 170px;
+            }
+
+            .hero-diagnostic-chip {
+                min-width: 116px;
+                padding: 10px 12px;
+            }
+
+            .hero-diagnostic-chip span {
+                font-size: 9px;
+            }
+
+            .hero-diagnostic-chip strong {
+                font-size: 14px;
+            }
+
+            .hero-chip-a {
+                left: 3%;
+            }
+
+            .hero-chip-b {
+                right: 3%;
+            }
+
+            .hero-chip-c {
+                left: 39%;
+            }
+
+            .hero-scene-caption {
+                left: 18px;
+                right: 18px;
+                bottom: 18px;
+                display: grid;
+                gap: 4px;
             }
 
             .contact-panel-link {
