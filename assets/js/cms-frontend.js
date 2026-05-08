@@ -180,7 +180,7 @@
     productsGrid.innerHTML = rows
       .map((item) => {
         const image = item.image_url
-          ? `<div class="cms-card-media"><img src="${escapeHtml(item.image_url)}" alt="${escapeHtml(item.name)}"></div>`
+          ? `<div class="cms-card-media"><img src="${escapeHtml(item.image_url)}" alt="${escapeHtml(item.name)}" loading="lazy" decoding="async"></div>`
           : '';
 
         const productState = getProductState(item);
@@ -234,7 +234,7 @@
     blogsGrid.innerHTML = rows
       .map((post) => {
         const image = post.cover_image_url
-          ? `<div class="cms-card-media"><img src="${escapeHtml(post.cover_image_url)}" alt="${escapeHtml(post.title)}"></div>`
+          ? `<div class="cms-card-media"><img src="${escapeHtml(post.cover_image_url)}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async"></div>`
           : '';
 
         const excerpt = post.excerpt || (post.content || '').slice(0, 180);
