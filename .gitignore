@@ -80,3 +80,6 @@ temp/
 # *.png
 # *.gif
 # *.webp 
+
+# Local Netlify folder
+.netlify
