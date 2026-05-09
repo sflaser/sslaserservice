@@ -67,12 +67,16 @@
             loading: eager;
         }
         
-        /* Lazy loading images with smooth transition */
+        /* Lazy images fade only after JS has attached a loading state.
+           CMS cards are injected later, so they must remain visible by default. */
         img[loading="lazy"] {
-            opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
+        .image-loading > img[loading="lazy"]:not(.loaded) {
+            opacity: 0;
+        }
+
         img[loading="lazy"].loaded {
             opacity: 1;
         }
