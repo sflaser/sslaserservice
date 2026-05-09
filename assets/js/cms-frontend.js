@@ -100,6 +100,16 @@
     return value.replace(pattern, `$1${target}`);
   }
 
+  function resolveOptimizedImageUrl(url) {
+    const value = String(url || '').trim();
+
+    if (value === '/images/products/pulse-shape-editable-nanosecond-fiber-laser/cover.png') {
+      return '/images/products/pulse-shape-editable-nanosecond-fiber-laser/cover-optimized.jpg';
+    }
+
+    return value;
+  }
+
   function buildProductActions(item, quoteLabel) {
     const actions = [];
 
@@ -179,8 +189,9 @@
 
     productsGrid.innerHTML = rows
       .map((item) => {
-        const image = item.image_url
-          ? `<div class="cms-card-media"><img src="${escapeHtml(item.image_url)}" alt="${escapeHtml(item.name)}" loading="lazy" decoding="async"></div>`
+        const imageUrl = resolveOptimizedImageUrl(item.image_url);
+        const image = imageUrl
+          ? `<div class="cms-card-media"><img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy" decoding="async"></div>`
           : '';
 
         const productState = getProductState(item);
