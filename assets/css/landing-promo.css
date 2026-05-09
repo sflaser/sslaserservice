@@ -183,6 +183,7 @@ body {
   display: none;
 }
 
+.hero-video-bg,
 .hero-bg,
 .hero-shade,
 .hero-scan {
@@ -190,8 +191,17 @@ body {
   inset: 0;
 }
 
-.hero-bg {
+.hero-video-bg {
   z-index: -3;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.52;
+  filter: saturate(0.88) contrast(1.08);
+}
+
+.hero-bg {
+  z-index: -4;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1324,6 +1334,10 @@ body {
     opacity: 0.44;
   }
 
+  .hero-video-bg {
+    opacity: 0.34;
+  }
+
   .hero-content h1,
   .landing-hero--immersive .btn-outline {
     color: #fffaf5;
@@ -1450,5 +1464,9 @@ body {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .hero-video-bg {
+    display: none;
   }
 }
