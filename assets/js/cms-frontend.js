@@ -102,6 +102,16 @@
 
   function resolveOptimizedImageUrl(url) {
     const value = String(url || '').trim();
+    const imageOverrides = {
+      'https://ydbviiswxofxapccpibv.supabase.co/storage/v1/object/public/site-assets/blog/1772769062741-mpcf5ny5um.jpeg':
+        '/images/blog/generated/solid-state-laser-repair-custom-solutions-20260509.jpg',
+      'https://ydbviiswxofxapccpibv.supabase.co/storage/v1/object/public/site-assets/blog/1772436725435-4uw4yozc5td.jpg':
+        '/images/blog/generated/preventive-maintenance-solid-state-lasers-20260509.jpg',
+    };
+
+    if (imageOverrides[value]) {
+      return imageOverrides[value];
+    }
 
     if (value === '/images/products/pulse-shape-editable-nanosecond-fiber-laser/cover.png') {
       return '/images/products/pulse-shape-editable-nanosecond-fiber-laser/cover-optimized.jpg';
@@ -244,8 +254,9 @@
 
     blogsGrid.innerHTML = rows
       .map((post) => {
-        const image = post.cover_image_url
-          ? `<div class="cms-card-media"><img src="${escapeHtml(post.cover_image_url)}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async"></div>`
+        const coverImageUrl = resolveOptimizedImageUrl(post.cover_image_url);
+        const image = coverImageUrl
+          ? `<div class="cms-card-media"><img src="${escapeHtml(coverImageUrl)}" alt="${escapeHtml(post.title)}" loading="lazy" decoding="async"></div>`
           : '';
 
         const excerpt = post.excerpt || (post.content || '').slice(0, 180);

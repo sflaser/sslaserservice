@@ -39,6 +39,18 @@
     });
   }
 
+  function resolveOptimizedImageUrl(url) {
+    const value = String(url || "").trim();
+    const imageOverrides = {
+      "https://ydbviiswxofxapccpibv.supabase.co/storage/v1/object/public/site-assets/blog/1772769062741-mpcf5ny5um.jpeg":
+        "/images/blog/generated/solid-state-laser-repair-custom-solutions-20260509.jpg",
+      "https://ydbviiswxofxapccpibv.supabase.co/storage/v1/object/public/site-assets/blog/1772436725435-4uw4yozc5td.jpg":
+        "/images/blog/generated/preventive-maintenance-solid-state-lasers-20260509.jpg",
+    };
+
+    return imageOverrides[value] || value;
+  }
+
   function renderTextInline(value) {
     let html = escapeHtml(value);
 
@@ -234,8 +246,10 @@
       excerptEl.textContent = post.excerpt || "";
       bodyEl.innerHTML = renderStructuredContent(post.content || "");
 
-      if (post.cover_image_url) {
-        coverEl.src = post.cover_image_url;
+      const coverImageUrl = resolveOptimizedImageUrl(post.cover_image_url);
+
+      if (coverImageUrl) {
+        coverEl.src = coverImageUrl;
         coverEl.alt = post.title || "Blog cover";
         coverEl.hidden = false;
         if (coverFrameEl) {
