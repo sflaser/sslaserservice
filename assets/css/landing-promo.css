@@ -578,6 +578,12 @@ body {
   transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
 }
 
+.route-card {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: clamp(58px, 5vw, 68px);
+}
+
 .problem-card::before,
 .route-card::before {
   content: "";
@@ -722,11 +728,12 @@ body {
 }
 
 .route-card .inline-actions {
-  position: absolute;
-  left: clamp(24px, 3vw, 34px);
-  right: clamp(24px, 3vw, 34px);
-  bottom: clamp(24px, 3vw, 34px);
-  margin-top: 0;
+  position: relative;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  margin-top: auto;
+  padding-top: 24px;
 }
 
 .journey-grid {
