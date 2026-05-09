@@ -1143,9 +1143,10 @@ body {
 }
 
 .rfq-note a {
-  color: #ffb24a;
+  color: #d9ff5f;
   font-weight: 800;
   text-decoration: none;
+  text-shadow: 0 0 14px rgba(217, 255, 95, 0.22);
 }
 
 .sr-only {
