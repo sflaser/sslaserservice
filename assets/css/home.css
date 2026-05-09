@@ -3157,77 +3157,6 @@
             white-space: nowrap;
         }
 
-        .hero-side-panel {
-            width: min(88%, 390px);
-            margin-top: -88px;
-            margin-left: auto;
-            padding: 24px;
-            border-radius: 24px;
-            background: rgba(24, 19, 14, 0.92);
-            color: rgba(255, 249, 241, 0.92);
-            box-shadow: 0 28px 60px rgba(17, 13, 10, 0.24);
-        }
-
-        .hero-side-panel h3 {
-            margin-top: 10px;
-            font-size: 24px;
-            line-height: 1.25;
-            color: #fff8ef;
-        }
-
-        .hero-panel-kicker {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: rgba(255, 230, 204, 0.62);
-        }
-
-        .hero-side-panel ul {
-            list-style: none;
-            display: grid;
-            gap: 12px;
-            margin: 18px 0 0;
-        }
-
-        .hero-side-panel li {
-            position: relative;
-            padding-left: 18px;
-            color: rgba(255, 244, 232, 0.78);
-            line-height: 1.7;
-        }
-
-        .hero-side-panel li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 11px;
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(242, 139, 35, 0.18);
-        }
-
-        .hero-panel-meta {
-            display: flex;
-            justify-content: space-between;
-            gap: 18px;
-            margin-top: 18px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255, 244, 232, 0.14);
-            color: rgba(255, 244, 232, 0.7);
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        .hero-panel-meta strong {
-            display: block;
-            color: #fff9f1;
-            font-size: 16px;
-            margin-top: 4px;
-        }
-
         .hero-trust-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -5080,11 +5009,6 @@
 
             .hero-title {
                 max-width: 12ch;
-            }
-
-            .hero-side-panel {
-                width: 100%;
-                margin-top: 0;
             }
 
             .hero-system-map {
