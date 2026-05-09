@@ -420,15 +420,18 @@ body {
 .scene-node {
   display: inline-flex;
   align-items: center;
+  z-index: 5;
   min-height: 28px;
   padding: 6px 10px;
-  border: 1px solid rgba(217, 255, 95, 0.22);
-  background: rgba(6, 10, 12, 0.64);
+  border: 1px solid rgba(217, 255, 95, 0.38);
+  background: rgba(6, 10, 12, 0.82);
   color: #e9ff9c;
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+  text-shadow: 0 0 14px rgba(217, 255, 95, 0.42);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
 }
 
 .scene-node--repair {
