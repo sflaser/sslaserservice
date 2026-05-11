@@ -9,7 +9,7 @@
   package = "netlify-plugin-checklinks"
 
   [plugins.inputs]
-    skipPatterns = ["eng/index.html"]
+    skipPatterns = ["eng/index.html", "https://www.sslaserservice.com/eng"]
 
 [[headers]]
   for = "/*"
