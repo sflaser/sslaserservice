@@ -5,6 +5,12 @@
 [build.environment]
   NODE_VERSION = "20"
 
+[[plugins]]
+  package = "netlify-plugin-checklinks"
+
+  [plugins.inputs]
+    skipPatterns = ["eng/index.html"]
+
 [[headers]]
   for = "/*"
   [headers.values]
