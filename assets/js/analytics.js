@@ -7,9 +7,19 @@
     window.dataLayer.push(arguments);
   };
 
+  const defaultConfigIds = ['G-CDW4YR5MC5', 'AW-1125868950'];
+  const extraConfigIds = (scriptTag?.dataset.configIds || '')
+    .split(',')
+    .map(function (id) {
+      return id.trim();
+    })
+    .filter(Boolean);
+  const configIds = Array.from(new Set(defaultConfigIds.concat(extraConfigIds)));
+
   window.gtag('js', new Date());
-  window.gtag('config', 'G-CDW4YR5MC5');
-  window.gtag('config', 'AW-1125868950');
+  configIds.forEach(function (id) {
+    window.gtag('config', id);
+  });
 
   if (scriptTag?.dataset.conversionSendTo) {
     if (scriptTag.dataset.conversionConfig) {
