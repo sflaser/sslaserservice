@@ -91,7 +91,7 @@
   status = 200
 
 [[redirects]]
-  from = "/eng/index.html"
+  from = "/eng.html"
   to = "/eng"
   status = 301
 
@@ -101,8 +101,13 @@
   status = 301
 
 [[redirects]]
+  from = "/eng/index.html"
+  to = "/eng"
+  status = 301
+
+[[redirects]]
   from = "/eng"
-  to = "/eng/index.html"
+  to = "/eng.html"
   status = 200
 
 [[redirects]]
