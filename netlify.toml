@@ -110,8 +110,9 @@
 
 [[redirects]]
   from = "/eng"
-  to = "/eng.html"
+  to = "/landing-eng.html"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/laser-support"
