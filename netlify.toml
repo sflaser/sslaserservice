@@ -100,11 +100,13 @@
   from = "/eng/"
   to = "/eng"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/eng/index.html"
   to = "/eng"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/eng"
