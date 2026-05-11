@@ -9,7 +9,7 @@
   package = "netlify-plugin-checklinks"
 
   [plugins.inputs]
-    skipPatterns = ["eng/index.html", "https://www.sslaserservice.com/eng"]
+    skipPatterns = ["eng/index.html", "https://www.sslaserservice.com/eng", "es/index.html", "https://www.sslaserservice.com/es"]
 
 [[headers]]
   for = "/*"
@@ -103,6 +103,12 @@
   force = true
 
 [[redirects]]
+  from = "/es"
+  to = "/laser-support/es/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/laser-support"
   to = "/eng"
   status = 301
@@ -119,13 +125,21 @@
 
 [[redirects]]
   from = "/laser-support/es"
-  to = "/laser-support/es/"
+  to = "/es"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/laser-support/es/"
-  to = "/laser-support/es/index.html"
-  status = 200
+  to = "/es"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/laser-support/es/index.html"
+  to = "/es"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/laser-repair"
