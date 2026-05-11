@@ -94,6 +94,7 @@
   from = "/eng.html"
   to = "/eng"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/eng/"
