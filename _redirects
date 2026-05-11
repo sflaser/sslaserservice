@@ -28,8 +28,12 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 
 # Blog details
 /blog /blog.html 200
-/laser-support /laser-support/ 301
-/laser-support/ /laser-support/index.html 200
+/eng/index.html /eng 301
+/eng/ /eng 301
+/eng /eng/index.html 200
+/laser-support /eng 301
+/laser-support/ /eng 301
+/laser-support/index.html /eng 301
 /laser-support/es /laser-support/es/ 301
 /laser-support/es/ /laser-support/es/index.html 200
 /laser-repair /laser-repair/ 301

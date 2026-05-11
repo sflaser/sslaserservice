@@ -91,14 +91,34 @@
   status = 200
 
 [[redirects]]
+  from = "/eng/index.html"
+  to = "/eng"
+  status = 301
+
+[[redirects]]
+  from = "/eng/"
+  to = "/eng"
+  status = 301
+
+[[redirects]]
+  from = "/eng"
+  to = "/eng/index.html"
+  status = 200
+
+[[redirects]]
   from = "/laser-support"
-  to = "/laser-support/"
+  to = "/eng"
   status = 301
 
 [[redirects]]
   from = "/laser-support/"
-  to = "/laser-support/index.html"
-  status = 200
+  to = "/eng"
+  status = 301
+
+[[redirects]]
+  from = "/laser-support/index.html"
+  to = "/eng"
+  status = 301
 
 [[redirects]]
   from = "/laser-support/es"
