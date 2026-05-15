@@ -11,3 +11,4 @@ Disallow: /private/
 Disallow: /temp/
 
 Sitemap: https://www.sslaserservice.com/sitemap.xml
+Sitemap: https://www.sslaserservice.com/sitemap-es.xml

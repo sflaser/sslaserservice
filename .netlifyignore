@@ -1,0 +1,13 @@
+node_modules/
+.git/
+.netlify/
+.npm-cache/
+.DS_Store
+*.log
+*.corrupt-backup-*.html
+
+docs/
+marketing/
+scripts/
+database/
+output/

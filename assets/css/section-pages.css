@@ -75,9 +75,9 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 12px;
   position: relative;
-  padding: 14px 18px;
+  padding: 12px 14px;
   border-radius: 24px;
   border: 1px solid var(--line);
   background: rgba(255, 251, 245, 0.9);
@@ -91,32 +91,43 @@ textarea {
 }
 
 .brand img {
-  height: 42px;
+  height: 36px;
   display: block;
 }
 
 .nav-shell {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
   margin-left: auto;
+  min-width: 0;
 }
 
 .nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4px;
 }
 
 .nav a,
 .btn {
   text-decoration: none;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   text-transform: uppercase;
-  padding: 10px 14px;
+  padding: 8px 9px;
   border-radius: 999px;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+.nav-language {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
 }
 
 .nav a:hover,
@@ -549,6 +560,18 @@ textarea {
   line-height: 1.7;
 }
 
+.info-card ul {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.info-card li + li {
+  margin-top: 6px;
+}
+
 .short-video-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -839,6 +862,11 @@ textarea {
     gap: 10px;
   }
 
+  .nav-language {
+    display: flex;
+    justify-content: center;
+  }
+
   .nav a,
   .btn {
     width: 100%;
@@ -920,5 +948,464 @@ textarea {
   .note-card p,
   .model-card p {
     font-size: 16px;
+  }
+}
+
+/* Production Factory inspired shared page pass */
+@font-face {
+  font-family: "Production Montserrat";
+  src: url("/assets/fonts/production-factory/Montserrat-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Production Roboto";
+  src: url("/assets/fonts/production-factory/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --brand: #ffb703;
+  --brand-dark: #d99a00;
+  --brand-soft: rgba(255, 183, 3, 0.18);
+  --text: #111827;
+  --muted: #4f5f73;
+  --line: rgba(27, 38, 59, 0.14);
+  --surface: #ffffff;
+  --surface-strong: #ffffff;
+  --factory-yellow: #ffb703;
+  --factory-navy: #1b263b;
+  --factory-blue: #415a77;
+  --factory-pale: #f5fafd;
+  --page-max: 1480px;
+  --page-gutter: clamp(20px, 3vw, 48px);
+  --font-sans: "Production Roboto", "Avenir Next", "SF Pro Text", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+  --font-display: "Production Montserrat", "Avenir Next", "SF Pro Display", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+}
+
+body {
+  color: var(--text);
+  background: var(--factory-pale);
+  font-family: var(--font-sans);
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  letter-spacing: 0;
+}
+
+.page-shell {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 0 84px;
+  overflow-x: hidden;
+}
+
+.page-shell > .page-hero,
+.page-shell > .section,
+.page-shell > .cta-band,
+.page-shell > .footer-strip {
+  width: min(calc(100% - (var(--page-gutter) * 2)), var(--page-max));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.topbar {
+  width: 100%;
+  align-items: stretch;
+  gap: 0;
+  overflow: visible;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--factory-blue);
+  box-shadow: 0 4px 18px rgba(13, 24, 38, 0.18);
+}
+
+.brand {
+  align-items: center;
+  min-width: min(32vw, 320px);
+  padding: 10px 60px 10px 18px;
+  background: var(--factory-yellow);
+  clip-path: polygon(0 0, calc(100% - 38px) 0, 100% 100%, 0 100%);
+}
+
+.brand img {
+  height: 42px;
+  width: auto;
+  max-width: 250px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.nav-shell {
+  padding: 0 14px 0 18px;
+}
+
+.nav a,
+.nav-language {
+  color: #f8fbff;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.nav a,
+.btn {
+  border-radius: 2px;
+  letter-spacing: 0;
+}
+
+.nav a:hover,
+.nav a.is-current {
+  color: var(--factory-yellow);
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.btn {
+  min-height: 46px;
+  padding: 0 22px;
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.btn-primary {
+  background: var(--factory-yellow);
+  color: var(--factory-navy);
+  box-shadow: none;
+}
+
+.btn-outline {
+  border-color: rgba(27, 38, 59, 0.28);
+  background: transparent;
+  color: var(--factory-navy);
+}
+
+.btn-primary:hover,
+.btn-outline:hover {
+  background: var(--factory-navy);
+  border-color: var(--factory-navy);
+  color: #ffffff;
+}
+
+.mobile-menu-btn {
+  border-radius: 2px;
+}
+
+.eyebrow,
+.metric-card strong,
+.scope-card strong,
+.app-card strong,
+.brand-card strong,
+.model-card strong,
+.note-card strong,
+.info-card strong,
+.short-video-copy strong,
+.visual-copy strong,
+.footer-copy strong {
+  width: fit-content;
+  border: 0;
+  border-radius: 0;
+  background: var(--factory-yellow);
+  color: var(--factory-navy);
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 100%, 0 100%);
+  padding: 7px 20px 7px 9px;
+  font-family: var(--font-display);
+  letter-spacing: 0;
+}
+
+.page-hero {
+  margin-top: 34px;
+}
+
+.panel,
+.metric-card,
+.scope-card,
+.app-card,
+.brand-card,
+.model-card,
+.note-card,
+.info-card,
+.short-video-card,
+.visual-card,
+.cta-band,
+.footer-strip {
+  border-radius: 8px;
+  border: 1px solid rgba(27, 38, 59, 0.14);
+  background: #ffffff;
+  box-shadow: 0 18px 38px rgba(27, 38, 59, 0.1);
+}
+
+.page-hero .hero-copy {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(27, 38, 59, 0.96), rgba(27, 38, 59, 0.82)),
+    url("/images/services/professional-repair-lab-home-20260418.jpg") center center / cover no-repeat;
+  color: #ffffff;
+}
+
+.page-hero .hero-copy::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 16px;
+  background: var(--factory-yellow);
+  clip-path: polygon(0 100%, 30% 100%, 36% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.page-hero .hero-copy h1 {
+  color: #ffffff;
+  font-size: 52px;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.page-hero .hero-copy p {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+.page-hero .hero-copy .btn-outline {
+  border-color: rgba(255, 255, 255, 0.56);
+  color: #ffffff;
+}
+
+.section-head h2,
+.cta-band h2 {
+  color: var(--factory-navy);
+  font-size: 36px;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.hero-copy p,
+.panel p,
+.app-card p,
+.scope-card p,
+.metric-card p,
+.note-card p,
+.model-card p,
+.brand-card p,
+.footer-copy p,
+.section-head p,
+.info-card p,
+.short-video-copy p,
+.visual-copy p {
+  color: var(--muted);
+  line-height: 1.68;
+}
+
+.page-hero .metric-card {
+  border-color: rgba(27, 38, 59, 0.14);
+  padding-left: 24px;
+}
+
+.brand-card,
+.model-card,
+.app-card,
+.scope-card,
+.info-card,
+.note-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-card::before,
+.model-card::before,
+.app-card::before,
+.scope-card::before,
+.info-card::before,
+.note-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 42%;
+  height: 8px;
+  background: var(--factory-blue);
+  clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.brand-card h3,
+.model-card h3,
+.app-card h3,
+.scope-card h3,
+.info-card h3,
+.short-video-copy h3,
+.visual-copy h3 {
+  color: var(--factory-navy);
+  letter-spacing: 0;
+}
+
+.short-video-card,
+.visual-card {
+  border-radius: 8px;
+}
+
+.short-video-frame,
+.visual-card img {
+  border-radius: 0;
+}
+
+.link-list a {
+  border-radius: 4px;
+  background: #f5fafd;
+}
+
+.link-list a:hover {
+  background: var(--factory-yellow);
+  color: var(--factory-navy);
+}
+
+.cta-band {
+  border: 0;
+  background:
+    linear-gradient(90deg, rgba(27, 38, 59, 0.96), rgba(27, 38, 59, 0.86)),
+    url("/images/services/industrial-processing-20260414.jpg") center center / cover no-repeat;
+  color: #ffffff;
+}
+
+.cta-band h2,
+.cta-band p,
+.cta-band li {
+  color: #ffffff;
+}
+
+.cta-band .eyebrow {
+  background: var(--factory-yellow);
+  color: var(--factory-navy);
+}
+
+.cta-band .btn-outline {
+  border-color: rgba(255, 255, 255, 0.56);
+  color: #ffffff;
+}
+
+.footer-strip {
+  border-top: 10px solid var(--factory-yellow);
+}
+
+.footer-links a {
+  border-radius: 2px;
+  background: #f5fafd;
+  color: var(--factory-navy);
+}
+
+.footer-links a:hover {
+  background: var(--factory-yellow);
+}
+
+@media (max-width: 1080px) {
+  .page-shell {
+    width: 100%;
+  }
+
+  .brand {
+    min-width: 250px;
+  }
+
+  .page-hero .hero-copy h1 {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 980px) {
+  .topbar {
+    align-items: center;
+    min-height: 64px;
+  }
+
+  .brand {
+    align-self: stretch;
+  }
+
+  .mobile-menu-btn {
+    margin-left: auto;
+    margin-right: 12px;
+    border: 0;
+    background: var(--factory-yellow);
+    color: var(--factory-navy);
+    box-shadow: none;
+  }
+
+  .nav-shell {
+    top: calc(100% + 10px);
+    border-radius: 0;
+    border-color: rgba(255, 255, 255, 0.12);
+    background: var(--factory-navy);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+  }
+
+  .nav a {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .mobile-nav-foot {
+    color: rgba(255, 255, 255, 0.78);
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: 100%;
+  }
+
+  .brand {
+    min-width: 188px;
+    padding: 10px 38px 10px 12px;
+  }
+
+  .brand img {
+    height: 34px;
+  }
+
+  .panel,
+  .metric-card,
+  .scope-card,
+  .app-card,
+  .brand-card,
+  .model-card,
+  .note-card,
+  .info-card,
+  .short-video-card,
+  .visual-card,
+  .cta-band,
+  .footer-strip {
+    border-radius: 8px;
+  }
+
+  .page-hero .hero-copy h1 {
+    font-size: 34px;
+    line-height: 1.12;
+  }
+
+  .section-head h2,
+  .cta-band h2 {
+    font-size: 28px;
   }
 }

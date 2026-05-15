@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4E0E1RLWN4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4E0E1RLWN4');
+  </script>
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inquiry Received | Sky Fire Laser</title>
   <meta name="robots" content="noindex,nofollow">
@@ -111,20 +119,30 @@
 
     .nav {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 6px;
     }
 
     .nav a,
     .btn {
       text-decoration: none;
       color: var(--text);
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0;
       text-transform: uppercase;
       padding: 10px 14px;
       border-radius: 999px;
+      white-space: nowrap;
+      line-height: 1.1;
+    }
+
+    .nav-language {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
     }
 
     .nav a:hover {
@@ -325,7 +343,14 @@
       }
     }
   </style>
-  <script defer src="/assets/js/analytics.js?v=20260508a" data-conversion-config="AW-11258689506" data-conversion-send-to="AW-11258689506/y0wjCKzz_pUZEOLvx_gp" data-conversion-value="1" data-conversion-currency="USD"></script>
+  <link rel="stylesheet" href="/assets/css/utility-template.css?v=20260515c">
+  <script defer src="/assets/js/analytics.js?v=20260511a" data-page-type="thank_you" data-conversion-config="AW-11258689506" data-conversion-send-to="AW-11258689506/y0wjCKzz_pUZEOLvx_gp" data-conversion-value="1" data-conversion-currency="USD"></script>
+  <link rel="canonical" href="https://www.sslaserservice.com/thanks.html">
+  <link rel="alternate" hreflang="en" href="https://www.sslaserservice.com/thanks.html">
+  <link rel="alternate" hreflang="es" href="https://www.sslaserservice.com/es/thanks.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.sslaserservice.com/thanks.html">
+
+
 </head>
 <body>
   <main class="shell">
@@ -355,7 +380,7 @@
             <a href="mailto:sales3@sflaser.net" class="mobile-nav-cta btn btn-outline">Email Technical Sales</a>
           </div>
         </div>
-      </nav>
+      <span data-lang-switch class="nav-language"><a href="/thanks.html" class="lang-option is-current" aria-current="true">EN</a> / <a href="/es/thanks.html" class="lang-option">ES</a></span></nav>
     </header>
 
     <section class="hero">

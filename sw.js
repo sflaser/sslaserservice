@@ -1,15 +1,12 @@
 // Service Worker for Sky Fire Laser Website
-// Version 1.2.1
+// Version 1.2.2
 
-const SW_VERSION = '1.2.1';
+const SW_VERSION = '1.2.2';
 const STATIC_CACHE_NAME = `skyfire-static-v${SW_VERSION}`;
 const DYNAMIC_CACHE_NAME = `skyfire-dynamic-v${SW_VERSION}`;
 
 // Only cache specific same-origin paths as static assets.
 const STATIC_PATHS = [
-    '/',
-    '/index.html',
-    '/sslaserservice.html',
     '/admin.html',
     '/blog.html',
     '/favicon.ico',
@@ -81,15 +78,15 @@ self.addEventListener('fetch', event => {
     }
 
     // Handle different types of requests
-    if (isStaticAsset(request.url)) {
+    if (isHTMLRequest(request)) {
+        // HTML - network first strategy so homepage/template updates are visible after deploy
+        event.respondWith(networkFirstStrategy(request));
+    } else if (isStaticAsset(request.url)) {
         // Static assets - cache first strategy
         event.respondWith(cacheFirstStrategy(request));
     } else if (isImageRequest(request)) {
         // Images - cache first with dynamic caching
         event.respondWith(cacheFirstWithDynamicCache(request));
-    } else if (isHTMLRequest(request)) {
-        // HTML - network first strategy
-        event.respondWith(networkFirstStrategy(request));
     } else {
         // Other resources - network first
         event.respondWith(networkFirstStrategy(request));

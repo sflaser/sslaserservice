@@ -142,6 +142,29 @@
   force = true
 
 [[redirects]]
+  from = "/sg"
+  to = "/sg/"
+  status = 301
+
+[[redirects]]
+  from = "/sg/"
+  to = "/sg/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/sg/laser-repair"
+  to = "/sg/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sg/laser-repair/"
+  to = "/sg/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/laser-repair"
   to = "/laser-repair/"
   status = 301

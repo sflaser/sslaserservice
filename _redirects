@@ -36,6 +36,10 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 /laser-support/es /es 301!
 /laser-support/es/ /es 301!
 /laser-support/es/index.html /es 301!
+/sg /sg/ 301
+/sg/ /sg/index.html 200!
+/sg/laser-repair /sg/ 301!
+/sg/laser-repair/ /sg/ 301!
 /laser-repair /laser-repair/ 301
 /laser-repair/semiconductor-manufacturing /laser-repair/semiconductor-manufacturing/ 301
 /laser-repair/semiconductor-manufacturing/kla /laser-repair/semiconductor-manufacturing/kla/ 301

@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4E0E1RLWN4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4E0E1RLWN4');
+  </script>
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy | SS Laser Service</title>
   <meta name="description" content="Privacy Policy for SS Laser Service. Learn how we collect, use, and protect information submitted through RFQ forms, email, and advertising lead forms.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://www.sslaserservice.com/privacy.html">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260412c">
+  <link rel="alternate" hreflang="en" href="https://www.sslaserservice.com/privacy.html">
+  <link rel="alternate" hreflang="es" href="https://www.sslaserservice.com/es/privacy.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.sslaserservice.com/privacy.html">
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260412c">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260412c">
   <link rel="shortcut icon" href="/favicon-32x32.png?v=20260412c">
   <style>
@@ -51,15 +64,18 @@
     .brand img { width: 44px; height: 44px; object-fit: contain; }
     .nav {
       display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 10px;
       font-family: Arial, sans-serif;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
+      white-space: nowrap;
     }
-    .nav a { text-decoration: none; color: var(--muted); }
+    .nav a { text-decoration: none; color: var(--muted); white-space: nowrap; }
+    .nav-language { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
     .hero {
       margin: 32px 0 28px;
       padding: clamp(32px, 6vw, 72px);
@@ -162,6 +178,7 @@
       .shell { width: min(100% - 28px, 1120px); }
     }
   </style>
+  <link rel="stylesheet" href="/assets/css/utility-template.css?v=20260515c">
   <script defer src="/assets/js/analytics.js?v=20260508a"></script>
 <!-- AI and search structured data -->
   <script type="application/ld+json">
@@ -207,8 +224,7 @@
 <body>
   <header class="shell topbar">
     <a class="brand" href="/" aria-label="SS Laser Service home">
-      <img src="/favicon-32x32.png?v=20260412c" alt="SS Laser Service logo">
-      <span>SS Laser Service</span>
+      <img src="/images/logos/LOGO长方形.png?v=20260412c" alt="SS Laser Service logo">
     </a>
     <nav class="nav" aria-label="Primary navigation">
       <a href="/">Home</a>
@@ -216,7 +232,7 @@
       <a href="/manufacturing/">Manufacturing</a>
       <a href="/components/">Components</a>
       <a href="/#contact">Contact</a>
-    </nav>
+    <span data-lang-switch class="nav-language"><a href="/privacy.html" class="lang-option is-current" aria-current="true">EN</a> / <a href="/es/privacy.html" class="lang-option">ES</a></span></nav>
   </header>
 
   <main class="shell">

@@ -1,11 +1,28 @@
+@font-face {
+  font-family: "Production Montserrat";
+  src: url("/assets/fonts/production-factory/Montserrat-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Production Roboto";
+  src: url("/assets/fonts/production-factory/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
-  --bg: #f8f9fb;
+  --bg: #f5fafd;
   --card: #ffffff;
-  --text: #1f2937;
-  --muted: #6b7280;
-  --primary: #ff8c00;
+  --text: #17223a;
+  --muted: #4f5f73;
+  --primary: #ffb703;
+  --navy: #1b263b;
+  --blue: #415a77;
   --danger: #c62828;
-  --border: #e5e7eb;
+  --border: rgba(27, 38, 59, 0.14);
+  --shadow: 0 18px 38px rgba(27, 38, 59, 0.1);
 }
 
 * {
@@ -14,37 +31,70 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: var(--bg);
+  font-family: "Production Roboto", "Avenir Next", "SF Pro Text", Arial, sans-serif;
+  background:
+    linear-gradient(180deg, rgba(245, 250, 253, 0.95), rgba(239, 246, 251, 0.98)),
+    url("/images/services/industrial-processing-20260414.jpg") center top / cover fixed no-repeat;
   color: var(--text);
 }
 
 .admin-shell {
-  max-width: 1100px;
+  width: min(calc(100% - 72px), 1480px);
+  max-width: none;
   margin: 0 auto;
-  padding: 28px 16px 56px;
+  padding: 42px 0 64px;
 }
 
 .admin-header {
+  position: relative;
+  overflow: hidden;
   margin-bottom: 24px;
+  padding: 34px;
+  border: 1px solid rgba(121, 224, 255, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(27, 38, 59, 0.96), rgba(27, 38, 59, 0.84)),
+    url("/images/services/professional-repair-lab-home-20260418.jpg") center / cover no-repeat;
+  color: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+.admin-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  background: var(--primary);
 }
 
 .admin-header h1 {
   margin: 0;
-  font-size: 30px;
+  font-family: "Production Montserrat", "Avenir Next", Arial, sans-serif;
+  font-size: clamp(34px, 5vw, 58px);
+  letter-spacing: 0;
 }
 
 .admin-header p {
   margin: 10px 0 0;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.76);
 }
 
 .admin-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px;
-  margin-bottom: 16px;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+}
+
+.admin-card h2,
+.toolbar strong {
+  font-family: "Production Montserrat", "Avenir Next", Arial, sans-serif;
+  color: var(--navy);
+  letter-spacing: 0;
 }
 
 .grid-2 {
@@ -72,9 +122,18 @@ textarea,
 select {
   width: 100%;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 10px 12px;
   background: #fff;
+  color: var(--text);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(255, 183, 3, 0.14);
+  outline: none;
 }
 
 textarea {
@@ -109,9 +168,9 @@ textarea {
 }
 
 .field-hint code {
-  background: #f3f4f6;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
+  background: #f7fbff;
+  border: 1px solid rgba(27, 38, 59, 0.12);
+  border-radius: 2px;
   padding: 1px 5px;
 }
 
@@ -130,10 +189,13 @@ textarea {
 
 .btn {
   border: none;
-  border-radius: 8px;
+  border-radius: 2px;
   padding: 10px 14px;
   cursor: pointer;
-  font-weight: 600;
+  font-family: "Production Montserrat", "Avenir Next", Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .btn-sm {
@@ -144,25 +206,32 @@ textarea {
 .btn-tool {
   padding: 6px 10px;
   font-size: 12px;
-  border: 1px solid #ffd7a8;
-  background: #fff8ef;
-  color: #8a4b00;
+  border: 1px solid rgba(27, 38, 59, 0.18);
+  background: #f7fbff;
+  color: var(--navy);
 }
 
 .btn-tool:hover {
   border-color: var(--primary);
-  background: #fff1df;
+  background: rgba(255, 183, 3, 0.14);
 }
 
 .btn-primary {
   background: var(--primary);
-  color: #fff;
+  color: var(--navy);
 }
 
 .btn-outline {
-  border: 1px solid var(--primary);
-  color: var(--primary);
+  border: 1px solid rgba(27, 38, 59, 0.24);
+  color: var(--navy);
   background: #fff;
+}
+
+.btn-primary:hover,
+.btn-outline:hover {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #ffffff;
 }
 
 .btn-danger {
@@ -180,7 +249,7 @@ textarea {
 
 .status {
   font-size: 14px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .status.error {
@@ -220,19 +289,19 @@ textarea {
 .badge {
   font-size: 12px;
   padding: 3px 8px;
-  border-radius: 999px;
+  border-radius: 2px;
   font-weight: 600;
   display: inline-block;
 }
 
 .badge.published {
-  background: #dcfce7;
-  color: #166534;
+  background: rgba(65, 90, 119, 0.14);
+  color: var(--navy);
 }
 
 .badge.draft {
-  background: #fef3c7;
-  color: #92400e;
+  background: rgba(255, 183, 3, 0.2);
+  color: var(--navy);
 }
 
 .hidden {
@@ -240,6 +309,11 @@ textarea {
 }
 
 @media (max-width: 900px) {
+  .admin-shell {
+    width: min(calc(100% - 28px), 720px);
+    padding-top: 20px;
+  }
+
   .grid-2 {
     grid-template-columns: 1fr;
   }
