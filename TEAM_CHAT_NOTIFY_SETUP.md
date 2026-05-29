@@ -2,34 +2,29 @@
 
 这个站点的博客不是 Markdown 文件仓库，而是通过 `/admin.html` 发布到 Supabase CMS。
 
-现在已经接入自动通知逻辑：当你在后台保存一篇 `Published` 状态的新博客时，后台会调用 Netlify Function，然后把消息发到钉钉群或企业微信群。
+现在已经接入自动通知逻辑：当你在后台保存一篇 `Published` 状态的新博客时，后台会调用 Netlify Function，然后把消息发到企业微信群。
 
 ## 你需要手动做的事
 
-### 1. 在钉钉群里创建机器人
+### 1. 在企业微信群里创建机器人
 
-钉钉群里打开：
+企业微信群里打开：
 
 ```text
-群设置 -> 智能群助手 -> 添加机器人 -> 自定义
+群设置 -> 群机器人 -> 添加机器人
 ```
 
-建议安全设置选择“加签”。创建后复制：
+创建后复制 webhook：
 
 ```text
 Webhook
-加签 Secret
 ```
 
 Webhook 类似：
 
 ```text
-https://oapi.dingtalk.com/robot/send?access_token=xxxx
+https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxxx
 ```
-
-Secret 一般以 `SEC` 开头。
-
-如果你用的是企业微信，也可以只配置企业微信机器人 webhook。
 
 ### 2. 在 Netlify 里添加环境变量
 
@@ -39,26 +34,18 @@ Secret 一般以 `SEC` 开头。
 Site configuration -> Environment variables
 ```
 
-如果用钉钉，添加：
+添加：
 
 ```text
-DINGTALK_WEBHOOK_URL = 钉钉机器人 Webhook
-DINGTALK_SECRET = 钉钉机器人加签 Secret
 BLOG_SITE_URL = https://www.sslaserservice.com
 SUPABASE_URL = https://ydbviiswxofxapccpibv.supabase.co
 SUPABASE_ANON_KEY = assets/js/cms-config.js 里的 supabaseAnonKey
-```
-
-如果用企业微信，添加：
-
-```text
 WECOM_WEBHOOK_URL = 企业微信群机器人 Webhook
-BLOG_SITE_URL = https://www.sslaserservice.com
-SUPABASE_URL = https://ydbviiswxofxapccpibv.supabase.co
-SUPABASE_ANON_KEY = assets/js/cms-config.js 里的 supabaseAnonKey
 ```
 
-不要把 webhook 或 secret 写进仓库。
+不要把 webhook 写进仓库。
+
+如果某天需要改成钉钉，函数里也保留了 `DINGTALK_WEBHOOK_URL` 和 `DINGTALK_SECRET` 兼容入口；但公司主流程只需要配置企业微信。
 
 ### 3. 推送代码并重新部署
 

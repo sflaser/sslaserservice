@@ -123,10 +123,10 @@ exports.handler = async function handler(event) {
     return json(405, { ok: false, error: "Method not allowed." });
   }
 
-  const channel = process.env.DINGTALK_WEBHOOK_URL
-    ? "dingtalk"
-    : process.env.WECOM_WEBHOOK_URL
-      ? "wecom"
+  const channel = process.env.WECOM_WEBHOOK_URL
+    ? "wecom"
+    : process.env.DINGTALK_WEBHOOK_URL
+      ? "dingtalk"
       : "";
 
   if (!channel) {
@@ -164,10 +164,10 @@ exports.handler = async function handler(event) {
       url: buildBlogUrl(slug),
     };
 
-    if (channel === "dingtalk") {
-      await sendDingTalk(post);
-    } else {
+    if (channel === "wecom") {
       await sendWeCom(post);
+    } else {
+      await sendDingTalk(post);
     }
 
     return json(200, { ok: true, sent: true, channel });
