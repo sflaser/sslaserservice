@@ -972,8 +972,8 @@ body {
 }
 
 .cta-band--landing .eyebrow {
-  background: rgba(242, 139, 35, 0.16);
-  border-color: rgba(242, 139, 35, 0.32);
+  background: rgba(255, 140, 0, 0.16);
+  border-color: rgba(255, 140, 0, 0.32);
   color: #ffe1b8;
 }
 
@@ -1578,7 +1578,7 @@ body:has(.page-shell--campaign) {
   min-height: 72px;
   padding: 12px 64px 12px 22px;
   border-radius: 0;
-  background: #ffb703;
+  background: #ff8c00;
   clip-path: polygon(0 0, calc(100% - 42px) 0, 100% 100%, 0 100%);
 }
 
@@ -1596,7 +1596,7 @@ body:has(.page-shell--campaign) {
 }
 
 .topbar-link:hover {
-  color: #ffb703;
+  color: #ff8c00;
 }
 
 .language-switch {
@@ -1610,7 +1610,7 @@ body:has(.page-shell--campaign) {
 }
 
 .language-switch a[aria-current="true"] {
-  background: #ffb703;
+  background: #ff8c00;
   color: #1b263b;
 }
 
@@ -1634,8 +1634,8 @@ body:has(.page-shell--campaign) {
 }
 
 .page-shell--campaign .btn-primary {
-  border-color: #ffb703;
-  background: #ffb703;
+  border-color: #ff8c00;
+  background: #ff8c00;
   color: #1b263b;
   box-shadow: none;
 }
@@ -1675,8 +1675,8 @@ body:has(.page-shell--campaign) {
 .route-card::before,
 .journey-step::after {
   border-radius: 0;
-  background: #ffb703;
-  box-shadow: 0 0 18px rgba(255, 183, 3, 0.24);
+  background: #ff8c00;
+  box-shadow: 0 0 18px rgba(255, 140, 0, 0.24);
 }
 
 .hero-eyebrow,
@@ -1684,7 +1684,7 @@ body:has(.page-shell--campaign) {
 .cta-band--landing .eyebrow {
   border: 0;
   border-radius: 0;
-  background: #ffb703;
+  background: #ff8c00;
   color: #1b263b;
   clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 100%, 0 100%);
 }
@@ -1701,8 +1701,8 @@ body:has(.page-shell--campaign) {
 
 .hero-tag:hover,
 .brand-pills a:hover {
-  border-color: #ffb703;
-  background: rgba(255, 183, 3, 0.16);
+  border-color: #ff8c00;
+  background: rgba(255, 140, 0, 0.16);
   box-shadow: none;
 }
 
@@ -1719,19 +1719,19 @@ body:has(.page-shell--campaign) {
 }
 
 .scene-module--tertiary {
-  border-color: rgba(255, 183, 3, 0.34);
-  background: rgba(255, 183, 3, 0.08);
+  border-color: rgba(255, 140, 0, 0.34);
+  background: rgba(255, 140, 0, 0.08);
 }
 
 .scene-beam {
-  background: linear-gradient(90deg, transparent, #ffb703, rgba(121, 224, 255, 0.78), transparent);
-  box-shadow: 0 0 22px rgba(255, 183, 3, 0.42);
+  background: linear-gradient(90deg, transparent, #ff8c00, rgba(121, 224, 255, 0.78), transparent);
+  box-shadow: 0 0 22px rgba(255, 140, 0, 0.42);
 }
 
 .scene-node {
-  border-color: rgba(255, 183, 3, 0.5);
+  border-color: rgba(255, 140, 0, 0.5);
   background: rgba(27, 38, 59, 0.9);
-  color: #ffb703;
+  color: #ff8c00;
   text-shadow: none;
 }
 
@@ -1776,7 +1776,7 @@ body:has(.page-shell--campaign) {
 .route-card strong,
 .sector-card strong,
 .contact-panel-label {
-  color: #ffb703;
+  color: #ff8c00;
 }
 
 .problem-card h3,
@@ -1801,18 +1801,18 @@ body:has(.page-shell--campaign) {
 }
 
 .route-card::after {
-  color: rgba(255, 183, 3, 0.16);
+  color: rgba(255, 140, 0, 0.16);
 }
 
 .review-flow .step-no {
   border: 0;
   border-radius: 2px;
-  background: #ffb703;
+  background: #ff8c00;
   color: #1b263b;
 }
 
 .landing-rfq-card::before {
-  background: #ffb703;
+  background: #ff8c00;
 }
 
 .rfq-field input,
@@ -1824,12 +1824,12 @@ body:has(.page-shell--campaign) {
 .rfq-field input:focus,
 .rfq-field select:focus,
 .rfq-field textarea:focus {
-  border-color: #ffb703;
-  box-shadow: 0 0 0 4px rgba(255, 183, 3, 0.14);
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.14);
 }
 
 .rfq-note a {
-  color: #ffb703;
+  color: #ff8c00;
   text-shadow: none;
 }
 

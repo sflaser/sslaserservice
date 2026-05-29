@@ -82,6 +82,56 @@
   status = 301
 
 [[redirects]]
+  from = "/meta.json"
+  to = "/manifest.json"
+  status = 200
+
+[[redirects]]
+  from = "/resources"
+  to = "/resources.html"
+  status = 200
+
+[[redirects]]
+  from = "/resources/"
+  to = "/resources.html"
+  status = 200
+
+[[redirects]]
+  from = "/es/resources"
+  to = "/es/resources.html"
+  status = 200
+
+[[redirects]]
+  from = "/es/resources/"
+  to = "/es/resources.html"
+  status = 200
+
+[[redirects]]
+  from = "/resourcesindustry-updates/"
+  to = "/resources/industry-updates/"
+  status = 301
+
+[[redirects]]
+  from = "/es/resourcesindustry-updates/"
+  to = "/es/resources/industry-updates/"
+  status = 301
+
+[[redirects]]
+  from = "/images/logos/LOGO"
+  to = "/images/logos/LOGO%E9%95%BF%E6%96%B9%E5%BD%A2.png"
+  status = 301
+
+[[redirects]]
+  from = "/images/services/ProfessionalRepairLab_optimized.jpg"
+  to = "/images/services/Professional%20Repair%20Lab_optimized.jpg"
+  status = 301
+
+[[redirects]]
+  from = "/images/services/Testing&Calibration.jpg"
+  to = "/images/services/Testing%20%26%20Calibration.jpg"
+  status = 301
+
+[[redirects]]
   from = "/admin"
   to = "/admin.html"
   status = 200

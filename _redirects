@@ -10,6 +10,16 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 /home / 301
 /index.html / 301
 /index.php / 301
+/meta.json /manifest.json 200
+/resources /resources.html 200
+/resources/ /resources.html 200
+/es/resources /es/resources.html 200
+/es/resources/ /es/resources.html 200
+/resourcesindustry-updates/ /resources/industry-updates/ 301
+/es/resourcesindustry-updates/ /es/resources/industry-updates/ 301
+/images/logos/LOGO /images/logos/LOGO%E9%95%BF%E6%96%B9%E5%BD%A2.png 301
+/images/services/ProfessionalRepairLab_optimized.jpg /images/services/Professional%20Repair%20Lab_optimized.jpg 301
+/images/services/Testing&Calibration.jpg /images/services/Testing%20%26%20Calibration.jpg 301
 
 # Set main HTML file as default
 / /index.html 200

@@ -1,6 +1,6 @@
 :root {
-  --brand: #f28b23;
-  --brand-dark: #d66f0b;
+  --brand: #ff8c00;
+  --brand-dark: #e67e00;
   --text: #171513;
   --muted: #686158;
   --bg: #f6f1e9;
@@ -18,7 +18,7 @@ body {
   font-family: "Avenir Next", "SF Pro Text", "PingFang SC", "Noto Sans SC", "Segoe UI", Arial, sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top right, rgba(242, 139, 35, 0.12), transparent 24%),
+    radial-gradient(circle at top right, rgba(255, 140, 0, 0.12), transparent 24%),
     linear-gradient(180deg, #fbf8f2 0%, #f4efe7 100%);
 }
 
@@ -80,7 +80,7 @@ body {
 }
 
 .blog-menu a:hover {
-  background: rgba(242, 139, 35, 0.12);
+  background: rgba(255, 140, 0, 0.12);
 }
 
 .blog-card {
@@ -224,12 +224,12 @@ body {
 }
 
 .btn-home {
-  background: linear-gradient(135deg, #f49a36 0%, #de7210 100%);
+  background: linear-gradient(135deg, #ff8c00 0%, #e67e00 100%);
   color: #fffdf9;
   border-radius: 999px;
   padding: 10px 16px;
   font-weight: 700;
-  box-shadow: 0 14px 30px rgba(242, 139, 35, 0.22);
+  box-shadow: 0 14px 30px rgba(255, 140, 0, 0.22);
 }
 
 @media (max-width: 700px) {

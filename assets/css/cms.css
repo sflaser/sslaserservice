@@ -30,7 +30,7 @@
 .cms-card-link:hover {
     transform: translateY(-4px);
     box-shadow: 0 24px 48px rgba(18, 15, 12, 0.09);
-    border-color: rgba(242, 139, 35, 0.2);
+    border-color: rgba(255, 140, 0, 0.2);
 }
 
 .cms-card-cover-link {
@@ -72,8 +72,8 @@
     align-self: flex-start;
     padding: 7px 11px;
     border-radius: 2px;
-    background: #ffb703;
-    border: 1px solid #ffb703;
+    background: #ff8c00;
+    border: 1px solid #ff8c00;
     color: #1b263b;
     font-size: 11px;
     font-weight: 700;
@@ -173,14 +173,14 @@
 }
 
 .cms-btn-primary {
-    background: #ffb703;
+    background: #ff8c00;
     color: #1b263b;
 }
 
 .cms-btn-primary:hover,
 .cms-btn-primary:focus-visible {
     background: #ffffff;
-    border-color: #ffb703;
+    border-color: #ff8c00;
     color: #1b263b;
 }
 
