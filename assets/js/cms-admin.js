@@ -551,6 +551,24 @@
     return null;
   }
 
+  async function notifyBlogPublished(payload) {
+    const res = await fetch('/.netlify/functions/notify-blog-published', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.ok === false) {
+      throw new Error(data.error || `Notification failed with HTTP ${res.status}.`);
+    }
+
+    return data;
+  }
+
   async function uploadImage(file, folder) {
     const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
     const key = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
@@ -706,10 +724,11 @@
       }
 
       let publishedAt = null;
+      const existingRow = editingBlogId ? blogRowsById.get(String(editingBlogId)) : null;
       if (status === 'published') {
-        const existingRow = editingBlogId ? blogRowsById.get(String(editingBlogId)) : null;
         publishedAt = existingRow && existingRow.published_at ? existingRow.published_at : new Date().toISOString();
       }
+      const shouldNotifyTeam = status === 'published' && (!existingRow || existingRow.status !== 'published');
 
       const payload = {
         title,
@@ -721,6 +740,15 @@
         published_at: publishedAt,
       };
 
+      const notificationPayload = {
+        title,
+        slug,
+        excerpt,
+        status,
+        published_at: publishedAt,
+      };
+
+      let saveMessage = '';
       if (editingBlogId) {
         await request(`/rest/v1/blog_posts?id=eq.${encodeURIComponent(editingBlogId)}`, {
           method: 'PATCH',
@@ -729,7 +757,7 @@
         });
         clearBlogEditMode(true);
         await fetchBlogs();
-        setStatus('Blog post updated.', 'success');
+        saveMessage = 'Blog post updated.';
       } else {
         await request('/rest/v1/blog_posts', {
           method: 'POST',
@@ -738,7 +766,23 @@
         });
         clearBlogEditMode(true);
         await fetchBlogs();
-        setStatus('Blog post saved.', 'success');
+        saveMessage = 'Blog post saved.';
+      }
+
+      if (shouldNotifyTeam) {
+        try {
+          const result = await notifyBlogPublished(notificationPayload);
+          if (result.sent) {
+            setStatus(`${saveMessage} Team notification sent.`, 'success');
+          } else {
+            setStatus(`${saveMessage} Team notification is not configured yet.`, 'error');
+          }
+        } catch (notifyErr) {
+          const message = notifyErr instanceof Error ? notifyErr.message : 'Team notification failed.';
+          setStatus(`${saveMessage} ${message}`, 'error');
+        }
+      } else {
+        setStatus(saveMessage, 'success');
       }
     } catch (err) {
       setStatus(err instanceof Error ? err.message : 'Failed to save blog post.', 'error');
