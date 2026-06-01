@@ -1,0 +1,69 @@
+{
+  "business-group": {
+    "label": "乾离业务群SKY FIRE",
+    "mode": "webhook",
+    "env": "WECOM_WEBHOOK_BUSINESS_GROUP"
+  },
+  "operations-group": {
+    "label": "乾离运营-业务对接群",
+    "mode": "webhook",
+    "env": "WECOM_WEBHOOK_OPERATIONS_GROUP"
+  },
+  "after-sales-group": {
+    "label": "乾离售后内部群",
+    "mode": "webhook",
+    "env": "WECOM_WEBHOOK_AFTER_SALES_GROUP"
+  },
+  "marketing-group": {
+    "label": "Marketing Group",
+    "mode": "webhook",
+    "env": "WECOM_WEBHOOK_MARKETING_GROUP"
+  },
+  "diy-project-group": {
+    "label": "项目-第三届DIY大赛（1.27-10.27)",
+    "mode": "webhook",
+    "env": "WECOM_WEBHOOK_DIY_PROJECT_GROUP"
+  },
+  "mia": {
+    "label": "Mia(mia)",
+    "role": "部门成员",
+    "mode": "app",
+    "touser": "TODO_MIA_USERID"
+  },
+  "jay": {
+    "label": "Jay(Jay)",
+    "role": "部门成员",
+    "mode": "app",
+    "touser": "TODO_JAY_USERID"
+  },
+  "wendy": {
+    "label": "Wendy",
+    "role": "部门成员",
+    "mode": "app",
+    "touser": "TODO_WENDY_USERID"
+  },
+  "emily": {
+    "label": "Emily",
+    "role": "业务部负责人",
+    "mode": "app",
+    "touser": "TODO_EMILY_USERID"
+  },
+  "andy": {
+    "label": "Andy",
+    "role": "总经理",
+    "mode": "app",
+    "touser": "TODO_ANDY_USERID"
+  },
+  "bruce": {
+    "label": "万绪栋(Bruce)",
+    "role": "技术部负责人",
+    "mode": "app",
+    "touser": "TODO_BRUCE_USERID"
+  },
+  "sunny": {
+    "label": "sunny云",
+    "role": "财务负责人",
+    "mode": "app",
+    "touser": "TODO_SUNNY_USERID"
+  }
+}

@@ -24,6 +24,7 @@ const endpoint = readArg(
 const secret = readArg("secret", process.env.NOTIFY_INGEST_SECRET || "");
 
 const payload = {
+  to: readArg("to", process.env.NOTIFY_TO || ""),
   site: required(readArg("site", process.env.NOTIFY_SITE || ""), "--site or NOTIFY_SITE"),
   type: readArg("type", process.env.NOTIFY_TYPE || "work"),
   title: required(readArg("title", process.env.NOTIFY_TITLE || ""), "--title or NOTIFY_TITLE"),

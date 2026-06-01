@@ -40,6 +40,21 @@ function clean(value) {
   return String(value || "").trim();
 }
 
+function normalizeRouteKey(value) {
+  return clean(value).toLowerCase().replace(/\s+/g, "-");
+}
+
+function parseRoutes() {
+  const raw = process.env.NOTIFY_ROUTES_JSON || "";
+  if (!raw) return {};
+
+  try {
+    return JSON.parse(raw);
+  } catch (error) {
+    throw new Error("NOTIFY_ROUTES_JSON is not valid JSON.");
+  }
+}
+
 function stripHtml(value) {
   return clean(value)
     .replace(/<style[\s\S]*?<\/style>/gi, " ")
@@ -75,8 +90,9 @@ function normalizePayload(body) {
     stripHtml(nestedProduct.body_html || body.body_html).slice(0, 220);
   const status = clean(body.status || nestedProduct.status || body.published_status);
   const actor = clean(body.actor || body.author || body.user || "Codex / automation");
+  const to = clean(body.to || body.recipient || body.route);
 
-  return { site, type, title, url, summary, status, actor };
+  return { site, type, title, url, summary, status, actor, to };
 }
 
 function buildMarkdown(payload) {
@@ -106,10 +122,9 @@ function buildMarkdown(payload) {
   return lines.join("\n\n");
 }
 
-async function sendWeCom(content) {
-  const webhookUrl = process.env.WECOM_WEBHOOK_URL || "";
+async function sendWeComWebhook(content, webhookUrl) {
   if (!webhookUrl) {
-    return { sent: false, skipped: "WECOM_WEBHOOK_URL is not configured." };
+    return { sent: false, skipped: "WeCom webhook is not configured." };
   }
 
   const response = await fetch(webhookUrl, {
@@ -129,6 +144,121 @@ async function sendWeCom(content) {
   return { sent: true };
 }
 
+async function getWeComAppToken() {
+  const corpId = process.env.WECOM_CORP_ID || "";
+  const secret = process.env.WECOM_APP_SECRET || "";
+
+  if (!corpId || !secret) {
+    throw new Error("Missing WECOM_CORP_ID or WECOM_APP_SECRET for direct WeCom messages.");
+  }
+
+  const url = `https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=${encodeURIComponent(corpId)}&corpsecret=${encodeURIComponent(secret)}`;
+  const response = await fetch(url);
+  const body = await response.json().catch(() => ({}));
+
+  if (!response.ok || body.errcode !== 0 || !body.access_token) {
+    throw new Error(`WeCom token request failed: ${JSON.stringify(body)}`);
+  }
+
+  return body.access_token;
+}
+
+async function sendWeComAppMessage(content, touser) {
+  const agentId = Number(process.env.WECOM_AGENT_ID || 0);
+  if (!agentId) {
+    throw new Error("Missing WECOM_AGENT_ID for direct WeCom messages.");
+  }
+  if (!touser) {
+    throw new Error("Missing touser in notification route.");
+  }
+
+  const accessToken = await getWeComAppToken();
+  const response = await fetch(
+    `https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=${encodeURIComponent(accessToken)}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({
+        touser,
+        agentid: agentId,
+        msgtype: "markdown",
+        markdown: { content },
+      }),
+    }
+  );
+
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok || body.errcode !== 0) {
+    throw new Error(`WeCom app message failed: ${JSON.stringify(body)}`);
+  }
+
+  return { sent: true };
+}
+
+function routeKeysFromPayload(payload) {
+  const raw = clean(payload.to || payload.recipient || payload.route || "");
+  if (!raw) return [];
+  return raw
+    .split(/[,，|]/)
+    .map(normalizeRouteKey)
+    .filter(Boolean);
+}
+
+function resolveRoute(key, routes) {
+  const route = routes[key] || routes[normalizeRouteKey(key)];
+  if (route) return { key, ...route };
+
+  return {
+    key,
+    label: key,
+    mode: "webhook",
+    env: "WECOM_WEBHOOK_URL",
+  };
+}
+
+async function deliverToRoute(route, content) {
+  if (route.mode === "app") {
+    return {
+      route: route.key,
+      label: route.label || route.key,
+      mode: "app",
+      ...(await sendWeComAppMessage(content, route.touser || "")),
+    };
+  }
+
+  const envName = route.env || "WECOM_WEBHOOK_URL";
+  const webhookUrl = route.webhookUrl || process.env[envName] || "";
+  return {
+    route: route.key,
+    label: route.label || route.key,
+    mode: "webhook",
+    ...(await sendWeComWebhook(content, webhookUrl)),
+  };
+}
+
+async function deliver(payload, content) {
+  const routes = parseRoutes();
+  const keys = routeKeysFromPayload(payload);
+
+  if (!keys.length) {
+    return [
+      {
+        route: "default",
+        label: "default",
+        mode: "webhook",
+        ...(await sendWeComWebhook(content, process.env.WECOM_WEBHOOK_URL || "")),
+      },
+    ];
+  }
+
+  const results = [];
+  for (const key of keys) {
+    results.push(await deliverToRoute(resolveRoute(key, routes), content));
+  }
+
+  return results;
+}
+
 exports.handler = async function handler(event) {
   if (event.httpMethod !== "POST") {
     return json(405, { ok: false, error: "Method not allowed." });
@@ -141,8 +271,12 @@ exports.handler = async function handler(event) {
 
   try {
     const payload = normalizePayload(getBody(event));
-    const result = await sendWeCom(buildMarkdown(payload));
-    return json(200, { ok: true, ...result });
+    const routes = await deliver(payload, buildMarkdown(payload));
+    return json(200, {
+      ok: true,
+      sent: routes.some((route) => route.sent),
+      routes,
+    });
   } catch (error) {
     return json(500, {
       ok: false,

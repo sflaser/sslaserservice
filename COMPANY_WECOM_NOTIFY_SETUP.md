@@ -24,6 +24,23 @@ NOTIFY_INGEST_SECRET = 自己设置一个长一点的随机口令
 
 `NOTIFY_INGEST_SECRET` 用来防止别人随便调用这个通知入口。
 
+如果要点对点通知成员，还需要在企业微信管理后台创建一个自建应用，然后添加：
+
+```text
+WECOM_CORP_ID = 企业 ID
+WECOM_AGENT_ID = 自建应用 AgentId
+WECOM_APP_SECRET = 自建应用 Secret
+NOTIFY_ROUTES_JSON = 通知路由表 JSON
+```
+
+路由表模板见：
+
+```text
+NOTIFY_ROUTES.example.json
+```
+
+注意：截图里的 `Mia(mia)`、`Jay(Jay)` 是显示名，不一定是 API 里的 `UserID`。点对点直发时，要用企业微信管理后台通讯录里的成员 `UserID`。
+
 ## 2. Codex 完成工作后发通知
 
 本仓库已经有脚本：
@@ -38,6 +55,7 @@ scripts/send-company-work-notify.mjs
 export NOTIFY_INGEST_SECRET="你在 Netlify 设置的口令"
 
 node scripts/send-company-work-notify.mjs \
+  --to mia \
   --site alleriastore.com \
   --type blog \
   --title "新博客标题" \
@@ -48,7 +66,18 @@ node scripts/send-company-work-notify.mjs \
 之后你可以直接对 Codex 说：
 
 ```text
-发布完成后，调用 company work notify，通知企业微信群。
+发布完成后，调用 company work notify，通知 Mia 和业务群。
+```
+
+多个接收人用逗号：
+
+```bash
+node scripts/send-company-work-notify.mjs \
+  --to mia,business-group \
+  --site alleriastore.com \
+  --type task \
+  --title "AlleriaStore 商品页已更新" \
+  --url "https://alleriastore.com/products/example"
 ```
 
 ## 3. Shopify Flow 接入
