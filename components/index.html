@@ -25,6 +25,7 @@
   <link rel="shortcut icon" href="/favicon-32x32.png?v=20260412c">
   <link rel="icon" type="image/png" href="/favicon-32x32.png?v=20260412c">
   <link rel="stylesheet" href="/assets/css/section-pages.css?v=20260529-orange3">
+  <link rel="stylesheet" href="/assets/css/cms.css?v=20260529-orange1">
   <script defer src="/assets/js/analytics.js?v=20260508a"></script>
 <!-- AI and search structured data -->
   <script type="application/ld+json">
@@ -236,26 +237,13 @@
   </div>
 </section>
 
-<section class="section">
+<section id="product-catalog" class="section cms-section">
   <div class="section-head">
-    <div><span class="eyebrow">Featured Component Offer</span><h2>Pulse-Shape Editable Nanosecond Fiber Laser</h2></div>
-    <p>This product sits inside Components because it is a sourcing-ready offer with a bilingual brochure pair, image set, and clear RFQ path. Send the application context if you need a technical review before quoting.</p>
+    <div><span class="eyebrow">Product Catalog</span><h2>Sourcing-ready component products.</h2></div>
+    <p>This catalog pulls the published component offers from the CMS, including the newly added passive optical component products. Use the RFQ path on each item when pricing or compatibility needs a technical review.</p>
   </div>
-  <div class="visual-grid visual-grid--quad">
-    <article class="visual-card">
-      <img src="/images/products/pulse-shape-editable-nanosecond-fiber-laser/cover.png" alt="Pulse-shape editable nanosecond fiber laser product cover" loading="lazy" decoding="async">
-      <div class="visual-copy">
-        <strong>Nanosecond source</strong>
-        <h3>Waveform-sensitive fiber laser with editable pulse shaping.</h3>
-        <p>FPGA-based control, 20-500 ns pulse width, up to 50 MHz repetition, and fiber-coupled output for research and precision workflows.</p>
-        <div class="inline-actions">
-          <a href="/assets/brochures/pulse-waveform-editable-nanosecond-fiber-laser-en.pdf" class="btn btn-outline" target="_blank" rel="noopener">Download brochure (EN)</a>
-          <a href="/assets/brochures/pulse-waveform-editable-nanosecond-fiber-laser-es.pdf" class="btn btn-outline" target="_blank" rel="noopener">Download brochure (ES)</a>
-          <a href="/#contact" class="btn btn-primary">Request RFQ</a>
-        </div>
-      </div>
-    </article>
-  </div>
+  <div id="cms-products-grid" class="cms-grid" data-limit="all"></div>
+  <p id="cms-products-empty" class="cms-empty cms-hidden">Loading products...</p>
 </section>
 
 <section class="section">
@@ -319,5 +307,7 @@
     });
   })();
 </script>
+<script src="/assets/js/cms-config.js?v=20260306g"></script>
+<script src="/assets/js/cms-frontend.js?v=20260602-products1"></script>
 </body>
 </html>

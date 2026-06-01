@@ -196,9 +196,17 @@
   async function loadProducts() {
     if (!productsGrid) return;
 
-    const rows = await fetchTable(
-      'products?select=id,name,short_description,price_cents,currency,image_url,purchase_url,brochure_url,published_at,status&status=eq.published&order=published_at.desc.nullslast&limit=8'
-    );
+    const productLimit = resolveLimit(productsGrid, 8);
+    const query = [
+      'products?select=id,name,short_description,price_cents,currency,image_url,purchase_url,brochure_url,published_at,status',
+      'status=eq.published',
+      'order=published_at.desc.nullslast',
+      productLimit ? `limit=${productLimit}` : '',
+    ]
+      .filter(Boolean)
+      .join('&');
+
+    const rows = await fetchTable(query);
 
     if (!rows.length) {
       if (productsEmpty) {
