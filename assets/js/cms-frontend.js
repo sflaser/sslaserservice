@@ -142,7 +142,7 @@
       }
     }
 
-    const inquiryBrand = cfg.inquiryBrand || 'Aurora Photonics';
+    const inquiryBrand = cfg.inquiryBrand || 'SkyFire Laser';
     const inquiryEmail = String(cfg.inquiryEmail || '').trim();
     const inquiryPhone = String(cfg.inquiryPhone || '').trim();
     const subject = encodeURIComponent(`Product inquiry: ${item.name || `${inquiryBrand} product`}`);

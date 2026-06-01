@@ -3,7 +3,7 @@ window.CMS_CONFIG = {
   supabaseAnonKey: "sb_publishable_0G4cdBkTRnWcF676cxFhtg_YVmf2vr8",
   storageBucket: "site-assets",
   defaultCurrency: "USD",
-  inquiryBrand: "Aurora Photonics",
+  inquiryBrand: "SkyFire Laser",
   inquiryEmail: "",
-  inquiryPhone: "+8618162690400"
+  inquiryPhone: "+8613995672493"
 };

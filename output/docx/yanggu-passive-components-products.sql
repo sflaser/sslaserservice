@@ -1,4 +1,4 @@
--- Generated from 3-光无源器件产品手册.docx for Aurora Photonics / Wuhan Yanggu Technology Co., Ltd.
+-- Generated from 3-光无源器件产品手册.docx for SkyFire Laser.
 -- Source Word cover/internal-use labels were intentionally omitted from public product content.
 
 insert into public.products (
@@ -18,7 +18,7 @@ insert into public.products (
   '1-plus-1-2-plus-1-pump-signal-combiner',
   'High-power multimode pump and signal combiner for 900-1000 nm pump paths, 1060/1550 nm signal transmission, and up to 2 x 30 W output.',
   $$
-Aurora Photonics (Wuhan Yanggu Technology Co., Ltd.) supplies (1+1)x1 and (2+1)x1 high-power multimode pump + signal combiners made with fused taper processing. The device combines high-power multimode fiber-coupled pump laser output while allowing the central signal fiber to transmit with low loss.
+SkyFire Laser supplies (1+1)x1 and (2+1)x1 high-power multimode pump + signal combiners made with fused taper processing. The device combines high-power multimode fiber-coupled pump laser output while allowing the central signal fiber to transmit with low loss.
 
 Key features:
 - High power conversion efficiency
@@ -81,7 +81,7 @@ insert into public.products (
   'pm-1-plus-1-2-plus-1-pump-signal-combiner',
   'Polarization-maintaining pump + signal combiner with high conversion efficiency, 900-1000 nm pump wavelength, and 18 dB extinction ratio.',
   $$
-Aurora Photonics PM (1+1)x1 and PM (2+1)x1 pump + signal combiners support high-power multimode pump combining while maintaining low-loss signal transmission for polarization-sensitive fiber systems.
+SkyFire Laser PM (1+1)x1 and PM (2+1)x1 pump + signal combiners support high-power multimode pump combining while maintaining low-loss signal transmission for polarization-sensitive fiber systems.
 
 Key features:
 - High power conversion efficiency
@@ -149,7 +149,7 @@ insert into public.products (
   '6-plus-1-pump-signal-combiner',
   'High-power (6+1)x1 pump + signal combiner for 900-1000 nm pump combining, 1064 nm signal paths, and up to 6 x 50 W output.',
   $$
-Aurora Photonics (6+1)x1 high-power multimode pump + signal combiners are designed for multi-pump fiber systems where high conversion efficiency and pump brightness preservation matter.
+SkyFire Laser (6+1)x1 high-power multimode pump + signal combiners are designed for multi-pump fiber systems where high conversion efficiency and pump brightness preservation matter.
 
 Key features:
 - High power conversion efficiency
@@ -213,7 +213,7 @@ insert into public.products (
   'n-by-1-multimode-pump-combiner',
   'Multimode pump combiner family for high-power pump combining, including 7x1 configurations with 900-1000 nm pump wavelength.',
   $$
-Aurora Photonics N x 1 multimode pump combiners use fused taper processing to combine multiple multimode laser-diode pump outputs and deliver the combined high power through a single output fiber.
+SkyFire Laser N x 1 multimode pump combiners use fused taper processing to combine multiple multimode laser-diode pump outputs and deliver the combined high power through a single output fiber.
 
 Key features:
 - High power conversion efficiency
@@ -275,7 +275,7 @@ insert into public.products (
   '1x2-2x2-standard-fiber-coupler',
   'Fused 1x2 / 2x2 standard fiber coupler with compact packaging, low insertion loss, and high reliability for optical modules and sensing systems.',
   $$
-Aurora Photonics fused 1x2 / 2x2 standard fiber couplers provide compact packaging, low insertion loss, and high reliability for optical modules, fiber sensors, and fiber test instruments.
+SkyFire Laser fused 1x2 / 2x2 standard fiber couplers provide compact packaging, low insertion loss, and high reliability for optical modules, fiber sensors, and fiber test instruments.
 
 Key features:
 - Compact fused taper package
@@ -341,7 +341,7 @@ insert into public.products (
   '1x2-2x2-pm-fiber-coupler',
   'Polarization-maintaining 1x2 / 2x2 fused fiber coupler with high ER, compact packaging, and low insertion loss.',
   $$
-Aurora Photonics PM 1x2 / 2x2 fused fiber couplers are designed for polarization-maintaining optical paths that need compact packaging, low insertion loss, high extinction ratio, and reliable long-term operation.
+SkyFire Laser PM 1x2 / 2x2 fused fiber couplers are designed for polarization-maintaining optical paths that need compact packaging, low insertion loss, high extinction ratio, and reliable long-term operation.
 
 Key features:
 - Polarization-maintaining fused taper structure
@@ -408,7 +408,7 @@ insert into public.products (
   '1x3-3x3-fiber-coupler',
   'Fused 1x3 / 3x3 fiber coupler family for 1310 nm or 1550 nm systems, with SSC, WBC, and DWC options.',
   $$
-Aurora Photonics 1x3 / 3x3 fused fiber couplers provide compact, reliable signal distribution for optical modules, fiber sensors, and fiber test instruments.
+SkyFire Laser 1x3 / 3x3 fused fiber couplers provide compact, reliable signal distribution for optical modules, fiber sensors, and fiber test instruments.
 
 Key features:
 - Fused taper construction
@@ -474,7 +474,7 @@ insert into public.products (
   '1x4-fiber-coupler',
   'Fused 1x4 fiber coupler family for 1310 nm, 1490 nm, and 1550 nm optical paths with SSC, WBC, DWC, and TWC options.',
   $$
-Aurora Photonics 1x4 fused fiber couplers provide compact, reliable multi-way optical splitting for modules, sensing systems, and fiber test equipment.
+SkyFire Laser 1x4 fused fiber couplers provide compact, reliable multi-way optical splitting for modules, sensing systems, and fiber test equipment.
 
 Key features:
 - Fused taper construction
@@ -537,7 +537,7 @@ insert into public.products (
   '1x2-2x2-fused-wdm-coupler',
   'Compact fused WDM coupler family with low loss, high isolation, low PDL, and 980/1550, 980/1590, or 1310/1550 nm options.',
   $$
-Aurora Photonics 1x2 / 2x2 fused WDM couplers are compact micro-optical passive devices with low loss, stable long-term performance, and multiple connector and package options.
+SkyFire Laser 1x2 / 2x2 fused WDM couplers are compact micro-optical passive devices with low loss, stable long-term performance, and multiple connector and package options.
 
 Key features:
 - Low insertion loss
@@ -603,7 +603,7 @@ insert into public.products (
   '1w-inline-optical-isolator',
   'Compact 1 W in-line optical isolator for 1064 nm or 1550 nm systems, with 28 dB maximum isolation and PM panda fiber.',
   $$
-Aurora Photonics 1 W in-line optical isolators provide compact passive isolation for fiber laser, amplifier, optical communication, and optical test systems.
+SkyFire Laser 1 W in-line optical isolators provide compact passive isolation for fiber laser, amplifier, optical communication, and optical test systems.
 
 Key features:
 - High isolation
@@ -671,7 +671,7 @@ insert into public.products (
   '20w-optical-isolator',
   '20 W optical isolator for 1064 nm systems with <0.5 dB insertion loss, 28 dB maximum isolation, and free-space output.',
   $$
-Aurora Photonics 20 W optical isolators are designed for higher-power 1064 nm fiber laser and high-performance laser systems that need compact passive isolation and low insertion loss.
+SkyFire Laser 20 W optical isolators are designed for higher-power 1064 nm fiber laser and high-performance laser systems that need compact passive isolation and low insertion loss.
 
 Key features:
 - High isolation
