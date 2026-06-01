@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { existsSync, readFileSync } from "node:fs";
+
 const args = process.argv.slice(2);
 
 function readArg(name, fallback = "") {
@@ -16,12 +18,18 @@ function required(value, label) {
   return value;
 }
 
+function readLocalSecret() {
+  const path = "/Users/zhangxiaodong/Documents/Codex/.secrets/sflaser_company_notify_secret";
+  if (!existsSync(path)) return "";
+  return readFileSync(path, "utf8").trim();
+}
+
 const endpoint = readArg(
   "endpoint",
   process.env.COMPANY_NOTIFY_ENDPOINT ||
     "https://www.sslaserservice.com/.netlify/functions/company-work-notify"
 );
-const secret = readArg("secret", process.env.NOTIFY_INGEST_SECRET || "");
+const secret = readArg("secret", process.env.NOTIFY_INGEST_SECRET || readLocalSecret());
 
 const payload = {
   to: readArg("to", process.env.NOTIFY_TO || ""),
