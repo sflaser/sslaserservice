@@ -142,9 +142,20 @@
       }
     }
 
-    actions.push(
-      `<a class="cms-btn cms-btn-outline" href="${escapeHtml(`mailto:sales3@sflaser.net?subject=${encodeURIComponent(`Product inquiry: ${item.name || 'SkyFire product'}`)}`)}">${quoteLabel}</a>`
-    );
+    const inquiryBrand = cfg.inquiryBrand || 'Aurora Photonics';
+    const inquiryEmail = String(cfg.inquiryEmail || '').trim();
+    const inquiryPhone = String(cfg.inquiryPhone || '').trim();
+    const subject = encodeURIComponent(`Product inquiry: ${item.name || `${inquiryBrand} product`}`);
+
+    if (inquiryEmail) {
+      actions.push(
+        `<a class="cms-btn cms-btn-outline" href="${escapeHtml(`mailto:${inquiryEmail}?subject=${subject}`)}">${quoteLabel}</a>`
+      );
+    } else if (inquiryPhone) {
+      actions.push(
+        `<a class="cms-btn cms-btn-outline" href="${escapeHtml(`tel:${inquiryPhone}`)}">${quoteLabel}</a>`
+      );
+    }
 
     return actions.join('');
   }
