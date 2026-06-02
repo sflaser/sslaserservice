@@ -1,27 +1,12 @@
 {
-  "name": "Sky Fire Laser - Professional Laser Repair Services",
-  "short_name": "Sky Fire Laser",
-  "description": "Professional solid-state laser repair and manufacturing services for industrial applications",
+  "name": "SS Laser Service",
+  "short_name": "SS Laser Service",
+  "description": "Professional solid-state laser repair, manufacturing, and optoelectronic component support.",
   "start_url": "/",
-  "display": "standalone",
+  "display": "browser",
   "background_color": "#ffffff",
   "theme_color": "#ff8c00",
-  "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en-US",
-  "dir": "ltr",
-  "icons": [
-    {
-      "src": "/app-icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/app-icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ]
+  "dir": "ltr"
 }

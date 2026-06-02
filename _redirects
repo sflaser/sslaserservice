@@ -10,7 +10,7 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 /home / 301
 /index.html / 301
 /index.php / 301
-/meta.json /manifest.json 200
+/meta.json / 301
 /resources /resources.html 200
 /resources/ /resources.html 200
 /es/resources /es/resources.html 200

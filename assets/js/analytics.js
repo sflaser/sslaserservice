@@ -34,6 +34,38 @@
     });
   }
 
+  const removeLegacyServiceWorker = function () {
+    if (!('serviceWorker' in navigator)) {
+      return;
+    }
+
+    navigator.serviceWorker.getRegistrations()
+      .then(function (registrations) {
+        registrations.forEach(function (registration) {
+          registration.unregister();
+        });
+      })
+      .catch(function () {});
+
+    if (window.caches?.keys) {
+      window.caches.keys()
+        .then(function (cacheNames) {
+          return Promise.all(
+            cacheNames
+              .filter(function (cacheName) {
+                return cacheName.indexOf('skyfire-') === 0;
+              })
+              .map(function (cacheName) {
+                return window.caches.delete(cacheName);
+              })
+          );
+        })
+        .catch(function () {});
+    }
+  };
+
+  window.addEventListener('load', removeLegacyServiceWorker, { once: true });
+
   const loadGoogleTag = function () {
     const script = document.createElement('script');
     script.async = true;
