@@ -57,6 +57,22 @@
     return `mailto:${inquiryEmail}?subject=${subject}&body=${body}`;
   }
 
+  function resolveOptimizedImageUrl(url) {
+    const value = String(url || '').trim();
+    const imageOverrides = {
+      '/images/products/passive-components/pump-signal-combiner.png':
+        '/images/products/passive-components/pump-signal-combiner-skyfire-retouched.png',
+      '/images/products/passive-components/pm-pump-signal-combiner.png':
+        '/images/products/passive-components/pm-pump-signal-combiner-skyfire-retouched.png',
+      '/images/products/passive-components/20w-inline-isolator.png':
+        '/images/products/passive-components/20w-inline-isolator-skyfire-retouched.png',
+      '/images/products/passive-components/1w-inline-isolator.png':
+        '/images/products/passive-components/1w-inline-isolator-skyfire-retouched.png',
+    };
+
+    return imageOverrides[value] || value;
+  }
+
   async function fetchProduct(slugValue) {
     const supabaseUrl = String(cfg.supabaseUrl || '').replace(/\/+$/, '');
     const supabaseAnonKey = cfg.supabaseAnonKey || '';
@@ -130,7 +146,7 @@
     summaryEl.textContent = overview;
 
     if (product?.image_url) {
-      imageEl.src = product.image_url;
+      imageEl.src = resolveOptimizedImageUrl(product.image_url);
       imageEl.alt = name;
       imageWrapEl.hidden = false;
     } else {

@@ -103,6 +103,14 @@
   function resolveOptimizedImageUrl(url) {
     const value = String(url || '').trim();
     const imageOverrides = {
+      '/images/products/passive-components/pump-signal-combiner.png':
+        '/images/products/passive-components/pump-signal-combiner-skyfire-retouched.png',
+      '/images/products/passive-components/pm-pump-signal-combiner.png':
+        '/images/products/passive-components/pm-pump-signal-combiner-skyfire-retouched.png',
+      '/images/products/passive-components/20w-inline-isolator.png':
+        '/images/products/passive-components/20w-inline-isolator-skyfire-retouched.png',
+      '/images/products/passive-components/1w-inline-isolator.png':
+        '/images/products/passive-components/1w-inline-isolator-skyfire-retouched.png',
       'https://ydbviiswxofxapccpibv.supabase.co/storage/v1/object/public/site-assets/blog/1772769062741-mpcf5ny5um.jpeg':
         '/images/blog/generated/solid-state-laser-repair-custom-solutions-source-grounded-20260509.jpg',
       'https://ydbviiswxofxapccpibv.supabase.co/storage/v1/object/public/site-assets/blog/1772436725435-4uw4yozc5td.jpg':
