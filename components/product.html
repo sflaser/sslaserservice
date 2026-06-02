@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Product Details | SS Laser Service</title>
+  <meta name="description" content="Detailed specifications for optoelectronic component products supplied through SS Laser Service.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://www.sslaserservice.com/components/product.html">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260412c">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=20260412c">
+  <link rel="stylesheet" href="/assets/css/section-pages.css?v=20260529-orange3">
+  <link rel="stylesheet" href="/assets/css/product-detail.css?v=20260602-details1">
+  <script defer src="/assets/js/analytics.js?v=20260602-site1"></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="SS Laser Service home">
+        <img src="/images/logos/LOGO长方形.png?v=20260412c" alt="SS Laser Service">
+      </a>
+      <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="page-nav" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div id="page-nav" class="nav-shell">
+        <nav class="nav" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/laser-repair/">Laser Repair</a>
+          <a href="/manufacturing/">Manufacturing</a>
+          <a href="/components/" class="is-current">Components</a>
+          <a href="/applications/">Applications</a>
+          <a href="/resources">Resources</a>
+          <a href="/#why-us">About</a>
+          <a href="/#contact">Contact</a>
+          <span data-lang-switch class="nav-language"><a href="/components/" class="lang-option is-current" aria-current="true">EN</a> / <a href="/es/components/" class="lang-option">ES</a></span>
+        </nav>
+        <p class="mobile-nav-foot">Component details, parameter tables, and RFQ paths for passive optical parts and source modules.</p>
+      </div>
+    </header>
+
+    <section class="product-detail-hero">
+      <article class="panel product-detail-copy">
+        <p id="product-detail-state" class="detail-state">Loading product details...</p>
+        <span id="product-category" class="eyebrow">Component Details</span>
+        <h1 id="product-title">Component product</h1>
+        <p id="product-summary">Loading the product overview and specification tables.</p>
+        <div id="product-actions" class="product-detail-actions">
+          <a class="btn btn-outline" href="/components/#product-catalog">Back to Components</a>
+        </div>
+      </article>
+      <aside id="product-image-wrap" class="panel product-detail-visual" hidden>
+        <img id="product-image" src="" alt="">
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div><span class="eyebrow">Technical Context</span><h2>Features and application fit.</h2></div>
+        <p>Use these notes to decide whether the part family is a reasonable match before sending a quotation request.</p>
+      </div>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h2>Features</h2>
+          <ul id="product-features"></ul>
+        </article>
+        <article class="detail-card">
+          <h2>Applications</h2>
+          <ul id="product-applications"></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div><span class="eyebrow">Specifications</span><h2>Parameter details from the product manual.</h2></div>
+        <p>Final configuration, fiber type, packaging, and lead time should be confirmed during quotation.</p>
+      </div>
+      <div id="product-specs"></div>
+      <p id="product-source-note" class="source-note"></p>
+    </section>
+
+    <footer class="footer-strip">
+      <div class="footer-copy">
+        <strong>SS Laser Service</strong>
+        <p>Send the product name, quantity, target configuration, and application context for a faster quotation.</p>
+      </div>
+      <div class="footer-links"><a href="/components/">Components</a><a href="mailto:sales3@sflaser.net">Email Technical Sales</a><a href="/#contact">RFQ</a></div>
+    </footer>
+  </main>
+
+  <script>
+    (() => {
+      const menuBtn = document.querySelector('.mobile-menu-btn');
+      const navShell = document.querySelector('.nav-shell');
+      if (!menuBtn || !navShell) return;
+      const closeMenu = () => {
+        navShell.classList.remove('is-open');
+        menuBtn.classList.remove('is-active');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      };
+      menuBtn.addEventListener('click', () => {
+        const isOpen = navShell.classList.toggle('is-open');
+        menuBtn.classList.toggle('is-active', isOpen);
+        menuBtn.setAttribute('aria-expanded', String(isOpen));
+        document.body.classList.toggle('menu-open', isOpen);
+      });
+      document.addEventListener('click', (event) => {
+        if (!navShell.contains(event.target) && !menuBtn.contains(event.target)) closeMenu();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMenu();
+      });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 980) closeMenu();
+      });
+    })();
+  </script>
+  <script src="/assets/js/cms-config.js?v=20260602-mail1"></script>
+  <script src="/assets/js/component-product-details.js?v=20260602-details1"></script>
+  <script src="/assets/js/component-product-detail.js?v=20260602-details1"></script>
+</body>
+</html>

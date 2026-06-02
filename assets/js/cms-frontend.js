@@ -122,10 +122,16 @@
 
   function buildProductActions(item, quoteLabel) {
     const actions = [];
+    const slug = String(item.slug || '')
+      .trim()
+      .toLowerCase();
+    const detailHref = slug
+      ? `/components/product.html?slug=${encodeURIComponent(slug)}`
+      : '';
 
-    if (item.purchase_url) {
+    if (detailHref) {
       actions.push(
-        `<a class="cms-btn cms-btn-primary" href="${escapeHtml(item.purchase_url)}" target="_blank" rel="noopener">Open Link</a>`
+        `<a class="cms-btn cms-btn-primary" href="${escapeHtml(detailHref)}">View Details</a>`
       );
     }
 
@@ -143,17 +149,32 @@
     }
 
     const inquiryBrand = cfg.inquiryBrand || 'SkyFire Laser';
-    const inquiryEmail = String(cfg.inquiryEmail || '').trim();
-    const inquiryPhone = String(cfg.inquiryPhone || '').trim();
-    const subject = encodeURIComponent(`Product inquiry: ${item.name || `${inquiryBrand} product`}`);
+    const inquiryEmail = String(cfg.inquiryEmail || 'sales3@sflaser.net').trim();
+    const productName = item.name || `${inquiryBrand} product`;
+    const productUrl = detailHref
+      ? new URL(detailHref, window.location.origin).href
+      : window.location.href;
+    const subject = encodeURIComponent(`Quote request: ${productName}`);
+    const body = encodeURIComponent(
+      [
+        `Hello ${inquiryBrand} team,`,
+        '',
+        `I would like to request pricing and availability for ${productName}.`,
+        `Product page: ${productUrl}`,
+        '',
+        'Please send pricing, lead time, and any configuration details needed for quotation.',
+        '',
+        'Quantity:',
+        'Application:',
+        'Company:',
+        '',
+        'Thank you.',
+      ].join('\n')
+    );
 
     if (inquiryEmail) {
       actions.push(
-        `<a class="cms-btn cms-btn-outline" href="${escapeHtml(`mailto:${inquiryEmail}?subject=${subject}`)}">${quoteLabel}</a>`
-      );
-    } else if (inquiryPhone) {
-      actions.push(
-        `<a class="cms-btn cms-btn-outline" href="${escapeHtml(`tel:${inquiryPhone}`)}">${quoteLabel}</a>`
+        `<a class="cms-btn cms-btn-outline" href="${escapeHtml(`mailto:${inquiryEmail}?subject=${subject}&body=${body}`)}">${quoteLabel}</a>`
       );
     }
 
@@ -198,7 +219,7 @@
 
     const productLimit = resolveLimit(productsGrid, 8);
     const query = [
-      'products?select=id,name,short_description,price_cents,currency,image_url,purchase_url,brochure_url,published_at,status',
+      'products?select=id,name,slug,short_description,price_cents,currency,image_url,purchase_url,brochure_url,published_at,status',
       'status=eq.published',
       'order=published_at.desc.nullslast',
       productLimit ? `limit=${productLimit}` : '',
@@ -219,8 +240,13 @@
     productsGrid.innerHTML = rows
       .map((item) => {
         const imageUrl = resolveOptimizedImageUrl(item.image_url);
+        const detailHref = item.slug
+          ? `/components/product.html?slug=${encodeURIComponent(item.slug)}`
+          : '';
         const image = imageUrl
-          ? `<div class="cms-card-media"><img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy" decoding="async"></div>`
+          ? detailHref
+            ? `<a class="cms-card-media" href="${escapeHtml(detailHref)}"><img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy" decoding="async"></a>`
+            : `<div class="cms-card-media"><img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy" decoding="async"></div>`
           : '';
 
         const productState = getProductState(item);

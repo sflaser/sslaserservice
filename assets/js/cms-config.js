@@ -4,6 +4,6 @@ window.CMS_CONFIG = {
   storageBucket: "site-assets",
   defaultCurrency: "USD",
   inquiryBrand: "SkyFire Laser",
-  inquiryEmail: "",
+  inquiryEmail: "sales3@sflaser.net",
   inquiryPhone: "+8613995672493"
 };
