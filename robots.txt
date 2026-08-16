@@ -6,7 +6,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
-Disallow: /thanks.html
 Disallow: /private/
 Disallow: /temp/
 

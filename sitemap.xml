@@ -7,12 +7,6 @@
     <priority>0.78</priority>
   </url>
   <url>
-    <loc>https://www.sslaserservice.com/blog.html</loc>
-    <lastmod>2026-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.50</priority>
-  </url>
-  <url>
     <loc>https://www.sslaserservice.com/components/drivers-electronics/</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>monthly</changefreq>
@@ -55,8 +49,80 @@
     <priority>0.66</priority>
   </url>
   <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=20w-optical-isolator</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.58</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=1-plus-1-2-plus-1-pump-signal-combiner</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.58</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=pm-1-plus-1-2-plus-1-pump-signal-combiner</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.58</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=6-plus-1-pump-signal-combiner</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.58</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=n-by-1-multimode-pump-combiner</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.58</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=1x2-2x2-standard-fiber-coupler</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.58</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=1x2-2x2-pm-fiber-coupler</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.58</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=1x3-3x3-fiber-coupler</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.58</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=1x4-fiber-coupler</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.58</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=1x2-2x2-fused-wdm-coupler</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.58</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=1w-inline-optical-isolator</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.58</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/components/product.html?slug=pulse-shape-editable-nanosecond-fiber-laser</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.62</priority>
+  </url>
+  <url>
     <loc>https://www.sslaserservice.com/</loc>
-    <lastmod>2026-05-01</lastmod>
+    <lastmod>2026-08-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
   </url>
@@ -89,12 +155,6 @@
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
-  </url>
-  <url>
-    <loc>https://www.sslaserservice.com/es</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.84</priority>
   </url>
   <url>
     <loc>https://www.sslaserservice.com/laser-repair/industrial-processing/dc-50/</loc>
@@ -277,10 +337,22 @@
     <priority>0.72</priority>
   </url>
   <url>
-    <loc>https://www.sslaserservice.com/resources.html</loc>
+    <loc>https://www.sslaserservice.com/resources</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/blog.html?slug=solid-state-laser-repair-and-custom-solutions</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.64</priority>
+  </url>
+  <url>
+    <loc>https://www.sslaserservice.com/blog.html?slug=solid-state-laser-preventive-maintenance-guide</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.64</priority>
   </url>
   <url>
     <loc>https://www.sslaserservice.com/assets/brochures/pulse-waveform-editable-nanosecond-fiber-laser-en.pdf</loc>

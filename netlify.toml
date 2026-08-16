@@ -12,7 +12,7 @@
   package = "netlify-plugin-checklinks"
 
   [plugins.inputs]
-    skipPatterns = ["eng/index.html", "https://www.sslaserservice.com/eng", "es/index.html", "https://www.sslaserservice.com/es", "googletagmanager.com/gtag/js?id=G-90D0KLQCY8"]
+    skipPatterns = ["eng/index.html", "https://www.sslaserservice.com/eng", "es/index.html", "https://www.sslaserservice.com/es", "googletagmanager.com/gtag/js?id=G-4E0E1RLWN4"]
 
 [[headers]]
   for = "/*"
@@ -22,6 +22,7 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+    Strict-Transport-Security = "max-age=31536000"
 
 [[headers]]
   for = "*.css"
@@ -69,6 +70,36 @@
   [headers.values]
     Cache-Control = "public, max-age=3600"
 
+[[headers]]
+  for = "/404.html"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+    X-Robots-Tag = "noindex, noarchive"
+
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+    X-Robots-Tag = "noindex, noarchive, nosnippet"
+
+[[headers]]
+  for = "/cache-refresh.html"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+    X-Robots-Tag = "noindex, noarchive, nosnippet"
+
+[[headers]]
+  for = "/thanks.html"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+    X-Robots-Tag = "noindex, noarchive"
+
+[[headers]]
+  for = "/es/thanks.html"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+    X-Robots-Tag = "noindex, noarchive"
+
 [[redirects]]
   from = "/home"
   to = "/"
@@ -78,16 +109,25 @@
   from = "/sslaserservice.html"
   to = "/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/index.html"
   to = "/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/meta.json"
   to = "/"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "/resources.html"
+  to = "/resources"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/resources"
@@ -96,8 +136,14 @@
 
 [[redirects]]
   from = "/resources/"
-  to = "/resources.html"
-  status = 200
+  to = "/resources"
+  status = 301
+
+[[redirects]]
+  from = "/es/resources.html"
+  to = "/es/resources"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/es/resources"
@@ -106,8 +152,8 @@
 
 [[redirects]]
   from = "/es/resources/"
-  to = "/es/resources.html"
-  status = 200
+  to = "/es/resources"
+  status = 301
 
 [[redirects]]
   from = "/resourcesindustry-updates/"
@@ -175,6 +221,7 @@
   from = "/laser-support/index.html"
   to = "/eng"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/laser-support/es"
@@ -190,6 +237,18 @@
 
 [[redirects]]
   from = "/laser-support/es/index.html"
+  to = "/es"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/es/laser-support"
+  to = "/es"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/es/laser-support/"
   to = "/es"
   status = 301
   force = true
@@ -214,6 +273,18 @@
 [[redirects]]
   from = "/sg/laser-repair/"
   to = "/sg/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/es/sg/laser-repair"
+  to = "/es/sg/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/es/sg/laser-repair/"
+  to = "/es/sg/"
   status = 301
   force = true
 
@@ -404,5 +475,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200
+  to = "/404.html"
+  status = 404

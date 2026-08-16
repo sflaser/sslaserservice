@@ -1833,6 +1833,259 @@ body:has(.page-shell--campaign) {
   text-shadow: none;
 }
 
+.finder-icon-sprite {
+  display: none;
+}
+
+.support-finder-section {
+  display: grid;
+  gap: 22px;
+}
+
+.support-finder-panel,
+.support-route-panel {
+  overflow: hidden;
+  border: 1px solid rgba(121, 224, 255, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 248, 252, 0.98)),
+    #ffffff;
+  box-shadow: 0 22px 54px rgba(5, 12, 24, 0.22);
+  color: #1b263b;
+}
+
+.support-finder-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid rgba(27, 38, 59, 0.12);
+  background: #ffffff;
+}
+
+.support-finder-tabs button {
+  min-height: 62px;
+  border: 0;
+  border-right: 1px solid rgba(27, 38, 59, 0.12);
+  background: transparent;
+  color: #1b263b;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.support-finder-tabs button:last-child {
+  border-right: 0;
+}
+
+.support-finder-tabs button.is-active {
+  color: #ff6b00;
+  box-shadow: inset 0 -4px 0 #ff8c00;
+}
+
+.support-finder-head,
+.support-route-head {
+  padding: clamp(22px, 4vw, 34px);
+  margin: 0;
+}
+
+.support-finder-head h2,
+.support-route-head h2 {
+  color: #1b263b;
+}
+
+.support-finder-head p,
+.support-route-head p,
+.support-route-card p,
+.support-finder-empty {
+  color: rgba(27, 38, 59, 0.68);
+}
+
+.support-finder-apps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0 clamp(22px, 4vw, 34px) clamp(18px, 3vw, 26px);
+}
+
+.support-finder-apps button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 72px;
+  border: 1px solid rgba(27, 38, 59, 0.14);
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1b263b;
+  font: inherit;
+  font-weight: 900;
+  text-align: left;
+  cursor: pointer;
+  padding: 14px;
+  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.support-finder-apps button:hover,
+.support-finder-apps button:focus-visible,
+.support-finder-apps button.is-active {
+  border-color: rgba(255, 140, 0, 0.7);
+  box-shadow: 0 16px 30px rgba(27, 38, 59, 0.12);
+  transform: translateY(-2px);
+}
+
+.support-finder-icon {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 4px;
+  background: #1b263b;
+  color: #ffffff;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.support-finder-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.48fr) auto;
+  gap: 14px;
+  padding: 0 clamp(22px, 4vw, 34px) clamp(18px, 3vw, 26px);
+  align-items: end;
+}
+
+.support-finder-controls label {
+  display: grid;
+  gap: 8px;
+}
+
+.support-finder-controls label span {
+  color: rgba(27, 38, 59, 0.62);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.support-finder-controls input,
+.support-finder-controls select {
+  width: 100%;
+  min-height: 54px;
+  border: 1px solid rgba(27, 38, 59, 0.16);
+  border-radius: 2px;
+  background: #ffffff;
+  color: #1b263b;
+  font: inherit;
+  padding: 14px 16px;
+}
+
+.support-finder-note {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid rgba(27, 38, 59, 0.12);
+}
+
+.support-finder-note p {
+  margin: 0;
+  padding: 20px clamp(22px, 4vw, 34px);
+  color: rgba(27, 38, 59, 0.68);
+  line-height: 1.65;
+}
+
+.support-finder-note p + p {
+  border-left: 1px solid rgba(27, 38, 59, 0.12);
+}
+
+.support-finder-note strong {
+  color: #1b263b;
+}
+
+.support-route-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid rgba(27, 38, 59, 0.12);
+}
+
+.support-route-list {
+  display: grid;
+}
+
+.support-route-card {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.62fr) minmax(0, 1fr) minmax(210px, 0.42fr);
+  gap: 18px;
+  align-items: center;
+  padding: 22px clamp(22px, 4vw, 34px);
+  border-bottom: 1px solid rgba(27, 38, 59, 0.12);
+}
+
+.support-route-card[hidden] {
+  display: none;
+}
+
+.support-route-card:last-child {
+  border-bottom: 0;
+}
+
+.support-route-category {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(27, 38, 59, 0.76);
+  font-weight: 900;
+}
+
+.support-route-card h3 {
+  margin: 0 0 8px;
+  color: #1b263b;
+  font-size: clamp(22px, 2vw, 30px);
+}
+
+.support-route-card p {
+  margin: 0;
+  line-height: 1.62;
+}
+
+.support-route-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.support-route-actions .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.support-finder-empty {
+  margin: 0;
+  padding: 20px clamp(22px, 4vw, 34px) 26px;
+  font-weight: 800;
+}
+
+.rfq-upload-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.rfq-upload-slot {
+  display: grid;
+  gap: 8px;
+}
+
+.rfq-upload-slot label {
+  color: rgba(247, 250, 239, 0.72);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: none;
+}
+
+.rfq-upload-slot input[type="file"] {
+  min-height: 54px;
+}
+
 .evidence-card img {
   background: #eaf2f8;
   object-fit: contain;
@@ -1858,6 +2111,27 @@ body:has(.page-shell--campaign) {
   .cta-band--landing {
     width: min(calc(100% - 40px), 860px);
   }
+
+  .support-finder-apps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .support-finder-controls,
+  .support-route-card,
+  .rfq-upload-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .support-route-head,
+  .support-finder-note {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .support-finder-note p + p {
+    border-left: 0;
+    border-top: 1px solid rgba(27, 38, 59, 0.12);
+  }
 }
 
 @media (max-width: 720px) {
@@ -1877,5 +2151,17 @@ body:has(.page-shell--campaign) {
   .landing-rfq-section,
   .cta-band--landing {
     width: min(calc(100% - 28px), 460px);
+  }
+
+  .support-finder-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .support-finder-tabs button:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .support-finder-apps {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
