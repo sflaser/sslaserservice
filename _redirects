@@ -8,13 +8,16 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 
 # Common redirects
 /home / 301
-/index.html / 301
+/sslaserservice.html / 301!
+/index.html / 301!
 /index.php / 301
-/meta.json / 301
+/meta.json / 301!
+/resources.html /resources 301!
 /resources /resources.html 200
-/resources/ /resources.html 200
+/resources/ /resources 301
+/es/resources.html /es/resources 301!
 /es/resources /es/resources.html 200
-/es/resources/ /es/resources.html 200
+/es/resources/ /es/resources 301
 /resourcesindustry-updates/ /resources/industry-updates/ 301
 /es/resourcesindustry-updates/ /es/resources/industry-updates/ 301
 /images/logos/LOGO /images/logos/LOGO%E9%95%BF%E6%96%B9%E5%BD%A2.png 301
@@ -42,14 +45,18 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 /es /laser-support/es/index.html 200!
 /laser-support /eng 301
 /laser-support/ /eng 301
-/laser-support/index.html /eng 301
+/laser-support/index.html /eng 301!
 /laser-support/es /es 301!
 /laser-support/es/ /es 301!
 /laser-support/es/index.html /es 301!
+/es/laser-support /es 301!
+/es/laser-support/ /es 301!
 /sg /sg/ 301
 /sg/ /sg/index.html 200!
 /sg/laser-repair /sg/ 301!
 /sg/laser-repair/ /sg/ 301!
+/es/sg/laser-repair /es/sg/ 301!
+/es/sg/laser-repair/ /es/sg/ 301!
 /laser-repair /laser-repair/ 301
 /laser-repair/semiconductor-manufacturing /laser-repair/semiconductor-manufacturing/ 301
 /laser-repair/semiconductor-manufacturing/kla /laser-repair/semiconductor-manufacturing/kla/ 301
@@ -86,6 +93,4 @@ http://skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 /components/optical-components /components/optical-components/ 301
 /components/drivers-electronics /components/drivers-electronics/ 301
 /components/legacy-spare-parts /components/legacy-spare-parts/ 301
-
-# Fallback for any unmatched routes
-/* /index.html 200
+/thanks /thanks.html 200

@@ -32,6 +32,94 @@
     stateEl.hidden = !message;
   }
 
+  function upsertMeta(selector, attributes, content) {
+    let element = document.head.querySelector(selector);
+    if (!element) {
+      element = document.createElement('meta');
+      Object.keys(attributes).forEach(function (name) {
+        element.setAttribute(name, attributes[name]);
+      });
+      document.head.appendChild(element);
+    }
+    element.setAttribute('content', content);
+  }
+
+  function buildPageTitle(value) {
+    const suffix = ' | Sky Fire Laser';
+    const label = String(value || 'Component product').replace(/\s+/g, ' ').trim();
+    const available = 65 - suffix.length;
+    const shortened = label.length > available
+      ? label.slice(0, available).replace(/\s+\S*$/, '').trim()
+      : label;
+    return `${shortened}${suffix}`;
+  }
+
+  function buildDescription(value) {
+    const normalized = String(value || '').replace(/\s+/g, ' ').trim();
+    if (normalized.length <= 160) return normalized;
+    return `${normalized.slice(0, 157).replace(/\s+\S*$/, '').replace(/[,:;\s]+$/, '')}…`;
+  }
+
+  function updateSearchMetadata(product, detail, name, overview, category) {
+    const canonicalUrl = new URL(`/components/product.html?slug=${encodeURIComponent(slug)}`, window.location.origin).href;
+    const description = buildDescription(product?.short_description || overview || `Specifications and RFQ details for ${name}.`);
+    const imageUrl = product?.image_url
+      ? new URL(resolveOptimizedImageUrl(product.image_url), window.location.origin).href
+      : '';
+    const canonical = document.head.querySelector('link[rel="canonical"]');
+
+    if (canonical) canonical.href = canonicalUrl;
+    upsertMeta('meta[name="robots"]', { name: 'robots' }, 'index,follow,max-image-preview:large,max-snippet:-1');
+    upsertMeta('meta[name="description"]', { name: 'description' }, description);
+    upsertMeta('meta[property="og:title"]', { property: 'og:title' }, `${name} | Sky Fire Laser`);
+    upsertMeta('meta[property="og:description"]', { property: 'og:description' }, description);
+    upsertMeta('meta[property="og:type"]', { property: 'og:type' }, 'product');
+    upsertMeta('meta[property="og:url"]', { property: 'og:url' }, canonicalUrl);
+    upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card' }, imageUrl ? 'summary_large_image' : 'summary');
+    upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title' }, `${name} | Sky Fire Laser`);
+    upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description' }, description);
+
+    if (imageUrl) {
+      upsertMeta('meta[property="og:image"]', { property: 'og:image' }, imageUrl);
+      upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt' }, name);
+      upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image' }, imageUrl);
+      upsertMeta('meta[name="twitter:image:alt"]', { name: 'twitter:image:alt' }, name);
+    }
+
+    let structuredData = document.getElementById('product-structured-data');
+    if (!structuredData) {
+      structuredData = document.createElement('script');
+      structuredData.id = 'product-structured-data';
+      structuredData.type = 'application/ld+json';
+      document.head.appendChild(structuredData);
+    }
+
+    structuredData.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Product',
+          '@id': `${canonicalUrl}#product`,
+          name,
+          description,
+          url: canonicalUrl,
+          sku: slug,
+          category,
+          image: imageUrl || undefined,
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': `${canonicalUrl}#breadcrumb`,
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: `${window.location.origin}/` },
+            { '@type': 'ListItem', position: 2, name: 'Components', item: `${window.location.origin}/components/` },
+            { '@type': 'ListItem', position: 3, name, item: canonicalUrl },
+          ],
+        },
+      ],
+    });
+  }
+
   function quoteHref(productName) {
     const inquiryBrand = cfg.inquiryBrand || 'SkyFire Laser';
     const inquiryEmail = String(cfg.inquiryEmail || 'sales3@sflaser.net').trim();
@@ -140,7 +228,8 @@
     const overview = detail?.overview || product?.description || product?.short_description || '';
     const category = detail?.category || 'Component details';
 
-    document.title = `${name} | SS Laser Service`;
+    document.title = buildPageTitle(name);
+    updateSearchMetadata(product, detail, name, overview, category);
     titleEl.textContent = name;
     categoryEl.textContent = category;
     summaryEl.textContent = overview;

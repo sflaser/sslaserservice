@@ -19,6 +19,115 @@
     cardEl.hidden = true;
   }
 
+  function upsertMeta(selector, attributes, content) {
+    let element = document.head.querySelector(selector);
+    if (!element) {
+      element = document.createElement("meta");
+      Object.keys(attributes).forEach(function (name) {
+        element.setAttribute(name, attributes[name]);
+      });
+      document.head.appendChild(element);
+    }
+    element.setAttribute("content", content);
+  }
+
+  function buildPageTitle(value) {
+    const suffix = " | Sky Fire Laser";
+    const label = String(value || "Resource").replace(/\s+/g, " ").trim();
+    const available = 65 - suffix.length;
+    const shortened = label.length > available
+      ? label.slice(0, available).replace(/\s+\S*$/, "").trim()
+      : label;
+    return `${shortened}${suffix}`;
+  }
+
+  function buildDescription(value) {
+    const normalized = String(value || "")
+      .replace(/[#*_`>\[\]()]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (normalized.length <= 160) return normalized;
+    return `${normalized.slice(0, 157).replace(/\s+\S*$/, "").replace(/[,:;\s]+$/, "")}…`;
+  }
+
+  function updateSearchMetadata(post, coverImageUrl) {
+    const canonicalUrl = new URL(`${window.location.pathname}?slug=${encodeURIComponent(post.slug)}`, window.location.origin).href;
+    const description = buildDescription(post.excerpt || post.content || "");
+    const absoluteImageUrl = coverImageUrl
+      ? new URL(coverImageUrl, window.location.origin).href
+      : "";
+    const canonical = document.head.querySelector('link[rel="canonical"]');
+    const currentLanguage = (document.documentElement.lang || "en-US").toLowerCase();
+
+    if (canonical) canonical.href = canonicalUrl;
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(function (link) {
+      const language = link.getAttribute("hreflang");
+      const counterpartPath = language === "es" ? "/es/blog.html" : "/blog.html";
+      link.href = new URL(`${counterpartPath}?slug=${encodeURIComponent(post.slug)}`, window.location.origin).href;
+    });
+
+    upsertMeta('meta[name="robots"]', { name: "robots" }, "index,follow,max-image-preview:large,max-snippet:-1");
+    upsertMeta('meta[name="description"]', { name: "description" }, description);
+    upsertMeta('meta[property="og:title"]', { property: "og:title" }, post.title);
+    upsertMeta('meta[property="og:description"]', { property: "og:description" }, description);
+    upsertMeta('meta[property="og:type"]', { property: "og:type" }, "article");
+    upsertMeta('meta[property="og:url"]', { property: "og:url" }, canonicalUrl);
+    upsertMeta('meta[name="twitter:card"]', { name: "twitter:card" }, absoluteImageUrl ? "summary_large_image" : "summary");
+    upsertMeta('meta[name="twitter:title"]', { name: "twitter:title" }, post.title);
+    upsertMeta('meta[name="twitter:description"]', { name: "twitter:description" }, description);
+
+    if (absoluteImageUrl) {
+      upsertMeta('meta[property="og:image"]', { property: "og:image" }, absoluteImageUrl);
+      upsertMeta('meta[property="og:image:alt"]', { property: "og:image:alt" }, post.title);
+      upsertMeta('meta[name="twitter:image"]', { name: "twitter:image" }, absoluteImageUrl);
+      upsertMeta('meta[name="twitter:image:alt"]', { name: "twitter:image:alt" }, post.title);
+    }
+
+    let structuredData = document.getElementById("blog-post-structured-data") || document.head.querySelector('script[type="application/ld+json"]');
+    if (!structuredData) {
+      structuredData = document.createElement("script");
+      structuredData.type = "application/ld+json";
+      document.head.appendChild(structuredData);
+    }
+    structuredData.id = "blog-post-structured-data";
+    structuredData.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BlogPosting",
+          "@id": `${canonicalUrl}#article`,
+          headline: post.title,
+          description,
+          url: canonicalUrl,
+          image: absoluteImageUrl || undefined,
+          datePublished: post.published_at || undefined,
+          dateModified: post.published_at || undefined,
+          inLanguage: currentLanguage.startsWith("es") ? "es" : "en-US",
+          author: { "@id": `${window.location.origin}/#organization` },
+          publisher: { "@id": `${window.location.origin}/#organization` },
+          mainEntityOfPage: { "@id": `${canonicalUrl}#webpage` },
+        },
+        {
+          "@type": "WebPage",
+          "@id": `${canonicalUrl}#webpage`,
+          url: canonicalUrl,
+          name: post.title,
+          description,
+          inLanguage: currentLanguage.startsWith("es") ? "es" : "en-US",
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": `${canonicalUrl}#breadcrumb`,
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: `${window.location.origin}/` },
+            { "@type": "ListItem", position: 2, name: "Resources", item: `${window.location.origin}/resources` },
+            { "@type": "ListItem", position: 3, name: post.title, item: canonicalUrl },
+          ],
+        },
+      ],
+    });
+  }
+
   function escapeHtml(value) {
     return String(value || "")
       .replace(/&/g, "&amp;")
@@ -240,13 +349,14 @@
         return;
       }
 
-      document.title = `${post.title} | Sky Fire Laser`;
+      document.title = buildPageTitle(post.title);
       titleEl.textContent = post.title || "";
       dateEl.textContent = formatDate(post.published_at);
       excerptEl.textContent = post.excerpt || "";
       bodyEl.innerHTML = renderStructuredContent(post.content || "");
 
       const coverImageUrl = resolveOptimizedImageUrl(post.cover_image_url);
+      updateSearchMetadata(post, coverImageUrl);
 
       if (coverImageUrl) {
         coverEl.src = coverImageUrl;

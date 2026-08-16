@@ -7,7 +7,10 @@
     window.dataLayer.push(arguments);
   };
 
-  const defaultConfigIds = ['G-CDW4YR5MC5', 'AW-1125868950'];
+  // Keep one primary GA4 property across the main site. Additional properties
+  // must be opted into with data-config-ids on this script tag.
+  const primaryMeasurementId = scriptTag?.dataset.measurementId || 'G-4E0E1RLWN4';
+  const defaultConfigIds = [primaryMeasurementId, 'AW-1125868950'];
   const extraConfigIds = (scriptTag?.dataset.configIds || '')
     .split(',')
     .map(function (id) {
@@ -16,9 +19,27 @@
     .filter(Boolean);
   const configIds = Array.from(new Set(defaultConfigIds.concat(extraConfigIds)));
 
-  window.gtag('js', new Date());
+  const alreadyConfigured = new Set(
+    window.dataLayer
+      .filter(function (entry) {
+        return entry && entry[0] === 'config' && entry[1];
+      })
+      .map(function (entry) {
+        return entry[1];
+      })
+  );
+  const hasJsBootstrap = window.dataLayer.some(function (entry) {
+    return entry && entry[0] === 'js';
+  });
+
+  if (!hasJsBootstrap) {
+    window.gtag('js', new Date());
+  }
+
   configIds.forEach(function (id) {
-    window.gtag('config', id);
+    if (!alreadyConfigured.has(id)) {
+      window.gtag('config', id);
+    }
   });
 
   if (scriptTag?.dataset.conversionSendTo) {
@@ -67,9 +88,14 @@
   window.addEventListener('load', removeLegacyServiceWorker, { once: true });
 
   const loadGoogleTag = function () {
+    const existingTag = document.querySelector('script[src*="googletagmanager.com/gtag/js?id="]');
+    if (existingTag) {
+      return;
+    }
+
     const script = document.createElement('script');
     script.async = true;
-    script.src = 'https://' + 'www.googletagmanager.com/gtag/js?id=G-CDW4YR5MC5';
+    script.src = 'https://' + `www.googletagmanager.com/gtag/js?id=${encodeURIComponent(primaryMeasurementId)}`;
     document.head.appendChild(script);
   };
 

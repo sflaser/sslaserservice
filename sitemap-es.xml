@@ -7,12 +7,6 @@
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.sslaserservice.com/es/blog.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
     <loc>https://www.sslaserservice.com/es/components/drivers-electronics/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -56,7 +50,7 @@
   </url>
   <url>
     <loc>https://www.sslaserservice.com/es/</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-08-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>
   </url>
@@ -217,12 +211,6 @@
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.sslaserservice.com/es/laser-support/</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
     <loc>https://www.sslaserservice.com/es/manufacturing/custom-solid-state/</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
@@ -259,7 +247,7 @@
     <priority>0.64</priority>
   </url>
   <url>
-    <loc>https://www.sslaserservice.com/es/resources.html</loc>
+    <loc>https://www.sslaserservice.com/es/resources</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>
@@ -272,18 +260,6 @@
   </url>
   <url>
     <loc>https://www.sslaserservice.com/es/sg/</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://www.sslaserservice.com/es/sg/laser-repair/</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.64</priority>
-  </url>
-  <url>
-    <loc>https://www.sslaserservice.com/es/thanks.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>

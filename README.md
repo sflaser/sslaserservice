@@ -14,16 +14,16 @@
 ### ⚡ 性能优化
 - 图片懒加载和预加载策略
 - WebP/AVIF格式检测
-- Service Worker离线缓存
+- 旧版Service Worker缓存清理
 - JavaScript性能监控和延迟加载
 - CSS硬件加速优化
 - 第三方脚本优化
 
-### 📱 PWA功能
-- Web应用清单配置
-- Service Worker缓存策略
+### 📱 普通网页体验
+- 不提供PWA安装入口
+- 保留旧版Service Worker清理脚本，帮助浏览器退出旧缓存
 - 移动端适配和主题色彩
-- 可安装到主屏幕
+- 从浏览器地址栏访问完整网页
 
 ### 🔒 安全优化
 - 完整的安全头配置
@@ -76,8 +76,8 @@ skyfire-laser-website/
 ├── _redirects              # URL重定向规则
 ├── sitemap.xml             # SEO站点地图
 ├── robots.txt              # 搜索引擎指令
-├── manifest.json           # PWA清单
-├── sw.js                   # Service Worker
+├── manifest.json           # 浏览器模式站点清单（不作为应用安装入口）
+├── sw.js                   # 旧版Service Worker清理脚本
 ├── .htaccess              # Apache服务器配置（备用）
 └── README.md              # 项目说明
 ```
@@ -121,7 +121,7 @@ npx serve .
 
 ### v1.0.0 (最新)
 - ✅ 完整的SEO优化
-- ✅ PWA功能支持
+- ✅ 普通网页体验（已移除可安装应用信号）
 - ✅ 性能优化
 - ✅ 安全加固
 - ✅ 移动端适配
@@ -134,4 +134,4 @@ npx serve .
 
 ## 📄 许可证
 
-Copyright © 2024 Sky Fire Laser. All rights reserved. 
+Copyright © 2024 Sky Fire Laser. All rights reserved.
