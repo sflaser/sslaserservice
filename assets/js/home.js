@@ -150,78 +150,6 @@
     });
   }
 
-  function initRfqForm() {
-    const rfqForm = document.querySelector('.rfq-form');
-    if (!rfqForm) return;
-
-    const isSpanish = isSpanishPage();
-    const formCopy = isSpanish
-      ? {
-        sending: 'Enviando...',
-        thanksPath: '/es/thanks.html',
-        fileError: 'El archivo adjunto supera 8 MB. Cargue un archivo más pequeño o envíelo por correo a sales3@sflaser.net después de enviar el RFQ.',
-        submitError: 'No se pudo enviar la solicitud. Inténtelo de nuevo o escriba directamente a sales3@sflaser.net.',
-      }
-      : {
-        sending: 'Sending...',
-        thanksPath: '/thanks.html',
-        fileError: 'The attached file is larger than 8 MB. Please upload a smaller file or email it to sales3@sflaser.net after submitting the RFQ.',
-        submitError: 'Submission failed. Please try again or email sales3@sflaser.net directly.',
-      };
-
-    rfqForm.addEventListener('submit', async function (event) {
-      event.preventDefault();
-
-      const submitButton = rfqForm.querySelector('button[type="submit"]');
-      const originalLabel = submitButton ? submitButton.textContent : '';
-
-      try {
-        if (submitButton) {
-          submitButton.disabled = true;
-          submitButton.textContent = formCopy.sending;
-        }
-
-        const maxFileSize = 8 * 1024 * 1024;
-        const files = Array.from(rfqForm.querySelectorAll('input[type="file"]'))
-          .flatMap(function (input) {
-            return Array.from(input.files || []);
-          });
-        const oversizedFile = files.find(function (file) {
-          return file.size > maxFileSize;
-        });
-
-        if (oversizedFile) {
-          throw new Error('Attached file exceeds 8 MB');
-        }
-
-        const formData = new FormData(rfqForm);
-        const response = await fetch('/', {
-          method: 'POST',
-          body: formData,
-        });
-
-        if (!response.ok) {
-          throw new Error('RFQ submission failed');
-        }
-
-        window.location.href = rfqForm.getAttribute('action') || formCopy.thanksPath;
-      } catch (error) {
-        console.error(error);
-
-        if (error && error.message === 'Attached file exceeds 8 MB') {
-          alert(formCopy.fileError);
-        } else {
-          alert(formCopy.submitError);
-        }
-
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = originalLabel;
-        }
-      }
-    });
-  }
-
   function initPlatformFinder() {
     const finder = document.querySelector('.platform-finder');
     const routeSection = document.querySelector('.finder-route-section');
@@ -702,7 +630,6 @@
   document.addEventListener('DOMContentLoaded', function () {
     bindImageStates();
     initFaq();
-    initRfqForm();
     initPlatformFinder();
     initHeader();
     initVideoEmbeds();

@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4E0E1RLWN4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-4E0E1RLWN4');
-  </script>
+
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Consulta recibida | Sky Fire Laser</title>
@@ -344,7 +337,7 @@
     }
   </style>
   <link rel="stylesheet" href="/assets/css/utility-template.css?v=20260529-orange1">
-  <script defer src="/assets/js/analytics.js?v=20260814-seo1" data-page-type="thank_you" data-conversion-config="AW-11258689506" data-conversion-send-to="AW-11258689506/y0wjCKzz_pUZEOLvx_gp" data-conversion-value="1" data-conversion-currency="USD"></script>
+  <script defer src="/assets/js/analytics.js?v=20260924-rfq1" data-page-type="thank_you"></script>
   <link rel="canonical" href="https://www.sslaserservice.com/es/thanks.html">
   <link rel="alternate" hreflang="en" href="https://www.sslaserservice.com/thanks.html">
   <link rel="alternate" hreflang="es" href="https://www.sslaserservice.com/es/thanks.html">
@@ -374,7 +367,7 @@
         <a href="/es/#contact">Contacto</a>
         <div class="mobile-nav-foot">
           <p class="mobile-nav-eyebrow">Gracias</p>
-          <p class="mobile-nav-contact">Su consulta ha sido recibida. Utilice los enlaces a continuación si desea regresar a una sección de servicio o enviar otra solicitud.</p>
+          <p class="mobile-nav-contact">Utilice los enlaces a continuación si desea regresar a una sección de servicio o enviar otra solicitud.</p>
           <div class="mobile-nav-actions">
             <a href="/es/#contact" class="mobile-nav-cta btn btn-primary">Iniciar una RFQ</a>
             <a href="mailto:sales3@sflaser.net" class="mobile-nav-cta btn btn-outline">Enviar correo a ventas técnicas</a>
@@ -385,9 +378,10 @@
 
     <section class="hero">
       <article class="panel">
-        <p class="eyebrow">Consulta recibida</p>
-        <h1>Su solicitud está en la cola.</h1>
-        <p class="lead">Recibimos su RFQ. Nuestro equipo revisará su solicitud y realizará un seguimiento con la reparación, el abastecimiento o el soporte de proyecto personalizado adecuado.</p>
+        <p class="eyebrow">RFQ</p>
+        <h1 data-rfq-thanks-title>¿Necesita enviar una consulta?</h1>
+        <p class="lead" data-rfq-thanks-detail>Use el formulario para enviar su solicitud. Si ya la ha enviado, conserve su referencia para el seguimiento.</p>
+        <p data-rfq-receipt hidden></p>
         <div class="actions">
           <a class="btn btn-primary" href="/es/">Regreso a casa</a>
           <a class="btn btn-outline" href="mailto:sales3@sflaser.net">Enviar archivos de soporte por correo electrónico</a>
@@ -453,5 +447,6 @@
       });
     });
   </script>
+  <script defer src="/assets/js/rfq.js?v=20260924-rfq1"></script>
 </body>
 </html>

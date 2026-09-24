@@ -28,15 +28,6 @@
   <meta name="twitter:description" content="Una primera ruta clara para sistemas láser instalados que necesitan reparación, reemplazo o componentes.">
   <meta name="twitter:image" content="https://www.sslaserservice.com/images/services/professional-repair-lab-home-20260418.jpg">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4E0E1RLWN4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-4E0E1RLWN4');
-    gtag('config', 'AW-1125868950');
-  </script>
 
   <script type="application/ld+json">
 {
@@ -59,6 +50,7 @@
   ]
 }
   </script>
+  <script defer src="/assets/js/analytics.js?v=20260924-rfq1"></script>
 </head>
 <body>
   <svg class="finder-icon-sprite" aria-hidden="true" focusable="false">
@@ -89,6 +81,32 @@
   </svg>
 
   <form name="rfq" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true" hidden>
+    <input type="hidden" name="inquiry_id">
+    <input type="hidden" name="transaction_id">
+    <input type="hidden" name="market" value="Global">
+    <input type="hidden" name="campaign_hint">
+    <input type="hidden" name="source_page">
+    <input type="hidden" name="submission_page">
+    <input type="hidden" name="landing_page">
+    <input type="hidden" name="referrer">
+    <input type="hidden" name="first_landing_page">
+    <input type="hidden" name="first_referrer">
+    <input type="hidden" name="utm_source">
+    <input type="hidden" name="utm_medium">
+    <input type="hidden" name="utm_campaign">
+    <input type="hidden" name="utm_term">
+    <input type="hidden" name="utm_content">
+    <input type="hidden" name="gclid">
+    <input type="hidden" name="gbraid">
+    <input type="hidden" name="wbraid">
+    <input type="hidden" name="first_utm_source">
+    <input type="hidden" name="first_utm_medium">
+    <input type="hidden" name="first_utm_campaign">
+    <input type="hidden" name="first_utm_term">
+    <input type="hidden" name="first_utm_content">
+    <input type="hidden" name="first_gclid">
+    <input type="hidden" name="first_gbraid">
+    <input type="hidden" name="first_wbraid">
     <input type="hidden" name="form-name" value="rfq">
     <input type="text" name="bot-field">
     <input type="text" name="inquiry_type">
@@ -472,6 +490,32 @@
         </div>
 
         <form class="rfq-form" name="rfq" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true" action="/es/thanks.html">
+    <input type="hidden" name="inquiry_id">
+    <input type="hidden" name="transaction_id">
+    <input type="hidden" name="market" value="Global">
+    <input type="hidden" name="campaign_hint">
+    <input type="hidden" name="source_page">
+    <input type="hidden" name="submission_page">
+    <input type="hidden" name="landing_page">
+    <input type="hidden" name="referrer">
+    <input type="hidden" name="first_landing_page">
+    <input type="hidden" name="first_referrer">
+    <input type="hidden" name="utm_source">
+    <input type="hidden" name="utm_medium">
+    <input type="hidden" name="utm_campaign">
+    <input type="hidden" name="utm_term">
+    <input type="hidden" name="utm_content">
+    <input type="hidden" name="gclid">
+    <input type="hidden" name="gbraid">
+    <input type="hidden" name="wbraid">
+    <input type="hidden" name="first_utm_source">
+    <input type="hidden" name="first_utm_medium">
+    <input type="hidden" name="first_utm_campaign">
+    <input type="hidden" name="first_utm_term">
+    <input type="hidden" name="first_utm_content">
+    <input type="hidden" name="first_gclid">
+    <input type="hidden" name="first_gbraid">
+    <input type="hidden" name="first_wbraid">
           <input type="hidden" name="form-name" value="rfq">
           <input type="hidden" name="finder_route" id="rfq-finder-route">
           <input type="hidden" name="routing_basis" id="rfq-routing-basis">
@@ -504,37 +548,37 @@
 
             <div class="rfq-field">
               <label for="rfq-name">Nombre completo</label>
-              <input id="rfq-name" name="full_name" type="text" required>
+              <input id="rfq-name" name="full_name" type="text" required maxlength="120">
             </div>
 
             <div class="rfq-field">
               <label for="rfq-company">Empresa / laboratorio</label>
-              <input id="rfq-company" name="company" type="text">
+              <input id="rfq-company" name="company" type="text" maxlength="160">
             </div>
 
             <div class="rfq-field">
               <label for="rfq-email">Correo electrónico</label>
-              <input id="rfq-email" name="email" type="email" required>
+              <input id="rfq-email" name="email" type="email" required maxlength="254">
             </div>
 
             <div class="rfq-field">
               <label for="rfq-phone">Teléfono / WhatsApp</label>
-              <input id="rfq-phone" name="phone" type="text">
+              <input id="rfq-phone" name="phone" type="text" maxlength="80">
             </div>
 
             <div class="rfq-field">
               <label for="rfq-brand">Marca</label>
-              <input id="rfq-brand" name="brand" type="text" placeholder="Coherent, Quantel, Lumibird, etc.">
+              <input id="rfq-brand" name="brand" type="text" placeholder="Coherent, Quantel, Lumibird, etc." maxlength="120">
             </div>
 
             <div class="rfq-field">
               <label for="rfq-model">Modelo / familia de producto</label>
-              <input id="rfq-model" name="model" type="text" placeholder="Puma 9150, Centurion, Verdi V18, módulo a medida...">
+              <input id="rfq-model" name="model" type="text" placeholder="Puma 9150, Centurion, Verdi V18, módulo a medida..." maxlength="160">
             </div>
 
             <div class="rfq-field rfq-field-full">
               <label for="rfq-application">Contexto de aplicación</label>
-              <input id="rfq-application" name="application" type="text" placeholder="Inspección de semiconductores, lidar, laboratorio de investigación, manufactura de pantallas...">
+              <input id="rfq-application" name="application" type="text" placeholder="Inspección de semiconductores, lidar, laboratorio de investigación, manufactura de pantallas..." maxlength="500">
             </div>
 
             <div class="rfq-field rfq-field-full">
@@ -553,12 +597,12 @@
                   <input id="rfq-file-3" name="project_file_3" type="file" accept=".jpg,.jpeg,.png,.webp,.pdf,.txt,.csv,.log,.zip,.7z">
                 </div>
               </div>
-              <p class="rfq-file-help">Adjunte hasta tres archivos, cada uno de hasta 8 MB: fotos de etiquetas, fotos de fallas, capturas, logs, PDFs o fichas técnicas.</p>
+              <p class="rfq-file-help">Adjunte hasta tres archivos, con un máximo total de 7 MB: fotos de etiquetas, fotos de fallas, capturas, logs, PDFs o fichas técnicas.</p>
             </div>
 
             <div class="rfq-field rfq-field-full">
               <label for="rfq-details">Detalles técnicos</label>
-              <textarea id="rfq-details" name="details" placeholder="Describa los síntomas de falla, la pieza requerida, longitud de onda/potencia objetivo o el problema técnico que necesita resolver." required></textarea>
+              <textarea id="rfq-details" name="details" placeholder="Describa los síntomas de falla, la pieza requerida, longitud de onda/potencia objetivo o el problema técnico que necesita resolver." required maxlength="10000"></textarea>
             </div>
           </div>
 
@@ -568,7 +612,8 @@
             <button type="submit" class="btn btn-primary">Enviar RFQ</button>
             <p class="rfq-note">Para archivos más grandes, escriba a <a href="mailto:sales3@sflaser.net">sales3@sflaser.net</a> después de enviar la solicitud.</p>
           </div>
-        </form>
+          <p data-rfq-status role="status" aria-live="polite" tabindex="-1" hidden></p>
+                    </form>
       </article>
     </section>
 
@@ -734,55 +779,6 @@
 	        updateRoutes();
 	      }
 
-	      if (rfqForm) {
-	        rfqForm.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          const submitButton = rfqForm.querySelector('button[type="submit"]');
-          const originalLabel = submitButton ? submitButton.textContent : '';
-
-          try {
-            if (submitButton) {
-              submitButton.disabled = true;
-              submitButton.textContent = 'Enviando...';
-            }
-
-	            const maxFileSize = 8 * 1024 * 1024;
-	            const files = Array.from(rfqForm.querySelectorAll('input[type="file"]'))
-	              .flatMap((input) => Array.from(input.files || []));
-	            const oversizedFile = files.find((file) => file.size > maxFileSize);
-
-	            if (oversizedFile) {
-	              throw new Error('El archivo adjunto supera 8 MB');
-	            }
-
-	            const formData = new FormData(rfqForm);
-
-            const response = await fetch('/', {
-              method: 'POST',
-              body: formData,
-            });
-
-            if (!response.ok) {
-              throw new Error(`RFQ submission failed with status ${response.status}`);
-            }
-
-	            window.location.href = rfqForm.getAttribute('action') || '/es/thanks.html';
-          } catch (error) {
-            console.error(error);
-            if (error && error.message === 'El archivo adjunto supera 8 MB') {
-              alert('El archivo adjunto supera 8 MB. Suba un archivo más pequeño o envíelo a sales3@sflaser.net después de enviar el RFQ.');
-            } else {
-              alert('No se pudo enviar la solicitud. Inténtelo de nuevo o escriba directamente a sales3@sflaser.net.');
-            }
-
-            if (submitButton) {
-              submitButton.disabled = false;
-              submitButton.textContent = originalLabel;
-            }
-          }
-        });
-      }
-
       if (!items.length || !('IntersectionObserver' in window)) return;
       document.body.classList.add('reveal-ready');
       const observer = new IntersectionObserver((entries) => {
@@ -798,5 +794,6 @@
       });
     })();
   </script>
+  <script defer src="/assets/js/rfq.js?v=20260924-rfq1"></script>
 </body>
 </html>
