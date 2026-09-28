@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4E0E1RLWN4"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-4E0E1RLWN4');
-    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solid-State Laser Repair &amp; Photonics | Sky Fire Laser</title>
@@ -155,6 +148,32 @@
 </head>
 <body>
   <form name="rfq" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true" hidden>
+    <input type="hidden" name="inquiry_id">
+    <input type="hidden" name="transaction_id">
+    <input type="hidden" name="market" value="Global">
+    <input type="hidden" name="campaign_hint">
+    <input type="hidden" name="source_page">
+    <input type="hidden" name="submission_page">
+    <input type="hidden" name="landing_page">
+    <input type="hidden" name="referrer">
+    <input type="hidden" name="first_landing_page">
+    <input type="hidden" name="first_referrer">
+    <input type="hidden" name="utm_source">
+    <input type="hidden" name="utm_medium">
+    <input type="hidden" name="utm_campaign">
+    <input type="hidden" name="utm_term">
+    <input type="hidden" name="utm_content">
+    <input type="hidden" name="gclid">
+    <input type="hidden" name="gbraid">
+    <input type="hidden" name="wbraid">
+    <input type="hidden" name="first_utm_source">
+    <input type="hidden" name="first_utm_medium">
+    <input type="hidden" name="first_utm_campaign">
+    <input type="hidden" name="first_utm_term">
+    <input type="hidden" name="first_utm_content">
+    <input type="hidden" name="first_gclid">
+    <input type="hidden" name="first_gbraid">
+    <input type="hidden" name="first_wbraid">
         <input type="hidden" name="form-name" value="rfq">
         <input type="text" name="bot-field">
         <input type="text" name="inquiry_type">
@@ -168,7 +187,11 @@
         <input type="text" name="application">
         <input type="file" name="project_file">
         <textarea name="details"></textarea>
-    </form>
+        <input type="hidden" name="finder_route">
+    <input type="hidden" name="routing_basis">
+    <input type="file" name="project_file_2">
+    <input type="file" name="project_file_3">
+  </form>
 
     <!-- Top navigation bar -->
     <header>
@@ -583,7 +606,7 @@
                             <span class="faq-icon"></span>
                         </button>
                         <div class="faq-answer">
-                            <p>Brand, model, current symptoms, application context, urgency, and a few clear photos are usually the most useful. If a file is larger than 8 MB, send it by email after submitting the RFQ.</p>
+                            <p>Brand, model, current symptoms, application context, urgency, and a few clear photos are usually the most useful. If a file is larger than 7 MB in total, send it by email after submitting the RFQ.</p>
                         </div>
                     </article>
 
@@ -650,6 +673,32 @@
                     </div>
 
                     <form class="rfq-form" name="rfq" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field" data-netlify-recaptcha="true" action="/thanks.html">
+    <input type="hidden" name="inquiry_id">
+    <input type="hidden" name="transaction_id">
+    <input type="hidden" name="market" value="Global">
+    <input type="hidden" name="campaign_hint">
+    <input type="hidden" name="source_page">
+    <input type="hidden" name="submission_page">
+    <input type="hidden" name="landing_page">
+    <input type="hidden" name="referrer">
+    <input type="hidden" name="first_landing_page">
+    <input type="hidden" name="first_referrer">
+    <input type="hidden" name="utm_source">
+    <input type="hidden" name="utm_medium">
+    <input type="hidden" name="utm_campaign">
+    <input type="hidden" name="utm_term">
+    <input type="hidden" name="utm_content">
+    <input type="hidden" name="gclid">
+    <input type="hidden" name="gbraid">
+    <input type="hidden" name="wbraid">
+    <input type="hidden" name="first_utm_source">
+    <input type="hidden" name="first_utm_medium">
+    <input type="hidden" name="first_utm_campaign">
+    <input type="hidden" name="first_utm_term">
+    <input type="hidden" name="first_utm_content">
+    <input type="hidden" name="first_gclid">
+    <input type="hidden" name="first_gbraid">
+    <input type="hidden" name="first_wbraid">
                         <input type="hidden" name="form-name" value="rfq">
                         <p hidden>
                             <label>Do not fill this field if you are human: <input name="bot-field"></label>
@@ -680,48 +729,48 @@
 
                             <div class="rfq-field">
                                 <label for="rfq-name">Full Name</label>
-                                <input id="rfq-name" name="full_name" type="text" required>
+                                <input id="rfq-name" name="full_name" type="text" required maxlength="120">
                             </div>
 
                             <div class="rfq-field">
                                 <label for="rfq-company">Company / Lab</label>
-                                <input id="rfq-company" name="company" type="text">
+                                <input id="rfq-company" name="company" type="text" maxlength="160">
                             </div>
 
                             <div class="rfq-field">
                                 <label for="rfq-email">Email</label>
-                                <input id="rfq-email" name="email" type="email" required>
+                                <input id="rfq-email" name="email" type="email" required maxlength="254">
                             </div>
 
                             <div class="rfq-field">
                                 <label for="rfq-phone">Phone / WhatsApp</label>
-                                <input id="rfq-phone" name="phone" type="text">
+                                <input id="rfq-phone" name="phone" type="text" maxlength="80">
                             </div>
 
                             <div class="rfq-field">
                                 <label for="rfq-brand">Brand</label>
-                                <input id="rfq-brand" name="brand" type="text" placeholder="Coherent, Quantel, Lumibird, etc.">
+                                <input id="rfq-brand" name="brand" type="text" placeholder="Coherent, Quantel, Lumibird, etc." maxlength="120">
                             </div>
 
                             <div class="rfq-field">
                                 <label for="rfq-model">Model / Product Family</label>
-                                <input id="rfq-model" name="model" type="text" placeholder="Puma 9150, Centurion, Verdi V18, custom module...">
+                                <input id="rfq-model" name="model" type="text" placeholder="Puma 9150, Centurion, Verdi V18, custom module..." maxlength="160">
                             </div>
 
                             <div class="rfq-field rfq-field-full">
                                 <label for="rfq-application">Application Context</label>
-                                <input id="rfq-application" name="application" type="text" placeholder="Semiconductor inspection, lidar, research lab, display manufacturing...">
+                                <input id="rfq-application" name="application" type="text" placeholder="Semiconductor inspection, lidar, research lab, display manufacturing..." maxlength="500">
                             </div>
 
                             <div class="rfq-field rfq-field-full">
                                 <label for="rfq-file">Reference File (optional)</label>
                                 <input id="rfq-file" name="project_file" type="file" accept=".jpg,.jpeg,.png,.pdf,.txt,.csv,.log,.zip,.7z">
-                                <p class="rfq-file-help">Attach one file up to 8 MB. Good options are failure photos, screenshots, log files, PDFs, or a spec sheet.</p>
+                                <p class="rfq-file-help">Attach one file up to 7 MB. Good options are failure photos, screenshots, log files, PDFs, or a spec sheet.</p>
                             </div>
 
                             <div class="rfq-field rfq-field-full">
                                 <label for="rfq-details">Technical Details</label>
-                                <textarea id="rfq-details" name="details" placeholder="Describe the failure symptoms, part requirement, target wavelength/power, or the technical problem you need solved." required></textarea>
+                                <textarea id="rfq-details" name="details" placeholder="Describe the failure symptoms, part requirement, target wavelength/power, or the technical problem you need solved." required maxlength="10000"></textarea>
                             </div>
                         </div>
 
@@ -729,9 +778,10 @@
 
                         <div class="rfq-actions">
                             <button type="submit" class="btn btn-primary">Send RFQ</button>
-                            <p class="rfq-note">If your logs or media are larger than 8 MB, email them to <a href="mailto:sales3@sflaser.net">sales3@sflaser.net</a> after submitting the form and reference the same project.</p>
+                            <p class="rfq-note">If your logs or media are larger than 7 MB in total, email them to <a href="mailto:sales3@sflaser.net">sales3@sflaser.net</a> after submitting the form and reference the same project.</p>
                         </div>
-                    </form>
+                      <p data-rfq-status role="status" aria-live="polite" tabindex="-1" hidden></p>
+        </form>
                 </article>
             </div>
         </div>
@@ -823,7 +873,8 @@
 
     <script defer src="/assets/js/cms-config.js?v=20260602-mail1"></script>
     <script defer src="/assets/js/cms-frontend.js?v=20260602-details1"></script>
-    <script defer src="/assets/js/analytics.js?v=20260814-seo1"></script>
-    <script defer src="/assets/js/home.js?v=20260508a"></script>
+    <script defer src="/assets/js/analytics.js?v=20260924-rfq1"></script>
+    <script defer src="/assets/js/home.js?v=20260924-rfq1"></script>
+  <script defer src="/assets/js/rfq.js?v=20260924-rfq1"></script>
 </body>
 </html>
