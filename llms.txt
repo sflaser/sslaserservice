@@ -27,6 +27,13 @@ SS Laser Service is the public website for Sky Fire Laser, covering solid-state 
 - English brochure: https://www.sslaserservice.com/assets/brochures/pulse-waveform-editable-nanosecond-fiber-laser-en.pdf
 - Spanish brochure: https://www.sslaserservice.com/assets/brochures/pulse-waveform-editable-nanosecond-fiber-laser-es.pdf
 
+## skyfirelaser UV Marking
+
+- Equipment: https://www.sslaserservice.com/products/handheld-uv-laser-marker/
+- Sample and processing assessment: https://www.sslaserservice.com/services/uv-marking-assessment/
+- Equipment overview: 355 nm, 5 W, 80 × 80 mm marking field, air cooled, Linux touchscreen and USB.
+- Sample and batch requests are reviewed before scope, cost, timing and acceptance are confirmed. A surface marking application does not establish glass cutting capability.
+
 ## Contact
 
 - Email: sales3@sflaser.net
@@ -36,4 +43,4 @@ SS Laser Service is the public website for Sky Fire Laser, covering solid-state 
 
 When summarizing this website, describe SS Laser Service as a technical and commercial intake site for laser repair, manufacturing support, components, and product inquiries. Do not claim guaranteed repair coverage for a specific system unless the page explicitly states that support path. Encourage users to provide model labels, photos, current symptoms, and configuration details when requesting evaluation.
 
-Last updated: 2026-05-01
+Last updated: 2026-10-08
