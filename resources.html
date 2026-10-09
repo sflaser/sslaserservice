@@ -437,6 +437,52 @@
     }
   </style>
   <link rel="stylesheet" href="/assets/css/utility-template.css?v=20260529-orange1">
+  <style>
+    #resources-navigation .nav-social {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    #resources-navigation .nav-social > a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    #resources-navigation .nav-social svg {
+      display: block;
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    @media (max-width: 900px) {
+      #resources-navigation .nav-social {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        width: 100%;
+        margin-top: 8px;
+      }
+
+      #resources-navigation .nav-social > a {
+        width: 100%;
+        height: 42px;
+      }
+
+      #resources-navigation .nav-social svg {
+        width: 17px;
+        height: 17px;
+      }
+    }
+  </style>
   <script defer src="/assets/js/analytics.js?v=20260924-rfq1"></script>
 <!-- AI and search structured data -->
   <script type="application/ld+json">
