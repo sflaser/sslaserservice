@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laser Repair Evaluation &amp; International Service Process | SkyFire</title>
+<title>Laser Repair Evaluation &amp; International Service Process | skyfirelaser</title>
+<meta property="og:site_name" content="skyfirelaser">
 <meta name="description" content="Start a laser repair review with your model and existing fault records. Confirm the evaluation scope, costs and shipping arrangements before further work.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://www.sslaserservice.com/repair-process/">
@@ -42,11 +43,31 @@
   ]
 }
 </script>
+<style>
+  .repair-brand-page .brand {
+    color: #1b263b;
+    font-size: 23px;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: -.04em;
+  }
+  .repair-brand-page .brand::before {
+    content: "";
+    width: 10px;
+    height: 28px;
+    margin-right: 10px;
+    background: #ff8c00;
+  }
+  .repair-brand-page .footer-copy strong {
+    text-transform: none;
+  }
+</style>
 </head>
-<body>
+<body class="repair-brand-page">
 <main class="page-shell">
 <header class="topbar">
-  <a class="brand" href="/" aria-label="SS Laser Service home"><img src="/images/logos/LOGO长方形.png?v=20260412c" alt="SS Laser Service"></a>
+  <a class="brand" href="/" aria-label="skyfirelaser home">skyfirelaser</a>
   <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="page-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
   <div id="page-nav" class="nav-shell">
     <nav class="nav" aria-label="Primary">
@@ -103,7 +124,7 @@
  <div><span class="eyebrow">Ready to discuss your unit?</span><h2>A short fault description is enough to start the conversation.</h2><p>Include the model and what changed. Additional documents can follow after the inquiry is received.</p><div class="cta-actions"><a class="btn btn-primary" href="/?inquiry_type=repair&amp;source_page=%2Frepair-process%2F#contact">Request a Repair Review</a><a class="btn btn-outline" href="mailto:sales3@sflaser.net?subject=Laser%20repair%20review">Email the Service Team</a></div></div>
  <div><ul class="checklist"><li><a href="/laser-repair/semiconductor-manufacturing/kla/sp5/">KLA SP5 laser-source review</a></li><li><a href="/laser-repair/semiconductor-manufacturing/kla/puma-9150/">Puma 9150 laser-source review</a></li><li><a href="/laser-repair/scientific-research/verdi-v18/">Verdi V18 repair review</a></li><li><a href="/laser-repair/">Other models and applications</a></li></ul></div>
 </section>
-<footer class="footer-strip"><div class="footer-copy"><strong>SkyFire · SS Laser Service</strong><p>Model-specific review for laser-source, component and research-laser requests.</p></div><div class="footer-links"><a href="/laser-repair/">Laser Repair</a><a href="/privacy.html">Privacy</a><a href="/?inquiry_type=repair&amp;source_page=%2Frepair-process%2F#contact">Start a Review</a></div></footer>
+<footer class="footer-strip"><div class="footer-copy"><strong>skyfirelaser</strong><p>Model-specific review for laser-source, component and research-laser requests.</p></div><div class="footer-links"><a href="/laser-repair/">Laser Repair</a><a href="/privacy.html">Privacy</a><a href="/?inquiry_type=repair&amp;source_page=%2Frepair-process%2F#contact">Start a Review</a></div></footer>
 </main>
 <script>
 (() => { const menuBtn=document.querySelector('.mobile-menu-btn'); const navShell=document.querySelector('.nav-shell'); if(!menuBtn||!navShell) return; const closeMenu=()=>{navShell.classList.remove('is-open');menuBtn.classList.remove('is-active');menuBtn.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open');}; menuBtn.addEventListener('click',()=>{const isOpen=navShell.classList.toggle('is-open');menuBtn.classList.toggle('is-active',isOpen);menuBtn.setAttribute('aria-expanded',String(isOpen));document.body.classList.toggle('menu-open',isOpen);}); document.addEventListener('click',(event)=>{if(!navShell.contains(event.target)&&!menuBtn.contains(event.target)) closeMenu();}); document.addEventListener('keydown',(event)=>{if(event.key==='Escape') closeMenu();}); window.addEventListener('resize',()=>{if(window.innerWidth>980) closeMenu();});})();
