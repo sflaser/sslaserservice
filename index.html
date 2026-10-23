@@ -205,6 +205,52 @@
     a.skyfire-wordmark { font-size: 21px; }
     a.skyfire-wordmark::before { flex-basis: 8px; height: 25px; margin-right: 8px; }
   }
+
+  /* Keep all header destinations accessible on compact desktop screens. */
+  @media (min-width: 901px) and (max-width: 1500px) {
+    header .header-right { align-items: center; padding-right: 18px; }
+    header .mobile-menu-btn {
+      display: inline-flex !important; align-items: center; justify-content: center;
+      width: auto; min-width: 102px; height: 44px; gap: 10px; padding: 0 14px;
+      border: 1px solid rgba(255,255,255,.3); border-radius: 4px;
+      background: #1b263b; color: #fff;
+    }
+    header .mobile-menu-btn .menu-caption {
+      display: block; width: auto; height: auto; margin: 0; background: transparent;
+      font-size: 13px; font-weight: 700; line-height: 1;
+    }
+    header .mobile-menu-btn .menu-glyph {
+      display: grid; width: 20px; height: 16px; margin: 0;
+      align-content: space-between; background: transparent;
+    }
+    header .mobile-menu-btn .menu-glyph > span {
+      display: block; width: 20px; height: 2px; margin: 0; background: currentColor;
+    }
+    header .main-nav {
+      display: none; position: absolute; z-index: 20; top: calc(100% + 10px);
+      left: 18px; right: 18px; padding: 16px; max-height: calc(100dvh - 96px);
+      overflow-y: auto; background: #1b263b; border: 1px solid rgba(255,255,255,.2);
+      box-shadow: 0 18px 36px rgba(0,0,0,.2);
+    }
+    header .main-nav.is-open { display: block; }
+    header .navigation { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+    header .navigation li { width: 100%; }
+    header .navigation li > a {
+      display: block; width: 100%; padding: 13px 14px; font-size: 13px;
+      background: rgba(255,255,255,.06); color: #fff;
+    }
+    header .navigation li.nav-social {
+      display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); padding: 0; gap: 8px;
+    }
+    header .navigation li.nav-social > a { display: inline-flex; height: 42px; padding: 0; }
+    header .navigation li[data-lang-switch] { justify-content: center; color: #fff; }
+    header .navigation li[data-lang-switch] > a { width: auto; }
+    header .mobile-nav-foot { display: grid; gap: 10px; padding-top: 14px; }
+    header .mobile-nav-eyebrow { color: #ff8c00; }
+    header .mobile-nav-contact { color: #fff; }
+    header .mobile-nav-actions { display: flex; gap: 12px; }
+    header .mobile-nav-cta.btn-outline { color: #fff; border-color: #fff; }
+  }
 </style>
 </head>
 <body>
@@ -334,7 +380,7 @@
                 <div class="hero-copy">
                     <p class="hero-eyebrow">Precision Repair · Custom Photonics · Components Supply</p>
                     <h1 class="hero-title">Solid-state laser repair, routed from <span class="hero-emphasis">the label you have.</span></h1>
-                    <p class="hero-summary">Start with application, OEM, model, or a platform photo. SkyFire routes the practical repair, replacement, sourcing, or custom photonics path.</p>
+                    <p class="hero-summary">Start with application, OEM, model, or a platform photo. skyfirelaser routes the practical repair, replacement, sourcing, or custom photonics path.</p>
 
                     <div class="hero-actions">
                         <a href="#platform-finder" class="btn btn-primary">Find My Service Path</a>
@@ -384,7 +430,7 @@
                 </div>
             </div>
 
-            <div class="hero-contact-strip" aria-label="SkyFire quick contact details">
+            <div class="hero-contact-strip" aria-label="skyfirelaser quick contact details">
                 <a href="tel:+8613995672493">
                     <span>Phone / WhatsApp</span>
                     <strong>+86-13995672493</strong>
@@ -574,8 +620,8 @@
     <section id="service-video" class="video-proof-section">
         <div class="container">
             <div class="video-proof-card">
-                <div class="video-proof-frame" aria-label="SkyFire solid-state laser service video">
-                    <button class="video-load-button" type="button" data-youtube-id="E9ZJhTfS6pc" aria-label="Play SkyFire solid-state laser service video">
+                <div class="video-proof-frame" aria-label="skyfirelaser solid-state laser service video">
+                    <button class="video-load-button" type="button" data-youtube-id="E9ZJhTfS6pc" aria-label="Play skyfirelaser solid-state laser service video">
                         <picture>
                             <source srcset="/images/repair/landing/solid-state-laser-video-poster-20260509.jpg" type="image/jpeg">
                             <img src="/images/services/professional-repair-lab-home-20260418.jpg" alt="" width="960" height="540" loading="lazy" decoding="async">
@@ -1077,7 +1123,7 @@
         <div class="container">
             <div class="footer-content">
                 <section class="footer-brand">
-                    <span class="footer-eyebrow">SkyFire Platform</span>
+                    <span class="footer-eyebrow">skyfirelaser Platform</span>
                     <h3>Repair, components, and custom photonics support.</h3>
                     <p>Use the links below to move directly to the right section or contact technical sales.</p>
                     <div class="footer-pills">
@@ -1111,7 +1157,7 @@
                             <li><a href="/resources">Resources</a></li>
                             <li><a href="/products/handheld-uv-laser-marker/">UV Marking Equipment</a></li>
                             <li><a href="/services/uv-marking-assessment/">Marking Assessment</a></li>
-                            <li><a href="#why-us">About SkyFire</a></li>
+                            <li><a href="#why-us">About skyfirelaser</a></li>
                             <li><a href="#contact">Request a Quote</a></li>
                             <li><a href="/privacy.html">Privacy Policy</a></li>
                             <li><a href="https://alleriastore.com/collections/fiber-laser-repairing-equipment" target="_blank" rel="noopener">Alleria Store</a></li>
