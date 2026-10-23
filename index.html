@@ -226,6 +226,17 @@
     header .mobile-menu-btn .menu-glyph > span {
       display: block; width: 20px; height: 2px; margin: 0; background: currentColor;
     }
+    header .mobile-menu-btn.is-active > .menu-caption,
+    header .mobile-menu-btn.is-active > .menu-glyph {
+      opacity: 1; transform: none !important;
+    }
+    header .mobile-menu-btn.is-active .menu-glyph > span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    header .mobile-menu-btn.is-active .menu-glyph > span:nth-child(2) { opacity: 0; }
+    header .mobile-menu-btn.is-active .menu-glyph > span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
     header .main-nav {
       display: none; position: absolute; z-index: 20; top: calc(100% + 10px);
       left: 18px; right: 18px; padding: 16px; max-height: calc(100dvh - 96px);
