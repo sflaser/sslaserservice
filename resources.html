@@ -534,13 +534,38 @@
   ]
 }
   </script>
+<style>
+  a.skyfire-wordmark {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: #1b263b;
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: -.04em;
+    white-space: nowrap;
+  }
+  a.skyfire-wordmark::before {
+    content: "";
+    flex: 0 0 10px;
+    height: 28px;
+    margin-right: 10px;
+    background: #ff8c00;
+  }
+  .footer-copy strong { text-transform: none; }
+  @media (max-width: 600px) {
+    a.skyfire-wordmark { font-size: 21px; }
+    a.skyfire-wordmark::before { flex-basis: 8px; height: 25px; margin-right: 8px; }
+  }
+</style>
 </head>
 <body>
   <main class="shell">
     <header class="topbar">
-      <a href="/" aria-label="skyfirelaser home">
-        <img src="/images/logos/LOGO长方形.png?v=20260412c" alt="skyfirelaser">
-      </a>
+      <a href="/" class="skyfire-wordmark" aria-label="skyfirelaser home">skyfirelaser</a>
       <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="resources-navigation">
         <span></span>
         <span></span>
@@ -701,3 +726,4 @@
   </script>
 </body>
 </html>
+

@@ -60,7 +60,6 @@
       "@id": "https://www.sslaserservice.com/#organization",
       "name": "skyfirelaser",
       "url": "https://www.sslaserservice.com/",
-      "logo": "https://www.sslaserservice.com/images/logos/LOGO长方形.png?v=20260412c",
       "email": "sales3@sflaser.net",
       "telephone": "+86-13995672493",
       "address": {
@@ -180,6 +179,33 @@
   ]
 }
   </script>
+<style>
+  a.skyfire-wordmark {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: #1b263b;
+    font-size: 23px;
+    font-weight: 800;
+    line-height: 1.2;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: -.04em;
+    white-space: nowrap;
+  }
+  a.skyfire-wordmark::before {
+    content: "";
+    flex: 0 0 10px;
+    height: 28px;
+    margin-right: 10px;
+    background: #ff8c00;
+  }
+  .footer-copy strong { text-transform: none; }
+  @media (max-width: 600px) {
+    a.skyfire-wordmark { font-size: 21px; }
+    a.skyfire-wordmark::before { flex-basis: 8px; height: 25px; margin-right: 8px; }
+  }
+</style>
 </head>
 <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -264,12 +290,7 @@
     <!-- Top navigation bar -->
     <header>
         <div class="container header-container">
-            <a href="/" class="logo">
-                <picture>
-                    <source srcset="/images/logos/skyfire-logo-header.webp?v=20260508a" type="image/webp">
-                    <img src="/images/logos/skyfire-logo-header.png?v=20260508a" alt="skyfirelaser" class="logo-image" width="640" height="320">
-                </picture>
-            </a>
+            <a href="/" class="logo skyfire-wordmark" aria-label="skyfirelaser home">skyfirelaser</a>
             <div class="header-right">
                 <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="main-navigation">
                     <span class="menu-caption" aria-hidden="true">Menu</span>
@@ -1144,3 +1165,4 @@
   <script defer src="/assets/js/rfq.js?v=20260924-rfq1"></script>
 </body>
 </html>
+
