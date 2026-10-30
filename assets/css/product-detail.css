@@ -155,3 +155,35 @@
     min-height: 260px;
   }
 }
+
+@media (max-width: 640px) {
+  .spec-table:not(:has(th:nth-child(4))) {
+    min-width: 0;
+    table-layout: fixed;
+  }
+
+  .spec-table:not(:has(th:nth-child(4))) th,
+  .spec-table:not(:has(th:nth-child(4))) td {
+    padding: 10px 8px;
+    line-height: 1.5;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .spec-table:not(:has(th:nth-child(4))) th:first-child {
+    width: 44%;
+  }
+
+  .spec-table:has(th:nth-child(3)):not(:has(th:nth-child(4))) th:nth-child(2) {
+    width: 18%;
+  }
+
+  .spec-table-wrap:has(th:nth-child(4))::before {
+    content: "Swipe horizontally to view all columns \2192";
+    display: block;
+    padding: 10px 12px;
+    color: #4f5e70;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
