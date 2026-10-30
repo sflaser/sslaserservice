@@ -2,7 +2,11 @@
   const cfg = window.CMS_CONFIG || {};
   const detailData = window.COMPONENT_PRODUCT_DETAILS || {};
   const params = new URLSearchParams(window.location.search);
-  const slug = (params.get('slug') || '').trim();
+  const prerenderedSlug = document.body.dataset.prerenderedProduct || '';
+  const slugValues = params.getAll('slug');
+  const slug = slugValues.length === 0 ? prerenderedSlug : (slugValues.length === 1 ? slugValues[0].trim() : '');
+  const mismatchedPrerender = Boolean(prerenderedSlug) && (slugValues.length > 1 || (slugValues.length === 1 && slug !== prerenderedSlug));
+  const hasPrerenderedProduct = prerenderedSlug === slug && !mismatchedPrerender;
 
   const stateEl = document.getElementById('product-detail-state');
   const titleEl = document.getElementById('product-title');
@@ -45,7 +49,7 @@
   }
 
   function buildPageTitle(value) {
-    const suffix = ' | Sky Fire Laser';
+    const suffix = ' | skyfirelaser';
     const label = String(value || 'Component product').replace(/\s+/g, ' ').trim();
     const available = 65 - suffix.length;
     const shortened = label.length > available
@@ -71,12 +75,12 @@
     if (canonical) canonical.href = canonicalUrl;
     upsertMeta('meta[name="robots"]', { name: 'robots' }, 'index,follow,max-image-preview:large,max-snippet:-1');
     upsertMeta('meta[name="description"]', { name: 'description' }, description);
-    upsertMeta('meta[property="og:title"]', { property: 'og:title' }, `${name} | Sky Fire Laser`);
+    upsertMeta('meta[property="og:title"]', { property: 'og:title' }, `${name} | skyfirelaser`);
     upsertMeta('meta[property="og:description"]', { property: 'og:description' }, description);
     upsertMeta('meta[property="og:type"]', { property: 'og:type' }, 'product');
     upsertMeta('meta[property="og:url"]', { property: 'og:url' }, canonicalUrl);
     upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card' }, imageUrl ? 'summary_large_image' : 'summary');
-    upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title' }, `${name} | Sky Fire Laser`);
+    upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title' }, `${name} | skyfirelaser`);
     upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description' }, description);
 
     if (imageUrl) {
@@ -98,14 +102,13 @@
       '@context': 'https://schema.org',
       '@graph': [
         {
-          '@type': 'Product',
-          '@id': `${canonicalUrl}#product`,
+          '@type': 'WebPage',
+          '@id': `${canonicalUrl}#webpage`,
           name,
           description,
           url: canonicalUrl,
-          sku: slug,
-          category,
-          image: imageUrl || undefined,
+          isPartOf: { '@id': `${window.location.origin}/#website` },
+          primaryImageOfPage: imageUrl || undefined,
         },
         {
           '@type': 'BreadcrumbList',
@@ -121,7 +124,7 @@
   }
 
   function quoteHref(productName) {
-    const inquiryBrand = cfg.inquiryBrand || 'SkyFire Laser';
+    const inquiryBrand = 'skyfirelaser';
     const inquiryEmail = String(cfg.inquiryEmail || 'sales3@sflaser.net').trim();
     const productUrl = window.location.href;
     const subject = encodeURIComponent(`Quote request: ${productName}`);
@@ -260,18 +263,23 @@
       ? tables.map(renderTable).join('')
       : '<p class="detail-muted">Send the product name and application context for a configuration review.</p>';
 
-    sourceEl.textContent = 'Specifications are organized from the passive optical components product manual and should be confirmed during quotation.';
+    sourceEl.textContent = 'Specifications are organized from the product documentation and should be confirmed during quotation.';
     setState('');
   }
 
   document.addEventListener('DOMContentLoaded', async function () {
+    if (mismatchedPrerender) {
+      upsertMeta('meta[name="robots"]', { name: 'robots' }, 'noindex,follow');
+      setState('This product detail page is not available for the requested product. Please return to the Components catalog.', true);
+      return;
+    }
     if (!slug) {
       setState('Missing product slug. Please return to the Components catalog.', true);
       return;
     }
 
     try {
-      setState('Loading product details...');
+      if (!hasPrerenderedProduct) setState('Loading product details...');
       const [product] = await Promise.all([fetchProduct(slug)]);
       const detail = detailData[slug] || null;
 
@@ -282,6 +290,8 @@
 
       render(product, detail || {});
     } catch (err) {
+      // Preserve the complete, verified build snapshot during a temporary API outage.
+      if (hasPrerenderedProduct) return;
       const detail = detailData[slug] || null;
       if (detail) {
         render(null, detail);

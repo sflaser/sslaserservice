@@ -1,6 +1,6 @@
 [build]
   publish = "."
-  command = "echo 'Static site deployment'"
+  command = "node scripts/prerender-component-products.mjs"
 
 [functions]
   directory = "netlify/functions"
