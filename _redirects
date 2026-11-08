@@ -1,5 +1,10 @@
 # Netlify Redirects for Sky Fire Laser Website
 
+# Operational source is not part of the public website (publish root is '.').
+/database/* /404.html 404!
+/supabase/* /404.html 404!
+/tests/* /404.html 404!
+
 # Redirect www to non-www
 https://www.skyfirelaserservice.com/* https://skyfirelaserservice.com/:splat 301!
 

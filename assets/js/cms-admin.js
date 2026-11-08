@@ -36,6 +36,28 @@
   let blogRowsById = new Map();
   let productRowsById = new Map();
 
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, (character) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+    }[character]));
+  }
+
+  function assetUrl(value) {
+    const text = String(value || '').trim();
+    if (!text) return null;
+    if (/^\/(?!\/)/.test(text) && !/[\\\u0000-\u001f]/.test(text)) return text;
+    try {
+      const url = new URL(text);
+      if (['https:', 'http:'].includes(url.protocol)) return text;
+    } catch { /* Show the same helpful message for invalid URLs and schemes. */ }
+    throw new Error('Asset links must be http(s) URLs or paths beginning with /.');
+  }
+
+  async function requireAdmin() {
+    const allowed = await request('/rest/v1/rpc/is_cms_admin', { method: 'POST', auth: true, body: {} });
+    if (allowed !== true) throw new Error('This account is not authorized to manage the CMS.');
+  }
+
   function setStatus(message, kind) {
     statusEl.textContent = message || '';
     statusEl.className = 'status';
@@ -609,6 +631,7 @@
 
     const data = await res.json();
     accessToken = data.access_token;
+    await requireAdmin();
     localStorage.setItem(tokenKey, accessToken);
   }
 
@@ -623,13 +646,13 @@
       .map(
         (row) => `
           <tr>
-            <td>${row.id}</td>
-            <td>${row.title}</td>
-            <td><span class="badge ${row.status}">${row.status}</span></td>
+            <td>${escapeHtml(row.id)}</td>
+            <td>${escapeHtml(row.title)}</td>
+            <td><span class="badge ${escapeHtml(row.status)}">${escapeHtml(row.status)}</span></td>
             <td>${row.published_at ? new Date(row.published_at).toLocaleString() : '-'}</td>
             <td class="actions">
-              <button class="btn btn-outline btn-sm" data-edit-blog="${row.id}">Edit</button>
-              <button class="btn btn-danger btn-sm" data-delete-blog="${row.id}">Delete</button>
+              <button class="btn btn-outline btn-sm" data-edit-blog="${escapeHtml(row.id)}">Edit</button>
+              <button class="btn btn-danger btn-sm" data-delete-blog="${escapeHtml(row.id)}">Delete</button>
             </td>
           </tr>
         `
@@ -648,13 +671,13 @@
       .map(
         (row) => `
           <tr>
-            <td>${row.id}</td>
-            <td>${row.name}</td>
-            <td>${(Number(row.price_cents || 0) / 100).toFixed(2)} ${(row.currency || 'USD').toUpperCase()}</td>
-            <td><span class="badge ${row.status}">${row.status}</span></td>
+            <td>${escapeHtml(row.id)}</td>
+            <td>${escapeHtml(row.name)}</td>
+            <td>${(Number(row.price_cents || 0) / 100).toFixed(2)} ${escapeHtml(String(row.currency || 'USD').toUpperCase())}</td>
+            <td><span class="badge ${escapeHtml(row.status)}">${escapeHtml(row.status)}</span></td>
             <td class="actions">
-              <button class="btn btn-outline btn-sm" data-edit-product="${row.id}">Edit</button>
-              <button class="btn btn-danger btn-sm" data-delete-product="${row.id}">Delete</button>
+              <button class="btn btn-outline btn-sm" data-edit-product="${escapeHtml(row.id)}">Edit</button>
+              <button class="btn btn-danger btn-sm" data-delete-product="${escapeHtml(row.id)}">Delete</button>
             </td>
           </tr>
         `
@@ -691,6 +714,9 @@
       await refreshTables();
       setStatus('Signed in successfully.', 'success');
     } catch (err) {
+      accessToken = '';
+      localStorage.removeItem(tokenKey);
+      leaveDashboard();
       setStatus(err instanceof Error ? err.message : 'Login failed.', 'error');
     }
   });
@@ -806,14 +832,14 @@
       const brochureUrlInput = String(formData.get('brochure_url') || '').trim();
       const status = String(formData.get('status') || 'draft');
 
-      let imageUrl = editingProductImageUrl || imageUrlInput || null;
+      let imageUrl = assetUrl(imageUrlInput);
       const imageFile = formData.get('image');
       if (imageFile instanceof File && imageFile.size > 0) {
         setStatus('Uploading product image...');
         imageUrl = await uploadImage(imageFile, 'products');
       }
 
-      let brochureUrl = editingProductBrochureUrl || brochureUrlInput || null;
+      let brochureUrl = assetUrl(brochureUrlInput);
       const brochureFile = formData.get('brochure_file');
       if (brochureFile instanceof File && brochureFile.size > 0) {
         setStatus('Uploading product brochure...');
@@ -1006,6 +1032,7 @@
 
     if (accessToken) {
       try {
+        await requireAdmin();
         enterDashboard();
         await refreshTables();
         setStatus('Session restored.', 'success');
@@ -1013,7 +1040,7 @@
         localStorage.removeItem(tokenKey);
         accessToken = '';
         leaveDashboard();
-        setStatus('Session expired. Please sign in again.', 'error');
+        setStatus(err instanceof Error ? err.message : 'Session expired. Please sign in again.', 'error');
       }
     }
   });

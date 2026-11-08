@@ -84,3 +84,11 @@ temp/
 
 # Local Netlify folder
 .netlify
+supabase/.temp/
+
+# Generated public blog templates/configuration used by the Edge bundle.
+netlify/edge-functions/lib/blog-data.mjs
+
+# Existing product prerender build outputs are regenerated from published CMS data.
+components/prerendered/
+netlify/edge-functions/component-product.js
