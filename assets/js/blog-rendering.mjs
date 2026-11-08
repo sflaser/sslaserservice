@@ -51,23 +51,27 @@ function resolveOptimizedImageUrl(url) {
 
 function renderTextInline(value) {
   const text = String(value || "");
-  const styledText = (input) => escapeHtml(input)
+  // Protect links/code while styling the whole inline span. The marker cannot
+  // occur in user content, so literal text can never expand into a saved token.
+  let marker = "\uE000";
+  while (text.includes(marker)) marker += "\uE000";
+  const saved = [];
+  const tokens = /`([^`]+)`|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+  const protectedText = text.replace(tokens, (_, code, label, url) => {
+    const html = code !== undefined
+      ? `<code>${escapeHtml(code)}</code>`
+      : `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${renderTextInline(label)}</a>`;
+    return `${marker}${saved.push(html) - 1}\uE001`;
+  });
+  let html = escapeHtml(protectedText)
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/__(.+?)__/g, "<strong>$1</strong>")
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
     .replace(/_(.+?)_/g, "<em>$1</em>");
-  // Only style text tokens: never run Markdown replacements over HTML or URLs.
-  const tokens = /`([^`]+)`|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
-  let html = "";
-  let offset = 0;
-  for (const match of text.matchAll(tokens)) {
-    html += styledText(text.slice(offset, match.index));
-    html += match[1] !== undefined
-      ? `<code>${escapeHtml(match[1])}</code>`
-      : `<a href="${escapeHtml(match[3])}" target="_blank" rel="noopener">${styledText(match[2])}</a>`;
-    offset = match.index + match[0].length;
-  }
-  return html + styledText(text.slice(offset));
+  saved.forEach((token, index) => {
+    html = html.split(`${marker}${index}\uE001`).join(token);
+  });
+  return html;
 }
 
 function renderMultiline(value) {

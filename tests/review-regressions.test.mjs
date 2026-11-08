@@ -22,6 +22,19 @@ test('Markdown preserves URL underscores, code, escaped attributes and inline em
   assert.match(renderStructuredContent('## Header\n\n- first\n- second\n\n> quote'), /<h2>Header<\/h2><ul><li>first/);
 });
 
+test('Markdown emphasis can wrap or span links/code without rewriting protected content', () => {
+  const link = '<a href="https://example.test/laser_service_manual.pdf" target="_blank" rel="noopener">Download</a>';
+  assert.equal(renderTextInline('**[Download](https://example.test/laser_service_manual.pdf)**'), `<strong>${link}</strong>`);
+  assert.equal(renderTextInline('*[Download](https://example.test/laser_service_manual.pdf)*'), `<em>${link}</em>`);
+  assert.equal(renderTextInline('**Before [Download](https://example.test/laser_service_manual.pdf) and `a_b_c` after**'),
+    `<strong>Before ${link} and <code>a_b_c</code> after</strong>`);
+  assert.equal(renderTextInline('__*Read [Download](https://example.test/laser_service_manual.pdf) and `**literal**`*__'),
+    `<strong><em>Read ${link} and <code>**literal**</code></em></strong>`);
+  assert.equal(renderTextInline('[**Use `a_b_c`**](https://example.test/a_b_c)'),
+    '<a href="https://example.test/a_b_c" target="_blank" rel="noopener"><strong>Use <code>a_b_c</code></strong></a>');
+  assert.equal(renderTextInline('literal \uE0000\uE001 **`safe`**'), 'literal \uE0000\uE001 <strong><code>safe</code></strong>');
+});
+
 test('Published article is fully rendered and safely escaped in the initial HTML', () => {
   for (const language of ['en', 'es']) {
     const html = renderBlog(templates[language], { ...post, title: '"</script><img src=x onerror=run()>', cover_image_url: 'javascript:run()' }, language);

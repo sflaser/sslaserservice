@@ -1,3 +1,17 @@
+-- Run this entire file in the trusted Supabase SQL editor after creating and
+-- confirming the designated owner in Auth. See CMS_SETUP.md.
+-- Abort before changing schema/policies instead of silently seeding no owner.
+begin;
+do $owner_preflight$
+begin
+  if (select count(*) from auth.users
+      where lower(email) = 'xiaodong@sflaser.net'
+      and email_confirmed_at is not null) <> 1 then
+    raise exception 'CMS setup requires exactly one confirmed Auth user for xiaodong@sflaser.net. Create and confirm that owner first, then rerun this entire file.';
+  end if;
+end;
+$owner_preflight$;
+
 -- Create blog posts table
 create table if not exists public.blog_posts (
   id bigint generated always as identity primary key,
@@ -158,3 +172,16 @@ on storage.objects
 for delete
 to authenticated
 using (bucket_id = 'site-assets' and (select public.is_cms_admin()));
+
+-- Fail the whole bootstrap if the trusted owner was not provisioned.
+do $owner_postflight$
+begin
+  if (select count(*) from cms_private.cms_admins a
+      join auth.users u on u.id = a.user_id
+      where lower(u.email) = 'xiaodong@sflaser.net'
+      and u.email_confirmed_at is not null) <> 1 then
+    raise exception 'CMS owner provisioning failed; all setup changes have been rolled back.';
+  end if;
+end;
+$owner_postflight$;
+commit;
