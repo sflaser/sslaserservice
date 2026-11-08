@@ -35,7 +35,7 @@ export function renderBlog(template, post, language) {
   };
   html = replace(html, /<script type="application\/ld\+json">[\s\S]*?<\/script>/,
     `<script id="blog-post-structured-data" type="application/ld+json">${JSON.stringify(structured).replace(/</g, '\\u003c')}</script>`);
-  html = html.replace('</head>', `<meta property="og:type" content="article">
+  html = html.replace('</head>', () => `<meta property="og:type" content="article">
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${escapeHtml(description)}">
 <meta property="og:url" content="${escapeHtml(canonical)}">

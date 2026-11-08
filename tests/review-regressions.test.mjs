@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import vm from 'node:vm';
 import { renderTextInline, renderStructuredContent } from '../assets/js/blog-rendering.mjs';
 import { createBlogHandler, renderBlog } from '../scripts/lib/blog-edge.mjs';
+import { renderProduct } from '../scripts/prerender-component-products.mjs';
 
 const root = new URL('../', import.meta.url);
 const read = (name) => readFile(new URL(name, root), 'utf8');
@@ -47,6 +48,27 @@ test('Published article is fully rendered and safely escaped in the initial HTML
     assert.match(html, /href="\/es\/blog.html\?slug=example_slug" class="lang-option/);
     assert.match(html, /href="\/blog.html\?slug=example_slug" class="lang-option/);
     assert(!html.includes('Loading blog post'));
+  }
+});
+
+test('CMS metadata preserves replacement metacharacters without duplicating the document', async () => {
+  const productTemplate = await read('components/product.html');
+  const escaped = value => value.replace(/&/g, '&amp;').replace(/'/g, '&#039;');
+  for (const token of ['$&', '$`', "$'"]) {
+    const title = `Literal ${token} title`;
+    const blog = renderBlog(templates.en, { ...post, title, excerpt: `Literal ${token} description` }, 'en');
+    const product = renderProduct(productTemplate, { name: title, slug: 'test-metadata', short_description: title }, {}, 'sales@example.test');
+    for (const html of [blog, product]) {
+      assert.equal((html.match(/<head>/g) || []).length, 1);
+      assert.equal((html.match(/<\/head>/g) || []).length, 1);
+      assert.equal((html.match(/<body\b/g) || []).length, 1);
+    }
+    assert(blog.includes(`<meta property="og:title" content="${escaped(title)}">`));
+    assert(product.includes(`<meta property="og:title" content="${escaped(title)} | skyfirelaser">`));
+    const blogData = JSON.parse(blog.match(/<script id="blog-post-structured-data" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    const productData = JSON.parse(product.match(/<script id="product-structured-data" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    assert.equal(blogData.headline, title);
+    assert.equal(productData['@graph'][0].name, title);
   }
 });
 
@@ -169,7 +191,7 @@ test('Editing existing product assets supports unchanged, replaced and cleared U
   }
 });
 
-test('Non-admin login discards the token; admitted admin stores it only after RPC', async () => {
+test('Non-admin login discards the authenticated token; admitted admin retains it', async () => {
   for (const allowed of [false, true]) {
     const { get, stored, calls } = await adminHarness(allowed);
     await get('login-form').handlers.submit({preventDefault() {}});
@@ -232,5 +254,37 @@ test('Restoring a non-admin or expired session fails closed; transient authoriza
     assert.equal(get('dashboard').classList.contains('hidden'), true);
     assert(!calls.some(c => c.url.includes('blog_posts')));
     if (settings.retain) assert.match(get('admin-status').textContent, /Unable to verify.*retry/);
+  }
+});
+
+
+test('Sign-in retry during authorization outage retains a saved session and explicit retry restores it', async () => {
+  for (const failure of [500, 'network']) {
+    const statuses = { authorization: failure };
+    const { get, stored, documentHandlers } = await adminHarness(true, { savedToken: 'saved-token', statuses });
+    await documentHandlers.DOMContentLoaded();
+    assert.equal(stored.cms_admin_access_token, 'saved-token');
+    assert.equal(get('retry-session-btn').hidden, false);
+    await get('login-form').handlers.submit({ preventDefault() {} });
+    assert.equal(stored.cms_admin_access_token, 'fake-test-token');
+    assert.equal(get('dashboard').classList.contains('hidden'), true);
+    assert.equal(get('retry-session-btn').hidden, false);
+    statuses.authorization = 200;
+    await get('retry-session-btn').handlers.click();
+    assert.equal(stored.cms_admin_access_token, 'fake-test-token');
+    assert.equal(get('dashboard').classList.contains('hidden'), false);
+    assert.equal(get('retry-session-btn').hidden, true);
+    assert.equal(get('admin-status').textContent, 'Session restored.');
+  }
+});
+
+test('Temporary sign-in service failure preserves a saved token; rejected credentials still clear it', async () => {
+  for (const failure of [500, 'network', 400, 401, 403, 422]) {
+    const { get, stored } = await adminHarness(true, { savedToken: 'saved-token', statuses: { login: failure } });
+    await get('login-form').handlers.submit({ preventDefault() {} });
+    const temporary = failure === 500 || failure === 'network';
+    assert.equal(Boolean(stored.cms_admin_access_token), temporary);
+    assert.equal(get('dashboard').classList.contains('hidden'), true);
+    assert.equal(get('retry-session-btn').hidden, !temporary);
   }
 });

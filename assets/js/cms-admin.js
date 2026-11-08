@@ -9,6 +9,7 @@
   const loginForm = document.getElementById('login-form');
   const logoutBtn = document.getElementById('logout-btn');
   const statusEl = document.getElementById('admin-status');
+  const retrySessionBtn = document.getElementById('retry-session-btn');
 
   const blogForm = document.getElementById('blog-form');
   const productForm = document.getElementById('product-form');
@@ -62,7 +63,8 @@
     }
   }
 
-  function setStatus(message, kind) {
+  function setStatus(message, kind, retry = false) {
+    if (retrySessionBtn) retrySessionBtn.hidden = !retry;
     statusEl.textContent = message || '';
     statusEl.className = 'status';
     if (kind) {
@@ -632,13 +634,19 @@
 
     if (!res.ok) {
       const txt = await res.text();
-      throw new Error(`Login failed: ${txt}`);
+      const error = new Error(`Login failed: ${txt}`);
+      error.status = res.status;
+      error.authenticationFailure = [400, 401, 403, 422].includes(res.status);
+      throw error;
     }
 
     const data = await res.json();
+    if (typeof data.access_token !== 'string' || !data.access_token) throw new Error('Invalid sign-in response. Please try again.');
     accessToken = data.access_token;
-    await requireAdmin();
+    // Save the authenticated session before checking CMS privileges. A temporary
+    // RPC outage must not lose it; the dashboard stays closed until authorized.
     localStorage.setItem(tokenKey, accessToken);
+    await requireAdmin();
   }
 
   async function fetchBlogs() {
@@ -718,7 +726,7 @@
         clearSession();
         setStatus('Session expired or access was denied. Please sign in again.', 'error');
       } else {
-        setStatus('You are signed in, but data could not be loaded. Reload this page to retry.', 'error');
+        setStatus('You are signed in, but data could not be loaded. Reload this page to retry, or select Retry session.', 'error', true);
       }
     }
   }
@@ -745,8 +753,15 @@
       setStatus('Signing in...');
       await login(email, password);
     } catch (err) {
-      clearSession();
-      setStatus(err instanceof Error ? err.message : 'Login failed.', 'error');
+      if (isAuthorizationFailure(err) || err.authenticationFailure) {
+        clearSession();
+        setStatus(err instanceof Error ? err.message : 'Login failed.', 'error');
+      } else {
+        leaveDashboard();
+        setStatus(accessToken
+          ? 'Unable to verify your session right now. Reload this page to retry, or select Retry session.'
+          : 'Sign-in is temporarily unavailable. Please try again.', 'error', Boolean(accessToken));
+      }
       return;
     }
     await loadDashboard('Signed in successfully.');
@@ -1056,27 +1071,30 @@
     }
   });
 
-  document.addEventListener('DOMContentLoaded', async function () {
-    if (!ensureConfigured()) {
+  async function restoreSession() {
+    if (!ensureConfigured() || !accessToken) return;
+    try {
+      await requireAdmin();
+    } catch (err) {
+      if (isAuthorizationFailure(err)) {
+        clearSession();
+        setStatus(err.message || 'Session expired. Please sign in again.', 'error');
+      } else {
+        // Retain the session without granting access until verification succeeds.
+        leaveDashboard();
+        setStatus('Unable to verify your session right now. Reload this page to retry, or select Retry session.', 'error', true);
+      }
       return;
     }
+    await loadDashboard('Session restored.');
+  }
 
-    if (accessToken) {
-      try {
-        await requireAdmin();
-      } catch (err) {
-        if (isAuthorizationFailure(err)) {
-          clearSession();
-          setStatus(err.message || 'Session expired. Please sign in again.', 'error');
-        } else {
-          // Do not grant access before the check succeeds, or discard a saved
-          // session merely because the authorization service is unavailable.
-          leaveDashboard();
-          setStatus('Unable to verify your session right now. Reload this page to retry.', 'error');
-        }
-        return;
-      }
-      await loadDashboard('Session restored.');
-    }
-  });
+  if (retrySessionBtn) {
+    retrySessionBtn.addEventListener('click', async function () {
+      retrySessionBtn.disabled = true;
+      try { await restoreSession(); }
+      finally { retrySessionBtn.disabled = false; }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', restoreSession);
 })();
