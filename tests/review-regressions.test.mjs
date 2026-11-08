@@ -111,35 +111,40 @@ test('CMS outage / invalid response fails closed with retryable 503 and noindex'
 });
 
 function element() {
+  const classes = new Set();
   const e = { value: '', files: [], textContent: '', innerHTML: '', hidden: false, attrs: {}, handlers: {}, dataset: {},
-    classList: { add() {}, remove() {}, toggle() {} }, scrollIntoView() {},
+    classList: { add(c) { classes.add(c); }, remove(c) { classes.delete(c); }, toggle() {}, contains(c) { return classes.has(c); } }, scrollIntoView() {},
     setAttribute(k, v) { this.attrs[k] = v; }, getAttribute(k) { return this.attrs[k]; },
     addEventListener(k, f) { this.handlers[k] = f; }, querySelector() { return element(); },
     reset() { for (const c of Object.values(this.elements)) c.value = ''; } };
   e.elements = new Proxy({}, { get(t, k) { return t[k] || (t[k] = element()); } }); return e;
 }
-async function adminHarness(allowed = true) {
-  const els = {}, calls = [], stored = {};
+async function adminHarness(allowed = true, { savedToken = '', statuses = {} } = {}) {
+  const els = {}, calls = [], stored = {}, documentHandlers = {};
+  if (savedToken) stored.cms_admin_access_token = savedToken;
   const get = id => els[id] || (els[id] = element());
   const marker = '<img src=x onerror="window.injected=true">';
   const rows = { blogs: [{ id: '1" onclick="x', title: marker, status: marker }], products: [{ id: '2" onclick="x', name: marker, status: marker, currency: marker }] };
   const context = {
-    window: { CMS_CONFIG: cms }, document: { getElementById: get, addEventListener() {} },
+    window: { CMS_CONFIG: cms }, document: { getElementById: get, addEventListener(type, handler) { documentHandlers[type] = handler; } },
     localStorage: { getItem(k) { return stored[k] || ''; }, setItem(k,v) { stored[k]=v; }, removeItem(k) { delete stored[k]; } },
     URL, HTMLElement: class {}, File: class {}, FormData: class {
       constructor(form) { this.form=form; }
       get(k) { if (k === 'image_url') return get('product-image-url').value; if (k === 'brochure_url') return get('product-brochure-url').value; return this.form.elements[k].value; }
     }, fetch: async (url, options) => {
       calls.push({url, ...options});
+      const kind = url.includes('is_cms_admin') ? 'authorization' : url.includes('blog_posts') ? 'blogs' : url.includes('products') ? 'products' : 'login';
+      const status = statuses[kind] || 200;
+      if (status === 'network') throw new TypeError('Network unavailable');
       let data = url.includes('blog_posts') ? rows.blogs : rows.products;
       if (url.includes('is_cms_admin')) data = allowed;
       if (url.includes('/auth/v1/token')) data = { access_token: 'fake-test-token' };
-      return { ok: true, headers: { get() { return 'application/json'; } }, json: async () => data };
+      return { ok: status === 200, status, text: async () => 'Test failure', headers: { get() { return 'application/json'; } }, json: async () => data };
     }, Map, console,
   };
   const code = (await read('assets/js/cms-admin.js')).replace(/\}\)\(\);\s*$/, 'globalThis.audit={fetchBlogs,fetchProducts,setProductEditMode,requireAdmin};\n})();');
   vm.createContext(context); vm.runInContext(code, context);
-  return { context, get, calls, marker, stored };
+  return { context, get, calls, marker, stored, documentHandlers };
 }
 
 test('CMS tables encode stored HTML and attribute characters in all row fields', async () => {
@@ -174,5 +179,58 @@ test('Non-admin login discards the token; admitted admin stores it only after RP
       assert.match(get('admin-status').textContent, /not authorized/);
       assert(!calls.some(c => c.url.includes('blog_posts')));
     }
+  }
+});
+
+
+test('Verified login and restored sessions survive transient table errors and can retry', async () => {
+  for (const phase of ['login', 'restore']) {
+    for (const failure of [500, 'network']) {
+      const statuses = { blogs: failure };
+      const { get, stored, documentHandlers } = await adminHarness(true, { savedToken: phase === 'restore' ? 'saved-token' : '', statuses });
+      if (phase === 'login') await get('login-form').handlers.submit({ preventDefault() {} });
+      else await documentHandlers.DOMContentLoaded();
+      assert(stored.cms_admin_access_token, `${phase}/${failure} must retain the valid token`);
+      assert.equal(get('dashboard').classList.contains('hidden'), false);
+      assert.equal(get('login-card').classList.contains('hidden'), true);
+      assert.match(get('admin-status').textContent, /signed in.*Reload this page to retry/);
+      const token = stored.cms_admin_access_token;
+      statuses.blogs = 200;
+      await documentHandlers.DOMContentLoaded();
+      assert.equal(stored.cms_admin_access_token, token);
+      assert.equal(get('admin-status').textContent, 'Session restored.');
+    }
+  }
+});
+
+test('401/403 table failures invalidate sessions even if another table first reports 500', async () => {
+  for (const phase of ['login', 'restore']) {
+    for (const failure of [401, 403]) {
+      const { get, stored, documentHandlers } = await adminHarness(true, {
+        savedToken: phase === 'restore' ? 'saved-token' : '', statuses: { blogs: 500, products: failure },
+      });
+      if (phase === 'login') await get('login-form').handlers.submit({ preventDefault() {} });
+      else await documentHandlers.DOMContentLoaded();
+      assert.equal(stored.cms_admin_access_token, undefined);
+      assert.equal(get('dashboard').classList.contains('hidden'), true);
+      assert.match(get('admin-status').textContent, /expired or access was denied/);
+    }
+  }
+});
+
+test('Restoring a non-admin or expired session fails closed; transient authorization outage remains retryable', async () => {
+  for (const settings of [
+    { allowed: false, statuses: {}, retain: false },
+    { allowed: true, statuses: { authorization: 401 }, retain: false },
+    { allowed: true, statuses: { authorization: 403 }, retain: false },
+    { allowed: true, statuses: { authorization: 500 }, retain: true },
+    { allowed: true, statuses: { authorization: 'network' }, retain: true },
+  ]) {
+    const { get, stored, calls, documentHandlers } = await adminHarness(settings.allowed, { savedToken: 'saved-token', statuses: settings.statuses });
+    await documentHandlers.DOMContentLoaded();
+    assert.equal(Boolean(stored.cms_admin_access_token), settings.retain);
+    assert.equal(get('dashboard').classList.contains('hidden'), true);
+    assert(!calls.some(c => c.url.includes('blog_posts')));
+    if (settings.retain) assert.match(get('admin-status').textContent, /Unable to verify.*retry/);
   }
 });

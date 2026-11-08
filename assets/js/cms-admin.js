@@ -55,7 +55,11 @@
 
   async function requireAdmin() {
     const allowed = await request('/rest/v1/rpc/is_cms_admin', { method: 'POST', auth: true, body: {} });
-    if (allowed !== true) throw new Error('This account is not authorized to manage the CMS.');
+    if (allowed !== true) {
+      const error = new Error('This account is not authorized to manage the CMS.');
+      error.status = 403;
+      throw error;
+    }
   }
 
   function setStatus(message, kind) {
@@ -562,7 +566,9 @@
 
     if (!res.ok) {
       const txt = await res.text();
-      throw new Error(`HTTP ${res.status}: ${txt}`);
+      const error = new Error(`HTTP ${res.status}: ${txt}`);
+      error.status = res.status;
+      throw error;
     }
 
     const ct = res.headers.get('content-type') || '';
@@ -685,8 +691,36 @@
       .join('');
   }
 
+  function isAuthorizationFailure(error) {
+    return error && (error.status === 401 || error.status === 403);
+  }
+
   async function refreshTables() {
-    await Promise.all([fetchBlogs(), fetchProducts()]);
+    // Wait for both reads so an early 500 cannot mask a later 401/403.
+    const results = await Promise.allSettled([fetchBlogs(), fetchProducts()]);
+    const errors = results.filter((result) => result.status === 'rejected').map((result) => result.reason);
+    if (errors.length) throw errors.find(isAuthorizationFailure) || errors[0];
+  }
+
+  function clearSession() {
+    accessToken = '';
+    localStorage.removeItem(tokenKey);
+    leaveDashboard();
+  }
+
+  async function loadDashboard(successMessage) {
+    enterDashboard();
+    try {
+      await refreshTables();
+      setStatus(successMessage, 'success');
+    } catch (err) {
+      if (isAuthorizationFailure(err)) {
+        clearSession();
+        setStatus('Session expired or access was denied. Please sign in again.', 'error');
+      } else {
+        setStatus('You are signed in, but data could not be loaded. Reload this page to retry.', 'error');
+      }
+    }
   }
 
   function enterDashboard() {
@@ -710,15 +744,12 @@
     try {
       setStatus('Signing in...');
       await login(email, password);
-      enterDashboard();
-      await refreshTables();
-      setStatus('Signed in successfully.', 'success');
     } catch (err) {
-      accessToken = '';
-      localStorage.removeItem(tokenKey);
-      leaveDashboard();
+      clearSession();
       setStatus(err instanceof Error ? err.message : 'Login failed.', 'error');
+      return;
     }
+    await loadDashboard('Signed in successfully.');
   });
 
   logoutBtn.addEventListener('click', function () {
@@ -1033,15 +1064,19 @@
     if (accessToken) {
       try {
         await requireAdmin();
-        enterDashboard();
-        await refreshTables();
-        setStatus('Session restored.', 'success');
       } catch (err) {
-        localStorage.removeItem(tokenKey);
-        accessToken = '';
-        leaveDashboard();
-        setStatus(err instanceof Error ? err.message : 'Session expired. Please sign in again.', 'error');
+        if (isAuthorizationFailure(err)) {
+          clearSession();
+          setStatus(err.message || 'Session expired. Please sign in again.', 'error');
+        } else {
+          // Do not grant access before the check succeeds, or discard a saved
+          // session merely because the authorization service is unavailable.
+          leaveDashboard();
+          setStatus('Unable to verify your session right now. Reload this page to retry.', 'error');
+        }
+        return;
       }
+      await loadDashboard('Session restored.');
     }
   });
 })();
