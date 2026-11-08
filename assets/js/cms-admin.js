@@ -29,6 +29,8 @@
 
   const tokenKey = 'cms_admin_access_token';
   let accessToken = localStorage.getItem(tokenKey) || '';
+  let sessionGeneration = 0;
+  const isCurrentSession = (generation) => generation === sessionGeneration;
   let editingBlogId = null;
   let editingProductId = null;
   let editingBlogCoverImageUrl = '';
@@ -622,7 +624,7 @@
     return `${supabaseUrl}/storage/v1/object/public/${storageBucket}/${key}`;
   }
 
-  async function login(email, password) {
+  async function login(email, password, generation) {
     const res = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
       method: 'POST',
       headers: {
@@ -641,6 +643,7 @@
     }
 
     const data = await res.json();
+    if (!isCurrentSession(generation)) return;
     if (typeof data.access_token !== 'string' || !data.access_token) throw new Error('Invalid sign-in response. Please try again.');
     accessToken = data.access_token;
     // Save the authenticated session before checking CMS privileges. A temporary
@@ -649,12 +652,13 @@
     await requireAdmin();
   }
 
-  async function fetchBlogs() {
+  async function fetchBlogs(generation = sessionGeneration) {
     const rows = await request(
       '/rest/v1/blog_posts?select=id,title,slug,excerpt,content,cover_image_url,status,published_at,created_at&order=created_at.desc',
       { auth: true }
     );
 
+    if (!isCurrentSession(generation)) return;
     blogRowsById = new Map(rows.map((row) => [String(row.id), row]));
     blogsTableBody.innerHTML = rows
       .map(
@@ -674,12 +678,13 @@
       .join('');
   }
 
-  async function fetchProducts() {
+  async function fetchProducts(generation = sessionGeneration) {
     const rows = await request(
       '/rest/v1/products?select=id,name,slug,short_description,description,price_cents,currency,purchase_url,image_url,brochure_url,status,published_at,created_at&order=created_at.desc',
       { auth: true }
     );
 
+    if (!isCurrentSession(generation)) return;
     productRowsById = new Map(rows.map((row) => [String(row.id), row]));
     productsTableBody.innerHTML = rows
       .map(
@@ -703,25 +708,30 @@
     return error && (error.status === 401 || error.status === 403);
   }
 
-  async function refreshTables() {
+  async function refreshTables(generation = sessionGeneration) {
     // Wait for both reads so an early 500 cannot mask a later 401/403.
-    const results = await Promise.allSettled([fetchBlogs(), fetchProducts()]);
+    const results = await Promise.allSettled([fetchBlogs(generation), fetchProducts(generation)]);
     const errors = results.filter((result) => result.status === 'rejected').map((result) => result.reason);
     if (errors.length) throw errors.find(isAuthorizationFailure) || errors[0];
   }
 
   function clearSession() {
+    sessionGeneration += 1;
+    if (retrySessionBtn) retrySessionBtn.disabled = false;
     accessToken = '';
     localStorage.removeItem(tokenKey);
     leaveDashboard();
   }
 
-  async function loadDashboard(successMessage) {
+  async function loadDashboard(successMessage, generation) {
+    if (!isCurrentSession(generation) || !accessToken) return;
     enterDashboard();
     try {
-      await refreshTables();
+      await refreshTables(generation);
+      if (!isCurrentSession(generation)) return;
       setStatus(successMessage, 'success');
     } catch (err) {
+      if (!isCurrentSession(generation)) return;
       if (isAuthorizationFailure(err)) {
         clearSession();
         setStatus('Session expired or access was denied. Please sign in again.', 'error');
@@ -748,11 +758,15 @@
     const formData = new FormData(loginForm);
     const email = String(formData.get('email') || '').trim();
     const password = String(formData.get('password') || '');
+    // Starting a new sign-in invalidates callbacks belonging to the old session.
+    const generation = ++sessionGeneration;
+    if (retrySessionBtn) retrySessionBtn.disabled = false;
 
     try {
       setStatus('Signing in...');
-      await login(email, password);
+      await login(email, password, generation);
     } catch (err) {
+      if (!isCurrentSession(generation)) return;
       if (isAuthorizationFailure(err) || err.authenticationFailure) {
         clearSession();
         setStatus(err instanceof Error ? err.message : 'Login failed.', 'error');
@@ -764,12 +778,11 @@
       }
       return;
     }
-    await loadDashboard('Signed in successfully.');
+    await loadDashboard('Signed in successfully.', generation);
   });
 
   logoutBtn.addEventListener('click', function () {
-    accessToken = '';
-    localStorage.removeItem(tokenKey);
+    clearSession();
     clearBlogEditMode(true);
     clearProductEditMode(true);
     leaveDashboard();
@@ -1073,9 +1086,11 @@
 
   async function restoreSession() {
     if (!ensureConfigured() || !accessToken) return;
+    const generation = sessionGeneration;
     try {
       await requireAdmin();
     } catch (err) {
+      if (!isCurrentSession(generation)) return;
       if (isAuthorizationFailure(err)) {
         clearSession();
         setStatus(err.message || 'Session expired. Please sign in again.', 'error');
@@ -1086,14 +1101,15 @@
       }
       return;
     }
-    await loadDashboard('Session restored.');
+    await loadDashboard('Session restored.', generation);
   }
 
   if (retrySessionBtn) {
     retrySessionBtn.addEventListener('click', async function () {
+      const generation = sessionGeneration;
       retrySessionBtn.disabled = true;
       try { await restoreSession(); }
-      finally { retrySessionBtn.disabled = false; }
+      finally { if (isCurrentSession(generation)) retrySessionBtn.disabled = false; }
     });
   }
   document.addEventListener('DOMContentLoaded', restoreSession);

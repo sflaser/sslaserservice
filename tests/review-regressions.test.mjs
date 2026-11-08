@@ -141,7 +141,7 @@ function element() {
     reset() { for (const c of Object.values(this.elements)) c.value = ''; } };
   e.elements = new Proxy({}, { get(t, k) { return t[k] || (t[k] = element()); } }); return e;
 }
-async function adminHarness(allowed = true, { savedToken = '', statuses = {} } = {}) {
+async function adminHarness(allowed = true, { savedToken = '', statuses = {}, beforeResponse } = {}) {
   const els = {}, calls = [], stored = {}, documentHandlers = {};
   if (savedToken) stored.cms_admin_access_token = savedToken;
   const get = id => els[id] || (els[id] = element());
@@ -161,6 +161,7 @@ async function adminHarness(allowed = true, { savedToken = '', statuses = {} } =
       let data = url.includes('blog_posts') ? rows.blogs : rows.products;
       if (url.includes('is_cms_admin')) data = allowed;
       if (url.includes('/auth/v1/token')) data = { access_token: 'fake-test-token' };
+      if (beforeResponse) await beforeResponse({ kind, status, url });
       return { ok: status === 200, status, text: async () => 'Test failure', headers: { get() { return 'application/json'; } }, json: async () => data };
     }, Map, console,
   };
@@ -287,4 +288,89 @@ test('Temporary sign-in service failure preserves a saved token; rejected creden
     assert.equal(get('dashboard').classList.contains('hidden'), true);
     assert.equal(get('retry-session-btn').hidden, !temporary);
   }
+});
+
+
+function deferred() {
+  let resolve;
+  const promise = new Promise(done => { resolve = done; });
+  return { promise, resolve };
+}
+
+test('A delayed Retry authorization callback cannot reopen the dashboard after Sign Out', async () => {
+  const started = deferred(), release = deferred();
+  let hold = false;
+  const { get, stored, calls, documentHandlers } = await adminHarness(true, {
+    savedToken: 'saved-token', statuses: { blogs: 500 },
+    beforeResponse: async ({ kind }) => { if (hold && kind === 'authorization') { started.resolve(); await release.promise; } },
+  });
+  await documentHandlers.DOMContentLoaded();
+  assert.equal(get('dashboard').classList.contains('hidden'), false);
+  hold = true;
+  const pending = get('retry-session-btn').handlers.click();
+  await started.promise;
+  get('logout-btn').handlers.click();
+  const readCount = calls.filter(call => call.url.includes('/blog_posts')).length;
+  release.resolve(); await pending;
+  assert.equal(stored.cms_admin_access_token, undefined);
+  assert.equal(get('dashboard').classList.contains('hidden'), true);
+  assert.equal(get('admin-status').textContent, 'Signed out.');
+  assert.equal(calls.filter(call => call.url.includes('/blog_posts')).length, readCount);
+});
+
+test('Stale successful table reads cannot overwrite a new sign-in DOM or status', async () => {
+  const started = deferred(), release = deferred();
+  let old = true, pendingReads = 0;
+  const { get, stored, documentHandlers } = await adminHarness(true, {
+    savedToken: 'saved-token',
+    beforeResponse: async ({ kind }) => {
+      if (old && ['blogs', 'products'].includes(kind)) {
+        if (++pendingReads === 2) started.resolve();
+        await release.promise;
+      }
+    },
+  });
+  const pending = documentHandlers.DOMContentLoaded();
+  await started.promise;
+  old = false;
+  await get('login-form').handlers.submit({ preventDefault() {} });
+  get('blogs-table-body').innerHTML = 'new-session-blog-rows';
+  get('products-table-body').innerHTML = 'new-session-product-rows';
+  release.resolve(); await pending;
+  assert.equal(stored.cms_admin_access_token, 'fake-test-token');
+  assert.equal(get('blogs-table-body').innerHTML, 'new-session-blog-rows');
+  assert.equal(get('products-table-body').innerHTML, 'new-session-product-rows');
+  assert.equal(get('admin-status').textContent, 'Signed in successfully.');
+});
+
+test('A stale table 401 cannot clear or hide a newly authenticated session', async () => {
+  const started = deferred(), release = deferred();
+  const statuses = { blogs: 401 };
+  let old = true;
+  const { get, stored, documentHandlers } = await adminHarness(true, {
+    savedToken: 'saved-token', statuses,
+    beforeResponse: async ({ kind }) => { if (old && kind === 'blogs') { started.resolve(); await release.promise; } },
+  });
+  const pending = documentHandlers.DOMContentLoaded();
+  await started.promise;
+  old = false; statuses.blogs = 200;
+  await get('login-form').handlers.submit({ preventDefault() {} });
+  release.resolve(); await pending;
+  assert.equal(stored.cms_admin_access_token, 'fake-test-token');
+  assert.equal(get('dashboard').classList.contains('hidden'), false);
+  assert.equal(get('admin-status').textContent, 'Signed in successfully.');
+});
+
+test('A stale sign-in response cannot replace the session or reopen the dashboard after Sign Out', async () => {
+  const started = deferred(), release = deferred();
+  const { get, stored } = await adminHarness(true, {
+    beforeResponse: async ({ kind }) => { if (kind === 'login') { started.resolve(); await release.promise; } },
+  });
+  const pending = get('login-form').handlers.submit({ preventDefault() {} });
+  await started.promise;
+  get('logout-btn').handlers.click();
+  release.resolve(); await pending;
+  assert.equal(stored.cms_admin_access_token, undefined);
+  assert.equal(get('dashboard').classList.contains('hidden'), true);
+  assert.equal(get('admin-status').textContent, 'Signed out.');
 });
