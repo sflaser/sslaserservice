@@ -9,6 +9,7 @@
   const loginForm = document.getElementById('login-form');
   const logoutBtn = document.getElementById('logout-btn');
   const statusEl = document.getElementById('admin-status');
+  const retrySessionBtn = document.getElementById('retry-session-btn');
 
   const blogForm = document.getElementById('blog-form');
   const productForm = document.getElementById('product-form');
@@ -28,6 +29,8 @@
 
   const tokenKey = 'cms_admin_access_token';
   let accessToken = localStorage.getItem(tokenKey) || '';
+  let sessionGeneration = 0;
+  const isCurrentSession = (generation) => generation === sessionGeneration;
   let editingBlogId = null;
   let editingProductId = null;
   let editingBlogCoverImageUrl = '';
@@ -36,7 +39,34 @@
   let blogRowsById = new Map();
   let productRowsById = new Map();
 
-  function setStatus(message, kind) {
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, (character) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+    }[character]));
+  }
+
+  function assetUrl(value) {
+    const text = String(value || '').trim();
+    if (!text) return null;
+    if (/^\/(?!\/)/.test(text) && !/[\\\u0000-\u001f]/.test(text)) return text;
+    try {
+      const url = new URL(text);
+      if (['https:', 'http:'].includes(url.protocol)) return text;
+    } catch { /* Show the same helpful message for invalid URLs and schemes. */ }
+    throw new Error('Asset links must be http(s) URLs or paths beginning with /.');
+  }
+
+  async function requireAdmin() {
+    const allowed = await request('/rest/v1/rpc/is_cms_admin', { method: 'POST', auth: true, body: {} });
+    if (allowed !== true) {
+      const error = new Error('This account is not authorized to manage the CMS.');
+      error.status = 403;
+      throw error;
+    }
+  }
+
+  function setStatus(message, kind, retry = false) {
+    if (retrySessionBtn) retrySessionBtn.hidden = !retry;
     statusEl.textContent = message || '';
     statusEl.className = 'status';
     if (kind) {
@@ -540,7 +570,9 @@
 
     if (!res.ok) {
       const txt = await res.text();
-      throw new Error(`HTTP ${res.status}: ${txt}`);
+      const error = new Error(`HTTP ${res.status}: ${txt}`);
+      error.status = res.status;
+      throw error;
     }
 
     const ct = res.headers.get('content-type') || '';
@@ -592,7 +624,7 @@
     return `${supabaseUrl}/storage/v1/object/public/${storageBucket}/${key}`;
   }
 
-  async function login(email, password) {
+  async function login(email, password, generation) {
     const res = await fetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
       method: 'POST',
       headers: {
@@ -604,32 +636,41 @@
 
     if (!res.ok) {
       const txt = await res.text();
-      throw new Error(`Login failed: ${txt}`);
+      const error = new Error(`Login failed: ${txt}`);
+      error.status = res.status;
+      error.authenticationFailure = [400, 401, 403, 422].includes(res.status);
+      throw error;
     }
 
     const data = await res.json();
+    if (!isCurrentSession(generation)) return;
+    if (typeof data.access_token !== 'string' || !data.access_token) throw new Error('Invalid sign-in response. Please try again.');
     accessToken = data.access_token;
+    // Save the authenticated session before checking CMS privileges. A temporary
+    // RPC outage must not lose it; the dashboard stays closed until authorized.
     localStorage.setItem(tokenKey, accessToken);
+    await requireAdmin();
   }
 
-  async function fetchBlogs() {
+  async function fetchBlogs(generation = sessionGeneration) {
     const rows = await request(
       '/rest/v1/blog_posts?select=id,title,slug,excerpt,content,cover_image_url,status,published_at,created_at&order=created_at.desc',
       { auth: true }
     );
 
+    if (!isCurrentSession(generation)) return;
     blogRowsById = new Map(rows.map((row) => [String(row.id), row]));
     blogsTableBody.innerHTML = rows
       .map(
         (row) => `
           <tr>
-            <td>${row.id}</td>
-            <td>${row.title}</td>
-            <td><span class="badge ${row.status}">${row.status}</span></td>
+            <td>${escapeHtml(row.id)}</td>
+            <td>${escapeHtml(row.title)}</td>
+            <td><span class="badge ${escapeHtml(row.status)}">${escapeHtml(row.status)}</span></td>
             <td>${row.published_at ? new Date(row.published_at).toLocaleString() : '-'}</td>
             <td class="actions">
-              <button class="btn btn-outline btn-sm" data-edit-blog="${row.id}">Edit</button>
-              <button class="btn btn-danger btn-sm" data-delete-blog="${row.id}">Delete</button>
+              <button class="btn btn-outline btn-sm" data-edit-blog="${escapeHtml(row.id)}">Edit</button>
+              <button class="btn btn-danger btn-sm" data-delete-blog="${escapeHtml(row.id)}">Delete</button>
             </td>
           </tr>
         `
@@ -637,24 +678,25 @@
       .join('');
   }
 
-  async function fetchProducts() {
+  async function fetchProducts(generation = sessionGeneration) {
     const rows = await request(
       '/rest/v1/products?select=id,name,slug,short_description,description,price_cents,currency,purchase_url,image_url,brochure_url,status,published_at,created_at&order=created_at.desc',
       { auth: true }
     );
 
+    if (!isCurrentSession(generation)) return;
     productRowsById = new Map(rows.map((row) => [String(row.id), row]));
     productsTableBody.innerHTML = rows
       .map(
         (row) => `
           <tr>
-            <td>${row.id}</td>
-            <td>${row.name}</td>
-            <td>${(Number(row.price_cents || 0) / 100).toFixed(2)} ${(row.currency || 'USD').toUpperCase()}</td>
-            <td><span class="badge ${row.status}">${row.status}</span></td>
+            <td>${escapeHtml(row.id)}</td>
+            <td>${escapeHtml(row.name)}</td>
+            <td>${(Number(row.price_cents || 0) / 100).toFixed(2)} ${escapeHtml(String(row.currency || 'USD').toUpperCase())}</td>
+            <td><span class="badge ${escapeHtml(row.status)}">${escapeHtml(row.status)}</span></td>
             <td class="actions">
-              <button class="btn btn-outline btn-sm" data-edit-product="${row.id}">Edit</button>
-              <button class="btn btn-danger btn-sm" data-delete-product="${row.id}">Delete</button>
+              <button class="btn btn-outline btn-sm" data-edit-product="${escapeHtml(row.id)}">Edit</button>
+              <button class="btn btn-danger btn-sm" data-delete-product="${escapeHtml(row.id)}">Delete</button>
             </td>
           </tr>
         `
@@ -662,8 +704,41 @@
       .join('');
   }
 
-  async function refreshTables() {
-    await Promise.all([fetchBlogs(), fetchProducts()]);
+  function isAuthorizationFailure(error) {
+    return error && (error.status === 401 || error.status === 403);
+  }
+
+  async function refreshTables(generation = sessionGeneration) {
+    // Wait for both reads so an early 500 cannot mask a later 401/403.
+    const results = await Promise.allSettled([fetchBlogs(generation), fetchProducts(generation)]);
+    const errors = results.filter((result) => result.status === 'rejected').map((result) => result.reason);
+    if (errors.length) throw errors.find(isAuthorizationFailure) || errors[0];
+  }
+
+  function clearSession() {
+    sessionGeneration += 1;
+    if (retrySessionBtn) retrySessionBtn.disabled = false;
+    accessToken = '';
+    localStorage.removeItem(tokenKey);
+    leaveDashboard();
+  }
+
+  async function loadDashboard(successMessage, generation) {
+    if (!isCurrentSession(generation) || !accessToken) return;
+    enterDashboard();
+    try {
+      await refreshTables(generation);
+      if (!isCurrentSession(generation)) return;
+      setStatus(successMessage, 'success');
+    } catch (err) {
+      if (!isCurrentSession(generation)) return;
+      if (isAuthorizationFailure(err)) {
+        clearSession();
+        setStatus('Session expired or access was denied. Please sign in again.', 'error');
+      } else {
+        setStatus('You are signed in, but data could not be loaded. Reload this page to retry, or select Retry session.', 'error', true);
+      }
+    }
   }
 
   function enterDashboard() {
@@ -683,21 +758,31 @@
     const formData = new FormData(loginForm);
     const email = String(formData.get('email') || '').trim();
     const password = String(formData.get('password') || '');
+    // Starting a new sign-in invalidates callbacks belonging to the old session.
+    const generation = ++sessionGeneration;
+    if (retrySessionBtn) retrySessionBtn.disabled = false;
 
     try {
       setStatus('Signing in...');
-      await login(email, password);
-      enterDashboard();
-      await refreshTables();
-      setStatus('Signed in successfully.', 'success');
+      await login(email, password, generation);
     } catch (err) {
-      setStatus(err instanceof Error ? err.message : 'Login failed.', 'error');
+      if (!isCurrentSession(generation)) return;
+      if (isAuthorizationFailure(err) || err.authenticationFailure) {
+        clearSession();
+        setStatus(err instanceof Error ? err.message : 'Login failed.', 'error');
+      } else {
+        leaveDashboard();
+        setStatus(accessToken
+          ? 'Unable to verify your session right now. Reload this page to retry, or select Retry session.'
+          : 'Sign-in is temporarily unavailable. Please try again.', 'error', Boolean(accessToken));
+      }
+      return;
     }
+    await loadDashboard('Signed in successfully.', generation);
   });
 
   logoutBtn.addEventListener('click', function () {
-    accessToken = '';
-    localStorage.removeItem(tokenKey);
+    clearSession();
     clearBlogEditMode(true);
     clearProductEditMode(true);
     leaveDashboard();
@@ -806,14 +891,14 @@
       const brochureUrlInput = String(formData.get('brochure_url') || '').trim();
       const status = String(formData.get('status') || 'draft');
 
-      let imageUrl = editingProductImageUrl || imageUrlInput || null;
+      let imageUrl = assetUrl(imageUrlInput);
       const imageFile = formData.get('image');
       if (imageFile instanceof File && imageFile.size > 0) {
         setStatus('Uploading product image...');
         imageUrl = await uploadImage(imageFile, 'products');
       }
 
-      let brochureUrl = editingProductBrochureUrl || brochureUrlInput || null;
+      let brochureUrl = assetUrl(brochureUrlInput);
       const brochureFile = formData.get('brochure_file');
       if (brochureFile instanceof File && brochureFile.size > 0) {
         setStatus('Uploading product brochure...');
@@ -999,22 +1084,33 @@
     }
   });
 
-  document.addEventListener('DOMContentLoaded', async function () {
-    if (!ensureConfigured()) {
+  async function restoreSession() {
+    if (!ensureConfigured() || !accessToken) return;
+    const generation = sessionGeneration;
+    try {
+      await requireAdmin();
+    } catch (err) {
+      if (!isCurrentSession(generation)) return;
+      if (isAuthorizationFailure(err)) {
+        clearSession();
+        setStatus(err.message || 'Session expired. Please sign in again.', 'error');
+      } else {
+        // Retain the session without granting access until verification succeeds.
+        leaveDashboard();
+        setStatus('Unable to verify your session right now. Reload this page to retry, or select Retry session.', 'error', true);
+      }
       return;
     }
+    await loadDashboard('Session restored.', generation);
+  }
 
-    if (accessToken) {
-      try {
-        enterDashboard();
-        await refreshTables();
-        setStatus('Session restored.', 'success');
-      } catch (err) {
-        localStorage.removeItem(tokenKey);
-        accessToken = '';
-        leaveDashboard();
-        setStatus('Session expired. Please sign in again.', 'error');
-      }
-    }
-  });
+  if (retrySessionBtn) {
+    retrySessionBtn.addEventListener('click', async function () {
+      const generation = sessionGeneration;
+      retrySessionBtn.disabled = true;
+      try { await restoreSession(); }
+      finally { if (isCurrentSession(generation)) retrySessionBtn.disabled = false; }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', restoreSession);
 })();

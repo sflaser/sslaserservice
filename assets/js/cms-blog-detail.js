@@ -1,3 +1,5 @@
+import { buildPageTitle, buildDescription, formatDate, resolveOptimizedImageUrl, renderStructuredContent } from "./blog-rendering.mjs?v=20261108-review1";
+
 (function () {
   const cfg = window.CMS_CONFIG || {};
   const supabaseUrl = (cfg.supabaseUrl || "").replace(/\/+$/, "");
@@ -31,25 +33,6 @@
     element.setAttribute("content", content);
   }
 
-  function buildPageTitle(value) {
-    const suffix = " | Sky Fire Laser";
-    const label = String(value || "Resource").replace(/\s+/g, " ").trim();
-    const available = 65 - suffix.length;
-    const shortened = label.length > available
-      ? label.slice(0, available).replace(/\s+\S*$/, "").trim()
-      : label;
-    return `${shortened}${suffix}`;
-  }
-
-  function buildDescription(value) {
-    const normalized = String(value || "")
-      .replace(/[#*_`>\[\]()]/g, "")
-      .replace(/\s+/g, " ")
-      .trim();
-    if (normalized.length <= 160) return normalized;
-    return `${normalized.slice(0, 157).replace(/\s+\S*$/, "").replace(/[,:;\s]+$/, "")}…`;
-  }
-
   function updateSearchMetadata(post, coverImageUrl) {
     const canonicalUrl = new URL(`${window.location.pathname}?slug=${encodeURIComponent(post.slug)}`, window.location.origin).href;
     const description = buildDescription(post.excerpt || post.content || "");
@@ -64,6 +47,12 @@
       const language = link.getAttribute("hreflang");
       const counterpartPath = language === "es" ? "/es/blog.html" : "/blog.html";
       link.href = new URL(`${counterpartPath}?slug=${encodeURIComponent(post.slug)}`, window.location.origin).href;
+    });
+
+    document.querySelectorAll('[data-lang-switch] a').forEach(function (link) {
+      const path = new URL(link.href, window.location.origin).pathname.startsWith('/es/')
+        ? '/es/blog.html' : '/blog.html';
+      link.href = new URL(`${path}?slug=${encodeURIComponent(post.slug)}`, window.location.origin).href;
     });
 
     upsertMeta('meta[name="robots"]', { name: "robots" }, "index,follow,max-image-preview:large,max-snippet:-1");
@@ -128,172 +117,6 @@
     });
   }
 
-  function escapeHtml(value) {
-    return String(value || "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-  function formatDate(value) {
-    if (!value) return "";
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return "";
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  }
-
-  function resolveOptimizedImageUrl(url) {
-    const value = String(url || "").trim();
-    const imageOverrides = {
-      "https://ydbviiswxofxapccpibv.supabase.co/storage/v1/object/public/site-assets/blog/1772769062741-mpcf5ny5um.jpeg":
-        "/images/blog/generated/solid-state-laser-repair-custom-solutions-source-grounded-20260509.jpg",
-      "https://ydbviiswxofxapccpibv.supabase.co/storage/v1/object/public/site-assets/blog/1772436725435-4uw4yozc5td.jpg":
-        "/images/blog/generated/preventive-maintenance-solid-state-lasers-source-grounded-20260509.jpg",
-    };
-
-    return imageOverrides[value] || value;
-  }
-
-  function renderTextInline(value) {
-    let html = escapeHtml(value);
-
-    // Inline code first so markdown markers inside code are preserved.
-    html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
-    html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-    html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-    html = html.replace(/__(.+?)__/g, "<strong>$1</strong>");
-    html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
-    html = html.replace(/_(.+?)_/g, "<em>$1</em>");
-
-    return html;
-  }
-
-  function renderMultiline(value) {
-    return renderTextInline(String(value || "")).replace(/\n/g, "<br>");
-  }
-
-  function isHorizontalRule(line) {
-    return /^\s*([-*_–—])(?:\s*\1){2,}\s*$/.test(line);
-  }
-
-  function isHeading(line) {
-    return /^\s*#{1,6}\s+/.test(line);
-  }
-
-  function isUnorderedList(line) {
-    return /^\s*[-*+•–—]\s+/.test(line);
-  }
-
-  function isOrderedList(line) {
-    return /^\s*\d+[.)]\s+/.test(line);
-  }
-
-  function isBlockquote(line) {
-    return /^\s*>\s?/.test(line);
-  }
-
-  function renderStructuredContent(content) {
-    const normalized = String(content || "").replace(/\r\n/g, "\n").trim();
-    if (!normalized) return "";
-
-    const lines = normalized.split("\n");
-    const html = [];
-
-    let i = 0;
-    while (i < lines.length) {
-      const raw = lines[i];
-      const line = raw.trim();
-
-      if (!line) {
-        i += 1;
-        continue;
-      }
-
-      if (isHorizontalRule(line)) {
-        html.push("<hr>");
-        i += 1;
-        continue;
-      }
-
-      if (isHeading(line)) {
-        const match = line.match(/^(#{1,6})\s+(.+)$/);
-        if (match) {
-          const level = Math.min(4, match[1].length);
-          html.push(`<h${level}>${renderTextInline(match[2].trim())}</h${level}>`);
-          i += 1;
-          continue;
-        }
-      }
-
-      if (isUnorderedList(line)) {
-        const items = [];
-        while (i < lines.length) {
-          const next = lines[i].trim();
-          if (!next) break;
-          if (!isUnorderedList(next)) break;
-          items.push(next.replace(/^[-*+•–—]\s+/, ""));
-          i += 1;
-        }
-        html.push(`<ul>${items.map((item) => `<li>${renderTextInline(item)}</li>`).join("")}</ul>`);
-        continue;
-      }
-
-      if (isOrderedList(line)) {
-        const items = [];
-        while (i < lines.length) {
-          const next = lines[i].trim();
-          if (!next) break;
-          if (!isOrderedList(next)) break;
-          items.push(next.replace(/^\d+[.)]\s+/, ""));
-          i += 1;
-        }
-        html.push(`<ol>${items.map((item) => `<li>${renderTextInline(item)}</li>`).join("")}</ol>`);
-        continue;
-      }
-
-      if (isBlockquote(line)) {
-        const quoteLines = [];
-        while (i < lines.length) {
-          const next = lines[i].trim();
-          if (!next) break;
-          if (!isBlockquote(next)) break;
-          quoteLines.push(next.replace(/^>\s?/, ""));
-          i += 1;
-        }
-        html.push(`<blockquote>${renderMultiline(quoteLines.join("\n"))}</blockquote>`);
-        continue;
-      }
-
-      const paragraphLines = [];
-      while (i < lines.length) {
-        const nextRaw = lines[i];
-        const next = nextRaw.trim();
-        if (!next) break;
-        if (isHeading(next) || isHorizontalRule(next) || isUnorderedList(next) || isOrderedList(next) || isBlockquote(next)) {
-          break;
-        }
-        paragraphLines.push(next);
-        i += 1;
-      }
-
-      if (paragraphLines.length) {
-        html.push(`<p>${renderMultiline(paragraphLines.join("\n"))}</p>`);
-      }
-
-      if (i < lines.length && !lines[i].trim()) {
-        i += 1;
-      }
-    }
-
-    return html.join("");
-  }
-
   async function fetchPost(params) {
     const filters = ["status=eq.published", "limit=1"];
 
@@ -327,6 +150,8 @@
   }
 
   async function init() {
+    // The edge response already contains the complete, current article.
+    if (cardEl.dataset.serverRendered === "true") return;
     if (!supabaseUrl || !supabaseAnonKey) {
       setState("CMS is not configured yet. Please set assets/js/cms-config.js.", true);
       return;

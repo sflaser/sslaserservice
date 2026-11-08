@@ -95,7 +95,7 @@ export function renderProduct(template, product, detail, email) {
   const metas = [['og:title', `${name} | skyfirelaser`], ['og:description', description], ['og:type', 'product'], ['og:url', canonical]];
   if (image) metas.push(['og:image', new URL(image, ORIGIN).href], ['og:image:alt', name]);
   const metadata = metas.map(([property, value]) => `<meta property="${property}" content="${escapeHtml(value)}">`).join('\n');
-  html = html.replace('</head>', `${metadata}\n<script id="product-structured-data" type="application/ld+json">${jsonScript(graph)}</script>\n</head>`);
+  html = html.replace('</head>', () => `${metadata}\n<script id="product-structured-data" type="application/ld+json">${jsonScript(graph)}</script>\n</head>`);
   return html;
 }
 export function buildEdgeSource(slugs) {

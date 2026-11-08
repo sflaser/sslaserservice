@@ -58,7 +58,7 @@ function signDingTalkUrl(webhookUrl, secret) {
   return url.toString();
 }
 
-async function verifySupabaseUser(token) {
+async function verifyCmsAdmin(token) {
   const supabaseUrl = trimTrailingSlash(process.env.SUPABASE_URL || "");
   const supabaseAnonKey = process.env.SUPABASE_ANON_KEY || "";
 
@@ -68,15 +68,20 @@ async function verifySupabaseUser(token) {
 
   if (!token) return false;
 
-  const response = await fetch(`${supabaseUrl}/auth/v1/user`, {
+  // A valid login is not CMS authorization. Check the database allowlist on
+  // each request so removing an administrator takes effect immediately.
+  const response = await fetch(`${supabaseUrl}/rest/v1/rpc/is_cms_admin`, {
+    method: "POST",
     headers: {
       apikey: supabaseAnonKey,
       Authorization: `Bearer ${token}`,
       Accept: "application/json",
+      "Content-Type": "application/json",
     },
+    body: "{}",
   });
 
-  return response.ok;
+  return response.ok && (await response.json()) === true;
 }
 
 async function sendDingTalk(post) {
@@ -139,7 +144,7 @@ exports.handler = async function handler(event) {
 
   try {
     const token = getBearerToken(event.headers);
-    const isAuthorized = await verifySupabaseUser(token);
+    const isAuthorized = await verifyCmsAdmin(token);
     if (!isAuthorized) {
       return json(401, { ok: false, error: "Unauthorized CMS session." });
     }

@@ -53,7 +53,7 @@
    - 选择GitHub并授权
    - 选择你的仓库
    - 配置构建设置：
-     - Build command: 留空
+     - Build command: `node scripts/prerender-component-products.mjs && node scripts/build-blog-edge.mjs`
      - Publish directory: `/`
      - Production branch: `main`
 
@@ -61,11 +61,9 @@
    - 每次推送到main分支都会自动部署
    - 支持分支预览和PR预览
 
-### 方法2: 手动ZIP部署
+### 方法2: Netlify CLI 预览部署
 
-1. 下载项目文件
-2. 压缩除了大型媒体文件外的所有文件
-3. 在Netlify控制台拖拽上传
+先在已关联的站点目录执行 `npx netlify deploy --build`，核验预览后再按项目发布流程部署正式站。不要只上传源码 ZIP：产品预渲染和博客 Edge Functions 需要构建与打包。
 
 ## 📁 项目结构
 
@@ -135,3 +133,12 @@ npx serve .
 ## 📄 许可证
 
 Copyright © 2024 Sky Fire Laser. All rights reserved.
+
+
+## CMS 和博客回归检查
+
+- `node --test tests/*.test.cjs tests/*.test.mjs`：表单、管理员权限、资源编辑和博客渲染回归。
+- 完整 build 会读取已发布产品生成静态产品页，并把当前中英博客模板和**公开** CMS 配置打包给 Edge Function。
+- `/blog`、`/blog.html`、`/es/blog`、`/es/blog.html`（含尾斜线）在请求时读取已发布文章。发布、修改、撤稿不需要重建；无文章 / 草稿 / 空正文返回 404 + noindex，CMS 读取失败返回 503 + noindex。文章请求不缓存，不向客户端发送服务端密钥。
+- 浏览器和 Edge 共用 `assets/js/blog-rendering.mjs`。本地静态服务器仍可使用浏览器读取文章；Netlify 的完整首屏 HTML 需在部署预览核验。
+- 管理界面登录 / 恢复会话会检查 `is_cms_admin` RPC；实际写权限仍由数据库和通知端点校验。

@@ -7726,3 +7726,8 @@
                 transition: none;
             }
         }
+
+/* Author display rules must not override filtered cards' hidden state. */
+.finder-route-card[hidden] {
+  display: none;
+}
