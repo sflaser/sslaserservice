@@ -31,7 +31,7 @@ SS Laser Service is the public website for Sky Fire Laser, covering solid-state 
 
 - Equipment: https://www.sslaserservice.com/products/handheld-uv-laser-marker/
 - Sample and processing assessment: https://www.sslaserservice.com/services/uv-marking-assessment/
-- Equipment overview: 355 nm, 5 W, 80 × 80 mm marking field, air cooled, Linux touchscreen and USB.
+- Equipment overview: 355 nm, 5 W, 60 × 60 mm (approx. 2.36 × 2.36 in) marking field, air cooled, Linux touchscreen and USB.
 - Sample and batch requests are reviewed before scope, cost, timing and acceptance are confirmed. A surface marking application does not establish glass cutting capability.
 
 ## Contact
