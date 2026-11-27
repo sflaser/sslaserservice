@@ -267,3 +267,46 @@ body {
     font-size: 18px;
   }
 }
+
+/* Blog navigation: keep intrinsic SVG sizing from expanding the header. */
+.blog-topbar .nav-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+.blog-topbar .nav-social > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  flex: 0 0 44px;
+}
+.blog-topbar .nav-social svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  fill: currentColor;
+}
+.blog-topbar .nav-language { white-space: nowrap; }
+.blog-topbar .blog-logo {
+  min-width: 0;
+  min-height: 64px;
+  padding: 16px 40px 16px 20px;
+  font-family: var(--font-display, sans-serif);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  text-transform: none;
+  white-space: nowrap;
+}
+@media (max-width: 1100px) {
+  .blog-topbar { flex-wrap: wrap; }
+  .blog-topbar .blog-menu { flex: 1 1 100%; margin: 0; padding: 8px 12px; }
+}
+@media (max-width: 900px) {
+  .blog-topbar { flex-direction: column; align-items: stretch; }
+}

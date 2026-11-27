@@ -1,4 +1,4 @@
-import { buildPageTitle, buildDescription, formatDate, resolveOptimizedImageUrl, renderStructuredContent } from "./blog-rendering.mjs?v=20261108-review1";
+import { buildPageTitle, buildDescription, formatDate, resolveOptimizedImageUrl, renderStructuredContent } from "./blog-rendering.mjs?v=20261127-entry1";
 
 (function () {
   const cfg = window.CMS_CONFIG || {};

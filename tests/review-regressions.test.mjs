@@ -95,9 +95,29 @@ test('Edge handler checks fresh published data and emits no-cache HTML for all s
   assert.equal(await head.text(), '');
 });
 
+test('Bare legacy blog entries redirect to the matching archive without a CMS request', async () => {
+  let calls = 0;
+  const handler = createBlogHandler({ cms, templates, fetchImpl: () => { calls++; throw new Error('unexpected fetch'); } });
+  for (const path of ['/blog', '/blog/', '/blog.html', '/es/blog', '/es/blog/', '/es/blog.html']) {
+    for (const method of ['GET', 'HEAD']) {
+      for (const query of ['', '?utm_source=newsletter&utm_campaign=repair&next=https%3A%2F%2Fother.test']) {
+        const response = await handler(new Request('https://preview.example' + path + query, { method }));
+        const target = new URL(response.headers.get('location'));
+        assert.equal(response.status, 301);
+        assert.equal(target.origin, 'https://preview.example');
+        assert.equal(target.pathname, path.startsWith('/es/') ? '/es/resources' : '/resources');
+        assert.equal(target.search, query);
+        assert.equal(await response.text(), '');
+      }
+    }
+  }
+  assert.equal(calls, 0);
+  assert.equal(await handler(new Request('https://preview.example/blog', { method: 'POST' })), undefined);
+});
+
 test('Empty, duplicate and ambiguous identifiers never fetch or become indexable', async () => {
   const handler = createBlogHandler({ cms, templates, fetchImpl: () => { throw new Error('unexpected fetch'); } });
-  for (const query of ['', '?slug=', '?slug=a&slug=b', '?slug=a&id=1', '?id=invalid']) {
+  for (const query of ['?slug=', '?id=', '?slug=%20', '?slug=&utm_source=newsletter', '?slug=a&slug=b', '?slug=a&id=1', '?id=invalid']) {
     const response = await handler(new Request('https://site.test/blog' + query));
     assert.equal(response.status, 404);
     assert.match(response.headers.get('x-robots-tag'), /noindex/);

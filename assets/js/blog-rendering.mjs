@@ -1,5 +1,5 @@
 function buildPageTitle(value) {
-  const suffix = " | Sky Fire Laser";
+  const suffix = " | skyfirelaser";
   const label = String(value || "Resource").replace(/\s+/g, " ").trim();
   const available = 65 - suffix.length;
   const shortened = label.length > available

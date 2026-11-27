@@ -72,6 +72,15 @@ export function createBlogHandler({ cms, templates, fetchImpl = fetch }) {
     if (!['GET', 'HEAD'].includes(request.method)) return;
     const url = new URL(request.url);
     const language = url.pathname.startsWith('/es/') ? 'es' : 'en';
+    // A bare legacy blog URL is an archive entry, not a missing article.
+    // Keep campaign parameters and the current origin (including deploy previews).
+    // Explicit but empty/invalid identifiers still follow the article 404 path.
+    if (!url.searchParams.has('slug') && !url.searchParams.has('id')) {
+      url.pathname = language === 'es' ? '/es/resources' : '/resources';
+      return new Response(null, { status: 301, headers: {
+        Location: url.href, 'Cache-Control': 'no-store, max-age=0',
+      } });
+    }
     const template = templates[language];
     let status = 404;
     let html;
