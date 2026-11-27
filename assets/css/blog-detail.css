@@ -292,6 +292,7 @@ body {
   fill: currentColor;
 }
 .blog-topbar .nav-language { white-space: nowrap; }
+.blog-topbar .btn-home { color: #f8fbff; }
 .blog-topbar .blog-logo {
   min-width: 0;
   min-height: 64px;
